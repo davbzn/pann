@@ -1,6 +1,129 @@
-\documentclass{article}
+\documentclass[12pt,a4paper]{book}
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{siunitx}
+
+% Nice captions.
+\usepackage[format=hang,font=small,labelfont=bf]{caption}
+\setlength{\captionmargin}{25pt}
+
+% define the symbols := and =: for ease of use
+\usepackage{mathtools}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+    
+% define bra and ket
+\newcommand{\bra}[1]{%
+	\left\langle #1 \right|
+}
+\newcommand{\ket}[1]{%
+	\left| #1 \right\rangle
+}
+\newcommand{\bracket}[2]{%
+	\left\langle #1 | #2 \right\rangle
+}
+
+% multiline commenting \begin{comment}
+\usepackage{comment}
+% package to cancel obliquely symbols
+\usepackage{cancel}
+
+% generate correct 1-bold (identity operator) font
+\usepackage{dsfont}
+% generate correct bold greek letters
+\usepackage{bm}
+% to produce stroked integral \fint
+\usepackage{esint}
+
+% better boxes (also multiple equations)
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+
+% author managing package
+\usepackage{authblk}
+
+\title{Photonic Artificial Neural Networks}
+\author[]{Davide Bazzanella}
+\affil[]{Department of Physics, University of Trento}
+
+% to create an index with terms and the corresponding page(s)
+\usepackage{makeidx}
+\makeindex
+
+% create plots
+\usepackage{pgfplots} % README here http://pgfplots.sourceforge.net/pgfplots.pdf
+\pgfplotsset{compat=1.14} 	%ShareLaTeX wants \pgfplotsset{compat=1.14}
+
+% externalize tikz images
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/] % activate!
+
+% draws bloch sphere
+%\usepackage{blochsphere}
+
 \begin{document}
-(Type your content here.) Your content here.
+
+% need this to fill between functions
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns,decorations,arrows, shapes.geometric}
+\usetikzlibrary{arrows.meta}
+
+% define the box around functions
+\newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
+
+\maketitle
+\tableofcontents
+%\cleardoublepage
+\clearpage
+
+\chapter{Introduction}
+WHAT and WHY?
+BACKUP project, why silicon photonics (CMOS compatibility)
+
+\chapter{Artificial Neural Networks}
+THEORY ON ANNs
+Artificial Neural Networks (ANNs) are computing devices which operate in way that mimics biological neural networks.
+\section{Types of ANNs}
+\subsection{Feed Forward NN}
+\subsubsection{FF NN node}
+%\begin{wrapfigure}[5]{r}{0.4\textwidth}
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\node [shape=circle, minimum size=2cm, draw=gray!100, fill=gray!20]%
+					(af) at (2,0) {};
+		\node at (af.south) [below] {activation function};
+		\node [regular polygon, regular polygon sides=6, minimum size=2cm, draw=gray!100, fill=gray!20]%
+					(ws) at (-2,0) {};
+		\node at (ws.south) [below] {weighted sum};
+		\draw (ws) to (af);
+		\foreach \i in {0,...,3,5}
+		\draw (-4.5,1.5-0.6*\i) .. controls (-3.5,1.5-0.6*\i) .. (ws);
+		\draw [dashed] (-4.5,1.5-0.6*4) .. controls (-3.5,1.5-0.6*4) .. (ws);
+%		\node at (af) [circle, radius=1cm, draw=gray!100, fill=gray!20] {};
+%		\node (c) at (90:1) {$\textbf{r}_0$};
+%		\draw [gray!50] (e) to (a);
+%		\draw (g) [->] to (c);
+%		\node at (0,0) [circle,draw=gray!100,fill=gray!20] {};
+%		\draw (0.5,-0.5) [<->] to (0.5,0.5);
+	\end{tikzpicture}
+	\caption{Feed Forward node}
+	\label{fig:FF_node}
+\end{figure}
+%\end{wrapfigure}
+\subsection{Other Types of ANNs}
+
+\chapter{Photonics applied to ANNs}
+\section{Weighted sum of inputs}
+\section{Nonlinear activation function}
+
+\chapter{Device, setup and measurements}
 \end{document}
- 
