@@ -84,72 +84,22 @@
 %\cleardoublepage
 \clearpage
 
-\chapter{Introduction}
-WHAT and WHY?
-BACKUP project, why silicon photonics (CMOS compatibility)
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\input{chapters/intro.tex}
 
 \chapter{Artificial Neural Networks}
-THEORY ON ANNs
-Artificial Neural Networks (ANNs) are computing devices which operate in way that mimics biological neural networks.
-\section{Types of ANNs}
-\subsection{Feed Forward NN}
-\subsubsection{FF NN node}
-%\begin{wrapfigure}[5]{r}{0.4\textwidth}
-\begin{figure}[ht]
-	\centering
-	\begin{tikzpicture}
-		\node [shape=circle, minimum size=2cm, draw=gray!100, fill=gray!20]%
-					(af) at (1.5,0) {\LARGE $f_a$};
-		\node at (af.south) [below, align=center] {activation \\ function};
-		\node [regular polygon, regular polygon sides=6, minimum size=2cm, draw=gray!100, fill=gray!20]%
-					(ws) at (-2,0) {\LARGE $\Sigma$};
-		\node at (ws.south) [below, align=center] {weighted \\ sum};
-		\draw (ws) to (af);
-		\foreach \i in {1,2,4}	\draw (-4.5,1.5-0.6*\i) .. controls (-3.5,1.5-0.6*\i) .. (ws);
-		\draw [dashed] (-4.5,-0.3) node {$\vdots\qquad$} .. controls (-3.5,-0.3) .. (ws);
-		\foreach \i in {1,2}		\node at (-4.5,1.5-0.6*\i) [left] {$x_\i$};
-		\node at (-4.5,-0.9)  [left] {$x_n$};
-		\draw (-2,1.5) node [above] {$w_0$} to (ws);
-		\draw (af) to (3.5,0) node [right] {$y$};
-	\end{tikzpicture}
-	\caption{Feed Forward node}
-	\label{fig:FF_node}
-\end{figure}
-%\end{wrapfigure}
-\begin{equation}
-y = f_a \left(  w_0 + \sum_i^n w_i x_i \right)
-\label{eq:node_function}
-\end{equation}
-\subsection{Other Types of ANNs}
+\input{chapters/ANNs.tex}
 
 \chapter{Photonics applied to ANNs}
-How do I intend to create a hardware photonic ANN node?
-\section{Weighted sum of inputs}
-This thing has already been demonstrated and integrated widely, so it will not be the focus of this work.
-\section{Nonlinear activation function}
-On the other hand, a photonic nonlinear activation function has not yet been found.
-This is where the focus of my work will be.
-
-\subsection{Simulations}
+\input{chapters/photonics_applied.tex}
 
 \chapter{Samples, setup and measurements}
-\section{The samples}
-I could say that in the time this work was done there would have not been enough time to design and produce an ad hoc device. The aim of this thesis is to produce a proof of concept, to answer the question of feasibility.
-\vspace{1em}
+\input{chapters/experiments.tex}
 
-The samples on which this work is based have been provided by the IRIS project.
-Specifically I had a few different structures available: from single rings resonators to the full matrix, each accessible via grating couplers.
-My choice was a system of intermediate complexity: a simple waveguide, coupled to eight drop channels by a single or a couple of ring resonators each.
-Moreover, these samples were provided with thermo-electric pads to heat the rings and effectively tune their resonance.
-The final choice was to study the \textit{mini-matrix} in which the coupling mechanism was provided by single ring resonators, because it was considered simpler.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\caption{image/scheme of the minimatrix}
-	\label{fig:minimatrix_full}
-\end{figure}
-
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusions}
+\input{chapters/conclusion.tex}
 
 
 \end{document}
