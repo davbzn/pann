@@ -1,105 +1,115 @@
 \documentclass[12pt,a4paper]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{subcaption}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
-\usepackage{siunitx}
 
-% Nice captions.
-\usepackage[format=hang,font=small,labelfont=bf]{caption}
-\setlength{\captionmargin}{25pt}
+\usepackage{graphicx}				% import external graphics ( \includegraphics command)
+\usepackage{wrapfig}					% allow text to wrap around figures ( \begin{wrapfigure} )
+\usepackage{subcaption}			% allows subfigures within figures. Subfloats have their own caption, and an optional global caption.
 
-% define the symbols := and =: for ease of use
-\usepackage{mathtools}
-\newcommand{\defeq}{\vcentcolon=}
-\newcommand{\eqdef}{=\vcentcolon}
-    
-% define bra and ket
-\newcommand{\bra}[1]{%
-	\left\langle #1 \right|
+\usepackage{siunitx}					% standard international system of units of measurement
+
+\usepackage{hyperref}				% links package
+\hypersetup{
+    bookmarks = true,         	% show bookmarks bar?
+    unicode = false,          	% non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar = true,        	% show Acrobat’s toolbar?
+    pdfmenubar = true,        	% show Acrobat’s menu?
+    pdffitwindow = false,     	% window fit to page when opened
+    pdfstartview = {FitH},    	% fits the width of the page to the window
+    pdftitle   =								% title
+    		{Photonic Artificial Neural Networks},
+    pdfsubject = 							% subject of the document
+    		{Application of integrated silicon photonics to artificial neural network design},
+    pdfauthor  = {Davide Bazzanella},		% author
+    pdfcreator = {Davide Bazzanella},  	% creator of the document
+    pdfkeywords={integrated, photonic,		% list of keywords
+    							microring, resonator,		%
+    							neural, network,					%
+    							feedforward}, 						%
+    pdfnewwindow = true,	% links in new PDF window
+    colorlinks = true,		% false: boxed links; true: colored links
+    linkcolor = black,		% color of internal links (change box color with linkbordercolor)
+    citecolor = black,		% color of links to bibliography
+    filecolor = black,		% color of file links
+    urlcolor  = blue			% color of external links
 }
-\newcommand{\ket}[1]{%
-	\left| #1 \right\rangle
+
+\usepackage{caption}			% Nice captions
+\captionsetup{
+		format			= hang,		% Indents the caption text, so it will ‘hang’ under the first line of the text.
+		margin			= 25pt,		% width used for both, the left and right margin. Is equivalent to margin={25pt,25pt}
+		font				= small,		% option affecting the whole caption (font).
+		labelfont	= bf				% option affecting the caption label and separator (labelfont).
+	 %textfont		=					% option affecting the caption text (textfont).
 }
-\newcommand{\bracket}[2]{%
-	\left\langle #1 | #2 \right\rangle
-}
 
-% multiline commenting \begin{comment}
-\usepackage{comment}
-% package to cancel obliquely symbols
-\usepackage{cancel}
+\usepackage{comment}			% multiline commenting \begin{comment}
+\usepackage{cancel}			% package to cancel obliquely symbols
 
-% generate correct 1-bold (identity operator) font
-\usepackage{dsfont}
-% generate correct bold greek letters
-\usepackage{bm}
-% to produce stroked integral \fint
-\usepackage{esint}
+\usepackage{dsfont}			% generate correct 1-bold (identity operator) font
+\usepackage{bm}					% generate correct bold greek letters
+\usepackage{esint}				% to produce stroked integral \fint
 
-% better boxes (also multiple equations)
-\usepackage{tcolorbox}
+\usepackage{tcolorbox}		% better boxes (also multiple equations)
 \tcbuselibrary{theorems}
 
-% author managing package
-\usepackage{authblk}
+\usepackage{authblk}			% author managing package
 
 \title{Photonic Artificial Neural Networks}
 \author[]{Davide Bazzanella}
 \affil[]{Department of Physics, University of Trento}
 
-% to create an index with terms and the corresponding page(s)
-\usepackage{makeidx}
+\usepackage{makeidx}			% to create an index with terms and the corresponding page(s)
 \makeindex
 
-% create plots
-\usepackage{pgfplots} % README here http://pgfplots.sourceforge.net/pgfplots.pdf
-\pgfplotsset{compat=1.14} 	%ShareLaTeX wants \pgfplotsset{compat=1.14}
-
-% externalize tikz images
-\usepackage{tikz}
-\usetikzlibrary{external}
+\usepackage{tikz}							% externalize tikz images
+\usetikzlibrary{external}			% 
 \tikzexternalize[prefix=tikz/] % activate!
+\usepackage{pgfplots} 					% create plots with pgf/tikz
+\pgfplotsset{compat=1.14} 			% README here http://pgfplots.sourceforge.net/pgfplots.pdf
 
-% draws bloch sphere
-%\usepackage{blochsphere}
+%\usepgfplotslibrary{fillbetween} % need this to fill between functions
+\usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric}
+
+% USER DEFINED COMMANDS %
+% define the symbols := and =: for ease of use
+\usepackage{mathtools}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
 
 \begin{document}
-
-% need this to fill between functions
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{patterns,decorations,arrows, shapes.geometric}
-\usetikzlibrary{arrows.meta}
 
 % define the box around functions
 \newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
 
 \maketitle
 \tableofcontents
-%\cleardoublepage
-\clearpage
+\cleardoublepage		%or \clearpage ?
 
-\chapter*{Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
+% introductory chapter ~ 5pg
 \input{chapters/intro.tex}
 
-\chapter{Artificial Neural Networks}
+% first chapter "Artificial Neural Networks" ~ 15pg
 \input{chapters/ANNs.tex}
 
-\chapter{Photonics applied to ANNs}
+% second chapter "Photonics applied to ANNs" ~ 15pg
 \input{chapters/photonics_applied.tex}
 
-\chapter{Samples, setup and measurements}
+% third chapter "Samples, setup and measurements" ~ 20pg
 \input{chapters/experiments.tex}
 
-\chapter*{Conclusion}
-\addcontentsline{toc}{chapter}{Conclusions}
+% conclusive chapter ~ 5pg
 \input{chapters/conclusion.tex}
 
+% total ~ 60pg
+
+% Bibliography
+
+% Aknowledgements
 
 \end{document}
