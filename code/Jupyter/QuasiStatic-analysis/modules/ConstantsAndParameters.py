@@ -100,7 +100,7 @@ T0 = 1               # [K]
 ñL    = 2*np.pi*ñR   # [m /λ0 ]=[1] core length
 ñV    = ñL*ñwga      # [m³/λ0³]=[1] ~ core volume
 ñVeff = ñV           # [m³/λ0³]=[1] effective mode volume
-Γ     = 0.9
+ñΓ    = Γ
 
 ρSi = 2.3290e3       # [kg/m³]
 ñMring = ρSi*V       # [kg] mass of the microring

@@ -13,9 +13,10 @@
 
 \usepackage{siunitx}					% standard international system of units of measurement
 
-\usepackage{hyperref}				% links package
+\usepackage{varioref}				% verbose references package
+\usepackage{hyperref}				% references and links package
 \hypersetup{
-    bookmarks = true,         	% show bookmarks bar?
+%    bookmarks = true,         	% show bookmarks bar?
     unicode = false,          	% non-Latin characters in Acrobat’s bookmarks
     pdftoolbar = true,        	% show Acrobat’s toolbar?
     pdfmenubar = true,        	% show Acrobat’s menu?
@@ -38,6 +39,7 @@
     filecolor = black,		% color of file links
     urlcolor  = blue			% color of external links
 }
+\usepackage{cleveref}				% clever references package
 
 \usepackage{caption}			% Nice captions
 \captionsetup{
@@ -60,18 +62,30 @@
 
 \usepackage{authblk}			% author managing package
 
-\title{Photonic Artificial Neural Networks}
+\title{%
+	Photonic Artificial Neural Networks:\\
+	\large All-Optical Activation Function%
+	}
 \author[]{Davide Bazzanella}
 \affil[]{Department of Physics, University of Trento}
+
+\usepackage[style=ieee]{biblatex}
+\addbibresource{custom_bibliography.bib}
+\addbibresource{mendeley_bibliography.bib}
+\usepackage{csquotes}		% required by biblatex ???
 
 \usepackage{makeidx}			% to create an index with terms and the corresponding page(s)
 \makeindex
 
 \usepackage{tikz}							% externalize tikz images
-\usetikzlibrary{external}			% 
-\tikzexternalize[prefix=tikz/] % activate!
 \usepackage{pgfplots} 					% create plots with pgf/tikz
 \pgfplotsset{compat=1.14} 			% README here http://pgfplots.sourceforge.net/pgfplots.pdf
+	%\usepgfplotslibrary{external}
+	\usetikzlibrary{external}			%
+	\tikzexternalize								% activate!
+	\tikzsetexternalprefix{tikz/}	% set subfolder
+	%\tikzexternalize[prefix=tikz/] % activate!
+
 
 %\usepgfplotslibrary{fillbetween} % need this to fill between functions
 \usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric}
@@ -83,6 +97,11 @@
 \newcommand{\eqdef}{=\vcentcolon}
 
 \begin{document}
+
+% define Capitalized names for chapter/section/...
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
 
 % define the box around functions
 \newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
@@ -109,7 +128,14 @@
 % total ~ 60pg
 
 % Bibliography
+%\cleardoublepage
+\printbibliography[heading=bibintoc]%,title={References}]
+%\markboth{BIBLIOGRAPHY{}
+%\addcontentsline{toc}{chapter}{Bibliography}
 
 % Aknowledgements
+\chapter*{Aknowledgements}
+\markboth{AKNOWLEDGEMENTS}{}
+\addcontentsline{toc}{chapter}{Aknowledgements}
 
 \end{document}

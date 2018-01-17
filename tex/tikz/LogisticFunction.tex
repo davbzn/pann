@@ -1,0 +1,16 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{LogisticFunction}
+\begin{tikzpicture}[baseline]
+	\begin{axis}[%
+%			yticklabel pos=upper,%
+			title ={$\mathrm{Logistic}(x)$},%
+			xlabel={$x$},%
+%			ylabel={$\mathrm{Logistic}(x)$},%
+		]
+		\newcommand\LIM{10}
+		\addplot [blue, 	domain=-\LIM:\LIM,		samples=1001,]	{(1+exp(-0.5*x))^-1};
+		\addplot [blue, 	domain=-\LIM:\LIM,		samples=1001,]	{(1+exp(-1.0*x))^-1};
+		\addplot [blue, 	domain=-\LIM:\LIM,		samples=1001,]	{(1+exp(-2.0*x))^-1};
+		\addplot [blue, 	domain=-\LIM:\LIM,		samples=1001,]	{(1+exp(-5.0*x))^-1};
+	\end{axis}
+\end{tikzpicture}

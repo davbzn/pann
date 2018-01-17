@@ -1,20 +1,156 @@
 \chapter{Artificial Neural Networks}
+\label{ch:Artificial_Neural_Networks}
 
-THEORY ON ANNs
-Artificial Neural Networks (ANNs) are computing devices which operate in way that mimics biological neural networks.
-\section{Types of ANNs}
-\subsection{Feed Forward NN}
-\subsubsection{FF NN node}
-%\begin{wrapfigure}[5]{r}{0.4\textwidth}
+Artificial Neural Networks (ANNs) are computational systems which elaborate information likewise biological neural networks (animal brains).
+
+
+\vspace{1em}
+ANNs can be either simulated on computers or built on specific hardware designed ad hoc.
+Both options can be modeled by 
+
+\vspace{1em}
+For simplicity in this chapter I will consider only logical models of artificial neural networks, which are therefore closer to simulated ANN than hardware ANN.
+
+
+\section{Neural Networks}
+\label{sec:Neural_Networks}
+
+%\begin{wrapfigure}[19]{r}{0.5\textwidth}
+%	\centering
+%	\input{tikz/GenericNN.tex}
+%	\caption{	General scheme of a neural network. %
+%						Triangles (red) are input nodes, circles (grey) are inner nodes, and squares (blue) are output nodes. %
+%						Interconnections among nodes are represented by arrows: %
+%						continuous when both elements are drawn, and dotted otherwise; %
+%						straight between inner nodes, and curved otherwise.%
+%						}
+%	\label{fig:general_NN}
+%\end{wrapfigure}
+
+A neural network is a collection of processing elements, or nodes, interconnected in an arbitrary topology.
+From its input nodes, the network accepts information, which will propagate into the inner nodes through the interconnections and will be elaborated at each node.
+At the end of the network, there will be a number of output nodes, with the task of reading a portion of the inner nodes.
+The inner nodes are also called hidden, because they are not meant to be accessible to the external world.
+A generic scheme of such network is shown in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.
+
 \begin{figure}[ht]
 	\centering
-	\input{tikz/FeedForwardNode.tex}
-	\caption{Feed Forward node}
-	\label{fig:FF_node}
+	\input{tikz/GenericNN.tex}
+	\caption{	Generic scheme of a neural network. %
+						Triangles (red) are input nodes, circles (grey) are inner nodes, and squares (blue) are output nodes. %
+						Interconnections among nodes are represented by arrows: %
+						continuous when both elements are drawn, and dotted otherwise; %
+						straight between inner nodes, and curved otherwise.%
+						}
+	\label{fig:generic_NN}
 \end{figure}
-%\end{wrapfigure}
+
+Each node can operate in the same way of the others or in a completely different manner, depending on the type of neural network.
+The operation of nodes resembles that of animal neurons: the various input gets collected and elaborated together to obtain an output, which will become one of the many inputs for subsequent neurons.
+Specifically, the most used model for neurons is divided into two parts, as shown in \autoref{fig:generic_node} \vpageref{fig:generic_node}.
+The first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/GenericNode.tex}
+	\caption{Generic node representation. $x$-values are inputs, $y$-values are outputs, $w_0$ is the bias.}
+	\label{fig:generic_node}
+\end{figure}
+The node is described mathematically by \autoref{eq:Generic_node_function}.
 \begin{equation}
-y = f_a \left(  w_0 + \sum_i^n w_i x_i \right)
-\label{eq:node_function}
+y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right)
+\label{eq:Generic_node_function}
 \end{equation}
-\subsection{Other Types of ANNs}
+
+Each node accepts values at its inputs and produces an output accordingly.
+However, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operation phase of the neural network, as I will explain in \autoref{sec:Working_Principles_of_ANNs} later \vpageref{sec:Working_Principles_of_ANNs}.
+
+Moreover it is mandatory for the activation function $f_a\left(\cdot\right)$ to be nonlinear, because otherwise a collection of nodes will result in just a weighted sum of its inputs.
+Two examples of nonlinear function are shown below in \autoref{fig:activation_function_examples}.
+
+\begin{figure}[ht]
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\input{tikz/HeavisideThetaFunction.tex}
+		\caption{}
+		\label{fig:activation_function_example_1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+  		\centering
+		\input{tikz/LogisticFunction.tex}
+		\caption{}
+		\label{fig:activation_function_example_2}
+  \end{subfigure}
+  \caption{Examples of activation function: (\ref{fig:activation_function_example_1}) is the well-known step function, or Heaviside $\Theta$, (\ref{fig:activation_function_example_2}) depicts a few functions from the family of the Logistic functions.}
+  	\label{fig:activation_function_examples}
+\end{figure}
+
+%A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
+
+\subsection{Feedforward NN}
+\label{ssec:Feedforward_NN}
+
+The first and most simple type of neural network is called Feedforward.
+In this kind of neural network, nodes are divided into groups called \textit{layers}.
+A layer is a collection of nodes that accepts inputs from a preceding group and generate as many outputs as the number of nodes in the layer.
+Each layer of a Feedforward neural network is connected in series with the others, except of input layer at the beginning and the output layer at the end.
+As for the single nodes, the inner layer are called hidden, because usually not accessible.
+
+The information travels from the input to the output and gets elaborated from each hidden layer: there are no connection between nodes of the same layer, nor loops or feedback between layers.
+Depending on the topology of the network, there might be more or less layers, each composed by the same or a different number of nodes.
+Moreover the connection between the layers might be complete, in that case the layer is said to be \textit{fully connected}, or sparse as in the case of convolutional layers.
+
+\subsubsection{Perceptron}
+\label{sssec:Perceptron}
+
+The most naive topology of a Feedforward neural network is given by the so called \textit{Perceptron}.
+The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron}\cite{frank1957perceptron,Rosenblatt1958}.
+The graph of such network is shown in \autoref{fig:Perceptron} below.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/PerceptronNN.tex}
+	\caption{Perceptron type neural network: in this representation the perceptron has $n$ inputs and $m$ outputs as well as a hidden layer with $m$ nodes.%
+		The colors, shape and styles are the same as in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.%
+		}
+	\label{fig:Perceptron}
+\end{figure}
+
+By adding more than one hidden perceptron layer to a neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP), shown in \autoref{fig:MLP} \vpageref{fig:MLP}.
+The shape of the hidden layer is represented by a rectangular matrix of size $n\times m$, where $n$ is the number of nodes in each layer and $m$ is the number of layers.
+In principle other shapes are possible, i.e. each layer could have a different number of nodes.
+However, since such network can still be reproduced by a appropriate sized rectangular matrix of nodes, from now on I will assume the simpler rectangular form, except where otherwise specified.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/MLPNN.tex}
+	\caption{	Multi-Layer Perceptron (MLP).}
+	\label{fig:MLP}
+\end{figure}
+
+\subsubsection{Other Feedforward NNs}
+\label{sssec:Other_Feedforward_NNs}
+
+Autoencoder
+
+Probabilistic
+
+Time delay
+
+Convolutional
+
+\subsection{Other Types of NNs}
+\label{ssec:Other_Types_of_NNs}
+\subsubsection{Recurrent NN}
+\subsubsection{Reservoir NN}
+\subsubsection{Modular NN}
+\subsubsection{Spiking NN}
+
+\section{Working Principles of ANNs}
+\label{sec:Working_Principles_of_ANNs}
+
+\subsection{Learning Process}
+\label{ssec:Learning_Process}
+
+\section{Real-Life Examples}
+\label{sec:Real-Life_Examples}

@@ -1,0 +1,14 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{HeavisideThetaFunction}
+\begin{tikzpicture}[baseline]
+	\begin{axis}[%
+%			yticklabel pos=upper,%
+			title ={$\Theta(x)$},%
+			xlabel={$x$},%
+%			ylabel={$\Theta(x)$},%
+		]
+		\newcommand\LIM{5}
+		\addplot [blue, domain=-\LIM:0,	samples=501,]	{0};
+		\addplot [blue, domain=0:\LIM,		samples=501,]	{1};
+	\end{axis}
+\end{tikzpicture}

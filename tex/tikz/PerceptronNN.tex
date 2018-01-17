@@ -1,0 +1,37 @@
+\tikzsetnextfilename{PerceptronNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lhid}{3}
+	\newcommand{\lout}{5}
+	
+	% nodes
+	\foreach \i in {0,1,3} \node (input\i) at (\lin,2.5-\i) [input] {};
+	
+	\foreach \i in {0,1,2,4} \node (inner\i) at (\lhid,3-\i) [inner] {};
+	
+	\foreach \i in {0,1,2,4} \node (output\i) at (\lout,3-\i) [output] {};
+	
+	\node (input2)		at (\lin,0.5) {}; 		\node at (\lin,0.6) {$\vdots$};
+	\node (inner3)		at (\lhid,0.0) {}; 	\node at (\lhid,0.1) {$\vdots$};
+	\node (output3)	at (\lout,0.0) {}; 	\node at (\lout,0.1) {$\vdots$};
+	
+	% interconnections
+	\foreach \i in {0,1,3}%
+		\foreach \j in {0,1,2,4}%
+			\draw [->] (input\i) to [out=0, in=180] (inner\j);
+	
+	\foreach \i in {0,1,3}%
+		\draw [dotted, ->] (input\i)	to [out=0, in=180] (inner3);
+	\foreach \j in {0,1,2,4}%
+		\draw [dotted, ->] (input2) 	to [out=0, in=180] (inner\j);
+	\foreach \i in {0,1,2,4}%
+		\draw [->] (inner\i) to [out=0, in=180] (output\i);
+	\draw [dotted, ->] (inner3) to [out=0, in=180] (output3);
+	
+\end{tikzpicture}

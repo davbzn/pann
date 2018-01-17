@@ -1,0 +1,65 @@
+\tikzsetnextfilename{GenericNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	% nodes
+	\foreach \i in {0,1,3} \node (input\i) at (0,2.5-\i) [input] {};
+	
+	\node (inner0) at (1.6, 0.2) [inner] {};
+	\node (inner1) at (1.8, 2.0) [inner] {};
+	\node (inner2) at (2.1, 1.2) [inner] {};
+	\node (inner3) at (2.5,-0.6) [inner] {};
+	\node (inner4) at (2.6, 3.0) [inner] {};
+
+	\node (inner5) at (4.7,-0.2) [inner] {};	
+	\node (inner6) at (5.0, 2.5) [inner] {};
+	\node (inner7) at (5.3, 1.2) [inner] {};
+	\node (inner8) at (6.0, 2.2) [inner] {};
+	\node (inner9) at (6.2, 0.3) [inner] {};	
+	
+	\foreach \i in {0,1,3} \node (output\i) at (7.5,2.5-\i) [output] {};
+	
+	% interconnections
+	\draw [->] (input0) to [out=0,in=180] (inner1);	
+	\draw [->] (input0) to [out=0,in=180] (inner2);	
+	\draw [->] (input0) to [out=0,in=180] (inner4);	
+	\draw [->] (input1) to [out=0,in=180] (inner2);	
+	\draw [->] (input1) to [out=0,in=180] (inner3);	
+	\draw [dotted, ->] (0.5,0.5)  to [out=0,in=180] (inner0);	
+	\draw [dotted, ->] (0.5,0.5)  to [out=0,in=180] (inner2);	
+	\draw [->] (input3) to [out=0,in=180] (inner0);	
+	\draw [->] (input3) to [out=0,in=180] (inner3);	
+	
+	\draw [->] (inner0) to (inner3);
+	\draw [->] (inner0) to (inner2);
+	\draw [->] (inner1) to (inner2);
+	\draw [->] (inner1) to (inner4);
+	
+	\draw [dotted, ->] (inner2) to +(0:1);
+	\draw [dotted, ->] (inner3) to +(0:1);
+	\draw [dotted, ->] (inner4) to +(0:1);
+	
+	\draw [dotted, <-] (inner5) to +(180:1);
+	\draw [dotted, <-] (inner6) to +(180:1);
+	\draw [dotted, <-] (inner7) to +(180:1);
+	
+	\draw [->] (inner5) to (inner9);	
+	\draw [->] (inner6) to (inner8);
+	\draw [->] (inner7) to (inner8);
+	\draw [->] (inner7) to (inner9);
+	
+	\draw [->] (inner5) to [out=0,in=180] (output3);
+	\draw [->] (inner7) to [out=0,in=180] (output1);
+	\draw [dotted,->] (inner7) to [out=0,in=180] (7.25,0.5);	
+	\draw [->] (inner8) to [out=0,in=180] (output0);
+	\draw [->] (inner8) to [out=0,in=180] (output1);
+	\draw [dotted,->] (inner9) to [out=0,in=180] (7.25,0.5);	
+	\draw [->] (inner9) to [out=0,in=180] (output3);
+	
+	\foreach \i in {0,7.5} \node at (\i,0.6) {$\vdots$};
+	
+\end{tikzpicture}

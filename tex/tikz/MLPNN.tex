@@ -1,0 +1,61 @@
+\tikzsetnextfilename{MLPNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lhid}{3}
+	\newcommand{\lhidb}{5}
+	\newcommand{\lhidc}{6.5}
+	\newcommand{\lhidd}{8}
+	\newcommand{\lout}{10}
+	
+	% nodes
+	\foreach \i in {0,1,3} \node (input\i) at (\lin,2.5-\i) [input] {};
+	
+	\foreach \j in {\lhid,\lhidb,\lhidd}%
+		\foreach \i in {0,1,2,4} \node (inner\j_\i) at (\j,3-\i) [inner] {};
+	
+	\foreach \i in {0,1,2,4} \node (output\i) at (\lout,3-\i) [output] {};
+	
+	\node (input2)		at (\lin,0.5) {}; 		\node at (\lin,0.6) {$\vdots$};
+	\foreach \j in {\lhid,\lhidb,\lhidd}%
+		\node (inner\j_3)		at (\j,0.0) {};
+	\foreach \j in {\lhid,\lhidb,\lhidd}%
+		\node at (\j,0.1) {$\vdots$};
+	\node (output3)	at (\lout,0.0) {}; 	\node at (\lout,0.1) {$\vdots$};
+	
+	% interconnections
+	% in - hid1
+	\foreach \i in {0,1,3}%
+		\foreach \j in {0,1,2,4}%
+			\draw [->] (input\i) to [out=0, in=180] (inner\lhid_\j);
+	\foreach \i in {0,1,3}%
+		\draw [dotted, ->] (input\i)	to [out=0, in=180] (inner\lhid_3);
+	\foreach \j in {0,1,2,4}%
+		\draw [dotted, ->] (input2) 	to [out=0, in=180] (inner\lhid_\j);
+	
+	\foreach \i in {0,1,2,4}%
+		\foreach \j in {0,1,2,4}%
+			\draw [->] (inner\lhid_\i) to [out=0, in=180] (inner\lhidb_\j);
+	\foreach \i in {0,1,2,4}%
+		\draw [dotted, ->] (inner\lhid_\i)	to [out=0, in=180] (inner\lhidb_3);
+	\foreach \j in {0,1,2,4}%
+		\draw [dotted, ->] (inner\lhid_3) to [out=0, in=180] (inner\lhidb_\j);
+	
+	\foreach \i in {0,1,2,3,4}%
+		\foreach \j in {0,1,2,3,4}%
+			\draw [dotted,->] (inner\lhidb_\i) to [out=0, in=180] (inner\lhidd_\j);
+	\fill [white] (6.3,-1.5) rectangle (6.7,3.5);
+	\foreach \i in {-0.9,0.1,1.1,2.1,3.1}%
+		\node at (\lhidc,\i) {$\vdots$};
+
+	\foreach \i in {0,1,2,4}%
+		\draw [->] (inner\lhidd_\i) to [out=0, in=180] (output\i);
+
+	\draw [dotted, ->] (inner\lhidd_3) to [out=0, in=180] (output3);
+	
+\end{tikzpicture}
