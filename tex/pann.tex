@@ -106,10 +106,15 @@
 % define the box around functions
 \newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
 
+%\pagenumbering{alph}
 \maketitle
+
+\pagenumbering{roman}
 \tableofcontents
 \cleardoublepage		%or \clearpage ?
 
+\pagenumbering{arabic}
+\mainmatter
 % introductory chapter ~ 5pg
 \input{chapters/intro.tex}
 
@@ -130,8 +135,6 @@
 % Bibliography
 %\cleardoublepage
 \printbibliography[heading=bibintoc]%,title={References}]
-%\markboth{BIBLIOGRAPHY{}
-%\addcontentsline{toc}{chapter}{Bibliography}
 
 % Aknowledgements
 \chapter*{Aknowledgements}

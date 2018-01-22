@@ -1,0 +1,71 @@
+\tikzsetnextfilename{BlackBoxNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lout}{5}
+	
+	% nodes
+	\foreach \i in {0,1,3} \node (input\i) at (\lin,2.5-\i) [input] {};
+	
+	\foreach \i in {0,1,2,4} \node (output\i) at (\lout,3-\i) [output] {};
+	
+	\node (inner0) at (1.6, 0.2) [inner] {};
+	\node (inner1) at (1.8, 2.0) [inner] {};
+	\node (inner2) at (2.1, 1.2) [inner] {};
+	\node (inner3) at (2.5,-0.8) [inner] {};
+	\node (inner4) at (2.6, 3.0) [inner] {};
+
+	\node (inner5) at (2.8,-0.1) [inner] {};
+	\node (inner6) at (3.0, 2.3) [inner] {};
+	\node (inner7) at (3.3, 1.2) [inner] {};
+	\node (inner8) at (3.9, 2.1) [inner] {};
+	\node (inner9) at (4.0, 0.0) [inner] {};
+	
+	\node (input2)		at (\lin,0.5) {}; 		\node at (\lin,0.6) {$\vdots$};
+	\node (output3)	at (\lout,0.0) {}; 	\node at (\lout,0.1) {$\vdots$};
+	
+	% interconnections
+	\draw [->] (input0) to [out=0,in=180] (inner1);
+	\draw [->] (input0) to [out=0,in=180] (inner2);
+	\draw [->] (input0) to [out=0,in=180] (inner4);
+	\draw [->] (input1) to [out=0,in=180] (inner2);
+	\draw [->] (input1) to [out=0,in=180] (inner3);
+	\draw [->] (input1) to [out=0,in=180] (inner4);
+	\draw [dotted, ->] (0.5,0.5)  to [out=0,in=180] (inner0);
+	\draw [dotted, ->] (0.5,0.5)  to [out=0,in=180] (inner1);
+	\draw [dotted, ->] (0.5,0.5)  to [out=0,in=180] (inner2);
+	\draw [->] (input3) to [out=0,in=180] (inner0);
+	\draw [->] (input3) to [out=0,in=180] (inner3);
+	
+	\draw [->] (inner0) to (inner3);
+	\draw [->] (inner0) to (inner5);
+	\draw [->] (inner1) to (inner4);
+	\draw [->] (inner1) to (inner6);
+	\draw [->] (inner1) to (inner7);
+	\draw [->] (inner2) to (inner5);
+	\draw [->] (inner2) to (inner6);
+	\draw [->] (inner2) to (inner7);
+	\draw [->] (inner3) to (inner9);
+	\draw [->] (inner4) to (inner6);
+	\draw [->] (inner5) to (inner7);
+	\draw [->] (inner5) to (inner9);
+	\draw [->] (inner6) to (inner7);
+	\draw [->] (inner6) to (inner8);
+	\draw [->] (inner7) to (inner8);
+	\draw [->] (inner7) to (inner9);
+	
+	\draw [->] (inner4)  to [out=0,in=180] (output0);
+	\draw [->] (inner8)  to [out=0,in=180] (output1);
+	\draw [->] (inner7)  to [out=0,in=180] (output2);
+	\draw [dotted, ->] (inner9)  to [out=0,in=180] (output3);
+	\draw [->] (inner3)  to [out=0,in=180] (output4);
+	
+	% black box
+	\filldraw [thick, draw=black, fill=black, fill opacity=0.4] (0.1,-1.5) rectangle (4.9,3.5);
+	
+\end{tikzpicture}

@@ -12,23 +12,13 @@ Both options can be modeled by
 For simplicity in this chapter I will consider only logical models of artificial neural networks, which are therefore closer to simulated ANN than hardware ANN.
 
 
-\section{Neural Networks}
-\label{sec:Neural_Networks}
+This chapter is intended as an introduction to the world of artificial neural network, and focuses on the main aspects and types of neural networks, without claiming to be comprehensive.
 
-%\begin{wrapfigure}[19]{r}{0.5\textwidth}
-%	\centering
-%	\input{tikz/GenericNN.tex}
-%	\caption{	General scheme of a neural network. %
-%						Triangles (red) are input nodes, circles (grey) are inner nodes, and squares (blue) are output nodes. %
-%						Interconnections among nodes are represented by arrows: %
-%						continuous when both elements are drawn, and dotted otherwise; %
-%						straight between inner nodes, and curved otherwise.%
-%						}
-%	\label{fig:general_NN}
-%\end{wrapfigure}
+\section{Basis of Neural Networks}
+\label{sec:Basis_of_Neural_Networks}
 
 A neural network is a collection of processing elements, or nodes, interconnected in an arbitrary topology.
-From its input nodes, the network accepts information, which will propagate into the inner nodes through the interconnections and will be elaborated at each node.
+From its input nodes, the network accepts information, which will propagate into the inner nodes through the interconnections and will get elaborated at each node.
 At the end of the network, there will be a number of output nodes, with the task of reading a portion of the inner nodes.
 The inner nodes are also called hidden, because they are not meant to be accessible to the external world.
 A generic scheme of such network is shown in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.
@@ -39,16 +29,16 @@ A generic scheme of such network is shown in \autoref{fig:generic_NN} \vpageref{
 	\caption{	Generic scheme of a neural network. %
 						Triangles (red) are input nodes, circles (grey) are inner nodes, and squares (blue) are output nodes. %
 						Interconnections among nodes are represented by arrows: %
-						continuous when both elements are drawn, and dotted otherwise; %
-						straight between inner nodes, and curved otherwise.%
+						continuous when both elements are drawn, and dotted otherwise. %
+						I chose a non-standard representation to emphasize the nonlinear nodes, which will use a nonlinear activation function. %
 						}
 	\label{fig:generic_NN}
 \end{figure}
 
 Each node can operate in the same way of the others or in a completely different manner, depending on the type of neural network.
-The operation of nodes resembles that of animal neurons: the various input gets collected and elaborated together to obtain an output, which will become one of the many inputs for subsequent neurons.
-Specifically, the most used model for neurons is divided into two parts, as shown in \autoref{fig:generic_node} \vpageref{fig:generic_node}.
-The first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
+The operation of nodes resembles that of animal neurons: various input gets collected and elaborated together to obtain an output, which will become one of the many inputs for subsequent neurons/nodes.
+Specifically, the most used model for neurons is the McCulloch–Pitts (MCP) neuron.
+It is divided into two parts, as shown in \autoref{fig:generic_node} \vpageref{fig:generic_node}: the first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
 
 \begin{figure}[ht]
 	\centering
@@ -56,11 +46,12 @@ The first part is a weighted sum of the inputs, while the second part is given b
 	\caption{Generic node representation. $x$-values are inputs, $y$-values are outputs, $w_0$ is the bias.}
 	\label{fig:generic_node}
 \end{figure}
-The node is described mathematically by \autoref{eq:Generic_node_function}.
+The node is described mathematically by \autoref{eq:Generic_node_function}
 \begin{equation}
-y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right)
+y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right),
 \label{eq:Generic_node_function}
 \end{equation}
+where $f_a$ is the activations function, evaluated on the sum of the input $x_i$ weighted with $w_i$, plus a bias $w_0$.
 
 Each node accepts values at its inputs and produces an output accordingly.
 However, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operation phase of the neural network, as I will explain in \autoref{sec:Working_Principles_of_ANNs} later \vpageref{sec:Working_Principles_of_ANNs}.
@@ -85,10 +76,104 @@ Two examples of nonlinear function are shown below in \autoref{fig:activation_fu
   	\label{fig:activation_function_examples}
 \end{figure}
 
+One can distinguish at least three type of nodes in every neural network: input, inner/hidden, and output nodes.
+Input nodes take one input value, from the outside of the neural network, and pass it on to the inner nodes unchanged.
+Inner/hidden nodes take many inputs and generate an output through the activation function.
+Output nodes, similarly to input nodes, take one input value, from the inside of the NN, and pass it on to the outside.
+
+%This is not the orthodox description, but I claim that it is more consistent than the standard representation with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
+This is not the orthodox description, however it is consistent with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
+Therefore I can easily distinguish the nodes which will use a nonlinear activation function.
+%Questa non è la visione standard/ortodossa, ma è consistente con un'idea di 'black box' in cui gli input e output sono gli unici nodi visibili. mentre gli altri sono all'interno della scatola nera.
+
+\begin{figure}[ht]
+	\centering
+%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\input{tikz/BlackBoxNN.tex}
+	\caption{Representation of the black-box concept}
+	\label{fig:black_box_NN}
+\end{figure}
+
 %A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
-\subsection{Feedforward NN}
-\label{ssec:Feedforward_NN}
+\noindent\uppercase{\large{What are neural network good for?\\ when do i talk about that?\\ e.g. NN are good for pattern recognition.}}
+\normalsize
+
+\section{Working Principles of ANNs}
+\label{sec:Working_Principles_of_ANNs}
+Because of its topology, each neural network will behave in a different manner from other neural networks with diverse, or even similar, arrangements of nodes.
+Moreover the same neural network will perform a certain task better or worse also depending on how inputs are weighted at each hidden node, and normally those parameters are initialized with a random value at the creation of the network.
+For this reason, before a neural network is considered ready to perform a task, it usually must go through three training stages: learning phase, validation phase, and testing phase.
+Every one of these stages are meant to prepare the network to work as required from the designer.
+
+\subsection{Learning Process}
+\label{ssec:Learning_Process}
+During the learning process the neural network is run on a set of known inputs $x$, each paired with its correct answer $y$, or target, in a second set of data.
+The neural network will produce at the output a third set $\hat{y}$, which should be as close as possible to the correct answers, when the network works properly.
+However this happens rarely, if ever, and a change in the way data is elaborated becomes necessary.
+The usual \ref{} way is to keep the same topology, but tweak the weights that connect the hidden nodes together.
+On account of this need, one needs to quantify the distance of the predicted result of the artificial neural network from the correct answer.
+This is made by means of the loss function.
+
+\subsubsection{Loss function}
+\label{sssec:Loss_function}
+The loss function $L(y, \hat{y})$ evaluates the difference between the predicted and the correct answer.
+Usually, this quantity is linked to the geometrical distance between the predicted output and the target $\left| \hat{y}-y \right|$.
+The most common loss function is the \textit{mean-square error}.
+Assuming to have an input set of $N$ examples paired with the same number of targets, and that the outputs and the targets are composed by $C$ values, or classes, the function becomes:
+\begin{equation}
+	L(y, \hat{y}) = f_{MSE}(y, \hat{y}) = \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C \left( \hat{y}_{n,i} - y_{n,i} \right)^2,
+\end{equation}
+where each example in the set is subtracted to its target and then squared.
+Finally the mean of all squares gives the expected result.
+
+Another commonly used function is the cross-entropy loss (also known as negative log likelihood),
+\begin{equation}
+	L(y, \hat{y}) = f_{CEL}(y, \hat{y}) = - \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C y_{n,i} \log \left( \hat{y}_{n,i} \right),
+\end{equation}
+which expects positive values at the input.
+Hence the error $-y\log \left( \hat{y} \right)$, quantified for each element in each example, is always a positive number.
+The mean over all examples in the set returns the results.
+
+Alternatively, variations of the previous methods are given by not taking the sum of the examples in place of the mean, or by calculating a loss function for each example instead of evaluating it for the whole set.
+
+\subsubsection{Weights Update Process}
+\label{sssec:Weights_Update_Process}
+
+The weights update process is a difficult task, and probably the most computationally expensive one in running a neural network.
+There is a variety of methods to chose from, depending on the type of artificial network and the resources available.
+
+A widely used algorithm is the gradient descent, from its most simple version to more complex variations such as stochastic gradient descent (SGD).
+This method updates the weights by subtracting a value proportional to the gradient of the loss function in respect to the weights themselves times a positive factor called \textit{learning rate}, as shown below.
+\begin{equation}
+	\left.w_i\right|_{n+1} = \left.w_i\right|_n - lr \cdot \frac{\partial L}{\partial \left.w_i\right|_n}
+\end{equation}
+where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate, $\dfrac{\partial L}{\partial \left.w_i\right|_n}$ is the first derivative of the loss function in respect to the i-th weight at the current step, and $\left.w_i\right|_{n+1}$ are the updated weights.
+%Hence it is necessary to calculate the gradient $\bigtriangledown_w L$.
+This method is equivalent to minimize the error on the loss function, by following the gradient $\bigtriangledown_w L$.
+This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where parameters and variables are swapped.
+
+The most efficient \ref{} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
+Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
+
+\subsection{Validation Process}
+\label{ssec:Validation_Process}
+
+\subsection{Testing Process}
+\label{ssec:Testing_Process}
+At the end, there is the process of testing the artificial neural network.
+Ideally the network is tested on a new set of data, for which the target results are known, similarly to the preceding phases.
+This time, however, the predicted outputs are compared to the correct answers to obtain an overall value for the correctness, often expressed in percentage.
+
+\subsection{Datasets}
+\label{ssec:Datasets}
+Since there are three phases of preparation for any artificial neural network, there must be an appropriate number of examples to feed to it.
+
+\noindent\uppercase{\normalsize{how do i divide a dataset?\\ what happens when there are too few examples?\\ And when there are too many?}}
+\normalsize
+
+\section{Feedforward NN}
+\label{sec:Feedforward_NN}
 
 The first and most simple type of neural network is called Feedforward.
 In this kind of neural network, nodes are divided into groups called \textit{layers}.
@@ -98,46 +183,64 @@ As for the single nodes, the inner layer are called hidden, because usually not 
 
 The information travels from the input to the output and gets elaborated from each hidden layer: there are no connection between nodes of the same layer, nor loops or feedback between layers.
 Depending on the topology of the network, there might be more or less layers, each composed by the same or a different number of nodes.
-Moreover the connection between the layers might be complete, in that case the layer is said to be \textit{fully connected}, or sparse as in the case of convolutional layers.
+Moreover the connection between the layers might be complete, i.e. each node in the layer accepts each input of the preceding layer, in that case the layer is said to be \textit{fully connected}, or sparse as in the case of convolutional layers (see \autoref{par:Convolutional}).
 
 \subsubsection{Perceptron}
 \label{sssec:Perceptron}
 
 The most naive topology of a Feedforward neural network is given by the so called \textit{Perceptron}.
 The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron}\cite{frank1957perceptron,Rosenblatt1958}.
-The graph of such network is shown in \autoref{fig:Perceptron} below.
+The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Perceptron} below.
 
 \begin{figure}[ht]
 	\centering
 	\input{tikz/PerceptronNN.tex}
-	\caption{Perceptron type neural network: in this representation the perceptron has $n$ inputs and $m$ outputs as well as a hidden layer with $m$ nodes.%
-		The colors, shape and styles are the same as in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.%
+	\caption{%
+		Perceptron type neural network: in this representation the perceptron has $n$ inputs and $m$ outputs as well as a hidden layer with $m$ nodes. %
+		Colors, shape and styles are the same as in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.%
 		}
 	\label{fig:Perceptron}
 \end{figure}
 
-By adding more than one hidden perceptron layer to a neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP), shown in \autoref{fig:MLP} \vpageref{fig:MLP}.
-The shape of the hidden layer is represented by a rectangular matrix of size $n\times m$, where $n$ is the number of nodes in each layer and $m$ is the number of layers.
-In principle other shapes are possible, i.e. each layer could have a different number of nodes.
-However, since such network can still be reproduced by a appropriate sized rectangular matrix of nodes, from now on I will assume the simpler rectangular form, except where otherwise specified.
+By adding more than one hidden perceptron layer to the neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP).
+This allows for more computational complexity \ref{}.
+When the total number of layer is more than two, the network is called \textit{deep}.
+A deep MLP is shown in \autoref{fig:deepMLP} \vpageref{fig:deepMLP}.
+In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \ref{}.
+Besides the shape, in literature a perceptron is almost always considered fully connected \ref{}.
 
 \begin{figure}[ht]
 	\centering
 	\input{tikz/MLPNN.tex}
-	\caption{	Multi-Layer Perceptron (MLP).}
-	\label{fig:MLP}
+	\caption{	Deep Multi-Layer Perceptron (MLP), fully connected.}
+	\label{fig:deepMLP}
 \end{figure}
 
 \subsubsection{Other Feedforward NNs}
 \label{sssec:Other_Feedforward_NNs}
 
-Autoencoder
+\paragraph{Autoencoder} neural networks are feedforward networks in which the output nodes are as many as the input nodes.
+The purpose of this kind of network is to reconstruct its own inputs.
 
-Probabilistic
+\paragraph{Probabilistic}
 
-Time delay
+\paragraph{Time delay}
 
-Convolutional
+\paragraph{Convolutional}\label{par:Convolutional} networks are inspired to the visual cortex, in which neurons are not fully connected their inputs but only to a restricted region.
+Convolutional neural networks are a type of feedforward network conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
+In this kind of network the input is often represented by a 2D matrix, instead of a 1D vector.
+It is usually composed by many layers, the prevalent kind is the convolutional one.
+This layer performs a two-dimensional convolution over the input matrix of a second 2D matrix of weights, called \textit{feature map}.
+Thus, each node of the layer operates on a restricted region to understand if a feature is present or not.
+Commonly the operating regions are overlapping and the feature map is shared among the nodes in the same layer.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\caption{image/scheme of the conv NN}
+	\label{fig:convolutionalNN}
+\end{figure}
+
 
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
@@ -145,12 +248,8 @@ Convolutional
 \subsubsection{Reservoir NN}
 \subsubsection{Modular NN}
 \subsubsection{Spiking NN}
-
-\section{Working Principles of ANNs}
-\label{sec:Working_Principles_of_ANNs}
-
-\subsection{Learning Process}
-\label{ssec:Learning_Process}
+other type of neuron model: Hodgkin–Huxley (H-H) model
+\url{ https://en.wikipedia.org/wiki/Binding_neuron }
 
 \section{Real-Life Examples}
 \label{sec:Real-Life_Examples}
