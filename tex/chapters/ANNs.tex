@@ -2,17 +2,52 @@
 \label{ch:Artificial_Neural_Networks}
 
 Artificial Neural Networks (ANNs) are computational systems which elaborate information likewise biological neural networks (animal brains).
+These systems modify their behavior through a learning process and improve their accuracy in a certain task.
+The underlying idea is that biological neural networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition) and prediction (e.g. pattern recognition).
 
-
-\vspace{1em}
-ANNs can be either simulated on computers or built on specific hardware designed ad hoc.
-Both options can be modeled by 
-
-\vspace{1em}
-For simplicity in this chapter I will consider only logical models of artificial neural networks, which are therefore closer to simulated ANN than hardware ANN.
-
+Mathematically speaking, ANNs are a collection of nodes, each of them elaborate the information and is connected to the other in a certain amount.
+Artificial networks can be either simulated on computers or physically built on specific hardware designed ad hoc.
+At this time, ANNs are mainly implemented by simulations, however the technological progress is withheld by limitation in computing power and efficiency.
+Training a complex artificial neural network with computers at the state of art might take even weeks.
+Thus research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
 
 This chapter is intended as an introduction to the world of artificial neural network, and focuses on the main aspects and types of neural networks, without claiming to be comprehensive.
+
+\subsection{History}
+\label{ssec:History}
+It is widely acknowledged that the opening work of this research field was made in 1943 by Warren McCulloch and Walter Pitts, a neurophysiologist and a mathematician respectively.
+In their research work, they described the operating mechanism of biological neurons by modeling a simple electronic circuit \cite{McCulloch1943}.
+
+The following important work was made by Donald O. Hebb, who hypothesized the neural plasticity in 1949 \cite{hebb1949organization}.
+He pointed out the fact that neural pathways are strengthened each time they are used, a concept known as \textit{Hebbian learning}.
+
+During the late 1950s and the early 1960s, as computers became more powerful, many promising works were published.
+Some simulated operation of artificial networks on calculators, e.g. Farley and Clark \cite{Farley1954} and Rochester \cite{Rochester1956}.
+Other produced circuitry that implemented on hardware such networks, e.g. Rosenblatt \cite{frank1957perceptron,Rosenblatt1958}.
+However, despite the early successes of neural networks, the traditional computing architecture (von Neumann architecture) was chosen as the preferred computing architecture.
+As a result, funding and therefore also research diminished drastically in the following decades.
+
+The reason this happened, probably, was due to several concurring facts.
+First of all, in the same time period a research paper wrongly suggested that there could not be any multiple-layered neural network.
+Moreover, the early successes of some works on neural networks pointed to an overestimation of the artificial neural networks potential, also held back by the technological capacity of the time.
+Finally, important questions of philosophical nature come to light, such as the fear fueled debate on the impact on our society of a class of computers able to think.
+This very controversy, i.e. artificial intelligence (AI) problem, is still a discussed topic today \cite{stanford.edu}.
+
+Sometime during the 1980s the interest for this computing method was reinvigorated.
+The main stimulation was probably given by a number of works which suggested methods to implement multi-layered networks distributing pattern recognition errors through the all the layers in the network.
+This method is now called \textit{backpropagation}.
+
+In today's research and technology, artificial neural networks are used in numerous applications.
+However, the development is made slowly, due to technological limitation in computational power of present processors.
+
+\subsection{Comparison with conventional computers}
+\label{ssec:Comparison_with_conventional_computers}
+
+%Digital, analog, and optical chips are the different types of chips being developed.
+%One might immediately discount analog signals as a thing of the past.
+%However neurons in the brain actually work more like analog signals than digital signals.
+%While digital signals have two distinct states (1 or 0, on or off), analog signals vary between minimum and maximum values.
+%It may be awhile, though, before optical chips can be used in commercial applications."
 
 \section{Basis of Neural Networks}
 \label{sec:Basis_of_Neural_Networks}
@@ -54,7 +89,7 @@ y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right),
 where $f_a$ is the activations function, evaluated on the sum of the input $x_i$ weighted with $w_i$, plus a bias $w_0$.
 
 Each node accepts values at its inputs and produces an output accordingly.
-However, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operation phase of the neural network, as I will explain in \autoref{sec:Working_Principles_of_ANNs} later \vpageref{sec:Working_Principles_of_ANNs}.
+However, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operative phase of the neural network, as I will explain in \autoref{sec:Working_Principles_of_ANNs} later \vpageref{sec:Working_Principles_of_ANNs}.
 
 Moreover it is mandatory for the activation function $f_a\left(\cdot\right)$ to be nonlinear, because otherwise a collection of nodes will result in just a weighted sum of its inputs.
 Two examples of nonlinear function are shown below in \autoref{fig:activation_function_examples}.
@@ -104,7 +139,7 @@ Therefore I can easily distinguish the nodes which will use a nonlinear activati
 Because of its topology, each neural network will behave in a different manner from other neural networks with diverse, or even similar, arrangements of nodes.
 Moreover the same neural network will perform a certain task better or worse also depending on how inputs are weighted at each hidden node, and normally those parameters are initialized with a random value at the creation of the network.
 For this reason, before a neural network is considered ready to perform a task, it usually must go through three training stages: learning phase, validation phase, and testing phase.
-Every one of these stages are meant to prepare the network to work as required from the designer.
+Every one of these stages is meant to prepare the network to work as required from the designer.
 
 \subsection{Learning Process}
 \label{ssec:Learning_Process}
@@ -151,10 +186,12 @@ This method updates the weights by subtracting a value proportional to the gradi
 where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate, $\dfrac{\partial L}{\partial \left.w_i\right|_n}$ is the first derivative of the loss function in respect to the i-th weight at the current step, and $\left.w_i\right|_{n+1}$ are the updated weights.
 %Hence it is necessary to calculate the gradient $\bigtriangledown_w L$.
 This method is equivalent to minimize the error on the loss function, by following the gradient $\bigtriangledown_w L$.
-This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where parameters and variables are swapped.
+This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where $W$ is the total number of parameters in the network.
 
 The most efficient \ref{} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
 Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
+
+\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
 
 \subsection{Validation Process}
 \label{ssec:Validation_Process}
@@ -244,12 +281,58 @@ Commonly the operating regions are overlapping and the feature map is shared amo
 
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
+By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
+Moreover, those different types of network are not a niche, but are widely \ref{} studied as a different approach to the same or additional problems.
+
 \subsubsection{Recurrent NN}
+\label{sssec:Recurrent_NN}
+Recurrent neural network are a kind of network in which a portion of the input of nodes depends on the (past) output of the same nodes or nodes of subsequent layers.
+That is information does not propagates only forward like in the feedforward networks, but can propagate also backward, for example in loops or in feedbacks.
+
 \subsubsection{Reservoir NN}
+\label{sssec:Reservoir_NN}
+Reservoir neural networks differ from feedforward and recurrent networks in the learning approach.
+In fact, the topology of a reservoir network could be exactly the same as that of a deep multi-layer perceptron or that of a recurrent network.
+However, the reservoir computing approach claims that it is not necessary to learn all the weights of the network, but only for the last (perceptron) layer.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\caption{image/scheme of the reservoir NN}
+	\label{fig:reservoirNN}
+\end{figure}
+
+These kind of networks, then, can be trained much faster than their respective counterparts, i.e. feedforward and recurrent,
 \subsubsection{Modular NN}
+\label{sec:Modular_NN}
+
+
 \subsubsection{Spiking NN}
-other type of neuron model: Hodgkin–Huxley (H-H) model
+\label{sec:Spiking_NN}
+Spiking artificial networks are the most different kind in respect to all the other networks until now described.
+In this class of ANNs, information is not coded only in the intensity of the signal, but also in the rate of signals, e.g. a high value will be encoded as a signal with high repetition rate, whereas a low value as a signal with low repetition rate.
+This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \ref{}.
+
+\vspace{1em}
+\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model
 \url{ https://en.wikipedia.org/wiki/Binding_neuron }
 
 \section{Real-Life Examples}
 \label{sec:Real-Life_Examples}
+\noindent\uppercase{\large{? Should I keep this section ?}}
+\normalsize
+
+\section{ANN Simulation}
+\label{sec:ANN_Simulation}
+The resources and the time available allowed me to implement physically only the activation function of one node.
+Hence, to test this hardware implementation as I will show in \autoref{sec:Test_of_a_Trained ANN} of \autoref{ch:experiments}, I had first to simulate and train \textit{offline} a specific neural network.
+To do so, I chose a programming language, \textit{Python}, and a library, \textit{PyTorch}, which helped me in this task.
+\subsection{PyTorch}
+\label{PyTorch}
+
+PyTorch is a python package that provides high-level features such as a deep learning research platform \cite{PyTorch.org}.
+It is based on a backpropagation algorithm called \textit{Reverse-mode auto-differentiation}, which is fast and flexible.
+Moreover integrates acceleration libraries that allow fast and lean operation.
+
+To summarize, the library was chosen for its language and its flexibility, even though it is also powerful.
+This because our need was to simulate a little network to test the activation function.
