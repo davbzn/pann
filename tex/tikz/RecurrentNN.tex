@@ -1,0 +1,32 @@
+\tikzsetnextfilename{RecurrentNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lhid}{2.5}
+	\newcommand{\lout}{5}
+	
+	% nodes
+	\foreach \i in {0,2} \node (input\i) at (\lin,1-\i) [input] {};
+	\node (input1)		at (\lin, 0) {}; 		\node at (\lin, 0.1) {$\vdots$};
+	
+	\node (inner1) at (\lhid, 0) [inner] {};
+	
+	\node (output1) at (\lout, 0) [output] {};
+	
+	% interconnections
+	\foreach \i in {0,2}%
+		\draw [->] (input\i) to [out=0, in=180] (inner1);
+	\draw [dotted, ->] (input1)	to [out=0, in=180] (inner1);
+	
+	\node (delay) at (\lhid, 1) {};
+	\draw [->|] (inner1) to [out=  0, in=270] +(0.7,0.5)   to [out= 90, in=  0] (delay);
+	\draw [|->] (delay)  to [out=180, in= 90] +(-0.7,-0.5) to [out=270, in=180] (inner1);
+	
+	\draw [->] (inner1) to [out=0, in=180] (output1);
+	
+\end{tikzpicture}

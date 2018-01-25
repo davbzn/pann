@@ -2,17 +2,128 @@
 \markboth{INTRODUCTION}{}
 \addcontentsline{toc}{chapter}{Introduction}
 
-WHAT and WHY?
-BACKUP project, why silicon photonics (CMOS compatibility)
-\vspace*{2em}
+\paragraph{The research field\\}
+Research in the field of artificial neural networks has became more and more popular in the last few decades as the computing power available to the average institution increased further.
+As a matter of fact, in the last two decades the calculation power which once belonged only to bulky, power hungry, and very expensive supercomputers, gradually became possible also for relatively more compact, efficient, and definitely cheaper servers and workstations.
 
-The formalization of the von Neumann architecture (1945) and the development of modern computers in the second half the 20th century allowed a great improvement in many scientific and technological areas.
-The technological progress led to [...]
+This trend is dictated by the fact that artificial neural networks are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
+Implementations of this general purpose architecture are able to do any logical computation with a series of instructions.
+However the downside of this suitability to generic computations is that it is often difficult to parallelize single operations and therefore certain tasks are inherently inefficient, both in energy and in time.
+Moreover another problem is that it requires explicit programming for each singular task
 
-\vspace*{2em}
-Now, on the verge of the era of artificial intelligence (AI), many breakthroughs in complex of AIs are happening.
-This is mainly due to the immense amount of data fed to AI algorithms.
-For this reason however, the algebraic calculus which is carried out so efficiently by computers is not enough anymore.
+The formalization of the von Neumann architecture dates back to 1945 and is as old as the first attempt in artificial neural networks.
+Shortly after, research and industry efforts focused only on the development of the Princeton architecture, choosing it de facto as the primary design for computing devices.
 
-\vspace*{2em}
-Under the
+In the recent years, help came from acceleration units known as Graphic Processing Units (GPU), which were developed for a completely different objective.
+These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to CPUs, but are much more efficient both in power and in time, because of their parallel execution.
+
+\paragraph{Todays software implementations\\}
+Between the most famous examples of simulated neural network there certainly are the older Watson supercomputer from IBM and the more recent AlphaGo artificial intelligence.
+Both of them arose to popularity because they defeated us humans to our own games.
+Specifically the effort of Watson was aimed at prevailing the most strongest human contestants at \textit{Jeopardy!}, an American television game, and succeeded in 2011.
+Watson was powered by a IBM supercomputer and used \SI{0.22}{\MW} of power.
+AlphaGO, nevertheless, is a deep neural network that in 2016, through reinforced learning algorithms, defeated Lee Sedol, considered the most formidable master of Go, a complicated board game.
+
+Another interesting case is given by SpiNNaker, of the University of Manchester.
+It is composed by $10^4$ neurons connected by more that $10^7$ synapses, and is simulated on over 65 thousand 18-core ARM processors connected together.
+Unlike the other two, its main goals are to simulate several neural mechanisms, such as the
+operation of visual cortex.
+
+Similarly to SpiNNaker, another effort in gaining better understanding of the human brain is \textit{The Blue Brain Project}, which is leaded by École Polytechnique Fédérale de Lausanne in collaboration with over one hundred other international research institutions and it is funded by the European Union.
+This project is simulated on IBM Blue Gene supercomputers, each fitted with more than 100 thousand processors and consuming several \si{\MW} of power.
+
+\paragraph{Present objectives and future trends\\}
+We can distinguish two principal objectives in this research field.
+The first one is a technological objective and is that of developing a more powerful computational instrument.
+The second objective is instead a topic of more fundamental research: to use the tools of artificial neural networks to better understand biological neural networks such as our brain.
+
+If the comprehension of the complex mechanism at the base of our brain has always been a very arduous assignment, the tasks that artificial neural network are facing become increasingly difficult while time passes.
+Whereas in the past years public and private research groups trained themselves with "easier" problems, such as television or board games, today they are concentrating their efforts on more challenging goals.
+Probably the most clear example of this tendency is given by the research on autonomous driving, where artificial neural networks are used primarily for real-time processing of data from several sensors..
+
+A great number of businesses formed in recent years around these problems and many other will probably do the same for similar areas.
+It is very likely that to achieve their objectives, even more powerful and complex artificial networks will be required.
+Therefore more processors will be developed and put together to achieve impressive computing power.
+However, one cannot expect to increase indefinitely the power, without significant improvements in efficiency.
+Hence alternatives are sought.
+
+\paragraph{Overview of current alternatives to simulations\\}
+
+Apart from the vast majority of the research on neural networks, which is being carried out with simulations on powerful processors, a smaller portion of research is focused on building neural network physically.
+Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow artificial neural networks to run physically, instead of being simulated on conventional computers.
+
+The reason why considerable improvements can be expected is that the path of designing hardware devices ad hoc for neural network computation has not yet been covered comprehensively.
+Majors performance or efficiency enhancements are coming from the fact that those new architectures are conceived with parallel execution of specific operations in mind.
+However, being designed for precise tasks makes them unsuitable for generic computation, which could in principle make them less easy to modify when needed, unlike simulations on conventional computers.
+
+Many of these use the electronics framework, mainly because of the many benefits of the mature silicon technology and its CMOS-compatible production chain.
+Specifically footprint and efficiency of CMOS devices has not yet stopped to grow since its discovery, in the past century.
+However, a relatively small portion of these works also inquired simpler network fabrication with organic electronic materials, achieving remarkable results.
+
+Among the most interesting projects which uses electronics there are TrueNorth of IBM and Neurogrid of Stanford University.
+The former is part of a long-term research project funded by DARPA and has the aim of building an artificial neural network with the capabilities of brains of small mammalians, such as cats or mice.
+In 2014 IBM showed a chip, named TrueNorth, containing 1 million artificial neurons and 256 millions synapses.
+This network, relying on more than 5 billion transistors organized on an area of \SI{4.3}{\square\cm}, consumed only \SI{60}{\mW}.
+The researcher also proved that connecting 48 of this chips together they obtained the equivalent of the brain of a mouse.
+
+Similarly, the intention behind Neurogrid chip is to explore numerous hypothesis concerning mammalian brains, specifically about the inner mechanisms of operation of the cerebral cortex.
+Stanford's implementation reaches the line of 1 million neurons, while only requiring \SI{5}{\W} of power consumption.
+Moreover the communication lines between single neurons, the synapses, are provided by FPGAs and banks of SRAM.
+
+Besides electronics, other kind of physical implementations are attempted from research teams.
+Probably the most intriguing example is given by researches in photonics, which attempts to match electronics performance by overcoming its intrinsically weaknesses, such as power consumption.
+Photonics has yet to reach achievements comparable to electronics, mainly due to the embryonic state of its technology.
+
+\paragraph{My work\\}
+My work has two related objectives.
+The primary aim is to implement a proof of concept for a fundamental component of artificial neural networks: the neuron's activation function.
+I plan to do so by employing the framework made available by integrated photonics.
+The second intent is to bring together two until now distant fields of research: physics and information technology, specifically photonics and machine learning.
+In fact generating knowledge transversal to the two research fields is at least as much important as the primary objective
+
+The idea at the base of our physical implementation is to employ integrated devices already manufactured to create a proof of concept for the activation function.
+The choice of integrated photonics is motivated by the fact that, unlike the electronic counterpart, does not suffer from the Joule effect.
+
+Therefore in this work I will study a particular device, a microring resonator, and characterize its response to different inputs, for several working conditions.
+This device can process information because it has, under certain circumstances, a nonlinear response function to its inputs.
+Moreover, the same device might in principle be used in another important part of artificial neural network nodes: the weighted sum.
+However, since this last point has already been discussed in literature and it requires less effort to produce acceptable results, it will not be at the center of this study.
+
+%{WHAT AM I DOING\\why silicon photonics (CMOS compatibility)}
+%The aim of this work is to put together two fields of research: physics and computer technology, specifically photonics and machine learning.
+%The idea is to create a proof of concept for a physical implementation of a very important piece of any artificial networks, the activation function, by using integrated photonics as framework.
+%Therefore I study a particular device, a microring resonator, and characterize its response to different inputs, for several working conditions.
+%This device can process information because it has, under certain circumstances, a nonlinear response function to its inputs.
+
+Moreover, the same device might in principle be used in another important part of artificial neural networks, the weighted sum.
+However, since this last fact has already been discussed in literature and it requires less effort to produce acceptable results, it will not be at the center of this study.
+
+%\paragraph{WHAT IMPROVEMENT WILL HAVE OVER EXISTING THINGS\\}
+Since the aim is to create a proof of concept with structures not specifically designed, I don't expect extraordinary performance both in speed and in efficiency.
+These aspects will be discussed in the conclusive words an will be studied to their fullest only in future works.
+%This project is consistent with those efforts because it studies a novel hardware implementation for an activation function.
+%Such implementation uses only optical phenomena and as such it is original.
+
+%\paragraph{WHY AM I DOING THIS WORK (project BACKUP)\\}
+Furthermore, regarding the second objective, my work is part of a bigger project, BACUKP, with a wider scope and a more ambitious goal.
+It attempts to connect three fields of research, normally quite distant from each other: physics, computing technology, and biology.
+The main idea is to use the integrated photonics framework (physics) to build an artificial neural network (computing technology) on chip, where one could grow and, at least partially control, real neurons (biology).
+The aim is to develop a methodologies and devices that will allow us to study neural activity from a bottom-up perspective.
+
+\paragraph{Structure of the thesis\\}
+
+The first chapter of this thesis is intended as an introduction to the world of artificial neural networks.
+After a brief historical summary, I describe the main aspects of neural networks and their working principles.
+Then I focus on the description of the simplest type of artificial networks, the feedforward network, and finally and overview on other kind of networks.
+Since the aim of this thesis is to tackle a specific problem, this chapter is not meant to be comprehensive foundation or compendium on the matter.
+Later, the chapter is concluded with an introductory description of the language Python and the library PyTorch, used in this work for artificial network simulations.
+
+The second chapter introduces the physics which I will study.
+Again, after a short explanation on the basic devices used in the field, I will describe in depth the device studied for the task.
+Having clarified the physics underneath, I ought to explain how I am going to use this physics to implement (part of) an artificial neural network.
+I will address these topics both from the theoretical point of view and from the numerical one, with simulation of the specific (simplified) system.
+
+The third chapter in dedicated to the description of the experimental work.
+At the beginning the problem of the selection of the sample is discussed, along with the definition of the device chosen.
+After, I characterize the different behaviors with detailed data.
+Finally, an explanation on how the device will be used in the neural network viewpoint and the corresponding tests of operation.

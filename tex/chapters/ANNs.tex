@@ -11,8 +11,6 @@ At this time, ANNs are mainly implemented by simulations, however the technologi
 Training a complex artificial neural network with computers at the state of art might take even weeks.
 Thus research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
 
-This chapter is intended as an introduction to the world of artificial neural network, and focuses on the main aspects and types of neural networks, without claiming to be comprehensive.
-
 \subsection{History}
 \label{ssec:History}
 It is widely acknowledged that the opening work of this research field was made in 1943 by Warren McCulloch and Walter Pitts, a neurophysiologist and a mathematician respectively.
@@ -154,6 +152,7 @@ This is made by means of the loss function.
 \label{sssec:Loss_function}
 The loss function $L(y, \hat{y})$ evaluates the difference between the predicted and the correct answer.
 Usually, this quantity is linked to the geometrical distance between the predicted output and the target $\left| \hat{y}-y \right|$.
+
 The most common loss function is the \textit{mean-square error}.
 Assuming to have an input set of $N$ examples paired with the same number of targets, and that the outputs and the targets are composed by $C$ values, or classes, the function becomes:
 \begin{equation}
@@ -288,6 +287,14 @@ Moreover, those different types of network are not a niche, but are widely \ref{
 \label{sssec:Recurrent_NN}
 Recurrent neural network are a kind of network in which a portion of the input of nodes depends on the (past) output of the same nodes or nodes of subsequent layers.
 That is information does not propagates only forward like in the feedforward networks, but can propagate also backward, for example in loops or in feedbacks.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/RecurrentNN.tex}
+	\caption{%
+		}
+	\label{fig:RecurrentNN}
+\end{figure}
 
 \subsubsection{Reservoir NN}
 \label{sssec:Reservoir_NN}
