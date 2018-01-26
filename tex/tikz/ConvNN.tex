@@ -1,0 +1,64 @@
+\tikzsetnextfilename{ConvNN}
+\begin{tikzpicture}
+	[%
+	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=3mm},%
+	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=3mm},%
+	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=3mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lhid}{3}
+	\newcommand{\lout}{5}
+	
+	%	vdots
+	\foreach \z in {\lin, \lhid, \lout}
+		\foreach \x in {0,3,7}
+				\node at (\z-0.4*0.6*\x,0.4*1.8-0.4*0.2*\x) {$\vdots$};
+	
+	% nodes
+	\foreach \x/\xt in {0/n,3,4,5,6,7}
+		\foreach \y/\yt in {0/n,3,4,5,6,7}
+			\node [input] (input\xt_\yt) at (\lin-0.4*0.6*\x,0.4*\y-0.4*0.2*\x) {};
+	
+	\foreach \x/\xt in {1/n,3,4,5}
+		\foreach \y/\yt in {1/n,3,4,5}
+			\node [inner] (inner\xt_\yt) at (\lhid-0.55*0.6*\x,0.55*\y-0.55*0.2*\x) {};
+			
+	\foreach \x/\xt in {1/n,3,4,5}
+		\foreach \y/\yt in {1/n,3,4,5}
+			\node [output] (output\xt_\yt) at (\lout-0.55*0.6*\x,0.55*\y-0.55*0.2*\x) {};
+	
+	% interconnections
+
+	\draw [black!50,thick] (input3_5.east) -- (input5_5.east)%
+		-- (input5_7.east) -- (input3_7.east) -- cycle;
+%	\draw [black!50,thick] (input4_4.east) -- (input4_6.east)%
+%		-- (input6_6.east) -- (input6_4.east) -- cycle;
+	\draw [black!50,thick] (input5_3.east) -- (input5_5.east)%
+		-- (input7_5.east) -- (input7_3.east) -- cycle;	
+	
+	\foreach \xt in {3,4,5}
+		\foreach \yt in {5,6,7}
+			\draw [thick,->] (input\xt_\yt)	to [out=0, in=180] (inner3_5);	
+	
+%	\foreach \xt in {4,5,6}
+%		\foreach \yt in {4,5,6}
+%			\draw [thick,->] (input\xt_\yt)	to [out=0, in=180] (inner4_4);
+
+	\foreach \xt in {5,6,7}
+		\foreach \yt in {3,4,5}
+			\draw [thick,->] (input\xt_\yt)	to [out=0, in=180] (inner5_3);
+		
+	%orange!80!red
+	%green!90!blue
+	\draw [thick,->] (inner5_3) to [out=0, in=180] (output5_3);
+	\draw [thick,->] (inner3_5) to [out=0, in=180] (output3_5);
+		
+	% redraw some things
+	
+	\node [inner] at (inner5_5) {};
+	\node [inner] at (inner4_5) {};
+	\node [output] at (output5_5) {};
+	\node [output] at (output4_5) {};
+	
+\end{tikzpicture}
