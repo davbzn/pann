@@ -1,0 +1,52 @@
+\tikzsetnextfilename{standardNNdesc}
+\begin{tikzpicture}
+	[%
+	input/.style ={circle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
+	inner/.style ={circle,	draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	outer/.style ={circle,	draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+	]
+
+	\newcommand\lin{0}
+	\newcommand{\lout}{5}
+	
+	% nodes
+	% input
+	\foreach \i in {0,2,3} \node (input\i) at (\lin,0.5+\i) [input] {};
+	\node (input1)		at (\lin,1.5) {}; 		\node at (\lin,1.6) {$\vdots$};
+	% inner
+	\foreach \n/\x/\y in {	0/1.6/1.2, 1/1.8/3.0, 2/2.1/2.2, 5/2.8/0.9, 6/3.0/3.3, %
+												3/2.5/0.2, 4/2.6/4.0, 7/3.3/2.2, 8/3.9/3.1, 9/4.0/1.0 %
+												}
+			\node (inner\n) at (\x,\y) [inner] {};
+	% outer
+	\foreach \n/\x/\y in {	3/2.5/0.2, 4/2.6/4.0, 7/3.3/2.2, 8/3.9/3.1, 9/4.0/1.0 }
+			\node (outer\n) at (\x,\y) [outer] {};
+	% output
+	\foreach \i in {0,1,2,3,4} \node (output\i) at (\lout,\i) {};
+	
+	% interconnections
+	% to input
+	\foreach \i/\type in {0/solid, 1/dotted, 2/solid, 3/solid}
+		\draw [<-, \type] (input\i) -- ++(-1,0);
+	
+	% input to inner
+	\foreach \i/\o in {0/0, 0/3, 2/2, 2/3, 2/4, 3/1, 3/2, 3/4}
+		\draw [->] (input\i) to [out=0,in=180] node [midway, above] {\tiny{ $w$ } } (inner\o);
+		
+	\foreach \i/\o in {1/0, 1/1, 1/2}
+		\draw [dotted, ->] (input\i) to [out=0,in=180] node [midway, above] {\tiny{ $w$ } } (inner\o);
+
+	% inner to inner
+%	\node at (0,0) {ciao};
+	\foreach \i/\o in {	0/3, 0/5, 1/4, 1/6, 1/7, 2/5, 2/6, 2/7, %
+											3/9, 4/6, 5/7, 5/9, 6/7, 6/8, 7/8, 7/9}
+		\draw [->] (inner\i) -- (inner\o) node [midway, above] {\tiny{ $w$ } };
+	
+	% outer to output	
+	\foreach \i/\o in {3/0, 7/2, 8/3, 4/4}
+		\draw [->] (outer\i) to [out=0,in=180] (output\o);
+				
+	\foreach \i/\o in {9/1}
+		\draw [dotted, ->] (outer\i) to [out=0,in=180] (output\o);
+	
+\end{tikzpicture}

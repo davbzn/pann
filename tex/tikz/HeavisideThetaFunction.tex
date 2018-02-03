@@ -8,7 +8,7 @@
 %			ylabel={$\Theta(x)$},%
 		]
 		\newcommand\LIM{5}
-		\addplot [blue, domain=-\LIM:0,	samples=501,]	{0};
-		\addplot [blue, domain=0:\LIM,		samples=501,]	{1};
+		\addplot [blue, domain=-\LIM:0,	smooth,]	{0};
+		\addplot [blue, domain=0:\LIM,		smooth,]	{1};
 	\end{axis}
 \end{tikzpicture}

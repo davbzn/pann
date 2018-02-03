@@ -1,34 +1,49 @@
 \chapter{Integrated Photonics}
 \label{ch:Integrated_Photonics}
 
-The physics on which i want to build my hardware ANN is optics/photonics.
-Specifically integrated photonics tries to mix the good points of the integrated electronics (CMOS compatibility) with the good parts of optics.
+To build an artificial neuromorphic network one has to choose first some physical phenomenon to employ in the fundamental blocks, likewise transistors in electronic circuits use the various behaviors of electrons in resistances, capacitors, and inductances.
+The physics which I want to build my artificial neuromorphic network with is photonics, precisely integrated photonics.
 
-How do I intend to create a hardware photonic ANN node?
+Photonics is the physical science which studies detection, manipulation, and emission of light.
+Specificially, integrated photonics is the branch that studies how to reduce and \textit{integrate} once macroscopic optical devices in miniaturized structures.
+In the past few decades, driven by the growing needs of communication technology, which was in turn following the increase in computational power of electronics, many integrated devices have been proposed and commercialized.
 
-\section{Waveguides}
-\label{sec:Waveguides}
-In conventional optics, light is handled with bulky mirrors and lenses toward the desired position.
-In integrated photonics the most important device to control light is the waveguide.
+% Many other devices such as Mach-Zenhder interferometers (MZI) and Directional Couplers (DC) have been demonstrated.
+% , Arrayed Waveguide Gratings (AWG) and Multimode interference(MMI)
+%\subsection{History}
+
+%\subsection{Comparison with other technologies}
+\subsection{Silicon Photonics ?}
+
+
+\section{Guided-wave photonics}
+\label{sec:guided-wave_photonics}
+The most important thing for integrated photonics is the way light is confined and manipulated into microscopic structures.
+While in conventional optics, light is delivered with bulky mirrors and lenses toward the desired position, in integrated photonics waveguides are the main device for the task.
+
+\subsection{Waveguides}
+\label{ssec:waveguides}
 A waveguide is a path inside a medium, whose volume is defined by a certain number of interfaces between different materials, in which light remains confined and ideally travels with negligible losses.
+This volume is called \textit{core} of the waveguide, while the medium external to it, if present, is called \textit{cladding.}
 
 One can distinguish two main types of waveguides: metallic and dielectric.
 The former are based on the reflection of the electromagnetic field by the metallic surface.
-However, for visible and infrared frequencies, metallic waveguides are not possible, due to too high absorption of the metals,
-The latter are based on the phenomenon of total internal reflection (TIR), and are nowadays widely used \ref{} in the industry and various research fields.
+However, for visible and infrared frequencies, metallic waveguides are not possible, due to too high absorption of the metals at those frequencies.
+On the other hand, dielectric waveguides are based on the phenomenon of total internal reflection (TIR) on the interface between two dielectric media.
+Different media are transparent in different ranges of frequencies, therefore not all media are suitable to build dielectric waveguides that work at a specific wavelength.
+For example, silicon is known to be transparent for light at and around \SI{1.55}{\um}, which is, for this and other reasons, the most used wavelength in communication technology.
+%The latter are based on the phenomenon of total internal reflection (TIR), and are nowadays widely used \ref{} in the industry and various research fields.
 
 \subsubsection{Total Internal Reflection and Dielectric Waveguides}
 Total internal reflection is the well-known phenomenon in which light coming from a material with high refractive index $n_H$ gets reflected at the interface with a material with low refractive index $n_L$.
-For this to happen, incident light must be at an angle greater than the \index{critical angle} given by the \index{Snell's law}
+For this to happen, incident light must be at an angle greater than the critical angle\index{critical angle} given by the Snell's law\index{Snell's law}:
 \begin{equation*}
 	\theta_C = \arcsin \left( \dfrac{n_L}{n_H}\right)
 \end{equation*}
 
-
 Waveguides have many shapes, however one can initially discriminate them by the dimensionality of the confinement of light.
 The simplest one is called \textit{slab} and it is composed by two interfaces, which divides the material in three volumes, as shown in \autoref{fig:slabVG} below.
-This type is classified as a 1D-waveguide, because light is constrained in only one dimension.
-A generic representation is shown in the \autoref{fig:slabVG} below.
+This type is classified as a 1D-waveguide, because it constrains light in only one dimension.
 
 \begin{figure}[ht]
 	\centering
@@ -40,7 +55,8 @@ A generic representation is shown in the \autoref{fig:slabVG} below.
 	\label{fig:slabVG}
 \end{figure}
 
-2D-waveguides on the other hand are used more, since they allow to confine light in a straight path and conduct it to the designed spot.
+2D-waveguides on the other hand are more common, to the point that with the term waveguide one usually refers to a device belonging to this category.
+Since they confine light in two dimension, their core then becomes a straight path with which one can conduct light from a place to another.
 A few types are shown in \autoref{fig:2DVG} below.
 
 \begin{figure}[ht]
@@ -54,24 +70,142 @@ A few types are shown in \autoref{fig:2DVG} below.
 	\label{fig:2DVG}
 \end{figure}
 
-\section{Microring Optical Cavity}
-\label{sec:Microring_Optical_Cavity}
+Obviously, the versatility of straight (2D-) waveguides is limited.
+Hence more complex structures such as bent waveguides have been developed.
+
+\paragraph{Propagation of light inside waveguides\\}
+\noindent Light propagates inside waveguides as superposition of transverse electro-magnetic (TEM) waves which keep reflecting on the interfaces of the core.
+The result of the superposition is the so called \textit{mode}, which is expressed mathematically by
+\begin{equation}
+	\phi(\textbf{r}) = \phi_m\left( x, y \right) e^{i\left( \beta_m z - \omega t\right)}.
+\end{equation}
+$\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \ni$ is the angular frequency of light.
+Each mode, identified by the $m$ idex, travels inside the waveguide with a certain propagation constant $\beta$ and maintaining a field distribution $\phi_m$.
+Both of them depends on the materials and the geometry of the waveguide, however while $\beta_m$ decrease with increasing $m$ indexes, the features of the function $\phi_m$ grows in number.
+Light either propagate in a manner described by a mode or superposition of modes or is rapidly scattered away.
+
+The filed distribution of some of the first modes, in the simplest case of a slab waveguide, is represented in \autoref{fig:WGmodes} below.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.8]{figures/modes.png}
+	\caption{Field distribution inside a slab waveguide.}
+	\label{fig:WGmodes}
+\end{figure}
+The function inside the core is characterized by maxima, minima and nodes with a certain periodicity and the number of nodes (where the function is zero) is strictly linked to the index $m$.
+Outside, the distribution of the field decays exponentially.
+For waveguide with a 2D core, the field can be expected to be a multivariate version of the same or similar function.
+However, differently from the analytical solution for slab waveguides, they are almost always found numerically.
+
+The propagation constant can be written as
+\begin{equation}
+\beta_m = n_{eff} k_0
+\end{equation}
+where $k_0$ is the wavevector in vacuum and $n_{eff}$ is the \textit{effective refractive index} of the mode.
+The value of this quantity is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
+The physical interpretation of the effective index is that of an average refractive index \textit{felt} by the mode propagating as a whole, instead of a superposition of multiple TEM waves \textit{feeling} different refractive indexes depending on the specific medium in which they are propagating.
+Similarly to the actual refractive index of materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
+Actually, a low imaginary part means that the material absorb less light and is therefore transparent.
+
+All of these parameters which describe the propagation of light along the waveguide depends both on the materials and the geometry of the core and the cladding, but also on the frequency of light
+For dielectric waveguides, the fundamental mode ($m=0$) is always supported while higher modes might or might not be, depending both on the waveguides and on the frequency of light.
+For this reason one distinguish \textit{single-mode} waveguides, which allow propagation for only the fundamental mode in a certain operative range of frequencies, from \textit{multi-mode} waveguides, which allow higher order modes to propagate.
+
+\subsection{Light coupling}
+\label{ssec:light_coupling}
+We covered how light travels inside a waveguide, now the problem on how to insert and extract light from it.
+The process of inserting light into a waveguide is called \textit{coupling} and often requires to extract light at the same time from another waveguide.
+
+\subsubsection{End coupling}
+\label{sssec:end_coupling}
+The most naive way to insert light into a waveguide is obviously to use one of its ends.
+This is achieved either by radiating a beam directly on the whole waveguide or by focusing it inside the core with some lensing mechanism (e.g. tapered optical fibers).
+
+These methods are very simple, however they have a low coupling efficiency. % and are only able to access structures at perimeter of a chip.
+
+\subsubsection{Grating coupling}
+\label{sssec:grating_coupling}
+% and prism coupling?
+A more sophisticated way to couple light inside a waveguide is to use the so called \textit{grating coupler}.
+A grating coupler is a periodic structure end coupled to a waveguide.
+It is designed in a way such that light incident from free space above it, at a certain angle and with a specific wavelength, is coupled inside the waveguide.
+
+\subsubsection{Evanescent coupling}
+\label{sssec:evanescent_coupling}
+Evanescent coupling exploits the fact that the field distribution outside the core decays exponentially to zero.
+This means that when two waveguides are separated by a sufficiently small distance, the field distribution of one waveguide cannot decays sufficiently fast to zero and instead extends itself over the core of the second waveguide.
+When this happens optical power can be transferred between the waveguides.
+Therefore, if at the beginning light is propagating inside one waveguide, light is \textit{coupled} inside the other waveguide because its mode overlaps the core of the second waveguide.
+Depending on the parameters of the problems, light can couple completely or partially between the waveguides.
+
+This exchange of optical power is periodic with their length.
+
+\subsection{Microring Optical Cavity}
+\label{ssec:Microring_Optical_Cavity}
 In integrated photonics the microring is an optical cavity made by bending a waveguide on itself.
+To insert light into the cavity, the microring is often side coupled with one or two straight waveguides.
+Light inserted from the different ports into the cavity interfere with itself, after a round trip, and with each other.
+When the waves are in phase, they generate constructive interference and the energy stored in the cavity increases exponentially.
+On the other hand, when the signals are out of phase, the interference is destructive and the energy stored in the cavity remains low.
+
+In the simpler case, when there is only one waveguide side coupled to the resonator, the optical cavity has only two ports, which are usually called \textit{input} and \textit{through}.
+This configuration is called \textit{All-Pass Filter}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
+%All pass filter theory\\
+All pass resonators have only one input and one output: light enters the resonator from the input and exits from the output, unless the device is used backwards or some specific phenomena happens (e.g. back scattering).
+
+%1.2.3.2 Add-drop filter theory\\
+\subsubsection{Add-drop filter theory}
+\label{sssec:Add-drop_filter_theory}
+By adding a secondary couple of input and output ports, one obtains the so called add-drop resonator.
+The name comes from the fact that the secondary input is used as an add port to convey additional content to the output channel, while the drop port is used to take some of the light from the input channel.
+Of course, light might also travel from the input to the output and from the add to the drop.
+Whether light goes straight or passes through the resonator depends on the frequency of the signals and the relative position of the resonance.
+Resonators with more than four ports are possible, however are very uncommon.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/ADF.tex}
+	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.}
+	\label{fig:ADF}
+\end{figure}
 
 \subsection{Nonlinear Perturbations}
 \label{ssec:Nonlinear_Perturbations}
 
+Comparison between nonlinear optics phenomena which affect a microring dynamic:
+\begin{itemize}
+\item TOC
+\item FCD
+\item FCA
+\item Kerr
+\item TPA
+\end{itemize}
 
-\section{Photonics applied to ANNs}
-\label{sec:Photonics_applied_to_ANNs}
+\section{Integrated photonics applied to ANNs}
+\label{sec:Integrated_photonics_applied_to_ANNs}
+Since our experiments are carried out in a time scale such that physics phenomena can be considered quasi-static, we obtain also that the only nonlinear effect non negligible is the thermo-optic effect.
 
 \subsection{Weighted sum of inputs}
 \label{ssec:Weighted_Sum_of_inputs}
 This has already been demonstrated and integrated widely, so it will not be the focus of this work.
+Two example are the banks of microring resonators and the MZ interferometers.
 
 \subsection{Nonlinear Activation Function}
 \label{ssec:Nonlinear_Activation_Function}
-As opposed to the mechanism for weighted sum, an phenomenon for the activation function in an integrated photonic circuit has yet to be proposed.
+As opposed to the mechanism for weighted sum, an optical phenomenon for the activation function in an integrated photonic circuit has yet to be proposed.
 
 \subsection{Simulations}
 \label{ssec:Simulations}
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/bistability_test.tex}
+	\caption{}
+%	\label{fig:bist_test}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/bistability_test2.tex}
+	\caption{}
+%	\label{fig:bist_test}
+\end{figure}

@@ -64,7 +64,10 @@
 \usepackage{authblk}			% author managing package
 
 \title{%
-	Photonic Artificial Neural Networks:\\
+%	Photonic Artificial Neural Networks:\\
+	Photonic Artificial Neuromorphic Networks:\\
+%	Photonic Neuromorphic Networks:\\
+%	Neuromorphic Photonics:\\
 	\large All-Optical Activation Function%
 	}
 \author[]{Davide Bazzanella}
@@ -86,7 +89,6 @@
 	\tikzexternalize								% activate!
 	\tikzsetexternalprefix{tikz/}	% set subfolder
 	%\tikzexternalize[prefix=tikz/] % activate!
-
 
 %\usepgfplotslibrary{fillbetween} % need this to fill between functions
 \usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric}
@@ -136,6 +138,12 @@
 % Bibliography
 %\cleardoublepage
 \printbibliography[heading=bibintoc]%,title={References}]
+
+% Index
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+%\markboth{INDEX}{}
 
 % Aknowledgements
 \chapter*{Aknowledgements}

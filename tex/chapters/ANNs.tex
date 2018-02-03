@@ -1,15 +1,18 @@
 \chapter{Artificial Neural Networks}
 \label{ch:Artificial_Neural_Networks}
 
-Artificial Neural Networks (ANNs) are computational systems which elaborate information likewise biological neural networks (animal brains).
-These systems modify their behavior through a learning process and improve their accuracy in a certain task.
-The underlying idea is that biological neural networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition) and prediction (e.g. pattern recognition).
+%A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
-Mathematically speaking, ANNs are a collection of nodes, each of them elaborate the information and is connected to the other in a certain amount.
-Artificial networks can be either simulated on computers or physically built on specific hardware designed ad hoc.
+Artificial Neuromorphic Networks (ANNs) are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (animal brains).
+Biological networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition) and prediction (e.g. pattern recognition).
+The underlying idea is to copy some of their mechanisms and exploit them for computational applications.
+These systems are intrinsically parallel in operation, do not require specific programming to operate, and modify their behavior through a learning process to improve their accuracy in a certain task.
+
+Mathematically speaking, ANNs are a collection of nodes, each one of them elaborates the information and is somehow connected to the other.
+Artificial networks can be either simulated on computers or physically built on hardware designed ad hoc.
 At this time, ANNs are mainly implemented by simulations, however the technological progress is withheld by limitation in computing power and efficiency.
 Training a complex artificial neural network with computers at the state of art might take even weeks.
-Thus research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
+Thus, with the aim of improving performance from simulated networks, research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
 
 \subsection{History}
 \label{ssec:History}
@@ -23,13 +26,21 @@ During the late 1950s and the early 1960s, as computers became more powerful, ma
 Some simulated operation of artificial networks on calculators, e.g. Farley and Clark \cite{Farley1954} and Rochester \cite{Rochester1956}.
 Other produced circuitry that implemented on hardware such networks, e.g. Rosenblatt \cite{frank1957perceptron,Rosenblatt1958}.
 However, despite the early successes of neural networks, the traditional computing architecture (von Neumann architecture) was chosen as the preferred computing architecture.
-As a result, funding and therefore also research diminished drastically in the following decades.
+%As a result, funding and therefore also research diminished drastically in the following decades.
 
-The reason this happened, probably, was due to several concurring facts.
-First of all, in the same time period a research paper wrongly suggested that there could not be any multiple-layered neural network.
-Moreover, the early successes of some works on neural networks pointed to an overestimation of the artificial neural networks potential, also held back by the technological capacity of the time.
-Finally, important questions of philosophical nature come to light, such as the fear fueled debate on the impact on our society of a class of computers able to think.
-This very controversy, i.e. artificial intelligence (AI) problem, is still a discussed topic today \cite{stanford.edu}.
+The reason why this happened, probably, was due to several concurring facts.
+First of all, in the same time period (1969) a research paper by Minsky and Papert \cite{Minsky1969}, which identified two important problems.
+The basic perceptron was not able to execute the exclusive-or (XOR) operation, unlike the logical circuits at the base of von Neumann architecture.
+Moreover, the research stated the fact that more complex networks such as multiple- or deep-layered networks were not possible (at that time) because of the lack of adequate processing power.
+
+%who discovered two key issues with the computational machines that processed neural networks.
+%The first was that basic perceptrons were incapable of processing the exclusive-or circuit.
+%The second was that computers didn't have enough processing power to effectively handle the work required by large neural networks.
+%in the same time period a research paper wrongly suggested that there could not be any multiple-layered neural network.
+
+In addition to this research, the early successes of some works on neural networks pointed to an overestimation of the artificial neural networks potential, also held back by the technological capacity of the time.
+Finally, important questions of philosophical nature came to light, such as the fear fueled debate on the impact on our society of a class of computers able to think.
+This very controversy, i.e. the artificial intelligence (AI) problem, is discussed still today \cite{stanford.edu}.
 
 Sometime during the 1980s the interest for this computing method was reinvigorated.
 The main stimulation was probably given by a number of works which suggested methods to implement multi-layered networks distributing pattern recognition errors through the all the layers in the network.
@@ -62,16 +73,17 @@ A generic scheme of such network is shown in \autoref{fig:generic_NN} \vpageref{
 	\caption{	Generic scheme of a neural network. %
 						Triangles (red) are input nodes, circles (grey) are inner nodes, and squares (blue) are output nodes. %
 						Interconnections among nodes are represented by arrows: %
-						continuous when both elements are drawn, and dotted otherwise. %
-						I chose a non-standard representation to emphasize the nonlinear nodes, which will use a nonlinear activation function. %
+						continuous when both elements are drawn, and dotted otherwise.
+						%						I chose a non-standard representation to emphasize the nonlinear nodes, which will use a nonlinear activation function. %
 						}
 	\label{fig:generic_NN}
 \end{figure}
 
-Each node can operate in the same way of the others or in a completely different manner, depending on the type of neural network.
+Nodes can all implement the same function or behave differntly, depending on the type of neural network.
+%Each node can operate in the same way of the others or in a completely different manner, depending on the type of neural network.
 The operation of nodes resembles that of animal neurons: various input gets collected and elaborated together to obtain an output, which will become one of the many inputs for subsequent neurons/nodes.
 Specifically, the most used model for neurons is the McCulloch–Pitts (MCP) neuron.
-It is divided into two parts, as shown in \autoref{fig:generic_node} \vpageref{fig:generic_node}: the first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
+It is divided into two parts, as shown in \autoref{fig:generic_node}: the first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
 
 \begin{figure}[ht]
 	\centering
@@ -87,7 +99,7 @@ y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right),
 where $f_a$ is the activations function, evaluated on the sum of the input $x_i$ weighted with $w_i$, plus a bias $w_0$.
 
 Each node accepts values at its inputs and produces an output accordingly.
-However, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operative phase of the neural network, as I will explain in \autoref{sec:Working_Principles_of_ANNs} later \vpageref{sec:Working_Principles_of_ANNs}.
+However, in addition to the input, the output depends also on the node's parameters: the weights and the bias, which are usually changed outside the operative phase of the neural network (see \autoref{sec:Working_Principles_of_ANNs}).
 
 Moreover it is mandatory for the activation function $f_a\left(\cdot\right)$ to be nonlinear, because otherwise a collection of nodes will result in just a weighted sum of its inputs.
 Two examples of nonlinear function are shown below in \autoref{fig:activation_function_examples}.
@@ -114,23 +126,39 @@ Input nodes take one input value, from the outside of the neural network, and pa
 Inner/hidden nodes take many inputs and generate an output through the activation function.
 Output nodes, similarly to input nodes, take one input value, from the inside of the NN, and pass it on to the outside.
 
+\subsection*{Standard Representation}
 %This is not the orthodox description, but I claim that it is more consistent than the standard representation with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
-This is not the orthodox description, however it is consistent with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
-Therefore I can easily distinguish the nodes which will use a nonlinear activation function.
-%Questa non è la visione standard/ortodossa, ma è consistente con un'idea di 'black box' in cui gli input e output sono gli unici nodi visibili. mentre gli altri sono all'interno della scatola nera.
+The way I depicted a generic neuromorphic network in \autoref{fig:generic_NN} is not the standard representation used in books and research papers.
+The main difference is that usually weights are commonly represented on the connection between the nodes, which are then designated to apply only the activation function.
+Moreover the input layer is linear as it feeds the inner nodes with the input data, while the output layer is actually given by the last nonlinear layer of the inner nodes.
+A generic network is shown in \autoref{fig:standardNNdesc}.
 
 \begin{figure}[ht]
-	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\input{tikz/BlackBoxNN.tex}
-	\caption{Representation of the black-box concept}
-	\label{fig:black_box_NN}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+%		\includegraphics[draft,width=6cm,height=4cm]{figures/foo.png}
+		\input{tikz/standardNNdesc.tex}
+		\caption{Standard way of representing networks}
+		\label{fig:standardNNdesc}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+  		\centering
+		\input{tikz/BlackBoxNN.tex}
+		\caption{Representation of the black-box concept}
+		\label{fig:black_box_NN}
+  \end{subfigure}
+  \caption{}
+  	\label{fig:description_comparison}
 \end{figure}
 
-%A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
+On the contrary, I consider the inner nodes as the only place where any kind of elaboration on the data happens.
+Inner nodes have a number of inputs, which are weighted and summed together to be entered as argument in the activation function.
+This leads to a natural separation between input/output nodes, which acquire the task of providing data from/to the outside, and inner nodes, which is where the activation function and/or the weighted sum are carried out.
 
-\noindent\uppercase{\large{What are neural network good for?\\ when do i talk about that?\\ e.g. NN are good for pattern recognition.}}
-\normalsize
+This non-standard description, moreover, is consistent with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside, as shown in \autoref{fig:generic_NN}.
+%Therefore I can easily distinguish the nodes which will use a nonlinear activation function.
+%Questa non è la visione standard/ortodossa, ma è consistente con un'idea di 'black box' in cui gli input e output sono gli unici nodi visibili. mentre gli altri sono all'interno della scatola nera.
+
 
 \section{Working Principles of ANNs}
 \label{sec:Working_Principles_of_ANNs}
@@ -143,10 +171,12 @@ Every one of these stages is meant to prepare the network to work as required fr
 \label{ssec:Learning_Process}
 During the learning process the neural network is run on a set of known inputs $x$, each paired with its correct answer $y$, or target, in a second set of data.
 The neural network will produce at the output a third set $\hat{y}$, which should be as close as possible to the correct answers, when the network works properly.
-However this happens rarely, if ever, and a change in the way data is elaborated becomes necessary.
-The usual \ref{} way is to keep the same topology, but tweak the weights that connect the hidden nodes together.
-On account of this need, one needs to quantify the distance of the predicted result of the artificial neural network from the correct answer.
-This is made by means of the loss function.
+%However this happens rarely, if ever, and a change in the way data is elaborated becomes necessary.
+%The usual \ref{} way is to keep the same topology, but tweak the weights that connect the hidden nodes together.
+%On account of this need, one have to quantify the distance of the predicted result of the artificial neural network from the correct answer.
+%This is made by means of the loss function.
+Typically weights among nodes are initialized randomly and the distance of the network outcome from the target function is measured through a loss function.
+Then weights are modified in order to decrease the loss function to its lowest possible value. %up to a tolerance limit is achieved.
 
 \subsubsection{Loss function}
 \label{sssec:Loss_function}
@@ -169,7 +199,7 @@ which expects positive values at the input.
 Hence the error $-y\log \left( \hat{y} \right)$, quantified for each element in each example, is always a positive number.
 The mean over all examples in the set returns the results.
 
-Alternatively, variations of the previous methods are given by not taking the sum of the examples in place of the mean, or by calculating a loss function for each example instead of evaluating it for the whole set.
+Alternatively, variations of the previous methods are given by taking the sum of the examples in place of the mean, or by calculating a loss function for each example instead of evaluating it for the whole set.
 
 \subsubsection{Weights Update Process}
 \label{sssec:Weights_Update_Process}
@@ -217,15 +247,16 @@ A layer is a collection of nodes that accepts inputs from a preceding group and 
 Each layer of a Feedforward neural network is connected in series with the others, except of input layer at the beginning and the output layer at the end.
 As for the single nodes, the inner layer are called hidden, because usually not accessible.
 
-The information travels from the input to the output and gets elaborated from each hidden layer: there are no connection between nodes of the same layer, nor loops or feedback between layers.
-Depending on the topology of the network, there might be more or less layers, each composed by the same or a different number of nodes.
+The information travels from the input to the output and gets elaborated from each hidden layer: there are neither connection between nodes of the same layer, nor loops or feedback between layers.
+%Depending on the topology of the network, there might be more or less layers, each composed by the same or a different number of nodes.
+The number of hidden layers and the number of nodes they contain depends on the network topology.
 Moreover the connection between the layers might be complete, i.e. each node in the layer accepts each input of the preceding layer, in that case the layer is said to be \textit{fully connected}, or sparse as in the case of convolutional layers (see \autoref{par:Convolutional}).
 
 \subsubsection{Perceptron}
 \label{sssec:Perceptron}
 
 The most naive topology of a Feedforward neural network is given by the so called \textit{Perceptron}.
-The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron}\cite{frank1957perceptron,Rosenblatt1958}.
+The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron} \cite{frank1957perceptron,Rosenblatt1958}.
 The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Perceptron} below.
 
 \begin{figure}[ht]
@@ -233,7 +264,7 @@ The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Pe
 	\input{tikz/PerceptronNN.tex}
 	\caption{%
 		Perceptron type neural network: in this representation the perceptron has $n$ inputs and $m$ outputs as well as a hidden layer with $m$ nodes. %
-		Colors, shape and styles are the same as in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.%
+%		Colors, shape and styles are the same as in \autoref{fig:generic_NN} \vpageref{fig:generic_NN}.%
 		}
 	\label{fig:Perceptron}
 \end{figure}
@@ -241,7 +272,7 @@ The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Pe
 By adding more than one hidden perceptron layer to the neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP).
 This allows for more computational complexity \ref{}.
 When the total number of layer is more than two, the network is called \textit{deep}.
-A deep MLP is shown in \autoref{fig:deepMLP} \vpageref{fig:deepMLP}.
+A deep MLP is shown in \autoref{fig:deepMLP}.
 In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \ref{}.
 Besides the shape, in literature a perceptron is almost always considered fully connected \ref{}.
 
@@ -274,7 +305,10 @@ Commonly the operating regions are overlapping and the feature map is shared amo
 	\centering
 %	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
 	\input{tikz/ConvNN.tex}
-	\caption{image/scheme of the conv NN}
+	\caption{%
+		Pictorial representation of a layer of a convolutional supernode.
+		Several supernodes form a convolutional layer.
+		}
 	\label{fig:convolutionalNN}
 \end{figure}
 
@@ -282,7 +316,7 @@ Commonly the operating regions are overlapping and the feature map is shared amo
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
 By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
-Moreover, those different types of network are not a niche, but are widely \ref{} studied as a different approach to the same or additional problems.
+Moreover, those different types of network are not a niche, but are widely \ref{} studied as a different approaches to the same or additional problems.
 
 \subsubsection{Recurrent NN}
 \label{sssec:Recurrent_NN}
@@ -293,6 +327,10 @@ That is information does not propagates only forward like in the feedforward net
 	\centering
 	\input{tikz/RecurrentNN.tex}
 	\caption{%
+		Representation of a recurrent node.
+		One of the inputs is given by the output itself.
+		This output to input connection could be mediated by a delay device, so that for example the output at $t-1$ becomes the input at $t$.
+		Depending on the structure of the network, there might be recurrent nodes and/or recurrent group of nodes, loops.
 		}
 	\label{fig:RecurrentNN}
 \end{figure}
@@ -301,16 +339,20 @@ That is information does not propagates only forward like in the feedforward net
 \label{sssec:Reservoir_NN}
 Reservoir neural networks differ from feedforward and recurrent networks in the learning approach.
 In fact, the topology of a reservoir network could be exactly the same as that of a deep multi-layer perceptron or that of a recurrent network.
-However, the reservoir computing approach claims that it is not necessary to learn all the weights of the network, but only for the last (perceptron) layer.
+However, the reservoir computing differs in approach in respect to deep learning.
+It claims that it is not necessary to learn all the weights of the network, as in deep learning, but it is sufficient to train only the last (perceptron) layer of the network.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\caption{image/scheme of the reservoir NN}
+%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\input{tikz/ReservoirNN.tex}
+	\caption{A reservoir NN is topologically equivalent to deep networks. However only the last layer is trained. In this picture the trained node are represented outside the box, while those inside are initialized with random weights which are then left unchanged.}
 	\label{fig:reservoirNN}
 \end{figure}
 
-These kind of networks, then, can be trained much faster than their respective counterparts, i.e. feedforward and recurrent,
+\noindent This kind of networks, then, can be trained much faster than their respective counterparts, i.e. feedforward and recurrent.
+The question over which training method is correct is still debated and literature does not provide clear answers yet.
+
 \subsubsection{Modular NN}
 \label{sec:Modular_NN}
 

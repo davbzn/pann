@@ -1,0 +1,45 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{ADF}
+\begin{tikzpicture}[baseline]
+	\newcommand\CENTRAL{193}
+	\newcommand\START{193-8}
+	\newcommand\STOP {193+7}
+	\newcommand\RA{0.5}
+	\newcommand\RB{0.8}
+	\newcommand\CC{299792458}
+	
+	\begin{axis}[%
+			axis x line*= bottom,
+			%scaled x ticks = manual:{$+\SI{193}{\THz}$}{ \pgfmathparse{#1-\CENTRAL} },%
+			xlabel = {Optical Frequency $\nu$ [$\si{\THz}$]},%
+			ylabel = {Normalized intensity},%
+			width=\textwidth*0.75,%
+			height=207pt,
+			xmin= 188, xmax = 199,
+			]
+		
+		\addplot[ red,
+			domain = \START:\STOP,
+			smooth, samples = 401,
+		] {(1-\RA)*(1-\RA)*((1-\RA)^2 + 4*\RA*sin(2e1*pi*x)^2)^-1};
+		\addplot[ blue,
+			domain = \START:\STOP,
+			smooth, samples = 401,
+		] {(1-\RB)*(1-\RB)*((1-\RB)^2 + 4*\RB*sin(2e1*pi*x)^2)^-1};
+%		] {(1-\RA)*(1-\RB)*((1-sqrt(\RA*\RB))^2 + 4*sqrt(\RA*\RB)*sin(2e1*pi*x)^2)^-1};
+	\end{axis}
+	
+	\begin{axis}[
+			width=\textwidth*0.75,%
+			height=207pt,
+			axis x line*= top,
+			axis y line = none,
+			xlabel = {Wavelength $\lambda$ [\si{\nm}]},
+			xmin= 188, xmax = 199,
+%  		xtick = {187.37029,188.54872,189.74206,190.95061,192.17465,193.41449,194.67043,195.94278,197.23188,198.53805,199.86163},
+			xtick = {187.37029,188.54872,189.74206,190.95061,192.17465,193.4143 ,194.67043,195.94278,197.2318 ,198.53805,199.86163},
+			scaled x ticks = manual:{$+\SI{1500}{\nm}$}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1) - 1500} },
+		]
+		\addplot[black, opacity=0, domain = \START:\STOP] {0*x}; %
+	\end{axis}
+\end{tikzpicture}
