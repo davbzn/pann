@@ -28,17 +28,21 @@ This volume is called \textit{core} of the waveguide, while the medium external 
 
 One can distinguish two main types of waveguides: metallic and dielectric.
 The former are based on the reflection of the electromagnetic field by the metallic surface.
-However, for visible and infrared frequencies, metallic waveguides are not possible, due to too high absorption of the metals at those frequencies.
+However, for visible and infrared frequencies, metallic waveguides are not possible, due to too high absorption of the metals at optical frequencies.
 On the other hand, dielectric waveguides are based on the phenomenon of total internal reflection (TIR) on the interface between two dielectric media.
-Different media are transparent in different ranges of frequencies, therefore not all media are suitable to build dielectric waveguides that work at a specific wavelength.
-For example, silicon is known to be transparent for light at and around \SI{1.55}{\um}, which is, for this and other reasons, the most used wavelength in communication technology.
+To produce TIR, the two materials must have sufficiently different real part of the refractive index.
+Moreover, they must also be transparent in the required range of frequencies.
+Hence not all media are suitable to build dielectric waveguides that work at a specific wavelength.
+For example, silicon is known to be transparent for light at and around \SI{1.55}{\um}, among other wavelengths.
+This feature together with a low distortion of signals is the reason why it is the most used wavelength in communication technology.
 %The latter are based on the phenomenon of total internal reflection (TIR), and are nowadays widely used \ref{} in the industry and various research fields.
 
-\subsubsection{Total Internal Reflection and Dielectric Waveguides}
+\subsubsection{Dielectric Waveguides}
+\label{sssec:Dielectric_Waveguides}
 Total internal reflection is the well-known phenomenon in which light coming from a material with high refractive index $n_H$ gets reflected at the interface with a material with low refractive index $n_L$.
 For this to happen, incident light must be at an angle greater than the critical angle\index{critical angle} given by the Snell's law\index{Snell's law}:
 \begin{equation*}
-	\theta_C = \arcsin \left( \dfrac{n_L}{n_H}\right)
+	\theta_C = \arcsin \left( \dfrac{n_L}{n_H}\right).
 \end{equation*}
 
 Waveguides have many shapes, however one can initially discriminate them by the dimensionality of the confinement of light.
@@ -79,7 +83,7 @@ The result of the superposition is the so called \textit{mode}, which is express
 \begin{equation}
 	\phi(\textbf{r}) = \phi_m\left( x, y \right) e^{i\left( \beta_m z - \omega t\right)}.
 \end{equation}
-$\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \ni$ is the angular frequency of light.
+$\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \nu$ is the angular frequency of light.
 Each mode, identified by the $m$ idex, travels inside the waveguide with a certain propagation constant $\beta$ and maintaining a field distribution $\phi_m$.
 Both of them depends on the materials and the geometry of the waveguide, however while $\beta_m$ decrease with increasing $m$ indexes, the features of the function $\phi_m$ grows in number.
 Light either propagate in a manner described by a mode or superposition of modes or is rapidly scattered away.
@@ -106,14 +110,16 @@ The physical interpretation of the effective index is that of an average refract
 Similarly to the actual refractive index of materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
 Actually, a low imaginary part means that the material absorb less light and is therefore transparent.
 
-All of these parameters which describe the propagation of light along the waveguide depends both on the materials and the geometry of the core and the cladding, but also on the frequency of light
-For dielectric waveguides, the fundamental mode ($m=0$) is always supported while higher modes might or might not be, depending both on the waveguides and on the frequency of light.
+All of these parameters which describe the propagation of light along the waveguide depends both on the materials and the geometry of the core and the cladding, but also on the frequency of light.
+For dielectric waveguides, the fundamental mode ($m=0$) is always supported while higher modes might not be, depending both on the waveguides and on the frequency of light.
 For this reason one distinguish \textit{single-mode} waveguides, which allow propagation for only the fundamental mode in a certain operative range of frequencies, from \textit{multi-mode} waveguides, which allow higher order modes to propagate.
+
+\LARGE { mode propagation and GVD? } \normalsize
 
 \subsection{Light coupling}
 \label{ssec:light_coupling}
 We covered how light travels inside a waveguide, now the problem on how to insert and extract light from it.
-The process of inserting light into a waveguide is called \textit{coupling} and often requires to extract light at the same time from another waveguide.
+The process of inserting light into a waveguide is called \textit{coupling} and it often requires at the same time to extract light from another waveguide.
 
 \subsubsection{End coupling}
 \label{sssec:end_coupling}
