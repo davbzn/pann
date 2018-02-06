@@ -1,0 +1,35 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{SOI}
+\begin{tikzpicture}[baseline]	
+	\begin{axis}[	xmin=-4.0, xmax=+4.0,
+								ymin=-0.0, ymax=+1.2,
+								ticks=none,
+								area legend,
+								legend style={draw=none},
+								legend cell align=left,
+								legend pos=outer north east,
+								]
+
+		\addplot [name path = air, 		forget plot] {1.50 + 0*x};
+		\addplot [name path = top, 		forget plot] {0.80 + 0*x};
+		\addplot [name path = upper, 	forget plot, opacity=0.0] {0.7 + 0*x};
+		\addplot [name path = lower, 	forget plot, opacity=0.0] {0.40 + 0*x};
+		\addplot [name path = bottom,	forget plot] {0.00 + 0*x};
+		
+		\addplot [top color=blue!20, bottom color=white]
+			fill between [ of=top and air, ];
+		\addlegendentry{Air}
+		
+		\addplot [pattern=north west lines, pattern color=gray!50]
+			fill between [ of=upper and top, ];
+		\addlegendentry{$Si$}
+		
+		\addplot [pattern=north east lines, pattern color=gray!50!red]
+			fill between [ of=lower and upper, ];
+		\addlegendentry{$SiO_2$}
+		
+		\addplot [pattern=north west lines, pattern color=gray!50]
+			fill between [ of=bottom and lower, ];
+			
+	\end{axis}
+\end{tikzpicture}

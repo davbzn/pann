@@ -1,6 +1,7 @@
 \chapter{Artificial Neural Networks}
 \label{ch:Artificial_Neural_Networks}
-
+\section{Introduction}
+\label{sec:AAN_intro}
 %A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
 Artificial Neuromorphic Networks (ANNs) are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (animal brains).
@@ -91,7 +92,7 @@ It is divided into two parts, as shown in \autoref{fig:generic_node}: the first 
 	\caption{Generic node representation. $x$-values are inputs, $y$-values are outputs, $w_0$ is the bias.}
 	\label{fig:generic_node}
 \end{figure}
-The node is described mathematically by \autoref{eq:Generic_node_function}
+The node is described mathematically by \cref{eq:Generic_node_function}
 \begin{equation}
 y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right),
 \label{eq:Generic_node_function}
@@ -217,7 +218,7 @@ where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate,
 This method is equivalent to minimize the error on the loss function, by following the gradient $\bigtriangledown_w L$.
 This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where $W$ is the total number of parameters in the network.
 
-The most efficient \ref{} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
+The most efficient \cite{??} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
 Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
 
 \paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
@@ -270,11 +271,11 @@ The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Pe
 \end{figure}
 
 By adding more than one hidden perceptron layer to the neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP).
-This allows for more computational complexity \ref{}.
+This allows for more computational complexity \cite{??}.
 When the total number of layer is more than two, the network is called \textit{deep}.
 A deep MLP is shown in \autoref{fig:deepMLP}.
-In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \ref{}.
-Besides the shape, in literature a perceptron is almost always considered fully connected \ref{}.
+In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \cite{??}.
+Besides the shape, in literature a perceptron is almost always considered fully connected \cite{??}.
 
 \begin{figure}[ht]
 	\centering
@@ -316,7 +317,7 @@ Commonly the operating regions are overlapping and the feature map is shared amo
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
 By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
-Moreover, those different types of network are not a niche, but are widely \ref{} studied as a different approaches to the same or additional problems.
+Moreover, those different types of network are not a niche, but are widely \cite{??} studied as a different approaches to the same or additional problems.
 
 \subsubsection{Recurrent NN}
 \label{sssec:Recurrent_NN}
@@ -361,10 +362,10 @@ The question over which training method is correct is still debated and literatu
 \label{sec:Spiking_NN}
 Spiking artificial networks are the most different kind in respect to all the other networks until now described.
 In this class of ANNs, information is not coded only in the intensity of the signal, but also in the rate of signals, e.g. a high value will be encoded as a signal with high repetition rate, whereas a low value as a signal with low repetition rate.
-This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \ref{}.
+This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \cite{??}.
 
 \vspace{1em}
-\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model
+\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model\\
 \url{ https://en.wikipedia.org/wiki/Binding_neuron }
 
 \section{Real-Life Examples}

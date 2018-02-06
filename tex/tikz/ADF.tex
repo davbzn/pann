@@ -1,32 +1,59 @@
 \tikzsetexternalprefix{tikz/}	% set subfolder
 \tikzsetnextfilename{ADF}
-\begin{tikzpicture}[baseline]
+\begin{tikzpicture}
 	\newcommand\CENTRAL{193}
-	\newcommand\START{193-8}
+	\newcommand\START{193-5}
 	\newcommand\STOP {193+7}
-	\newcommand\RA{0.5}
-	\newcommand\RB{0.8}
 	\newcommand\CC{299792458}
 	
 	\begin{axis}[%
 			axis x line*= bottom,
-			%scaled x ticks = manual:{$+\SI{193}{\THz}$}{ \pgfmathparse{#1-\CENTRAL} },%
-			xlabel = {Optical Frequency $\nu$ [$\si{\THz}$]},%
-			ylabel = {Normalized intensity},%
+%			scaled x ticks = manual:{$+\SI{193}{\THz}$}{ \pgfmathparse{#1-\CENTRAL} },%
+			xlabel = {Optical Frequency $\nu$ [$\si{\THz}$]},
+			ylabel = {Transmission},
+			legend columns=3,
+			legend cell align=right,
+			legend style={ at={(0.5,-0.22)}, anchor=north },
 			width=\textwidth*0.75,%
 			height=207pt,
 			xmin= 188, xmax = 199,
+			%
+			% global plot definition
+			domain = \START:\STOP,
+			samples = 551,
+			smooth,
+			no markers,
+			cycle multi list={
+%					exotic\nextlist 
+					color list\nextlist
+					solid,densely dotted
+					%[2 of]linestyles
+				},
 			]
+				
+		\foreach \TA/\LA/\Radius/\Neff in {0.85/0.9/5/3.826, 0.85/0.75/5/3.826 }{ %, 0.9/0.99/5/3.826
+			\edef\temp{
+				\noexpand\addlegendimage{empty legend}
+				\noexpand\addlegendentry{$\tau=\TA,\gamma=\LA,R=\SI{\Radius}{\um}:$};
+				\noexpand\addplot 
+										{ + (1-\TA^2)^2 * \LA
+											/ ( (1-\TA^2 * \LA)^2 	+ 4 * \TA^2 	* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+										};
+				\noexpand\addlegendentry{$D(\omega)$};
+				\noexpand\addplot 
+										{ + \TA^2 * ( (1- \LA)^2	+ 4 					* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+											/ ( (1-\TA^2 * \LA)^2 	+ 4 * \TA^2 	* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+										};
+				\noexpand\addlegendentry{$T(\omega)$};
+								}
+			\temp
+		}
 		
-		\addplot[ red,
-			domain = \START:\STOP,
-			smooth, samples = 401,
-		] {(1-\RA)*(1-\RA)*((1-\RA)^2 + 4*\RA*sin(2e1*pi*x)^2)^-1};
-		\addplot[ blue,
-			domain = \START:\STOP,
-			smooth, samples = 401,
-		] {(1-\RB)*(1-\RB)*((1-\RB)^2 + 4*\RB*sin(2e1*pi*x)^2)^-1};
-%		] {(1-\RA)*(1-\RB)*((1-sqrt(\RA*\RB))^2 + 4*sqrt(\RA*\RB)*sin(2e1*pi*x)^2)^-1};
+		\draw [|<->|] (192.0446013229, 0.6) -- (194.5386870543, 0.6) node [midway, fill=white] {$FSR$};%0.5665693
+	
+		\draw [<-] (192.3, 0.283) -- (193.1,0.283) node [right] {$\Delta\omega$}; %0.5665693/2 = 0.283
+		\draw [<-] (191.8, 0.283) -- (191,0.283) {};	
+		
 	\end{axis}
 	
 	\begin{axis}[
@@ -36,10 +63,13 @@
 			axis y line = none,
 			xlabel = {Wavelength $\lambda$ [\si{\nm}]},
 			xmin= 188, xmax = 199,
+%			xmin= 150, xmax = 250,
 %  		xtick = {187.37029,188.54872,189.74206,190.95061,192.17465,193.41449,194.67043,195.94278,197.23188,198.53805,199.86163},
 			xtick = {187.37029,188.54872,189.74206,190.95061,192.17465,193.4143 ,194.67043,195.94278,197.2318 ,198.53805,199.86163},
-			scaled x ticks = manual:{$+\SI{1500}{\nm}$}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1) - 1500} },
+%			xtick = {157.785504211, 171.309976, 187.37029, 199.86163, 214.13747, 230.609583077, 249.827048333},
+%			scaled x ticks = manual:{$+\SI{1500}{\nm}$}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1) - 1500} },
+			scaled x ticks = manual:{}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1)} },
 		]
-		\addplot[black, opacity=0, domain = \START:\STOP] {0*x}; %
+		\addplot[black, opacity=0, domain = \START:\STOP] {0}; %
 	\end{axis}
 \end{tikzpicture}

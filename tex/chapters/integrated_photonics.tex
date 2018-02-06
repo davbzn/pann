@@ -1,41 +1,114 @@
 \chapter{Integrated Photonics}
 \label{ch:Integrated_Photonics}
 
+\section{Introduction}
+\label{sec:Photonics_intro}
 To build an artificial neuromorphic network one has to choose first some physical phenomenon to employ in the fundamental blocks, likewise transistors in electronic circuits use the various behaviors of electrons in resistances, capacitors, and inductances.
-The physics which I want to build my artificial neuromorphic network with is photonics, precisely integrated photonics.
+The physics which I want to build my artificial neuromorphic network with is photonics, precisely integrated silicon photonics.
 
 Photonics is the physical science which studies detection, manipulation, and emission of light.
 Specificially, integrated photonics is the branch that studies how to reduce and \textit{integrate} once macroscopic optical devices in miniaturized structures.
-In the past few decades, driven by the growing needs of communication technology, which was in turn following the increase in computational power of electronics, many integrated devices have been proposed and commercialized.
+In the past few decades, thanks to the constant improvement of the manufacturing techniques, many productive problems has been progressively resolved.
+Moreover interest in the field is rising, driven by the growing needs of communication technology, which was in turn following the increase in computational power of electronics.
+Many integrated devices have been proposed \cite{??} and some of them even commercialized \cite{??} .
+
+Silicon photonics is the research field that studies how to integrate optical devices in structures built with silicon and materials derived from it.
+Silicon is well-known material which has been widely studied in microelectronics.
+It possesses many qualities which allow relatively easy manufacturing of high grade structures.
+However there also some drawbacks, for example being a centrosymmetric element it does not possess nonlinearities of the second order.
 
 % Many other devices such as Mach-Zenhder interferometers (MZI) and Directional Couplers (DC) have been demonstrated.
 % , Arrayed Waveguide Gratings (AWG) and Multimode interference(MMI)
 %\subsection{History}
 
-%\subsection{Comparison with other technologies}
-\subsection{Silicon Photonics ?}
+\subsection{Silicon Photonics}
+\label{ssec:Silicon_Photonics}
+Silicon-on-Insulator (SOI) photonics is one of the widest branches of integrated photonics.
+It pursues the same objectives of all integrated photonics with the addition of following the production steps already developed for microelectronics.
 
+Its framework is the silicon wafer, which is then altered by a often numerous series of production steps.
+The first step is the burial of an insulator layer of $SiO_2$, called \textit{buffer}, which defines the bottom surface of the layer at the top.
+The pure $Si$ volume at the top, the \textit{device} layer, is where integrated optical structures will be built with various processes like photolitography, thermal oxidation, ion implantation, and etching.
+
+\begin{figure}[ht]
+	\centering
+	\input{tikz/SOI.tex}
+	\caption{SOI productive framework.
+		The buffer layer of $SiO_2$ is buried underneath the pure crystalline $Si$ device layer which is used to build structures.
+		The top silicon layer will become the volume in which light will be confined.
+		The bottom silicon, underneath the buffer layer, is called substrate.
+		}
+	\label{fig:SOI}
+\end{figure}
+
+The fact of relying on the SOI framework to build integrated devices is a strength of silicon photonics, because it enables researchers to develop CMOS compatible integrated optical structures.
+Complementary Metal-Oxide-Semiconductor (CMOS) compatibility is an industry standard created to fabricate microelectronic devices.
+Therefore by exploiting this standard all the know-how of the manufacturing industries behind the commercial microelectronic products is available to fabricate integrated photonics devices.
+
+Moreover, by sharing the fabrication technology with microelectronic makes it easier to integrate electronic components to obtain hybrid integrated optoelectronic devices or to compensate lack of appropriate optical structures.
+
+Hence silicon photonics is a promising technology for a combination of cost and technological reasons.
+A list of advantages and disadvantages of silicon photonics in compared to other photonics technologies is provided in \autoref{tab:silicon_adv_and_disadv}.
+
+\begin{table}[!htbp]
+	\centering
+	\footnotesize
+	\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+	\toprule
+	\normalsize Disadvantages & \normalsize Advantages \\ 
+	\midrule
+	\begin{enumerate}[ label={\roman*.}, noitemsep ]
+		\item Stable, well-understood material
+		\item Stable native oxide available for cladding and electrical isolation
+		\item Relatively low-cost substrates
+		\item Optically transparent at important wavelengths of \SI{1.3}{\um} and \SI{1.55}{\um}
+		\item Well-characterized processing
+		\item Highly confining optical technology
+		\item High refractive index means short devices
+		\item Micromachining means V-grooves and an effective hybrid technology are possible
+		\item Semiconductor material offers the potential of optical and electronic integration
+		\item High thermal conductivity means tolerance to high-power devices or to high packing density
+		\item Carrier injection means optical modulation is possible
+		\item Thermo-optic effect means a second possibility for optical modulation exists
+	\end{enumerate}
+	&
+	\begin{enumerate}[ label={\roman*.}, noitemsep]
+		\item No Pockels effect
+		\item indirect bandgap means that native optical sources are not possible
+		\item High refractive index means that inherently short devices which are difficult to fabricate (e.g. gratings)
+		\item Modulation mechanisms tend to be relatively slow
+		\item Thermal effects can be problematic for some optical circuits
+	\end{enumerate}
+	\\	
+	\bottomrule
+	\end{tabular}
+	
+	\caption{Advantages and disadvantages of silicon photonics over other integrated photonics technologies. Taken from \cite{Reed2004}.}
+	\label{tab:silicon_adv_and_disadv}
+\end{table}
 
 \section{Guided-wave photonics}
 \label{sec:guided-wave_photonics}
 The most important thing for integrated photonics is the way light is confined and manipulated into microscopic structures.
-While in conventional optics, light is delivered with bulky mirrors and lenses toward the desired position, in integrated photonics waveguides are the main device for the task.
+While in conventional optics, light is delivered with bulky mirrors and lenses toward the desired position, in integrated photonics waveguides are the main device for this task.
 
 \subsection{Waveguides}
 \label{ssec:waveguides}
 A waveguide is a path inside a medium, whose volume is defined by a certain number of interfaces between different materials, in which light remains confined and ideally travels with negligible losses.
 This volume is called \textit{core} of the waveguide, while the medium external to it, if present, is called \textit{cladding.}
 
-One can distinguish two main types of waveguides: metallic and dielectric.
+One can distinguish two types of waveguides: metallic and dielectric.
 The former are based on the reflection of the electromagnetic field by the metallic surface.
-However, for visible and infrared frequencies, metallic waveguides are not possible, due to too high absorption of the metals at optical frequencies.
+Light is confined in the desired path by a series of metallic mirrors.
+However, this mechanism works well only for electromagnetic radiation for which metals can still be considered \textit{perfect metals}.
+For visible and infrared frequencies integrated metallic waveguides are not possible, due to too high absorption of the metals at optical frequencies.
+
 On the other hand, dielectric waveguides are based on the phenomenon of total internal reflection (TIR) on the interface between two dielectric media.
 To produce TIR, the two materials must have sufficiently different real part of the refractive index.
-Moreover, they must also be transparent in the required range of frequencies.
+Moreover, they must also be transparent, i.e. they must have low imaginary part of the refractive index, in the required range of frequencies.
 Hence not all media are suitable to build dielectric waveguides that work at a specific wavelength.
 For example, silicon is known to be transparent for light at and around \SI{1.55}{\um}, among other wavelengths.
 This feature together with a low distortion of signals is the reason why it is the most used wavelength in communication technology.
-%The latter are based on the phenomenon of total internal reflection (TIR), and are nowadays widely used \ref{} in the industry and various research fields.
 
 \subsubsection{Dielectric Waveguides}
 \label{sssec:Dielectric_Waveguides}
@@ -46,17 +119,17 @@ For this to happen, incident light must be at an angle greater than the critical
 \end{equation*}
 
 Waveguides have many shapes, however one can initially discriminate them by the dimensionality of the confinement of light.
-The simplest one is called \textit{slab} and it is composed by two interfaces, which divides the material in three volumes, as shown in \autoref{fig:slabVG} below.
+The simplest one is called \textit{slab} and it is composed by two interfaces, which divides the material in three volumes, as shown in \autoref{fig:slabWG} below.
 This type is classified as a 1D-waveguide, because it constrains light in only one dimension.
 
 \begin{figure}[ht]
 	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\includegraphics[scale=.4]{figures/dielBC.pdf}
-	\caption{Scheme of a dielectric slab waveguide, made by two materials with refractive indexes $n_H$ and $n_L$.
+%	\includegraphics[scale=.4]{figures/dielBC.pdf}
+	\input{tikz/dielWG.tex}
+	\caption{Scheme of a dielectric slab waveguide, made by two materials with refractive indexes $n_H$ and $n_L$, with $n_H>n_L$.
 		Two rays are shown: the unguided one is incident on the interface at an angle smaller than the critical angle.
-		Conversely the guided ray is incident at an greater angle and is therefore totally reflected inside the waveguide \cite{Saleh1991}.}
-	\label{fig:slabVG}
+		Conversely the guided ray is incident at a greater angle and is therefore totally reflected inside the waveguide \cite{Saleh1991}.}
+	\label{fig:slabWG}
 \end{figure}
 
 2D-waveguides on the other hand are more common, to the point that with the term waveguide one usually refers to a device belonging to this category.
@@ -81,7 +154,7 @@ Hence more complex structures such as bent waveguides have been developed.
 \noindent Light propagates inside waveguides as superposition of transverse electro-magnetic (TEM) waves which keep reflecting on the interfaces of the core.
 The result of the superposition is the so called \textit{mode}, which is expressed mathematically by
 \begin{equation}
-	\phi(\textbf{r}) = \phi_m\left( x, y \right) e^{i\left( \beta_m z - \omega t\right)}.
+	\phi(\textbf{r}) = \phi_m\left( x, y \right) e^{i\left( \beta_m z - \omega t \right)}.
 \end{equation}
 $\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \nu$ is the angular frequency of light.
 Each mode, identified by the $m$ idex, travels inside the waveguide with a certain propagation constant $\beta$ and maintaining a field distribution $\phi_m$.
@@ -102,9 +175,9 @@ However, differently from the analytical solution for slab waveguides, they are 
 
 The propagation constant can be written as
 \begin{equation}
-\beta_m = n_{eff} k_0
+\beta_m = n_{eff} k_0 + i \alpha_{eff}
 \end{equation}
-where $k_0$ is the wavevector in vacuum and $n_{eff}$ is the \textit{effective refractive index} of the mode.
+where $k_0$ is the wavevector in vacuum, $n_{eff}$ is the \textit{effective refractive index}\index{effective refractive index} of the mode, and $\alpha_{eff}$ is \textit{effective absorption coefficient}\index{effective absorption coefficient}.
 The value of this quantity is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
 The physical interpretation of the effective index is that of an average refractive index \textit{felt} by the mode propagating as a whole, instead of a superposition of multiple TEM waves \textit{feeling} different refractive indexes depending on the specific medium in which they are propagating.
 Similarly to the actual refractive index of materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
@@ -137,7 +210,7 @@ It is designed in a way such that light incident from free space above it, at a 
 
 \subsubsection{Evanescent coupling}
 \label{sssec:evanescent_coupling}
-Evanescent coupling exploits the fact that the field distribution outside the core decays exponentially to zero.
+Evanescent coupling exploits the fact that the evanescent field distribution outside the core decays exponentially to zero \cite{Reed2004}.
 This means that when two waveguides are separated by a sufficiently small distance, the field distribution of one waveguide cannot decays sufficiently fast to zero and instead extends itself over the core of the second waveguide.
 When this happens optical power can be transferred between the waveguides.
 Therefore, if at the beginning light is propagating inside one waveguide, light is \textit{coupled} inside the other waveguide because its mode overlaps the core of the second waveguide.
@@ -153,24 +226,137 @@ Light inserted from the different ports into the cavity interfere with itself, a
 When the waves are in phase, they generate constructive interference and the energy stored in the cavity increases exponentially.
 On the other hand, when the signals are out of phase, the interference is destructive and the energy stored in the cavity remains low.
 
+\begin{figure}[ht]
+	\centering
+%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\includegraphics[scale=.8]{figures/microring_theory.png}
+	\caption{•}
+	\label{fig:resonator_theory}
+\end{figure}
+
 In the simpler case, when there is only one waveguide side coupled to the resonator, the optical cavity has only two ports, which are usually called \textit{input} and \textit{through}.
 This configuration is called \textit{All-Pass Filter}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
 %All pass filter theory\\
-All pass resonators have only one input and one output: light enters the resonator from the input and exits from the output, unless the device is used backwards or some specific phenomena happens (e.g. back scattering).
+All pass resonators have only one input and one output: light then propagate in only in one direction, unless some specific phenomena happens (e.g. back scattering).
+
+By adding a secondary waveguide coupled to the ring, one obtains the so called Add-Drop Filter (ADF) configuration.
+Its name derive by the fact that the two additional ports are called \textit{Add} and \textit{Drop} respectively.
+This simple structure can be readily used as a signal mixer: signals at the resonance wavelengths of the cavity are directed from the input to the drop channel or from the add channel to the through port.
+Additionally signals out of resonance travel straight from the input to the through channel and from the add to the drop port.
+Resonators with more than four ports are possible, however are very uncommon.
+
+The theoretical model usually employed to describe resonators analytically decomposes their structure in a series of simpler substructures.
+As shown in \autoref{fig:resonator_theory}, both the APF and the ADF configurations are studied as ordered combinations of straight waveguides, coupling regions a bent waveguides.
+Other used descriptions, such as numerical simulation obtained with finite element methods (FEM), achieve more precise results, however they are more dependent on the specific geometry of the problem.
+Moreover the approximation given by the analytical model is sufficiently accurate to make clear the physics behind it and it can be expanded to include non-trivial phenomena (see \autoref{ssec:Nonlinear_Perturbations}).
+In the following section I will go through the necessary steps to solve the case of the ADF configuration in the theoretical model.
 
 %1.2.3.2 Add-drop filter theory\\
 \subsubsection{Add-drop filter theory}
 \label{sssec:Add-drop_filter_theory}
-By adding a secondary couple of input and output ports, one obtains the so called add-drop resonator.
-The name comes from the fact that the secondary input is used as an add port to convey additional content to the output channel, while the drop port is used to take some of the light from the input channel.
-Of course, light might also travel from the input to the output and from the add to the drop.
-Whether light goes straight or passes through the resonator depends on the frequency of the signals and the relative position of the resonance.
-Resonators with more than four ports are possible, however are very uncommon.
+ADF configuration is obtained when a microring is coupled to two waveguides.
+Such structure is composed by three different basic structures: four straight waveguides, two bent waveguides which together form the whole ring, and two coupling regions between the waveguides and the microring.
+Each of these pieces transfers light to or from the outside or another piece.
+
+Since our experiments are carried out in a time scale such that physics phenomena can be considered quasi-static, the field propagating in the device is described by a scalar complex function which, assuming a monochromatic continuous EM wave, loses any temporal dependence:
+\begin{equation}
+	E(z) = |E(z_0)|e^{i\beta z},
+\end{equation}
+where $z$ is the direction of propagation, loosely defined to accommodate propagation both along straight and bent waveguides ($z\sim r\theta$), $t$ is time, $\omega=2\pi\nu$ is the angular frequency, and $\beta = n_{eff}k_0+i\alpha_{eff}$ is the propagation constant.
+Propagation in the straight waveguides is often considered without loss (i.e. $\alpha_{eff}\approx 0$) and thus neglected.
+On the other hand, propagation in the two halves of the ring is frequently considered with radiative losses (i.e $\alpha_{eff}> 0$), because a bent waveguide is intrinsically more difficult to fabricate in comparison to a straight one.
+
+The last structure type, the coupler between the resonator and the waveguides, is considered alike a beamsplitter.
+In this approximation, light does not propagate in this part as it was in the previous ones.
+Its operation is reduced to the exchange of power between the two input ports and two output ports, which is described by the following matrices:
+\begin{equation}
+\begin{pmatrix}
+E^{w+}_{ch} \\
+E^{r+}_{ch} \\
+\end{pmatrix} = \textbf{M}
+\begin{pmatrix}
+E^{w-}_{ch} \\
+E^{r-}_{ch} \\
+\end{pmatrix}, \qquad \textbf{M} = 
+\begin{pmatrix}
+\tau & i\kappa \\
+i\kappa & \tau \\
+\end{pmatrix},
+\end{equation}
+where $E$ is the field amplitude of the `$_{ch}$' channel either in the waveguide `$^w$' or in the ring `$^r$' and before `$^-$' and after `$^+$' the coupling.
+The matrix $\textbf{M}$ is characterized by two real valued parameters, $\tau$ and $\kappa$, between $0$ and $1$.
+Specifically, they must verify the following constraint:
+\begin{equation}
+\det\left(\textbf{M}\right) = |\tau|^2 + |i\kappa|^2 = 1.
+\end{equation}
+which represents the conservation of energy.
+
+At this point one can solve the problem by putting all the pieces together.
+Neglecting the propagation inside the waveguide, the full system of equation that describe the problem is:
+\begin{subequations}
+\begin{align}
+E^{w+}_{in}	&= \tau 		 E^{w-}_{in} + i\kappa	E^{r-}_{in} \label{seq:in_w+}\\
+E^{r+}_{in}	&= i\kappa	 E^{w-}_{in} + \tau 		E^{r-}_{in} \label{seq:in_r+}\\
+\nonumber\\
+E^{r-}_{out}	&= E^{r+}_{in}		e^{i\beta \pi R } \label{seq:out_r-_in}\\
+E^{r-}_{in}	&= E^{r+}_{out}	e^{i\beta \pi R } \label{seq:in_r-_out}\\
+\nonumber\\
+E^{w+}_{out}	&= \tau 		 E^{w-}_{out} + i\kappa	E^{r-}_{out} \label{seq:out_w+}\\
+E^{r+}_{out}	&= i\kappa	 E^{w-}_{out} + \tau 		E^{r-}_{out} \label{seq:out_r+}
+\end{align}
+\label{eq:ADF_equations}
+\end{subequations}
+The first two \cref{seq:in_w+,seq:in_r+} describe the exchange of optical power between the first channel and the microring resonator.
+Then the third and fourth \cref{seq:out_r-_in,seq:in_r-_out} delineate the propagation of light in the two halves of the resonator, from one coupling region to the other.
+Lastly the remaining two equation characterize the transfer of light between the resonator and the add-drop channel.
+
+Using these equations it is easy to define new quantities of interest: the first one is transmittance from the \textit{input} to the \textit{through} port.
+\begin{equation}
+\eta_T\left(\omega\right) \defeq \dfrac{E^{w+}_{in}}{E^{w-}_{in}}
+	= t\dfrac{1-e^{i\beta 2\pi R}}{1-\tau^2e^{i\beta 2\pi R}}
+\end{equation}
+Similarly, one can also define the transmittance from the \textit{input} to the \textit{drop} port.
+\begin{equation}
+\eta_D\left(\omega\right) \defeq \dfrac{E^{w+}_{out}}{E^{w-}_{in}}
+	= \dfrac{-\kappa^2e^{i\beta\pi R}}{1-\tau^2e^{i\beta 2\pi R}}
+\end{equation}
+
+However, this quantities have complex values and therefore are difficult to study.
+For this reason, one define also the transmission between the same ports as the square modulus of the transmittance.
+Thus it follows that
+\begin{equation}
+T \defeq |\eta_T|^2 = \tau 
+\dfrac	{ \left( 1- 				e^{-2\phi_I} \right)^2 + 4 				e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
+			{ \left( 1-\tau^2	e^{-2\phi_I} \right)^2 + 4 \tau^2	e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
+\end{equation}
+and
+\begin{equation}
+D \defeq |\eta_D|^2 
+\dfrac	{ \kappa^4 e^{-2\phi_R}}
+			{ \left( 1-\tau^2	e^{-2\phi_I} \right)^2 + 4 \tau^2	e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
+\end{equation}
+where the notation is simplified by $\phi_I = \pi R\alpha_{eff}$.
+The dependence of $T=T(\omega)$ and $D=D(\omega)$ from the frequency (or wavelength) of light is obtained by making explicit the wavevector dependence $k_0=\frac{\omega}{c_0}=\frac{2\pi}{\lambda}$ in which $c_0$ is the universal constant speed of light in vacuum.
+
+The transmission is much more interesting to study than the transmittance because it represents the ratio between the input and output optical powers ($I\propto |E|^2$), except for a constant factor.
+Both transmission spectra, as shown in \autoref{fig:ADF}, have either peaks or dips, linearly spaced in frequency: the resonances of the microring.
+Specifically at each resonance the through spectrum shows dips while the drop spectrum shows peaks.
+The depth of the dips, the height of the peaks, and the width of both of them is defined by few parameters: the coupling constant $\tau$\footnote{one can choose also $\kappa$, but it does not matter which one, since $\tau^2 = 1-\kappa^2$} and the loss parameter $\gamma = e^{-2\phi_I}$.
+
+Each resonance is identified by a positive integer number, because every resonance is at a frequency that verifies the following equation:
+\begin{equation}
+	\nu_m = \dfrac{c_0}{2\pi R} \dfrac{m}{n_{eff}} .
+\end{equation}
+Each one of them is therefore spaced by a quantity called \textit{Free Spectral Range} (FSR) \index{Free Spectral Range (FSR)}:
+\begin{equation}
+	FSR = \dfrac{c_0}{2\pi R n_{eff}} .
+\end{equation}
 
 \begin{figure}[ht]
 	\centering
 	\input{tikz/ADF.tex}
-	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.}
+	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.
+	The microring has a radius of \SI{5}{\um}, a coupling constant $\tau=0.85$, while the round trip loss factor $\gamma=e^{-2\phi_I}$ takes the two values of $0.9$ and $0.25$}
 	\label{fig:ADF}
 \end{figure}
 

@@ -11,6 +11,12 @@
 \usepackage{wrapfig}					% allow text to wrap around figures ( \begin{wrapfigure} )
 \usepackage{subcaption}			% allows subfigures within figures. Subfloats have their own caption, and an optional global caption.
 
+\usepackage{parcolumns}
+
+\usepackage{booktabs}				% professional tables
+
+\usepackage[shortlabels]{enumitem}
+
 \usepackage{siunitx}					% standard international system of units of measurement
 
 \usepackage{varioref}				% verbose references package
@@ -40,7 +46,7 @@
     filecolor = black,		% color of file links
     urlcolor  = blue			% color of external links
 }
-\usepackage{cleveref}				% clever references package
+\usepackage[noabbrev]{cleveref}		% clever references package
 
 \usepackage{caption}			% Nice captions
 \captionsetup{
@@ -90,8 +96,8 @@
 	\tikzsetexternalprefix{tikz/}	% set subfolder
 	%\tikzexternalize[prefix=tikz/] % activate!
 
-%\usepgfplotslibrary{fillbetween} % need this to fill between functions
-\usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric}
+\usepgfplotslibrary{fillbetween} % need this to fill between functions
+\usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric, decorations.markings}
 
 % USER DEFINED COMMANDS %
 % define the symbols := and =: for ease of use
@@ -110,8 +116,13 @@
 \newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}
 
 %\pagenumbering{alph}
-\maketitle
+%\maketitle
+\frontmatter
+\thispagestyle{empty}
+\input{chapters/cover.tex}
+\thispagestyle{empty}
 
+\cleardoublepage
 \pagenumbering{roman}
 \tableofcontents
 \cleardoublepage		%or \clearpage ?
