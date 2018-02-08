@@ -123,10 +123,16 @@
 \thispagestyle{empty}
 
 \cleardoublepage
-\pagenumbering{roman}
+%\pagenumbering{roman}
 \tableofcontents
-\cleardoublepage		%or \clearpage ?
 
+% Index
+\cleardoublepage
+%\addcontentsline{toc}{chapter}{Symbols and Acronyms}
+\printindex
+%\markboth{INDEX}{}
+
+\cleardoublepage
 \pagenumbering{arabic}
 \mainmatter
 % introductory chapter ~ 5pg
@@ -149,12 +155,6 @@
 % Bibliography
 %\cleardoublepage
 \printbibliography[heading=bibintoc]%,title={References}]
-
-% Index
-\cleardoublepage
-\addcontentsline{toc}{chapter}{Index}
-\printindex
-%\markboth{INDEX}{}
 
 % Aknowledgements
 \chapter*{Aknowledgements}

@@ -1,0 +1,22 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{APF_scheme}
+\begin{tikzpicture}[baseline, thick, every node/.style={font=\scriptsize}]
+	\draw [{stealth[reversed]}-stealth] (-1.5,0)
+				node [below] {input} -- (1.5,0)
+				node [below] {through};
+	\draw [{stealth[reversed]}-stealth] (-0.5,0) -- (0.5,0);
+	
+	\draw (0,1) circle (0.9);
+	\draw [-{stealth}] (0,1)
+				-- ++(30:0.9cm) node [midway, below right] {R};
+	
+	\draw [-{stealth}] (0,0.1)
+				arc [start angle=-90,end angle=-60, radius=0.9];
+	\draw [-{stealth[reversed]}] (0,0.1)
+				arc [start angle=-90,end angle=-120, radius=0.9];
+	
+	\draw [thin, densely dashed] (0,-0.2) -- (0,0.3);	
+	
+	\draw [thin]		(-0.5,0.4) -- (+0.5,0.4) --
+								(+0.5,-0.3) -- (-0.5,-0.3) -- cycle;
+\end{tikzpicture}

@@ -1,0 +1,60 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{WGmodes}
+\begin{tikzpicture}[baseline]
+	\begin{axis}[	width=\textwidth*0.75,
+								height=200pt,
+								axis lines=center,
+								xlabel={$x$}, ylabel={$y$},
+								xmin=-0.2, xmax=+4.0,
+								ymin=-1.3, ymax=+1.3,
+								domain=-1:1,
+								xtick=\empty,
+								ytick={-0.5,0.5},
+								yticklabels={$-\dfrac{d}{2}$,$\dfrac{d}{2}$,},
+								thick,
+								area legend,
+								legend style={draw=none},
+								legend cell align=left,
+								legend pos=outer north east,
+								]
+								
+		\addlegendimage{black};
+		\addlegendentry{$n_L$}
+		\addplot [name path = upper, domain=0:3.8, 	forget plot] {+0.50};
+		\addplot [name path = lower, domain=0:3.8,	forget plot] {-0.50};
+		
+		\addplot [pattern=crosshatch dots, pattern color=gray!50]
+			fill between [ of=lower and upper];
+		\addlegendentry{$n_H$}
+		
+		\addplot [black] ({0.5+.2    *exp(-8*x^2)}, {x});
+		\addplot [black] ({1.0+.5*x  *exp(-8*x^2)}, {x});
+		\addplot [black] ({1.5+2.*x^2*exp(-8*x^2)}, {x});
+		\addplot [black] ({2.0+4.*x^3*exp(-8*x^2)}, {x});
+%		
+%		\draw [black] (0.5,-1.5) -- (3,-1.5);
+%		\draw [black] (0.5,-1.5) -- (0.5,+1.5);
+%		\draw [black] (3.0,-1.5) -- (3.0,+1.5);
+%		\draw [black] (3.0,-1.5) -- (3.8,-0.9) -- (3.8,+2.1) -- (3,+1.5);
+%		\draw [black] (0.5,+1.5) -- (1.3,+2.1) -- (3.8,+2.1);
+%		
+%		\path [name path= lowerFace, black] (3,-0.5) -- (3.8,+0.1);
+%		\path [name path= upperFace, black] (3,+0.5) -- (3.8,+1.1);
+%		\addplot [pattern=crosshatch dots, pattern color=gray!50]
+%			fill between [ of=lowerFace and upperFace];
+%		\draw [black] (3,-0.5) -- (3.8,+0.1) -- (3.8,+1.1) -- (3,+0.5);
+%		
+%		\draw [black, dashed] (1.3,+1.1) -- (3.8,+1.1);
+%		\draw [black, dashed] (1.3,+1.1) -- (1.3,+2.1);
+%		\draw [black, dashed] (1.3,+1.1) -- (0.5,+0.5);
+%		
+%		\draw [-stealth] (0,0) -- (0.4,0.3) node [above left] {$x$};
+%		
+%		\draw [	decoration={ markings, mark=between positions 0.0625 and 1 step 0.125 with {\arrow[line width=1]{stealth} }, }, postaction={decorate}]
+%			(0.8,-0.0) -- (0.88,+0.5) -- (1.06,-0.5) node [below] {\footnotesize Unguided ray} -- (1.22,+0.5) -- (1.38,-0.5) -- (1.46,+0.0);
+%			
+%		\draw [	decoration={ markings, mark=between positions 0.125 and 1 step 0.25 with {\arrow[line width=1]{stealth}}, }, postaction={decorate}]
+%			(1.7,-0.0) -- (2.0,+0.5) -- (2.6,-0.5) node [below left] {\footnotesize Guided ray} -- (2.9,+0.0);
+				
+	\end{axis}
+\end{tikzpicture}

@@ -1,8 +1,8 @@
 \chapter{Integrated Photonics}
 \label{ch:Integrated_Photonics}
 
-\section{Introduction}
-\label{sec:Photonics_intro}
+%\section{Introduction}
+%\label{sec:Photonics_intro}
 To build an artificial neuromorphic network one has to choose first some physical phenomenon to employ in the fundamental blocks, likewise transistors in electronic circuits use the various behaviors of electrons in resistances, capacitors, and inductances.
 The physics which I want to build my artificial neuromorphic network with is photonics, precisely integrated silicon photonics.
 
@@ -21,8 +21,10 @@ However there also some drawbacks, for example being a centrosymmetric element i
 % , Arrayed Waveguide Gratings (AWG) and Multimode interference(MMI)
 %\subsection{History}
 
-\subsection{Silicon Photonics}
-\label{ssec:Silicon_Photonics}
+%\subsection{Silicon Photonics}
+%\label{ssec:Silicon_Photonics}
+\section{Silicon Photonics}
+\label{sec:Silicon_Photonics}
 Silicon-on-Insulator (SOI) photonics is one of the widest branches of integrated photonics.
 It pursues the same objectives of all integrated photonics with the addition of following the production steps already developed for microelectronics.
 
@@ -155,16 +157,18 @@ Hence more complex structures such as bent waveguides have been developed.
 The result of the superposition is the so called \textit{mode}, which is expressed mathematically by
 \begin{equation}
 	\phi(\textbf{r}) = \phi_m\left( x, y \right) e^{i\left( \beta_m z - \omega t \right)}.
+	\label{eq:mode_propagation}
 \end{equation}
 $\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \nu$ is the angular frequency of light.
 Each mode, identified by the $m$ idex, travels inside the waveguide with a certain propagation constant $\beta$ and maintaining a field distribution $\phi_m$.
-Both of them depends on the materials and the geometry of the waveguide, however while $\beta_m$ decrease with increasing $m$ indexes, the features of the function $\phi_m$ grows in number.
+Both of them depend on the materials and the geometry of the waveguide, however while $\beta_m$ decrease with increasing $m$ indexes, the features of the function $\phi_m$ grows in number.
 Light either propagate in a manner described by a mode or superposition of modes or is rapidly scattered away.
 
 The filed distribution of some of the first modes, in the simplest case of a slab waveguide, is represented in \autoref{fig:WGmodes} below.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.8]{figures/modes.png}
+	\includegraphics[scale=0.8]{figures/modes.png}\\
+	\input{tikz/WGmodes.tex}
 	\caption{Field distribution inside a slab waveguide.}
 	\label{fig:WGmodes}
 \end{figure}
@@ -177,46 +181,45 @@ The propagation constant can be written as
 \begin{equation}
 \beta_m = n_{eff} k_0 + i \alpha_{eff}
 \end{equation}
-where $k_0$ is the wavevector in vacuum, $n_{eff}$ is the \textit{effective refractive index}\index{effective refractive index} of the mode, and $\alpha_{eff}$ is \textit{effective absorption coefficient}\index{effective absorption coefficient}.
-The value of this quantity is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
+where $k_0$ is the wavevector in vacuum, $n_{eff} \defeq c_0/v_{ph}$ is the \textit{effective refractive index}\index{effective refractive index} of the mode, and $\alpha_{eff}$ is \textit{effective absorption coefficient}\index{effective absorption coefficient}.
+The effective refractive index is the ratio between the speed of light and the \textit{effective phase velocity} $v_{ph}$ at which each wavefront propagates in the core and its value is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
+
 The physical interpretation of the effective index is that of an average refractive index \textit{felt} by the mode propagating as a whole, instead of a superposition of multiple TEM waves \textit{feeling} different refractive indexes depending on the specific medium in which they are propagating.
 Similarly to the actual refractive index of materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
-Actually, a low imaginary part means that the material absorb less light and is therefore transparent.
+Actually, a low imaginary part means that the material absorbs less and is therefore transparent to light.
 
 All of these parameters which describe the propagation of light along the waveguide depends both on the materials and the geometry of the core and the cladding, but also on the frequency of light.
 For dielectric waveguides, the fundamental mode ($m=0$) is always supported while higher modes might not be, depending both on the waveguides and on the frequency of light.
 For this reason one distinguish \textit{single-mode} waveguides, which allow propagation for only the fundamental mode in a certain operative range of frequencies, from \textit{multi-mode} waveguides, which allow higher order modes to propagate.
 
-\LARGE { mode propagation and GVD? } \normalsize
+Equation (\ref{eq:mode_propagation}) describes the propagation of a monochromatic light wave, which has ideally the same mode amplitude from $t=-\infty$ to $t=+\infty$.
+This is obviously not a good physical representation, as light is generated and absorbed.
+Eventually light is described to travel in wavepackets of finite duration, which are inherently non-monochromatic.
 
-\subsection{Light coupling}
-\label{ssec:light_coupling}
-We covered how light travels inside a waveguide, now the problem on how to insert and extract light from it.
-The process of inserting light into a waveguide is called \textit{coupling} and it often requires at the same time to extract light from another waveguide.
+When light becomes non-monochromatic, the frequency dependence of the propagation constant $\beta$ has to be considered.
+Usually, if working on a restricted range of frequencies, this dependence is characterized by a Taylor expansion at the first order.
+\begin{subequations}
+\begin{align}
+	\beta\left(\omega\right)
+		&\simeq \beta\left(\omega'\right) + \frac{\partial \beta\left(\omega\right) }{\partial \omega} \Delta\omega \label{eq:beta_taylor}\\
+		&\simeq \dfrac{1}{v_{ph}} \omega' + \frac{1}{v_g} \Delta\omega \label{eq:beta_taylor_v}
+\end{align}
+\end{subequations}
+where $1/v_{ph} = n_{eff}/c_0$, $\Delta\omega = \omega-\omega'$, and $v_g \defeq \left( \frac{\partial k}{\partial \omega}\right)^{-1}$.
+The \textit{group velocity} $v_g$ describes the speed at which the ensemble of frequencies, the wavepacket, propagates.
+Then, in a similar manner to $n_{eff}$ which is the ratio between $c_0$ and the effective phase velocity, one can define the \textit{effective group index} $n_{eff}^g$ as ratio between the speed of light in vacuum $c_0$ and the effective group velocity $v_g$ of a packet of light inside a waveguide:
+\begin{equation}
+	n_{eff}^g \defeq \dfrac{c_0}{v_g} = n_{eff}\left( \omega \right) +\omega\dfrac{\partial n_{eff}}{\partial \omega}.
+	\label{eq:neff_group}
+\end{equation}
+The latter equation allow to describe the Taylor expansion of $\beta$ in other terms:
+\begin{equation}
+	\beta\left(\omega\right) \simeq \frac{n_{eff}}{c_0}\omega' + \frac{n_{eff}^g}{c_0} \Delta\omega
+	\label{eq:beta_taylor_n}
+\end{equation}
+Nevertheless the monochromatic wave propagation model is still valid, because it is a very good approximation of slowly varying and almost monochromatic waves, such as the one I will use in my experiments.
 
-\subsubsection{End coupling}
-\label{sssec:end_coupling}
-The most naive way to insert light into a waveguide is obviously to use one of its ends.
-This is achieved either by radiating a beam directly on the whole waveguide or by focusing it inside the core with some lensing mechanism (e.g. tapered optical fibers).
-
-These methods are very simple, however they have a low coupling efficiency. % and are only able to access structures at perimeter of a chip.
-
-\subsubsection{Grating coupling}
-\label{sssec:grating_coupling}
-% and prism coupling?
-A more sophisticated way to couple light inside a waveguide is to use the so called \textit{grating coupler}.
-A grating coupler is a periodic structure end coupled to a waveguide.
-It is designed in a way such that light incident from free space above it, at a certain angle and with a specific wavelength, is coupled inside the waveguide.
-
-\subsubsection{Evanescent coupling}
-\label{sssec:evanescent_coupling}
-Evanescent coupling exploits the fact that the evanescent field distribution outside the core decays exponentially to zero \cite{Reed2004}.
-This means that when two waveguides are separated by a sufficiently small distance, the field distribution of one waveguide cannot decays sufficiently fast to zero and instead extends itself over the core of the second waveguide.
-When this happens optical power can be transferred between the waveguides.
-Therefore, if at the beginning light is propagating inside one waveguide, light is \textit{coupled} inside the other waveguide because its mode overlaps the core of the second waveguide.
-Depending on the parameters of the problems, light can couple completely or partially between the waveguides.
-
-This exchange of optical power is periodic with their length.
+\LARGE GVD? \normalsize
 
 \subsection{Microring Optical Cavity}
 \label{ssec:Microring_Optical_Cavity}
@@ -226,34 +229,65 @@ Light inserted from the different ports into the cavity interfere with itself, a
 When the waves are in phase, they generate constructive interference and the energy stored in the cavity increases exponentially.
 On the other hand, when the signals are out of phase, the interference is destructive and the energy stored in the cavity remains low.
 
+%\begin{figure}[ht]
+%	\centering
+%%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+%	\includegraphics[scale=.8]{figures/microring_theory.png}
+%	\caption{•}
+%	\label{fig:resonator_theory}
+%\end{figure}
+
 \begin{figure}[ht]
 	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\includegraphics[scale=.8]{figures/microring_theory.png}
-	\caption{•}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\input{tikz/APF_scheme.tex}
+		\caption{All-Pass-Filter}
+		\label{fig:APF_scheme}
+	\end{subfigure}
+	\hspace{.02\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\input{tikz/ADF_scheme.tex}
+		\caption{Add-Drop-Filter}
+		\label{fig:ADF_scheme}
+	\end{subfigure}
+	\hspace{.02\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\input{tikz/APF-ADF_coupling_scheme.tex}
+		\caption{Coupling region}
+		\label{fig:coupling_scheme}
+	\end{subfigure}
+	
+	\caption{
+		Schematic representation of microring configurations and of their coupling regions.
+		APF has two channels, \textit{input} and \textit{through}, and one coupling region.
+		ADF has four channels, \textit{input}, \textit{through}, \textit{add} and \textit{drop}, and two coupling regions.
+	}
 	\label{fig:resonator_theory}
 \end{figure}
 
-In the simpler case, when there is only one waveguide side coupled to the resonator, the optical cavity has only two ports, which are usually called \textit{input} and \textit{through}.
-This configuration is called \textit{All-Pass Filter}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
+In the simpler case when there is only one waveguide side coupled to the resonator the optical cavity has only two ports, which are usually called \textit{input} and \textit{through}.
+This configuration, shown in \autoref{fig:APF_scheme}, is called \textit{All-Pass Filter}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
 %All pass filter theory\\
 All pass resonators have only one input and one output: light then propagate in only in one direction, unless some specific phenomena happens (e.g. back scattering).
 
-By adding a secondary waveguide coupled to the ring, one obtains the so called Add-Drop Filter (ADF) configuration.
-Its name derive by the fact that the two additional ports are called \textit{Add} and \textit{Drop} respectively.
+By adding a secondary waveguide coupled to the ring, one obtains the so called Add-Drop Filter (ADF) configuration, shown in \autoref{fig:ADF_scheme}.
+Its name derive by the fact that the two additional ports are called \textit{add} and \textit{drop} respectively.
 This simple structure can be readily used as a signal mixer: signals at the resonance wavelengths of the cavity are directed from the input to the drop channel or from the add channel to the through port.
 Additionally signals out of resonance travel straight from the input to the through channel and from the add to the drop port.
 Resonators with more than four ports are possible, however are very uncommon.
 
 The theoretical model usually employed to describe resonators analytically decomposes their structure in a series of simpler substructures.
-As shown in \autoref{fig:resonator_theory}, both the APF and the ADF configurations are studied as ordered combinations of straight waveguides, coupling regions a bent waveguides.
+Both the APF and the ADF configurations are studied as ordered combinations of straight waveguides and bent waveguides, which are coupled together in specific \textit{coupling regions}, as shown in \autoref{fig:coupling_scheme}.
 Other used descriptions, such as numerical simulation obtained with finite element methods (FEM), achieve more precise results, however they are more dependent on the specific geometry of the problem.
 Moreover the approximation given by the analytical model is sufficiently accurate to make clear the physics behind it and it can be expanded to include non-trivial phenomena (see \autoref{ssec:Nonlinear_Perturbations}).
 In the following section I will go through the necessary steps to solve the case of the ADF configuration in the theoretical model.
 
 %1.2.3.2 Add-drop filter theory\\
-\subsubsection{Add-drop filter theory}
-\label{sssec:Add-drop_filter_theory}
+\subsubsection{Add-Drop-Filter theory}
+\label{sssec:Add-Drop-Filter_theory}
 ADF configuration is obtained when a microring is coupled to two waveguides.
 Such structure is composed by three different basic structures: four straight waveguides, two bent waveguides which together form the whole ring, and two coupling regions between the waveguides and the microring.
 Each of these pieces transfers light to or from the outside or another piece.
@@ -263,9 +297,10 @@ Since our experiments are carried out in a time scale such that physics phenomen
 	E(z) = |E(z_0)|e^{i\beta z},
 \end{equation}
 where $z$ is the direction of propagation, loosely defined to accommodate propagation both along straight and bent waveguides ($z\sim r\theta$), $t$ is time, $\omega=2\pi\nu$ is the angular frequency, and $\beta = n_{eff}k_0+i\alpha_{eff}$ is the propagation constant.
+Both dependence of the effective index $n_{eff}=n_{eff}\left(\omega\right)$ and the effective loss factor $\alpha_{eff}=\alpha_{eff}\left(\omega\right)$ will be expanded only when necessary.
+
 Propagation in the straight waveguides is often considered without loss (i.e. $\alpha_{eff}\approx 0$) and thus neglected.
 On the other hand, propagation in the two halves of the ring is frequently considered with radiative losses (i.e $\alpha_{eff}> 0$), because a bent waveguide is intrinsically more difficult to fabricate in comparison to a straight one.
-
 The last structure type, the coupler between the resonator and the waveguides, is considered alike a beamsplitter.
 In this approximation, light does not propagate in this part as it was in the previous ones.
 Its operation is reduced to the exchange of power between the two input ports and two output ports, which is described by the following matrices:
@@ -283,7 +318,8 @@ E^{r-}_{ch} \\
 i\kappa & \tau \\
 \end{pmatrix},
 \end{equation}
-where $E$ is the field amplitude of the `$_{ch}$' channel either in the waveguide `$^w$' or in the ring `$^r$' and before `$^-$' and after `$^+$' the coupling.
+where $E$ is the field amplitude of the `$_{ch}$' channel either in the waveguide `$^w$' or in the ring `$^r$', before `$^-$' and after `$^+$' the coupling.
+An explanatory diagram is shown in \autoref{fig:coupling_scheme}.
 The matrix $\textbf{M}$ is characterized by two real valued parameters, $\tau$ and $\kappa$, between $0$ and $1$.
 Specifically, they must verify the following constraint:
 \begin{equation}
@@ -325,52 +361,251 @@ However, this quantities have complex values and therefore are difficult to stud
 For this reason, one define also the transmission between the same ports as the square modulus of the transmittance.
 Thus it follows that
 \begin{equation}
-T \defeq |\eta_T|^2 = \tau 
-\dfrac	{ \left( 1- 				e^{-2\phi_I} \right)^2 + 4 				e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
-			{ \left( 1-\tau^2	e^{-2\phi_I} \right)^2 + 4 \tau^2	e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
+T \left( \omega \right) \defeq |\eta_T|^2 = \tau 
+\dfrac	{ \left( 1- 				\gamma \right)^2 + 4 				\gamma \sin^2 \left( n_{eff} k_0 \pi R \right) }
+			{ \left( 1-\tau^2	\gamma \right)^2 + 4 \tau^2	\gamma \sin^2 \left( n_{eff} k_0 \pi R \right) }
 \end{equation}
 and
 \begin{equation}
-D \defeq |\eta_D|^2 
-\dfrac	{ \kappa^4 e^{-2\phi_R}}
-			{ \left( 1-\tau^2	e^{-2\phi_I} \right)^2 + 4 \tau^2	e^{-2\phi_I} \sin^2 \left( n_{eff} k_0 \pi R \right) }
+D \left( \omega \right) \defeq |\eta_D|^2 =
+\dfrac	{ \kappa^4 \gamma}
+			{ \left( 1-\tau^2	\gamma \right)^2 + 4 \tau^2	\gamma \sin^2 \left( n_{eff} k_0 \pi R \right) }
 \end{equation}
-where the notation is simplified by $\phi_I = \pi R\alpha_{eff}$.
+where the notation is simplified by loss parameter $\gamma = e^{\pi R\alpha_{eff}}$.
 The dependence of $T=T(\omega)$ and $D=D(\omega)$ from the frequency (or wavelength) of light is obtained by making explicit the wavevector dependence $k_0=\frac{\omega}{c_0}=\frac{2\pi}{\lambda}$ in which $c_0$ is the universal constant speed of light in vacuum.
 
-The transmission is much more interesting to study than the transmittance because it represents the ratio between the input and output optical powers ($I\propto |E|^2$), except for a constant factor.
-Both transmission spectra, as shown in \autoref{fig:ADF}, have either peaks or dips, linearly spaced in frequency: the resonances of the microring.
-Specifically at each resonance the through spectrum shows dips while the drop spectrum shows peaks.
-The depth of the dips, the height of the peaks, and the width of both of them is defined by few parameters: the coupling constant $\tau$\footnote{one can choose also $\kappa$, but it does not matter which one, since $\tau^2 = 1-\kappa^2$} and the loss parameter $\gamma = e^{-2\phi_I}$.
-
-Each resonance is identified by a positive integer number, because every resonance is at a frequency that verifies the following equation:
-\begin{equation}
-	\nu_m = \dfrac{c_0}{2\pi R} \dfrac{m}{n_{eff}} .
-\end{equation}
-Each one of them is therefore spaced by a quantity called \textit{Free Spectral Range} (FSR) \index{Free Spectral Range (FSR)}:
-\begin{equation}
-	FSR = \dfrac{c_0}{2\pi R n_{eff}} .
-\end{equation}
-
-\begin{figure}[ht]
+\begin{figure}[!htbp]
 	\centering
 	\input{tikz/ADF.tex}
-	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.
-	The microring has a radius of \SI{5}{\um}, a coupling constant $\tau=0.85$, while the round trip loss factor $\gamma=e^{-2\phi_I}$ takes the two values of $0.9$ and $0.25$}
+	\caption{
+		Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.
+		The resonators considered differ in radius ($R=$\SI{4}{\um} and $R=$\SI{5}{\um}), but share the coupling constant $\tau=0.85$, the half round trip loss factor $\gamma=0.8$ and the effective index $n_{eff}=3.826$.
+	}
 	\label{fig:ADF}
 \end{figure}
 
+The transmission is much more interesting to study than the transmittance because it represents the ratio between the input and output optical powers ($I\propto |E|^2$), except for a constant factor, and is therefore a real valued function of $\omega$ instead of a complex one.
+Both transmission spectra, as shown in \autoref{fig:ADF}, have either peaks or dips: the resonances of the microring.
+Specifically, at each resonance, the through spectrum shows dips while the drop spectrum shows peaks.
+The depth of the dips, the height of the peaks, and the width of both of them is defined by few parameters: the coupling constant $\tau$\footnote{one can choose also $\kappa$, but it does not matter which one, since $\tau^2 = 1-\kappa^2$} and the half round trip loss factor $\gamma = e^{-\pi R\alpha_{eff}}$.
+
+The frequency of each resonance is identified by a positive integer number, that verifies the following equation:
+\begin{equation}
+	\omega_m = m\dfrac{c_0}{n_{eff}(\omega)R},
+\end{equation}
+where the dependence of $n_{eff}=n_{eff}\left(\omega\right)$ has been explicitly shown.
+Moreover, it is easy to convert this quantity in other domains with:
+\begin{equation}
+	\omega = 2\pi\nu \qquad \mathrm{and} \qquad c_0 = \nu\lambda
+	\label{eq:omega_nu_lambda}
+\end{equation}
+Each resonance is spaced from the next one by a quantity called \textit{Free Spectral Range}\index{Free Spectral Range (FSR)} $FSR_{\omega_m}$.
+By exploiting the Taylor expansion of $\beta$ seen in \cref{eq:beta_taylor_n} one obtains
+\begin{equation}
+	FSR_{\omega_m} \simeq \dfrac{c_0}{n_{eff}^g\left(\omega_m\right) R} .
+\end{equation}
+where the \textit{effettive group index} $n_{eff}^g\left(\omega\right)$ has been defined in \cref{eq:neff_group}.
+Another important quantity is the width of the peaks or dips of each resonance.
+Ordinarily one evaluate the so called \textit{full-width-half-maximum} (FWHM):
+\begin{equation}
+	FWHM_{\omega_m} = \dfrac{c_0}{n_{eff}^g\left(\omega_m\right)}\dfrac{1- \tau^2\gamma}{\pi R \tau \sqrt{\gamma}}
+\end{equation}
+
+\begin{figure}[!hbtp]
+	\centering
+	\input{tikz/ADF2.tex}
+	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.
+	The microring has a radius of \SI{5}{\um} and an effective index $n_{eff}=3.826$.
+	The coupling constant is $\tau=0.85$, while the half round trip loss factor $\gamma$ takes the two values of $0.9$ and $0.75$.
+	The arrows indicate a $FSR_\nu \approx \SI{2.49}{\THz}$ and a $FWHM_\nu \approx \SI{0.3}{\THz}$, which gives a quality factor of around $Q \approx \num{650}$.
+	% aggiungere esempi di Qfactor
+	}
+	\label{fig:ADF2}
+\end{figure}
+
+Values such this are often expressed in the wavelength domain: however to obtain the $FSR_\lambda$ one can not use \cref{eq:omega_nu_lambda}.
+Instead the following relations have to be used:
+\begin{equation}
+	\Delta\omega = 2\pi \Delta \nu = \dfrac{2\pi c_0}{\lambda^2}\Delta\lambda
+		\qquad \mathrm{and} \qquad
+	\Delta\lambda = \dfrac{c_0}{\nu^2}\Delta\nu = \dfrac{2\pi c_0}{\omega^2}\Delta\omega
+\end{equation}
+By employing the first relation, one obtains
+\begin{equation}
+	FSR_{\lambda_m} \simeq \dfrac{\lambda_m^2}{n_{eff}^g\left(\lambda_m\right) 2\pi R}
+		\qquad \mathrm{and} \qquad
+	FWHM_{\lambda_m} \simeq	\dfrac{\lambda_m^2}{n_{eff}^g}
+													\dfrac{1- \tau^2\gamma}{2\pi^2 R \tau \sqrt{\gamma}}
+\end{equation}
+where $n_{eff}^g\left(\lambda_m\right)$ is an appropriate redefinition of the effective group index in the wavelength domain.
+
+An additional figure of merit of an optical microring resonator is the \textit{quality factor} $Q-factor$, or simply $Q$.
+The quality factor has many similar definitions, depending on the field of study.
+In the most physical, but less operative one defines it as $2\pi$ times the ratio between the energy stored in the cavity and the energy lost each cycle.
+$$Q \defeq 2\pi \times \frac{\mathrm{energy~stored}}{\mathrm{energy~lost~per~cycle}}$$
+However, for my purposes this definition is too cumbersome, thus a similar one is used instead:
+\begin{equation}
+Q \defeq \dfrac{\omega_m}{FWHM_{\omega_m}} = \dfrac{\lambda_m}{FWHM_{\lambda_m}}
+\end{equation}
+Both are sensible definitions and as $Q$ becomes larger they become approximately equivalent.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[t]{0.47\textwidth}
+		\centering
+%		\includegraphics[draft,width=8cm,height=6cm]{figures/foo.png}
+		\input{tikz/ADF_D_contour.tex}
+		\caption{Maximum transmission $D\left( \omega_m \right)$}
+		\label{fig:D_contour}
+	\end{subfigure}
+	\hspace{0.03\textwidth}
+	\begin{subfigure}[t]{0.47\textwidth}
+		\centering
+%		\includegraphics[draft,width=8cm,height=6cm]{figures/foo.png}
+		\input{tikz/ADF_Q_contour.tex}
+		\caption{Quality factor $Q$}
+		\label{fig:Q_contour}
+	\end{subfigure}
+	\caption{Contour plots of the maximum transmission on the drop channel $D\left( \omega_m \right)$ and of the quality factor $Q$, parametrized for the coupling coefficient $\tau^2$ and the half round trip loss factor $\gamma$.
+	The $Q-factor$ is obtained for a resonance near $v_m\approx\SI{200}{\THz}$ (arbitrarily chosen) and an effective group index $n_{eff}^g \approx 4$.
+	}
+	\label{fig:APF_contour_plots}
+\end{figure}
+
+\subsubsection{Critical coupling}
+\label{sssec:Critical_coupling}
+Critical coupling/ over-coupling / under-coupling / enhancement factor
+
+%\subsection{Light coupling}
+%\label{ssec:light_coupling}
+We covered how light travels inside a waveguide, now the problem on how to insert and extract light from it.
+The process of inserting light into a waveguide is called \textit{coupling} and it often requires at the same time to extract light from another waveguide.
+
+%subsubsection{End coupling}
+%label{sssec:end_coupling}
+The most naive way to insert light into a waveguide is obviously to use one of its ends.
+This is achieved either by radiating a beam directly on the whole waveguide or by focusing it inside the core with some lensing mechanism (e.g. tapered optical fibers).
+
+These methods are very simple, however they have a low coupling efficiency. % and are only able to access structures at perimeter of a chip.
+
+%\subsubsection{Grating coupling}
+%\label{sssec:grating_coupling}
+% and prism coupling?
+A more sophisticated way to couple light inside a waveguide is to use the so called \textit{grating coupler}.
+A grating coupler is a periodic structure end coupled to a waveguide.
+It is designed in a way such that light incident from free space above it, at a certain angle and with a specific wavelength, is coupled inside the waveguide.
+
+%\subsubsection{Evanescent coupling}
+%\label{sssec:evanescent_coupling}
+Evanescent coupling exploits the fact that the evanescent field distribution outside the core decays exponentially to zero \cite{Reed2004}.
+This means that when two waveguides are separated by a sufficiently small distance, the field distribution of one waveguide cannot decays sufficiently fast to zero and instead extends itself over the core of the second waveguide.
+When this happens optical power can be transferred between the waveguides.
+Therefore, if at the beginning light is propagating inside one waveguide, light is \textit{coupled} inside the other waveguide because its mode overlaps the core of the second waveguide.
+Depending on the parameters of the problems, light can couple completely or partially between the waveguides.
+
+This exchange of optical power is periodic with their length.
+
 \subsection{Nonlinear Perturbations}
 \label{ssec:Nonlinear_Perturbations}
+In the precedent section, I considered the material of waveguides and resonators as a linear medium.
+This is however only an approximation, because almost any material shows some sort of nonlinearity if probed with a high enough electromagnetic field.
 
-Comparison between nonlinear optics phenomena which affect a microring dynamic:
-\begin{itemize}
-\item TOC
-\item FCD
-\item FCA
-\item Kerr
-\item TPA
-\end{itemize}
+In integrated photonics, due to the lateral confinement of the field inside the waveguide, much higher field amplitude are reached in comparison to free space.
+Moreover, inside an optical cavity, such as an appropriately built microring resonator, the field reaches even more higher amplitudes thanks to its large enhancement factor and nonlinearities might arise.
+
+Silicon response to light is almost linear.
+However, a silicon optical cavity, by confinement and enhancement, can obtain a very high electromagnetic field inside, such that its response becomes significantly nonlinear.
+
+One can distinguish two kinds of optical nonlinearities shown by silicon: electronic nonlinearities and thermal nonlinearities.
+
+% ### refractive index
+% nSi = 3.48           # Silicon refractive index
+% n0 = nSi             # standard refractive index
+% n2 = 5e-14           # [1/(W/cm²)] intensity-dependent refractive index
+% n2 = 4.5e-18         # [1/(W/m²)]  intensity-dependent refractive index
+% dndT = 1.86e-4       # [1/K]
+% dndN = -1.73e-27     # [m³]
+% dαdN =  1.1e-15      # [m²]
+% βtpa =  0.79e-11      # [m/W]
+% vg = c0/4.0          # [m/s]
+
+\subsubsection{Electronic nonlinearities}
+\label{sssec:Electronic_nonlinearities}
+Silicon is a centrosymmetric material and thus does not exhibit optical nonlinearities of even orders.
+The most efficient nonlinear effects belong to the third order.
+
+Silicon nonlinearities are mainly due to two fundamental effects of this category and their correlated effects.
+\paragraph{Kerr effect}
+The first one is the Kerr effect, which is given by the real part of the third order nonlinear susceptibility $\chi^{(3)}$ and it produces a change in the refractive index characterized by:
+\begin{equation}
+	\Delta n_{Kerr} = n_2 I,
+\end{equation}
+where $I$ is the intensity of light beam and $n_2$ is the second-order (or intensity dependent) nonlinear refractive index, defined by
+\begin{equation}
+	n_2 = \dfrac{3}{4\varepsilon_0 n_0^2 c_0} \mathcal{R}\mathrm{e} \left[ \chi^{(3)} \right]
+	\overset{Si}{\simeq} \SI{0.45e-17}{\square\m\per\W}.
+\end{equation}
+
+\paragraph{Two photon absorption}
+The other fundamental effect is the two photon absorption (TPA), which is linked instead to the imaginary part of the third order nonlinear susceptibility.
+It does not produce a change to the real part of the refractive index but to its imaginary part, which is in turn linked to the absorption coefficient by $\alpha=2\mathcal{I}\mathrm{m}[n]\omega/c_0$:
+\begin{equation}
+	\Delta\alpha_{TPA} = \beta_{TPA} I,
+\end{equation}
+where $\beta_{TPA}$ is the TPA coefficient which is experimentally found to be
+\begin{equation}
+	\beta_{TPA} \overset{Si}{\simeq} \SI{0.79e-11}{\m\per\W}.
+\end{equation}
+
+As a consequence to the absorption of two photons, a free carrier is generated in the conduction band of silicon.
+The presence of free carriers alters the refractive index in its real and imaginary parts as well with  two additional effects.
+
+\subparagraph{Free carrier effects}
+When free carriers are generated in the conduction band, they can either move around until they thermalize or they can absorb an incoming photon.
+The first case is the \textit{free carrier dispersion} (FCD) effect, which affects the real part of the refractive index.
+The second case is the \textit{free carrier absorption} (FCA) effect and affects the imaginary part of the refractive index.
+Both effects are usually characterized as first order expansion, as follows:
+\begin{align}
+	n			\left(N	\right) &= n				\left(N_0\right) + \left.\dfrac{dn}{dN}\right|_{N_0} \Delta N \\
+	\alpha	\left(N	\right) &= \alpha	\left(N_0\right) + \left.\dfrac{d\alpha}{dN}\right|_{N_0} \Delta N
+\end{align}
+where the value of the FCD and FCA coefficients is
+\begin{equation}
+	\left.\dfrac{dn}{dN}\right|_{N_0} \overset{Si}{\simeq} \SI{-1.73e-21}{\cubic\m}
+	\qquad and \qquad
+	\left.\dfrac{d\alpha}{dN}\right|_{N_0} \overset{Si}{\simeq} \SI{1.1e-15}{\square\m}
+\end{equation}
+respectively.
+
+\subsubsection{Thermal nonlinearities}
+\label{sssec:Thermal_nonlinearities}
+The thermal nonlinearity of materials refractive index linked to their optical response is called \textit{thermo-optic effect} (TOE).
+When light propagates inside a medium, a portion of the photons is absorbed.
+Hence the material heats up and its refractive index changes.
+To characterize this change usually a first order expansion is made:
+\begin{equation}
+	n\left(T\right) = n\left(T_0\right) + \left.\dfrac{dn}{dT}\right|_{T_0} \Delta T,
+	\label{eq:TOC}
+\end{equation}
+where $\dfrac{dn}{dT}$ is called \textit{thermo-optic coefficient} and $\Delta T$ is the temperature shift.
+
+In silicon waveguides, the shift in temperature is caused both by linear and nonlinear processes.
+The linear process is characterized by the linear absorption coefficient $\alpha$.
+Similarly, the nonlinear processes of heat generation are linked to the nonlinear part of the absorption coefficient and are given mainly by the two photon absorption and by the free carrier absorption.
+
+The thermo-optic coefficient (TOC) of silicon at \SI{300}{\K} is \cite{??} :
+\begin{equation}
+	\left.\dfrac{dn}{dT}\right|_{\SI{300}{\K}} = \SI{1.86e-4}{\per\K}.
+	\label{eq:Si_TOC}
+\end{equation}
+Moreover, due to the fact that in silicon integrated structures the cladding is usually made by $SiO_2$, a thermally insulating material, the heat generated by the beam confined in the cavity will stay within the core, thus amplifying the effect even further.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\caption{•}
+	\label{fig:NL_effects}
+\end{figure}
 
 \section{Integrated photonics applied to ANNs}
 \label{sec:Integrated_photonics_applied_to_ANNs}

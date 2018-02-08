@@ -1,5 +1,5 @@
 \tikzsetexternalprefix{tikz/}	% set subfolder
-\tikzsetnextfilename{ADF}
+\tikzsetnextfilename{ADF2}
 \begin{tikzpicture}[baseline]
 	\newcommand\CENTRAL{193}
 	\newcommand\START{193-5}
@@ -31,7 +31,7 @@
 				},
 			]
 				
-		\foreach \TA/\LA/\Radius/\Neff in {0.85/0.8/4/3.826, 0.85/0.8/5/3.826 }{ %, 0.9/0.99/5/3.826
+		\foreach \TA/\LA/\Radius/\Neff in {0.85/0.9/5/3.826, 0.85/0.75/5/3.826 }{ %, 0.9/0.99/5/3.826
 			\edef\temp{
 				\noexpand\addlegendimage{empty legend}
 				\noexpand\addlegendentry{$\tau=\TA,\gamma=\LA,n_{eff}=\Neff, R=\SI{\Radius}{\um}:$};
@@ -49,14 +49,10 @@
 			\temp
 		}
 		
-		\node [pin=45:{\scriptsize 76}] at (189.5568364, .346) {};
-		\node [pin=45:{\scriptsize 77}] at (192.0510053, .346) {};
-		\node [pin=45:{\scriptsize 78}] at (194.5451742, .346) {};
-		\node [pin=45:{\scriptsize 79}] at (197.0393431, .346) {};
-		
-		\node [pin=45:{\scriptsize 61}] at (190.18038076,.346) {};
-		\node [pin=45:{\scriptsize 62}] at (193.29809192,.346) {};
-		\node [pin=45:{\scriptsize 63}] at (196.41580308,.346) {};
+		\draw [|<->|] (192.0446013229, 0.6) -- (194.5386870543, 0.6) node [midway, fill=white] {\scriptsize $FSR$};%0.5665693
+	
+		\draw [<-] (192.3, 0.283) -- (192.8,0.283) node [right] {\scriptsize $FWHM$}; %0.5665693/2 = 0.283
+		\draw [<-] (191.8, 0.283) -- (191.3,0.283) {};
 		
 	\end{axis}
 	

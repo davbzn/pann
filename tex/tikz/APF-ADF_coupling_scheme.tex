@@ -1,0 +1,21 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{APF-ADF_coupling_scheme}
+\begin{tikzpicture}[baseline, line width=8pt, every node/.style={font=\small}]
+	\draw [gray!30] (0,0) node [above, black] {$E^{r-}$}
+				arc [start angle=-105,end angle=-75, radius=5] node [above, black] {$E^{r+}$};
+	\draw [gray!30] (0,-0.8) node [below, black] {$E^{w-}$}
+				-- (2.588190451,-0.8) node [below, black] {$E^{w+}$};
+
+	\draw [thin, densely dashed] (1.294095225,-1.5) -- (1.294095225,.5);
+
+	\draw [thin, dashed, {stealth[reversed]}-stealth, out=-15, in=180] (0,0)
+				to node [pos=0.4, left]	{$i\kappa$} (2.588190451,-0.8);
+	\draw [thin, dashed, {stealth[reversed]}-stealth, out=0, in=195] (0,-0.8)
+				to node [pos=0.6, right]	{$i\kappa$} (2.588190451,-0.0);
+
+	\draw [thin, dashed, {stealth[reversed]}-stealth] (0,0)
+				arc [start angle=-105,end angle=-75, radius=5]
+				node [midway, above right] {$\tau$};
+	\draw [thin, dashed, {stealth[reversed]}-stealth] (0,-0.8)
+				-- (2.588190451,-0.8) node [midway, below right] {$\tau$};
+\end{tikzpicture}

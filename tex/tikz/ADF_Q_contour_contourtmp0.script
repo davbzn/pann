@@ -1,0 +1,1 @@
+unset surface; set cntrparam levels discrete 5e1,1e2,2e2,4e2,1e3; set contour; set table "tikz/ADF_Q_contour_contourtmp0.table"; splot "tikz/ADF_Q_contour_contourtmp0.dat";
