@@ -1,0 +1,43 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{ADF_Q_logx_contour}
+\begin{tikzpicture}[baseline]
+
+%%% loglog contour plot
+	\begin{axis}[
+			title = {$Q$},
+			width=8cm, % height=207pt,
+			domain = -2:0,
+			domain y = 0:1,
+			xmin=-2, xmax=0,
+			ymin=+0, ymax=1,
+			xtick=\empty,
+			yticklabel pos=right,
+			ylabel = {$\gamma$},
+			samples = 51,
+			view={0}{90},
+			]
+		
+		\addplot3 [contour gnuplot={
+								labels over line,
+								levels={5e1,1e2,2e2,4e2,1e3},
+								label distance=100pt,
+								handler/.style=smooth,
+								}
+		] { 2*pi*192e12*(3.826*pi*5e-6*sqrt((1-10^x)*y))/(299792458*(1-(1-10^x)*y)) };	
+		
+	\end{axis}
+
+	\begin{axis}[
+			xmode=log,%|normal
+			width=8cm, % height=207pt,
+			xlabel = {$\kappa^2=1-\tau^2$},
+			domain = 1e-2:1e0,
+			domain y = 0:1,
+			xmin = 1e-2, 	xmax=1e0,
+			ymin = 0, 			ymax=1,
+			yticklabel=\ ,
+		]
+		\addplot [opacity=0] {x};
+	\end{axis}
+	
+\end{tikzpicture}

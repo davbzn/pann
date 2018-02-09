@@ -1,0 +1,38 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{ADF_D_loglog_contour}
+\begin{tikzpicture}[baseline]
+
+%% loglog contour plot	
+	\begin{axis}[
+			title = {$D\left( \nu_{m} \right)$},
+			width=8cm, % height=207pt,
+			domain = -3:0,
+			ticks=none,
+			yticklabel pos=upper,
+			samples = 51,
+			smooth,
+			view={0}{90},
+			]
+		
+		\addplot3 [contour gnuplot={
+								labels over line,
+%								levels={ 2e4,4e4,6e4,1e5,2e5,6e5,1e6},
+								handler/.style=smooth,
+								}
+		] {(1-10^x)^2*10^y/(1-10^(x+y))^2	};
+		
+	\end{axis}
+
+	\begin{loglogaxis}[
+			width=8cm, % height=207pt,
+			xlabel = {$\tau^2$},
+			ylabel = {$\gamma$},
+			yticklabel pos=right,
+			domain = 1e-3:1e0,
+			xmax = 1e0, xmin=1e-3,
+			ymax = 1e0, ymin=1e-3,
+		]
+		\addplot [opacity=0] {x};
+	\end{loglogaxis}
+	
+\end{tikzpicture}

@@ -167,7 +167,7 @@ Light either propagate in a manner described by a mode or superposition of modes
 The filed distribution of some of the first modes, in the simplest case of a slab waveguide, is represented in \autoref{fig:WGmodes} below.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.8]{figures/modes.png}\\
+%	\includegraphics[scale=0.8]{figures/modes.png}\\
 	\input{tikz/WGmodes.tex}
 	\caption{Field distribution inside a slab waveguide.}
 	\label{fig:WGmodes}
@@ -179,14 +179,21 @@ However, differently from the analytical solution for slab waveguides, they are 
 
 The propagation constant can be written as
 \begin{equation}
-\beta_m = n_{eff} k_0 + i \alpha_{eff}
+\beta_m = n_{eff} k_0 + i \alpha_{eff}/2
 \end{equation}
 where $k_0$ is the wavevector in vacuum, $n_{eff} \defeq c_0/v_{ph}$ is the \textit{effective refractive index}\index{effective refractive index} of the mode, and $\alpha_{eff}$ is \textit{effective absorption coefficient}\index{effective absorption coefficient}.
-The effective refractive index is the ratio between the speed of light and the \textit{effective phase velocity} $v_{ph}$ at which each wavefront propagates in the core and its value is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
+The effective refractive index is the ratio between the speed of light and the \textit{effective phase velocity} $v_{ph}$ at which each wavefront propagates in the core.
+It is a pure number and its value is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
+A high refractive index means a higher confinement of the electromagnetic field inside the core and a slower propagation speed along the waveguide.
+The effective absorption coefficient instead is defined by the ratio between the input and output powers for a material of depth $L$, such that $I_{out}/I_{in}=e^{-\alpha_{eff}L}$, and has units of \si{\per\m}.
+A low absorption coefficient is synonym of transparency and low power absorption per unit length.
 
-The physical interpretation of the effective index is that of an average refractive index \textit{felt} by the mode propagating as a whole, instead of a superposition of multiple TEM waves \textit{feeling} different refractive indexes depending on the specific medium in which they are propagating.
-Similarly to the actual refractive index of materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
-Actually, a low imaginary part means that the material absorbs less and is therefore transparent to light.
+The physical interpretation of the effective indexes is that they define the propagation of the mode as a whole, instead of a superposition of multiple TEM waves each with a propagation characterized by the local values of refractive index and absorption coefficient.
+Moreover, in term of magnitudes, a higher refractive index means a slower propagation whereas a higher absorption coefficient means a higher power absorption per unit length.
+
+%The physical interpretation of the effective index is that of an average refractive index \textit{felt} by the mode propagating as a whole, instead of a superposition of multiple TEM waves \textit{feeling} different refractive indexes depending on the specific medium in which they are propagating.
+%Similarly, the effective absorption coefficient is linked to the ones of the materials, $n_{eff}$ is a complex number and the imaginary part is directly linked with the absorption properties of the materials.
+%Actually, a low imaginary part means that the material absorbs less and is therefore transparent to light.
 
 All of these parameters which describe the propagation of light along the waveguide depends both on the materials and the geometry of the core and the cladding, but also on the frequency of light.
 For dielectric waveguides, the fundamental mode ($m=0$) is always supported while higher modes might not be, depending both on the waveguides and on the frequency of light.
@@ -296,7 +303,7 @@ Since our experiments are carried out in a time scale such that physics phenomen
 \begin{equation}
 	E(z) = |E(z_0)|e^{i\beta z},
 \end{equation}
-where $z$ is the direction of propagation, loosely defined to accommodate propagation both along straight and bent waveguides ($z\sim r\theta$), $t$ is time, $\omega=2\pi\nu$ is the angular frequency, and $\beta = n_{eff}k_0+i\alpha_{eff}$ is the propagation constant.
+where $z$ is the direction of propagation, loosely defined to accommodate propagation both along straight and bent waveguides ($z\sim r\theta$), $t$ is time, $\omega=2\pi\nu$ is the angular frequency, and $\beta = n_{eff}k_0+i\alpha_{eff}/2$ is the propagation constant.
 Both dependence of the effective index $n_{eff}=n_{eff}\left(\omega\right)$ and the effective loss factor $\alpha_{eff}=\alpha_{eff}\left(\omega\right)$ will be expanded only when necessary.
 
 Propagation in the straight waveguides is often considered without loss (i.e. $\alpha_{eff}\approx 0$) and thus neglected.
@@ -371,7 +378,7 @@ D \left( \omega \right) \defeq |\eta_D|^2 =
 \dfrac	{ \kappa^4 \gamma}
 			{ \left( 1-\tau^2	\gamma \right)^2 + 4 \tau^2	\gamma \sin^2 \left( n_{eff} k_0 \pi R \right) }
 \end{equation}
-where the notation is simplified by loss parameter $\gamma = e^{\pi R\alpha_{eff}}$.
+where the notation is simplified by loss parameter $\gamma = e^{-\alpha_{eff}\pi R}$.
 The dependence of $T=T(\omega)$ and $D=D(\omega)$ from the frequency (or wavelength) of light is obtained by making explicit the wavevector dependence $k_0=\frac{\omega}{c_0}=\frac{2\pi}{\lambda}$ in which $c_0$ is the universal constant speed of light in vacuum.
 
 \begin{figure}[!htbp]
@@ -387,7 +394,7 @@ The dependence of $T=T(\omega)$ and $D=D(\omega)$ from the frequency (or wavelen
 The transmission is much more interesting to study than the transmittance because it represents the ratio between the input and output optical powers ($I\propto |E|^2$), except for a constant factor, and is therefore a real valued function of $\omega$ instead of a complex one.
 Both transmission spectra, as shown in \autoref{fig:ADF}, have either peaks or dips: the resonances of the microring.
 Specifically, at each resonance, the through spectrum shows dips while the drop spectrum shows peaks.
-The depth of the dips, the height of the peaks, and the width of both of them is defined by few parameters: the coupling constant $\tau$\footnote{one can choose also $\kappa$, but it does not matter which one, since $\tau^2 = 1-\kappa^2$} and the half round trip loss factor $\gamma = e^{-\pi R\alpha_{eff}}$.
+The depth of the dips, the height of the peaks, and the width of both of them is defined by few parameters: the coupling constant $\tau$\footnote{one can choose also $\kappa$, but it does not matter which one, since $\tau^2 = 1-\kappa^2$} and the half round trip loss factor $\gamma = e^{-\alpha_{eff}\pi R}$.
 
 The frequency of each resonance is identified by a positive integer number, that verifies the following equation:
 \begin{equation}
@@ -417,7 +424,8 @@ Ordinarily one evaluate the so called \textit{full-width-half-maximum} (FWHM):
 	\caption{Transmission spectra of microring resonators in Add-Drop Filter configuration for the through and drop ports.
 	The microring has a radius of \SI{5}{\um} and an effective index $n_{eff}=3.826$.
 	The coupling constant is $\tau=0.85$, while the half round trip loss factor $\gamma$ takes the two values of $0.9$ and $0.75$.
-	The arrows indicate a $FSR_\nu \approx \SI{2.49}{\THz}$ and a $FWHM_\nu \approx \SI{0.3}{\THz}$, which gives a quality factor of around $Q \approx \num{650}$.
+	The arrows indicate a $FSR_\nu \approx \SI{2.49}{\THz}$ and a $FWHM_\nu \approx \SI{0.35}{\THz}$, which gives a quality factor of around $Q \approx \num{550}$.
+	The other resonator has $FWHM_\nu \approx \SI{0.5}{\THz}$ which gives a quality factor of $Q \approx \num{390}$.
 	% aggiungere esempi di Qfactor
 	}
 	\label{fig:ADF2}
@@ -448,6 +456,19 @@ However, for my purposes this definition is too cumbersome, thus a similar one i
 Q \defeq \dfrac{\omega_m}{FWHM_{\omega_m}} = \dfrac{\lambda_m}{FWHM_{\lambda_m}}
 \end{equation}
 Both are sensible definitions and as $Q$ becomes larger they become approximately equivalent.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[t]{0.47\textwidth}
+		\centering
+		\input{tikz/ADF_D_logx_contour.tex}
+	\end{subfigure}
+	\hspace{0.03\textwidth}
+	\begin{subfigure}[t]{0.47\textwidth}
+		\centering
+		\input{tikz/ADF_Q_logx_contour.tex}
+	\end{subfigure}
+\end{figure}
 
 \begin{figure}
 	\centering
