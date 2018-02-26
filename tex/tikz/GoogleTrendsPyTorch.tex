@@ -1,0 +1,38 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{GoogleTrendsPyTorch}
+
+\begin{tikzpicture}[baseline]
+	
+	\begin{axis}[
+			title={Google Trends Analytics},
+			xlabel={Year},
+			ylabel={Interest over time},
+			tick align=outside,
+			width=\textwidth*0.75,%
+			height=207pt,
+			legend style={at={(0.5,-0.45)},anchor=north,legend columns=-1},
+			date coordinates in=x,
+			xtick distance={124},
+			xticklabel={\month-\year},
+			xticklabel style= {rotate=90,anchor=near xticklabel},
+		]
+			 
+		\addplot [semithick, blue!80]
+			table [x index=0, y index=1] {tikz/GTrends_multiTimeline.csv};
+		\addplot [semithick, red]
+			table [x index=0, y index=2] {tikz/GTrends_multiTimeline.csv};
+		\addplot [semithick, orange]
+			table [x index=0, y index=3] {tikz/GTrends_multiTimeline.csv};
+		\addplot [semithick, green!60!blue]
+			table [x index=0, y index=4] {tikz/GTrends_multiTimeline.csv};
+		\addplot [semithick, black]
+			table [x index=0, y index=5] {tikz/GTrends_multiTimeline.csv};
+			
+    \addlegendentry{ \scriptsize PyTorch }
+    \addlegendentry{ \scriptsize TensorFlow }
+    \addlegendentry{ \scriptsize Theano }
+    \addlegendentry{ \scriptsize Keras }
+    \addlegendentry{ \scriptsize Caffe }
+    
+	\end{axis}
+\end{tikzpicture}

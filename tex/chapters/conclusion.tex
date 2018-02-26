@@ -2,8 +2,74 @@
 \markboth{CONCLUSION}{}
 \addcontentsline{toc}{chapter}{Conclusions}
 
-%\paragraph{WHY AM I DOING THIS WORK (project BACKUP)\\}
-Furthermore, regarding the second objective, my work is part of a bigger project, BACUKP, with a wider scope and a more ambitious goal.
-It attempts to connect three fields of research, normally quite distant from each other: physics, computing technology, and biology.
-The main idea is to use the integrated photonics framework (physics) to build an artificial neural network (computing technology) on chip, where one could grow and, at least partially control, real neurons (biology).
-The aim is to develop a methodologies and devices that will allow us to study neural activity from a bottom-up perspective.
+\paragraph{Summary\\}
+This work was focused on using an optical microring resonator as nonlinear node of a feedforward artificial neural network.
+The problem has been tackled simultaneously by two directions: the experimental measurement of the nonlinear response of the node and its simulation by means of software libraries.
+
+% THEORETICAL BASIS OF ANN
+% PYTORCH LIBRARY AND SIMULATIONS
+The first part of the thesis aimed to introduce the fundamental concepts of artificial neural network and machine learning.
+It was followed by the arrangement of a simulated neural network on the PyTorch software library.
+
+% THEORETICAL STUDY OF MRR
+% NUMERICAL SIMULATIONS OF MRR
+The central part of the thesis explained the physical effects related to the working principles of an optical microring resonator in the \textit{Add-Drop Filter} configuration.
+These effects initially have been studied in their analytical linear approximation.
+%Subsequently, with the introduction of nonlinear perturbations to the resonator response, the physical phenomena have been analyzed numerically.
+Subsequently, nonlinear perturbations have been introduced to the resonator response.
+The physical effect produced have been analyzed numerically.
+
+%EXPERIMENTAL MEASURES
+%APPLICATION OF MEASURES TO PYTORCH
+In the last part, my work has been to assemble an experimental setup and a related measurement methodology.
+This setup has been used to gather experimental data on the actual response of an optical microring resonator.
+
+Afterwards, the gathered data proved to be useful in the implementation, inside the simulated artificial neural networks, a nonlinear activation function resembling the response of the resonator.
+
+\paragraph{Accomplishments\\}
+During the period of time of this work I assembled the experimental setup to study the integrated photonic device.
+The experimental measures have been carried out with a continuous enhancement of the setup.
+
+The properties and the physical mechanisms that regulate operation of the resonator have been characterized.
+To obtain a more profound knowledge of the physical phenomena, I successfully carried out numerical simulations.
+
+I implemented a small neural network in PyTorch, which is a software library used by the machine learning community.
+The code was initially used to solve a benchmark problem, with standard artificial neural network parameters and functions.
+Finally I implemented also a new activation function that mimics the response of a microring resonator in Add-Drop Filter configuration.
+This allowed me to confront the operation of the standard function with the one based on the optical bistability.
+
+\paragraph{Improvements\\}
+The setup should be enhanced by working on its bottlenecks, which are, in particular, the light source and the photodetection system.
+The light source should be stabilized as much as possible, both in power and in wavelength.
+This is worth because the microring resonators are quite sensitive to the parameters of the input signals.
+
+On the other hand, the system of the photodetectors could be improved in the response time as well.
+In fact, due to both hardware and software limitations, a full measure can take a long time, depending on the number of sampling points.
+The photodetectors should be rearranged in a way such that their control could be simplified.
+Moreover, the control software has been developed to be adaptive rather than fast in its operation.
+Working on both the software and the hardware of the detectors should improve the single measurement speed.
+Hence, the time spent on the full measure will benefit too.
+
+A better experimental setup would allow to acquire more data in less time and therefore to obtain a superior statistics.
+In turn this data, collected with a robust method, will consent also to complete a quantitative analysis.
+From this new work elaboration speed, energy efficiency, and requirements for node cascadability could be estimated.
+Eventually this will help the design of a class of new ad hoc devices, whose characteristics will be defined suit neural network nodes operation.
+
+\paragraph{Future perspective\\}
+As much important as the accomplishments, the futures studies which can start from this work or make use of part of it are many and interesting.
+%pave the way
+
+First of all, the natural continuation on this work on feedforward neural networks can start with the improvements suggested above.
+Improve the experimental setup, explore new zones in the parameters space and realize a quantitative analysis.
+Hopefully, this will lead to the definition of an all-optical framework for feedforward neural network development and operation.
+
+Moreover, starting from the same framework with or without some modifications, an interesting development will be to research on the methods employed by reservoir computing.
+All-optical reservoir computing could put together the efficiency of the algorithm to the inherent complexity of structures based on multiple coupled optical cavities.
+
+Furthermore, the development of a time-dependent theory would allow the analysis of physical effects in different regimes other than the quasi-static one.
+This will consent to investigate new phenomena and test their properties against the requirements for the neural network node operation.
+By exploiting new optical effects, we will be able to examine other implementations, such as spiking neurons.
+In this type of neurons, the intensity of the signals is as much important as their rate.
+
+In common to all these projects, there must be a simultaneous development of the software simulation, based on standard libraries.
+This allows initial performance comparison between the software functions and the proposed physical effects.

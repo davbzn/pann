@@ -1,9 +1,18 @@
 \tikzsetnextfilename{RecurrentNN}
-\begin{tikzpicture}
-	[%
-	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=5mm},%
-	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=5mm},%
-	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=5mm},%
+\begin{tikzpicture}[
+		baseline,
+		input/.style ={
+			isosceles triangle,	draw=red!50,		fill=red!20,	
+			thick,	inner sep=0pt,	minimum size=5mm
+		},
+		inner/.style ={
+			circle,							draw=black!50,	fill=black!20,
+			thick,	inner sep=0pt,	minimum size=5mm
+		},
+		output/.style={
+			rectangle,						draw=blue!50,	fill=blue!20,
+			thick,	inner sep=0pt,	minimum size=5mm
+		},
 	]
 
 	\newcommand\lin{0}

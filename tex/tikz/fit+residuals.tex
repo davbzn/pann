@@ -1,0 +1,56 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{fit+residuals}
+
+%['689.652', '0.434', '1.310', '-0.975', '-0.518', '0.403', '0.502']
+
+\begin{tikzpicture}
+	\begin{axis}[
+			title={Nonlinear activation function fit},
+			width=0.75\textwidth,
+			height=207pt,
+			scale only axis,
+			name=main plot,
+			xticklabels=\empty,
+			domain=0:1,
+			ylabel={Output signal},
+			legend pos=south east,
+	    clip mode=individual,			
+		]
+
+	\addplot [blue, thick, mark=*, mark size=1.2, mark options={green!70!blue}]
+		table [x index=0, y index=1] {tikz/activation.csv};
+		
+	\addplot [red, thick, samples=501]
+		{	+ 0.434 / (1 + exp(-689.652*(x-0.403) ))
+			+ 1.310*max(x,0)
+			- 0.975*max(x-0.403,0)
+			- 0.518*max(x-0.502,0)
+			}; % {b*sigmoid(a*(arg-x0))+c*relu(arg)+d*relu(arg-x0)+g*relu(arg-x1)};
+	
+	\addlegendentry{data points};
+	\addlegendentry{fit};
+	
+	\end{axis}
+	
+	\begin{axis}[
+			at={(main plot.below south west)},
+			yshift=.2cm,
+			xlabel={Input signal},
+			ylabel={Residuals},
+			anchor=north west,
+	width=0.75\textwidth,
+			scale only axis,
+			height=1.6cm,
+			domain=0:1,
+			ymin=-0.12, ymax=+0.12,
+			ytick={-0.1,0,0.1},
+	    clip mode=individual,
+		]
+	
+	\addplot [thick, blue, mark=*, mark size=1.2, mark options={green!70!blue, solid}]
+		table [x index=0, y index=2] {tikz/activation.csv};
+		
+	\addplot [thick, red] table [x index=0, y index=1] {tikz/residuals.csv};
+
+	\end{axis}
+\end{tikzpicture}

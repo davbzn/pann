@@ -1,0 +1,2 @@
+tikz/cold_resonance.pdf: tikz/triangles.csv
+tikz/cold_resonance.pdf: tikz/triangles.csv

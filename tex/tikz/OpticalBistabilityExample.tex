@@ -1,0 +1,27 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{OpticalBistabilityExample}
+\begin{tikzpicture}[baseline]
+	\begin{axis}[
+			xlabel={Input optical power},
+			ylabel={Output optical power},
+			xtick={0},
+			ytick={0},
+		]
+		\newcommand\LIM{10}
+		\addplot [name path=upwards, blue, 	domain=0:\LIM,		samples=101, smooth, thick]
+			{.2*x+(.1+exp(-1e1*(x-7)))^-1};
+		\addplot [name path=downwards, red, 	domain=0:\LIM,		samples=101, smooth, thick, dashed]
+			{.2*x+(.1+exp(-1e1*(x-3)))^-1};
+			
+		\addplot [pattern color=gray!25, pattern=north west lines] fill between [
+			of=upwards and downwards,
+			soft clip={domain=2:8},
+		];
+		
+		\node [fill=white, align=center] at (5.25,5.5)	 {\footnotesize bistability\\\footnotesize region};
+		
+		\draw [-stealth, blue] (2.25,-0.1) -- (3.25,0.1);
+		\draw [-stealth, red ] (8.1,12.2) -- (7.1,12.0);
+		
+	\end{axis}
+\end{tikzpicture}

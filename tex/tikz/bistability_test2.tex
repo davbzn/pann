@@ -2,15 +2,26 @@
 \tikzsetnextfilename{bistability_test2}
 % This file was created by matplotlib2tikz v0.6.15.
 
-\newcommand{\plotfile}[1]{
+\newcommand{\downfile}[1]{
     \pgfplotstableread[col sep=tab, header=true]{#1}{\table}
     \pgfplotstablegetcolsof{#1}
     \pgfmathtruncatemacro\numberofcols{\pgfplotsretval - 1}
     \pgfplotsinvokeforeach{1,...,\numberofcols}{
         \pgfplotstablegetcolumnnamebyindex{##1}\of{\table}\to{\colname}
-        \addplot [semithick, color##1, mark=*, mark size=1, mark options={solid}]%
+        \addplot [name path=down##1, semithick, color##1, mark=*, mark size=1, mark options={solid}]%
         		table [x index= 0, y index=##1] {#1};
         \addlegendentryexpanded{ \colname }
+    }
+}
+
+\newcommand{\upfile}[1]{
+    \pgfplotstableread[col sep=tab, header=true]{#1}{\table}
+    \pgfplotstablegetcolsof{#1}
+    \pgfmathtruncatemacro\numberofcols{\pgfplotsretval - 1}
+    \pgfplotsinvokeforeach{1,...,\numberofcols}{
+        \pgfplotstablegetcolumnnamebyindex{##1}\of{\table}\to{\colname}
+        \addplot [name path=up##1, semithick, color##1, mark=*, mark size=1, mark options={solid}]%
+        		table [x index= 0, y index=##1] {#1};
     }
 }
 
@@ -29,17 +40,29 @@
 	\begin{axis}[
 			title={Internal Power},
 			xlabel={Pump Power [\si{mW}]},
-			ylabel={Internal Power [a.u.*]},
+			ylabel={Internal Power [arb.units]},
 			tick align=outside,
 			tick pos=left,
 			width=\textwidth*0.75,%
 			height=207pt,
 			legend pos = outer north east,
 			cycle list name=color list,
+			forget plot style={opacity=0.4},
 		]
 		\addlegendentry{\hspace{-.6cm}$\Delta\lambda$ in \si{\pm}}
 		\addlegendimage{empty legend};
 		
-		\plotfile{tikz/foo.csv}
+		\upfile{tikz/upwards.csv}
+		\downfile{tikz/downwards.csv}
+
+    \addplot [fill=color1, opacity=0.2] fill between [of=up1 and down1];
+    \addplot [fill=color2, opacity=0.2] fill between [of=up2 and down2];
+    \addplot [fill=color3, opacity=0.2] fill between [of=up3 and down3];
+    \addplot [fill=color4, opacity=0.2] fill between [of=up4 and down4];
+    \addplot [fill=color5, opacity=0.2] fill between [of=up5 and down5];
+    \addplot [fill=color6, opacity=0.2] fill between [of=up6 and down6];
+    \addplot [fill=color7, opacity=0.2] fill between [of=up7 and down7];
+    \addplot [fill=color8, opacity=0.2] fill between [of=up8 and down8];
+    \addplot [fill=color9, opacity=0.2] fill between [of=up9 and down9];
 	\end{axis}
 \end{tikzpicture}

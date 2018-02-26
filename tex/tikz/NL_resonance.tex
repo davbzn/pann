@@ -1,0 +1,68 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{NL_resonance}
+\begin{tikzpicture}[baseline]
+	\newcommand\CENTRAL{192}
+	\newcommand\START{190.9}
+	\newcommand\STOP {193}
+	\newcommand\CC{299792458}
+	
+	\begin{axis}[
+			axis x line*= bottom,
+			xlabel = {Optical Frequency $\nu$ [$\si{\THz}$]},
+			ylabel = {Transmission},
+			legend columns=-1,
+			legend cell align=right,
+			legend style={ at={(0.5,-0.22)}, anchor=north },
+			width=\textwidth*0.75,%
+			height=207pt,
+			xmin= 190.95, xmax = 193,
+			%
+			% global plot definition
+			domain = \START:\STOP,
+			samples = 101,
+			smooth,
+			no markers,
+			cycle multi list={
+%					exotic
+					blue, orange, red
+				},
+			]
+				
+		\foreach \TA/\LA/\Radius/\Neff in {0.85/0.9/5/3.826, 0.85/0.9/5/3.827, 0.85/0.9/5/3.830 }{
+			\edef\temp{
+				\noexpand\addlegendimage{empty legend}
+				\noexpand\addlegendentry{$n_{eff}=\Neff:$};
+				\noexpand\addplot 
+										{ + (1-\TA^2)^2 * \LA
+											/ ( (1-\TA^2 * \LA)^2 	+ 4 * \TA^2 	* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+										};
+				\noexpand\addlegendentry{$D(\omega)$};
+%				\noexpand\addplot 
+%										{ + \TA^2 * ( (1- \LA)^2	+ 4 					* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+%											/ ( (1-\TA^2 * \LA)^2 	+ 4 * \TA^2 	* \LA *sin(deg(\Neff*pi*\Radius*2*pi*x*1e6/\CC))^2 )
+%										};
+%				\noexpand\addlegendentry{$T(\omega)$};
+				}
+			\temp
+		}
+		
+		\node [draw=black, fill=white, align=center] at (192.7,0.5) {$\tau=0.85$\\ $\gamma=0.9$\\ $R=\SI{5}{\um}$};
+		
+	\end{axis}
+	
+	\begin{axis}[
+			width=\textwidth*0.75,%
+			height=207pt,
+			axis x line*= top,
+			axis y line = none,
+			xlabel = {Wavelength $\lambda$ [\si{\nm}]},
+			samples=2,
+			xmin= 190.95, xmax = 193,
+			xtick = {193.41448903, 193.16524356, 192.91663964, 192.66867481, 192.421, 192.17465256, 191.92859027, 191.68315729, 191.43835121, 191.19416964, 190.95061019},
+			scaled x ticks = manual:{}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1)} },
+			/pgf/number format/1000 sep=,
+		]
+		\addplot[black, opacity=0, domain = \START:\STOP] {0}; %
+	\end{axis}
+	
+\end{tikzpicture}

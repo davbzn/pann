@@ -1,6 +1,6 @@
 \tikzsetexternalprefix{tikz/}	% set subfolder
 \tikzsetnextfilename{WGmodes}
-\begin{tikzpicture}[baseline]
+\begin{tikzpicture}[baseline,scale=1]
 	\begin{axis}[	width=\textwidth*0.75,
 								height=200pt,
 								axis lines=center,
@@ -29,7 +29,7 @@
 			fill between [ of=lower and upper];
 		\addlegendentry{$n_H$}
 		
-		\foreach \m/\p/\a/\k in {0/0.3/0.2/0.15, 0/1.5/0.2/0.6, 8/3./0.2/2.1}{%, 8/1.8/0.1/1.8}{
+		\foreach \m/\p/\a/\k in {0/0.3/0.2/0.15, 2/1.5/0.2/0.6, 8/3./0.2/2.1}{%, 8/1.8/0.1/1.8}{
 			\edef\temp{
 				\noexpand\draw [black, thin] (\p, -2) -- (\p, +2) node [right, mnumber] {$m=\m$};
 				\noexpand\addplot [black, very thick, domain=-1:+1] ({\p + \a*cos(deg(\k*2*pi*x)) }, {x});

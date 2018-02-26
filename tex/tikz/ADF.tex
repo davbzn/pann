@@ -14,6 +14,7 @@
 			legend columns=3,
 			legend cell align=right,
 			legend style={ at={(0.5,-0.22)}, anchor=north },
+			/pgf/number format/1000 sep=,
 			width=\textwidth*0.75,%
 			height=207pt,
 			xmin= 188, xmax = 199,
@@ -73,6 +74,7 @@
 %			xtick = {157.785504211, 171.309976, 187.37029, 199.86163, 214.13747, 230.609583077, 249.827048333},
 %			scaled x ticks = manual:{$+\SI{1500}{\nm}$}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1) - 1500} },
 			scaled x ticks = manual:{}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1)} },
+			/pgf/number format/1000 sep=,
 		]
 		\addplot[black, opacity=0, domain = \START:\STOP] {0}; %
 	\end{axis}

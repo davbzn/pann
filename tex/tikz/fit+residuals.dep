@@ -1,0 +1,3 @@
+tikz/fit+residuals.pdf: tikz/activation.csv
+tikz/fit+residuals.pdf: tikz/activation.csv
+tikz/fit+residuals.pdf: tikz/residuals.csv

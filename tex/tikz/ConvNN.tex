@@ -1,9 +1,9 @@
 \tikzsetnextfilename{ConvNN}
-\begin{tikzpicture}
-	[%
-	input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=3mm},%
-	inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=3mm},%
-	output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=3mm},%
+\begin{tikzpicture}[
+		baseline,
+		input/.style ={isosceles triangle,	draw=red!50,		fill=red!20,		thick,	inner sep=0pt,	minimum size=3mm},
+		inner/.style ={circle,							draw=black!50,	fill=black!20,	thick,	inner sep=0pt,	minimum size=3mm},
+		output/.style={rectangle,					draw=blue!50,	fill=blue!20,	thick,	inner sep=0pt,	minimum size=3mm},
 	]
 
 	\newcommand\lin{0}
@@ -11,9 +11,11 @@
 	\newcommand{\lout}{5}
 	
 	%	vdots
-	\foreach \z in {\lin, \lhid, \lout}
-		\foreach \x in {0,3,7}
-				\node at (\z-0.4*0.6*\x,0.4*1.8-0.4*0.2*\x) {$\vdots$};
+	\foreach \x in {0,3,7}
+			\node at (\lin-0.4*0.6*\x,0.4*1.8-0.4*0.2*\x) {$\vdots$};
+	\foreach \z in {\lhid, \lout}
+		\foreach \x in {1,5}
+				\node at (\z-0.55*0.6*\x,0.55*2.0-0.55*0.2*\x) {$\vdots$};
 	
 	% nodes
 	\foreach \x/\xt in {0/n,3,4,5,6,7}

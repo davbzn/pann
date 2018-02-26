@@ -1,7 +1,7 @@
 \chapter{Artificial Neural Networks}
 \label{ch:Artificial_Neural_Networks}
-\section{Introduction}
-\label{sec:AAN_intro}
+%\section{Introduction}
+%\label{sec:AAN_intro}
 %A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
 Artificial Neuromorphic Networks (ANNs) are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (animal brains).
@@ -15,8 +15,8 @@ At this time, ANNs are mainly implemented by simulations, however the technologi
 Training a complex artificial neural network with computers at the state of art might take even weeks.
 Thus, with the aim of improving performance from simulated networks, research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
 
-\subsection{History}
-\label{ssec:History}
+\section{History}
+\label{sec:History}
 It is widely acknowledged that the opening work of this research field was made in 1943 by Warren McCulloch and Walter Pitts, a neurophysiologist and a mathematician respectively.
 In their research work, they described the operating mechanism of biological neurons by modeling a simple electronic circuit \cite{McCulloch1943}.
 
@@ -30,7 +30,7 @@ However, despite the early successes of neural networks, the traditional computi
 %As a result, funding and therefore also research diminished drastically in the following decades.
 
 The reason why this happened, probably, was due to several concurring facts.
-First of all, in the same time period (1969) a research paper by Minsky and Papert \cite{Minsky1969}, which identified two important problems.
+First of all, in the same time period (1969) a research paper by Minksi and Papert \cite{minski1969perceptrons}, which identified two important problems.
 The basic perceptron was not able to execute the exclusive-or (XOR) operation, unlike the logical circuits at the base of von Neumann architecture.
 Moreover, the research stated the fact that more complex networks such as multiple- or deep-layered networks were not possible (at that time) because of the lack of adequate processing power.
 
@@ -49,15 +49,6 @@ This method is now called \textit{backpropagation}.
 
 In today's research and technology, artificial neural networks are used in numerous applications.
 However, the development is made slowly, due to technological limitation in computational power of present processors.
-
-\subsection{Comparison with conventional computers}
-\label{ssec:Comparison_with_conventional_computers}
-
-%Digital, analog, and optical chips are the different types of chips being developed.
-%One might immediately discount analog signals as a thing of the past.
-%However neurons in the brain actually work more like analog signals than digital signals.
-%While digital signals have two distinct states (1 or 0, on or off), analog signals vary between minimum and maximum values.
-%It may be awhile, though, before optical chips can be used in commercial applications."
 
 \section{Basis of Neural Networks}
 \label{sec:Basis_of_Neural_Networks}
@@ -85,7 +76,7 @@ Nodes can all implement the same function or behave differntly, depending on the
 The operation of nodes resembles that of animal neurons: various input gets collected and elaborated together to obtain an output, which will become one of the many inputs for subsequent neurons/nodes.
 Specifically, the most used model for neurons is the McCulloch–Pitts (MCP) neuron.
 It is divided into two parts, as shown in \autoref{fig:generic_node}: the first part is a weighted sum of the inputs, while the second part is given by the so called activation function.
-
+\newpage
 \begin{figure}[ht]
 	\centering
 	\input{tikz/GenericNode.tex}
@@ -137,7 +128,6 @@ A generic network is shown in \autoref{fig:standardNNdesc}.
 \begin{figure}[ht]
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-%		\includegraphics[draft,width=6cm,height=4cm]{figures/foo.png}
 		\input{tikz/standardNNdesc.tex}
 		\caption{Standard way of representing networks}
 		\label{fig:standardNNdesc}
@@ -160,6 +150,14 @@ This non-standard description, moreover, is consistent with the idea of function
 %Therefore I can easily distinguish the nodes which will use a nonlinear activation function.
 %Questa non è la visione standard/ortodossa, ma è consistente con un'idea di 'black box' in cui gli input e output sono gli unici nodi visibili. mentre gli altri sono all'interno della scatola nera.
 
+\subsection{Comparison with conventional computers}
+\label{ssec:Comparison_with_conventional_computers}
+
+%Digital, analog, and optical chips are the different types of chips being developed.
+%One might immediately discount analog signals as a thing of the past.
+%However neurons in the brain actually work more like analog signals than digital signals.
+%While digital signals have two distinct states (1 or 0, on or off), analog signals vary between minimum and maximum values.
+%It may be awhile, though, before optical chips can be used in commercial applications."
 
 \section{Working Principles of ANNs}
 \label{sec:Working_Principles_of_ANNs}
@@ -221,23 +219,47 @@ This vector lives in the multidimensional space of the loss function $L:\mathbb{
 The most efficient \cite{??} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
 Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
 
-\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
+%\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
 
 \subsection{Validation Process}
 \label{ssec:Validation_Process}
+In the validation process, which happens repeatedly throughout the training process, the neural network is tested of a new set of examples.
+However, the outcome of this test is not used to change the weights as in the learning phase.
+Instead, the output is used to prevent overfitting.
+
+Overfitting is the phenomenon in which a neural network is trained over and over on the same set of data.
+This can train the network to recognize specific features of the samples instead of the more general ones.
+Therefore, by periodically testing the network on a novel set, i.e. the validation set which is different from the training set, one can reduce or avoid the problem.
+
+Depending on the resources available and the size of the dataset, the validation happens more or less often throughout the learning process.
+
 
 \subsection{Testing Process}
 \label{ssec:Testing_Process}
-At the end, there is the process of testing the artificial neural network.
-Ideally the network is tested on a new set of data, for which the target results are known, similarly to the preceding phases.
-This time, however, the predicted outputs are compared to the correct answers to obtain an overall value for the correctness, often expressed in percentage.
+At the end of the training and validation processes, there is the process of testing the artificial neural network.
+The network is tested on a new set of data, the test data.
+This time the predicted outputs are compared to the correct answers, but no weights are changed.
+Instead, an overall value of the correctness is evaluated and it is often expressed in percentage.
+
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/LVTcurves.tex}
+	\caption{The learning curves are the value of the loss function, or criterion, as a function of the training iterations.
+	Both the validation and the test error are usually higher than the error on the training set.
+	Sometimes, to avoid overfitting, the training procedure is stopped at a minimum of the validation learning curve \cite{duda2012pattern}.
+	}
+	\label{fig:LVTcurves}
+\end{figure}
 
 \subsection{Datasets}
 \label{ssec:Datasets}
-Since there are three phases of preparation for any artificial neural network, there must be an appropriate number of examples to feed to it.
+Creating a dataset and splitting it into subsets is another problem to deal with.
+It is not so simple and straightforward as it appears.
+For example a dataset which is too big will lead to a longer training time for the network, whereas a too little set will cause a poor training.
 
-\noindent\uppercase{\normalsize{how do i divide a dataset?\\ what happens when there are too few examples?\\ And when there are too many?}}
-\normalsize
+The most naive division is in three equal parts, since three are the phases of preparation for any artificial neural network.
+However, as shown later in \autoref{ssec:PyDataset}, when the resources dictates otherwise, other subdivision can be implemented.
+In my case, the decision was to follow the suggestions of the authors of the dataset and divide the examples into a training set and a test set only, with a ratio between the two close to 50\%.
 
 \section{Feedforward NN}
 \label{sec:Feedforward_NN}
@@ -245,7 +267,7 @@ Since there are three phases of preparation for any artificial neural network, t
 The first and most simple type of neural network is called Feedforward.
 In this kind of neural network, nodes are divided into groups called \textit{layers}.
 A layer is a collection of nodes that accepts inputs from a preceding group and generate as many outputs as the number of nodes in the layer.
-Each layer of a Feedforward neural network is connected in series with the others, except of input layer at the beginning and the output layer at the end.
+Each layer of a Feedforward neural network is connected in series with the others, except for the input layer at the beginning and the output layer at the end.
 As for the single nodes, the inner layer are called hidden, because usually not accessible.
 
 The information travels from the input to the output and gets elaborated from each hidden layer: there are neither connection between nodes of the same layer, nor loops or feedback between layers.
@@ -253,8 +275,8 @@ The information travels from the input to the output and gets elaborated from ea
 The number of hidden layers and the number of nodes they contain depends on the network topology.
 Moreover the connection between the layers might be complete, i.e. each node in the layer accepts each input of the preceding layer, in that case the layer is said to be \textit{fully connected}, or sparse as in the case of convolutional layers (see \autoref{par:Convolutional}).
 
-\subsubsection{Perceptron}
-\label{sssec:Perceptron}
+\subsection{Perceptron}
+\label{ssec:Perceptron}
 
 The most naive topology of a Feedforward neural network is given by the so called \textit{Perceptron}.
 The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron} \cite{frank1957perceptron,Rosenblatt1958}.
@@ -287,37 +309,37 @@ Besides the shape, in literature a perceptron is almost always considered fully 
 \subsubsection{Other Feedforward NNs}
 \label{sssec:Other_Feedforward_NNs}
 
-\paragraph{Autoencoder} neural networks are feedforward networks in which the output nodes are as many as the input nodes.
-The purpose of this kind of network is to reconstruct its own inputs.
-
-\paragraph{Probabilistic}
-
-\paragraph{Time delay}
+Feedforward neural networks are a large family that includes many other types besides the perceptron one.
+A few names are autoencoder, time delay, and convolutional neural networks.
+Autoencoders ANNs are feedforward networks with the same number of input and output nodes, with the purpose of reconstructing its own inputs.
+For this reason autoencoders employ unsupervised learning.
+Time delay networks have a feedforward structure and their purpose is to analyze patterns in
 
 \paragraph{Convolutional}\label{par:Convolutional} networks are inspired to the visual cortex, in which neurons are not fully connected their inputs but only to a restricted region.
 Convolutional neural networks are a type of feedforward network conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
-In this kind of network the input is often represented by a 2D matrix, instead of a 1D vector.
-It is usually composed by many layers, the prevalent kind is the convolutional one.
+Its input is often represented as a 2D matrix, instead of a 1D vector.
+This kind of network is usually composed by many layers, the prevalent kind is the convolutional one.
 This layer performs a two-dimensional convolution over the input matrix of a second 2D matrix of weights, called \textit{feature map}.
 Thus, each node of the layer operates on a restricted region to understand if a feature is present or not.
 Commonly the operating regions are overlapping and the feature map is shared among the nodes in the same layer.
 
 \begin{figure}[ht]
 	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
 	\input{tikz/ConvNN.tex}
 	\caption{%
 		Pictorial representation of a layer of a convolutional supernode.
-		Several supernodes form a convolutional layer.
+		Several supernodes might be placed side by side to form a convolutional layer.
 		}
 	\label{fig:convolutionalNN}
 \end{figure}
 
+Convolutional neural networks are nowadays widely used in image recognition with outstanding results and they improve with a steady pace.
+A technological application of this kind of network is the real time recognition of obstacles in a vehicle path, for safety and automation purposes in the automotive industry.
 
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
 By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
-Moreover, those different types of network are not a niche, but are widely \cite{??} studied as a different approaches to the same or additional problems.
+Moreover, those different types of network are not a niche, but they are widely \cite{??} studied as a different approaches to the same or additional problems.
 
 \subsubsection{Recurrent NN}
 \label{sssec:Recurrent_NN}
@@ -331,10 +353,15 @@ That is information does not propagates only forward like in the feedforward net
 		Representation of a recurrent node.
 		One of the inputs is given by the output itself.
 		This output to input connection could be mediated by a delay device, so that for example the output at $t-1$ becomes the input at $t$.
-		Depending on the structure of the network, there might be recurrent nodes and/or recurrent group of nodes, loops.
+		Depending on the structure of the network, there might be recurrent nodes and/or recurrent groups of nodes, i.e. loops.
 		}
 	\label{fig:RecurrentNN}
 \end{figure}
+
+Recurrent networks have found greatest use in time series analysis and prediction \cite{duda2012pattern}.
+However often recurrent type of networks are employed to obtain the same classification of feedforward ones.
+In this case, the former are equivalent to the latter, if ``unfolded'' in time.
+That is the expansion of the recurrent architecture in time is the same as the topology of the feedforward one in space.
 
 \subsubsection{Reservoir NN}
 \label{sssec:Reservoir_NN}
@@ -345,7 +372,6 @@ It claims that it is not necessary to learn all the weights of the network, as i
 
 \begin{figure}[ht]
 	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
 	\input{tikz/ReservoirNN.tex}
 	\caption{A reservoir NN is topologically equivalent to deep networks. However only the last layer is trained. In this picture the trained node are represented outside the box, while those inside are initialized with random weights which are then left unchanged.}
 	\label{fig:reservoirNN}
@@ -354,36 +380,186 @@ It claims that it is not necessary to learn all the weights of the network, as i
 \noindent This kind of networks, then, can be trained much faster than their respective counterparts, i.e. feedforward and recurrent.
 The question over which training method is correct is still debated and literature does not provide clear answers yet.
 
-\subsubsection{Modular NN}
-\label{sec:Modular_NN}
+%\subsubsection{Modular NN}
+%\label{sec:Modular_NN}
 
+%\subsubsection{Spiking NN}
+%\label{sec:Spiking_NN}
+%Spiking artificial networks are the most different kind in respect to all the other networks until now described.
+%In this class of ANNs, information is not coded only in the intensity of the signal, but also in the rate of signals, e.g. a high value will be encoded as a signal with high repetition rate, whereas a low value as a signal with low repetition rate.
+%This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \cite{??}.
+%
+%\vspace{1em}
+%\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model\\
+%\url{ https://en.wikipedia.org/wiki/Binding_neuron }
 
-\subsubsection{Spiking NN}
-\label{sec:Spiking_NN}
-Spiking artificial networks are the most different kind in respect to all the other networks until now described.
-In this class of ANNs, information is not coded only in the intensity of the signal, but also in the rate of signals, e.g. a high value will be encoded as a signal with high repetition rate, whereas a low value as a signal with low repetition rate.
-This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \cite{??}.
-
-\vspace{1em}
-\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model\\
-\url{ https://en.wikipedia.org/wiki/Binding_neuron }
-
-\section{Real-Life Examples}
-\label{sec:Real-Life_Examples}
-\noindent\uppercase{\large{? Should I keep this section ?}}
-\normalsize
+%\section{Real-Life Examples}
+%\label{sec:Real-Life_Examples}
+%\noindent\uppercase{\large{? Should I keep this section ?}}
+%\normalsize
 
 \section{ANN Simulation}
 \label{sec:ANN_Simulation}
-The resources and the time available allowed me to implement physically only the activation function of one node.
-Hence, to test this hardware implementation as I will show in \autoref{sec:Test_of_a_Trained ANN} of \autoref{ch:experiments}, I had first to simulate and train \textit{offline} a specific neural network.
-To do so, I chose a programming language, \textit{Python}, and a library, \textit{PyTorch}, which helped me in this task.
+In the field of artificial neural network simulation, there are several platforms that are independently developed.
+Among them there are TensorFlow, Theano, Caffe, Keras, Torch, and PyTorch.
+Unfortunately, each one of them have its strength and weakness, therefore the choice of the framework becomes very difficult.
+
+To make a choice, the key factors considered were the language used, the features, the flexibility, and the level of diffusion of the framework in the machine learning community.
+The language used is a determining factor, because it takes time to learn the peculiarities of a library written for a known language, but even more time to learn to use an unknown programming language.
+However also the features and the flexibility in the implementation are important traits, on account of the fact that any feature that is not natively implemented needs new coding.
+In turn, it is difficult to integrate new coding if the framework is not flexible enough to accommodate extensions or custom definitions.
+Last, but not least, it is easier to find support for a widespread framework in respect to a limitedly used one.
+In regards to this, \autoref{fig:GoogleTrendsPyTorch} shows the number of internet searches for some frameworks in the past few years.
+
+In light of the facts above, PyTorch was chosen as framework.
+PyTorch is an open source machine learning library for python, which development has started only recently and it is based upon the older framework Torch  \cite{PyTorch.org}.
+It provides a high-level platform for the deep learning ecosystem and integrates acceleration libraries that allow fast and lean operation, both on common CPUs and GPUs.
+It is based on a backpropagation algorithm called \textit{Reverse-mode auto-differentiation}, which allows versatile execution.
+
+To summarize, the library was chosen for its language, its flexibility, and the growing interest for it within the machine learning community.
+Nevertheless, its features make it a very powerful framework. However, considering the need to keep the simulated system as simple as possible, this last characteristic slipped in the background.
+The need to simulate a simple network comes from the fact that the ultimate goal of this project is to implement an ANN with a (photonic) hardware architecture.
+
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/GoogleTrendsPyTorch.tex}
+	\caption{Google Search statistics for different keywords in the \textit{machine learning and artificial intelligence} field.
+		Numbers represent search interest relative to the highest point on the chart for the given region and time.
+		A value of 100 is the peak popularity for the term.}
+	\label{fig:GoogleTrendsPyTorch}
+\end{figure}
+
+%The resources and the time available allowed me to implement physically only the activation function of one node.
+%Hence, to test this hardware implementation as I will show in \autoref{sec:Test_of_a_Trained ANN} of \autoref{ch:experiments}, I had first to simulate and train \textit{offline} a specific neural network.
+%To do so, I chose a programming language, \textit{Python}, and a library, \textit{PyTorch}, which helped me in this task.
+
 \subsection{PyTorch}
-\label{PyTorch}
+\label{ssec:PyTorch}
+PyTorch is a Python package which provides a powerful framework for deep learning.
+It is versatile in the sense that allow customizations at almost every level of operation.
+For the purposes of this work, a neural network implemented in PyTorch is composed by the definition of three main components and a few lines of code to implement the operation.
 
-PyTorch is a python package that provides high-level features such as a deep learning research platform \cite{PyTorch.org}.
-It is based on a backpropagation algorithm called \textit{Reverse-mode auto-differentiation}, which is fast and flexible.
-Moreover integrates acceleration libraries that allow fast and lean operation.
+The most important part of the network is the so called \textit{model}, which defines the topology of the network by setting parameters such as the number of nodes in each layer and the connections among them.
+Moreover, it defines also the activation function for each node, separately or in groups.
+The activation function can be coded from scratch, but can also be one of the functions provided by the library or a composition of them.
+While the first offers almost unlimited flexibility, the second choice consents to exploit the functions already given.
+The second option is the best choice, if the needs of the task support it, because it allows to save much time.
 
-To summarize, the library was chosen for its language and its flexibility, even though it is also powerful.
-This because our need was to simulate a little network to test the activation function.
+Another important part of the network is the so called \textit{criterion}, which is nothing else than the loss function.
+The set of functions provided by PyTorch can accommodate almost any necessity.
+Moreover, their operation can usually be adjusted with some internal parameters.
+
+Similarly to the criterion, the last piece of the system is given by the \textit{optimizer}.
+Optimizers are a class of algorithms that provides the optimization of the weights during the learning phase.
+Most commonly used methods are already supported and they provide parameters to fine tune their execution.
+
+Following the official tutorials and the immense package documentation, I implemented a multi-layer perceptron (MLP) and then tested it with randomly generated numbers until its operation seemed correct.
+The model that I defined allows to implement a fully-connected feedforward neural network with some parameters.
+Specifically, the parameters cover the number of input and ouptut nodes, the number of hidden layer, and the number of nodes in each hidden layer.
+Another degree of freedom that I implemented is whether the last hidden layer has a nonlinear activation function or a linear one.
+The scheme of the network is shown in \autoref{fig:ANN_model}.
+
+The optimizer chosen is called \textit{Stochastic Gradiend Descent} (SGD), which is parametrized just by the learning rate, at least in its vanilla implementation.
+The criterion used initially is the mean square error, however it was eventually replaced by the cross entropy loss (CEL), which is more suited to the classification task.
+
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/PT_MLP.tex}
+	\caption{Topology of the model implemented in PyTorch. The number of input ad output nodes, as well as the number of nodes in the last hidden layers is determined by the dataset.
+	The number of nodes in the other hidden layers and the number of hidden layers itself is governed by a parameter.}
+	\label{fig:ANN_model}
+\end{figure}
+
+\subsection{Dataset}
+\label{ssec:PyDataset}
+Initial tests and trials on artificial neural networks are often made by using randomly generated sets of numbers.
+However, once the system has been successfully set up, to compare different working parameters such as number of nodes and number of layers, a common standardized dataset should be employed.
+Moreover in this way, it is possible to compare implementations belonging to other research groups.
+
+Again, the need to keep the system as simple as possible, drove my attention towards datasets of middle to small sizes.
+With the help of the \textit{UC Irvine Machine Learning Repository} \cite{UCIMLR}, I selected one with a bit less than a thousand entries.
+The dataset is called \textit{Connectionist Bench (Vowel Recognition - Deterding Data) Data Set}.
+It is composed by \num{990} entries of \num{10} attributes, i.e. input values, grouped in \num{11} classes.
+
+Each entry is a vector of \num{10} real numbers plus an integer number between \num{0} and \num{10}.
+In view of the fact the proposed activation function is a real-positive-valued function (see \autoref{sec:Characterization_of_the_Activation_Function}), I normalized the database.
+The normalization is independently applied to each one of the attributes in such a way that is described by a real number in $[0,1]$.
+The normalization is applied before the dataset is divided in the learning and testing examples.
+
+The authors suggest to divide the dataset a learning set of \num{528} entries and a testing set of \num{462} entries.
+Since the number of entries is low, compared to other datasets, the validation set is not define.
+In this case, the test set is used as validation instead too.
+
+\subsection{Simulated ANN operation}
+\label{ssec:Simulated_ANN_operation}
+Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
+Initially I implemented a \textit{ReLU} and a sigmoid activation functions.
+The ReLU function is a standard activation function and is defined as follows:
+\begin{equation}
+f_{ReLU}(x) =
+\begin{cases}
+	0 & \qquad \mathrm{for}~ x\leq 0\\
+	x & \qquad \mathrm{for}~ x\geq 0
+\end{cases}~.
+\label{eq:relu}
+\end{equation}
+On the other hand, the sigmoid function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
+\begin{equation}
+f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
+\end{equation}
+with $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$ parameters.
+Both functions are widely used in literature, however the \textit{ReLU} function seems to be preferred lately.
+
+In \autoref{sec:Test_of_a_Trained ANN} there are the results of the same network models, with the nonlinear activation function given by the microring resonator.
+
+The choice of the structure of the neural network is purely heuristic.
+Up to now, no satisfactory method has been proposed in literature.
+However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
+Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
+
+\subsubsection{Learning}
+The learning process with the
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
+	\caption{learning process}
+	\label{fig:PyTorch_learning}
+\end{figure}
+
+\subsubsection{Collection of results}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{c c c c c}
+	\toprule
+	no. hidden 	& no. nodes	& other			& nonlinear	& Percent\\
+	layers 			& per layer	& parameters	& function		& correct\\
+	\midrule
+	c & c & c & c & c\\
+	c & c & c & c & c\\
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+%+-------------------------+--------+---------+---------+
+%|                         | no. of | no.     | percent |
+%|       Classifier        | hidden | correct | correct |
+%|                         | units  |         |         | 
+%+-------------------------+--------+---------+---------+
+%| Single-layer perceptron |  -     | 154     | 33      | 
+%| Multi-layer perceptron  | 88     | 234     | 51      |
+%| Multi-layer perceptron  | 22     | 206     | 45      |
+%| Multi-layer perceptron  | 11     | 203     | 44      | 
+%| Modified Kanerva Model  | 528    | 231     | 50      |
+%| Modified Kanerva Model  | 88     | 197     | 43      | 
+%| Radial Basis Function   | 528    | 247     | 53      |
+%| Radial Basis Function   | 88     | 220     | 48      | 
+%| Gaussian node network   | 528    | 252     | 55      |
+%| Gaussian node network   | 88     | 247     | 53      |
+%| Gaussian node network   | 22     | 250     | 54      |
+%| Gaussian node network   | 11     | 211     | 47      | 
+%| Square node network     | 88     | 253     | 55      |
+%| Square node network     | 22     | 236     | 51      |
+%| Square node network     | 11     | 217     | 50      | 
+%| Nearest neighbour       |  -     | 260     | 56      | 
+%+-------------------------+--------+---------+---------+

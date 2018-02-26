@@ -1,0 +1,55 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{WG_examples}
+\begin{tikzpicture}[	scale=1,
+										baseline,
+										thick,
+										line join=round,
+										hatch/.style={
+												preaction={fill, white},
+												pattern=crosshatch dots,
+												pattern color=gray
+											},
+										dense/.style={
+												fill=gray!50,
+%												preaction={fill, white},
+%												pattern=crosshatch,
+%												pattern color=black
+											}
+										]
+%	\draw[step=.5,gray,very thin] (-.5,-.5) grid (12,3.5);
+
+	\def\mylist{	0/0/2.4/0.75, 0.8/0.75/0.8/0.3,
+							2.75/0/2.4/0.75,
+							5.5/0/2.4/0.9, 6.3/0.9/0.8/0.15,
+							8.25/0/2.4/0.9, 9.05/0.9/0.8/0.15
+							}
+	
+	\foreach \px/\py/\w/\h in \mylist {
+		\draw [fill=white]	(\px,\py) -- ++(0,\h) -- ++(60:2.4) -- ++(\w,0)
+											-- ++(0,-\h) -- ++(240:2.4) -- cycle;
+		\draw (\px,\py)++(\w,\h) -- ++(-\w,0)++(\w,0)
+					-- ++(0,-\h)++(0,\h) -- +(60:2.4);
+	}
+
+	% first wg
+	\draw [hatch] (0.8,0.75) -- ++(0,0.3) -- ++(0.8,0) -- ++(0,-0.3)	-- cycle;
+	
+	% second wg
+	\draw [hatch] (2.75,0)++(0.8,0.75) -- ++(60:2.4) -- ++(0.8,0)
+				-- ++(240:2.4) -- ++(0,-0.3) -- ++(-0.8,0) -- cycle;
+	\draw (2.75,0)++(0.8,0.75) -- ++(0.8,0);	
+
+	% third wg
+	\draw [hatch] (5.5,0)++(0.8,0.9) -- ++(0,0.15) -- ++(0.8,0) -- ++(0,-0.15)
+				-- ++(0.8,0) -- ++(0,-0.15) -- ++(-2.4,0) -- ++(0,0.15) -- cycle;
+	\draw [hatch] (5.5,0)++(2.4,0.75) -- ++(0,0.15) -- ++(60:2.4) -- ++(0,-0.15) -- cycle;
+	
+	% fourth wg
+	\draw [dense] (8.25,0)++(0,0.75) -- ++(0,0.15) -- ++(2.4,0) -- ++(60:2.4)
+				-- ++(0,-0.15) -- ++(240:2.4) -- cycle;
+	\draw (8.25,0)++(2.4,0.75) -- ++(0,0.15);
+	\draw [hatch] (8.25,0)++(0.8,0.9) -- ++(0,0.15) -- ++(0.8,0) -- ++(0,-0.15) -- cycle;
+	
+	\foreach \px/\name in {1.2/a, 3.95/b, 6.7/c, 9.45/d}
+		\node at (\px,0) [below] {$(\name)$};
+\end{tikzpicture}

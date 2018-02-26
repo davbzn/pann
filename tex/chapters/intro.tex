@@ -9,98 +9,116 @@
 Research in the field of artificial neural networks has became more and more popular in the last few decades as the computing power available to the average institution increased further.
 As a matter of fact, in the last two decades the calculation power which once belonged only to bulky, power hungry, and very expensive supercomputers, gradually became possible also for relatively more compact, efficient, and definitely cheaper servers and workstations.
 
-This trend is dictated by the fact that artificial neural networks are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
+This trend has been dictated by the fact that artificial neural networks are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
 Implementations of this general purpose architecture are able to do any logical computation with a series of instructions.
 However the downside of this suitability to generic computations is that it is often difficult to parallelize single operations and therefore certain tasks are inherently inefficient, both in energy and in time.
-Moreover another problem is that it requires explicit programming for each singular task
+Moreover another problem is that it requires explicit programming for each singular task.
 
-The formalization of the von Neumann architecture dates back to 1945 and is as old as the first attempt in artificial neural networks.
+The formalization of the von Neumann (or Princeton) architecture dates back to 1945 \cite{Godfrey1993} and it is as old as the first attempt in artificial neural networks \cite{Rosenblatt1958}.
 Shortly after, research and industry efforts focused only on the development of the Princeton architecture, choosing it de facto as the primary design for computing devices.
 
 In the recent years, help came from acceleration units known as Graphic Processing Units (GPU), which were developed for a completely different objective.
-These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to CPUs, but are much more efficient both in power and in time, because of their parallel execution.
+These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to CPUs, but are much more efficient both in power and in time, because of their parallel execution \cite{stone2010opencl,DBLP:journals/corr/abs-1211-5590}.
 
 \paragraph{Todays software implementations\\}
 Between the most famous examples of simulated neural network there certainly are the older Watson supercomputer from IBM and the more recent AlphaGo artificial intelligence.
 Both of them arose to popularity because they defeated us humans to our own games.
 Specifically the effort of Watson was aimed at prevailing the most strongest human contestants at \textit{Jeopardy!}, an American television game, and succeeded in 2011.
 Watson was powered by a IBM supercomputer and used \SI{0.22}{\MW} of power.
-AlphaGO, nevertheless, is a deep neural network that in 2016, through reinforced learning algorithms, defeated Lee Sedol, considered the most formidable master of Go, a complicated board game.
+AlphaGO, nevertheless, is a deep neural network that in 2016, through reinforced learning algorithms, defeated Lee Sedol, considered the most formidable master of Go, a complicated board game \cite{Nawrocki2016a}.
 
 Another interesting case is given by SpiNNaker, of the University of Manchester.
 It is composed by $10^4$ neurons connected by more that $10^7$ synapses, and is simulated on over 65 thousand 18-core ARM processors connected together.
 Unlike the other two, its main goals are to simulate several neural mechanisms, such as the operation of visual cortex.
-The SpiNNaker system is part of the Human Brain Project (HBP), funded by the European Union.\cite{HBP.eu}
+The SpiNNaker system is part of the Human Brain Project (HBP), funded by the European Union \cite{HBP.eu, Nawrocki2016a}.
 
 Similarly to SpiNNaker, another effort in gaining better understanding of the human brain is \textit{The Blue Brain Project}, which is leaded by École Polytechnique Fédérale de Lausanne in collaboration with over one hundred other international research institutions and it is funded by the European Union.
-This project is simulated on IBM Blue Gene supercomputers, each fitted with more than 100 thousand processors and consuming several \si{\MW} of power.
+This project is simulated on IBM Blue Gene supercomputers, each fitted with more than 100 thousand processors and consuming several \si{\MW} of power \cite{Nawrocki2016a}.
 
 \paragraph{Present objectives and future trends\\}
 We can distinguish two principal objectives in this research field.
 The first one is a technological objective and is that of developing a more powerful computational instrument.
-The second objective is instead a topic of more fundamental research: to use the tools of artificial neural networks to better understand biological neural networks such as our brain.
+The second objective is instead a topic of more fundamental research: to use the tools of artificial neural networks to better understand biological neural networks such as our brain \cite{sciamHBP, HBP.eu}.
 
 If the comprehension of the complex mechanism at the base of our brain has always been a very arduous assignment, the tasks that artificial neural network are facing become increasingly difficult while time passes.
-Whereas in the past years public and private research groups trained themselves with "easier" problems, such as television or board games, today they are concentrating their efforts on more challenging goals.
-Probably the most clear example of this tendency is given by the research on autonomous driving, where artificial neural networks are used primarily for real-time processing of data from several sensors.
+Whereas in the past years public and private research groups trained themselves with ``easier" problems, such as television or board games, today they are concentrating their efforts on more challenging goals.
+Probably the most clear example of this tendency is given by the research on autonomous driving, where artificial neural networks are used primarily for real-time processing of data from several sensors \cite{roadDetection}.
 
 A great number of businesses formed in recent years around these problems and many other will probably do the same for similar areas.
 It is very likely that to achieve their objectives, even more powerful and complex artificial networks will be required.
 Therefore more processors will be developed and put together to achieve impressive computing power.
 However, one cannot expect to increase indefinitely the power, without significant improvements in efficiency.
-Hence alternatives are sought.
+Hence alternatives are sought \cite{soman2016recent}.
 
 \paragraph{Overview of current alternatives to simulations\\}
 Apart from the vast majority of the research on neural networks, which is being carried out with simulations on powerful processors, a smaller portion of research is focused on building neural network physically.
-Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow artificial neural networks to run physically, instead of being simulated on conventional computers.
+Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow artificial neural networks to run physically, instead of being simulated on conventional computers \cite{soman2016recent}.
 
 The reason why considerable improvements can be expected is that the path of designing hardware devices ad hoc for neural network computation has not yet been covered comprehensively.
 Majors performance or efficiency enhancements are coming from the fact that those new architectures are conceived with parallel execution of specific operations in mind.
 This, however, makes them inevitably less adaptable to changes, unlike software simulations on conventional computers, which can be modified just by changing few lines of code.
 A good example is given by size of the network, which in simulation is easily altered, even of orders of magnitude, while in hardware implementations it depends strictly by the architecture features and scalability.
-%
 %However, being designed for precise tasks makes them unsuitable for generic computation, which could in principle make them less easy to modify when needed, unlike simulations on conventional computers.
 
-Many of these use the electronics framework, mainly because of the many benefits of the mature silicon technology and its CMOS-compatible production chain.
+Many of these use the electronics framework, mainly because of the many benefits of the mature silicon technology and its CMOS-compatible production chain \cite{}.
 Specifically footprint and efficiency of CMOS devices has not yet stopped to grow since its discovery, in the past century.
-However, a relatively small portion of these works also inquired simpler network fabrication with organic electronic materials, achieving remarkable results.
+However, a relatively small portion of these works also inquired simpler network fabrication with organic electronic materials, achieving remarkable results \cite{Nawrocki2016a}.
 
 Among the most interesting projects which uses electronics there are TrueNorth of IBM, Neurogrid of Stanford University, and BrainScaleS designed in Hidelberg and Dresden.
 The former is part of a long-term research project funded by DARPA and has the aim of building an artificial neural network with the capabilities of brains of small mammalians, such as cats or mice.
 In 2014 IBM showed a chip, named TrueNorth, containing 1 million artificial neurons and 256 millions synapses.
 This network, relying on more than 5 billion transistors organized on an area of \SI{4.3}{\square\cm}, consumed only \SI{60}{\mW}.
-The researcher also proved that connecting 48 of this chips together they obtained the equivalent of the brain of a mouse.
+The researcher also proved that connecting 48 of this chips together they obtained the equivalent of the brain of a mouse \cite{Nawrocki2016a}.
 
 Similarly, the intention behind Neurogrid chip is to explore numerous hypothesis concerning mammalian brains, specifically about the inner mechanisms of operation of the cerebral cortex.
 Stanford's implementation reaches the line of 1 million neurons, while only requiring \SI{5}{\W} of power consumption.
-Moreover the communication lines between single neurons, the synapses, are provided by FPGAs and banks of SRAM.
+Moreover the communication lines between single neurons, the synapses, are provided by FPGAs and banks of SRAM \cite{Nawrocki2016a}.
 
-Finally the BrainScaleS is built by 20 silicon wafers, each containing  200,000 biologically realistic neurons and 50x106 plastic synapses.
+Finally the BrainScaleS is built by 20 silicon wafers, each containing  200,000 biologically realistic neurons and \num{50e6} plastic synapses.
 Likewise SpiNNaker is funded by the European Union and it is part of the Human Brain Project.
-A particularity of this system is that does not execute pre-programmed code but evolves according to the physical properties of the devices.\cite{HBP.eu}
+A particularity of this system is that does not execute pre-programmed code, but evolves according to the physical properties of the devices themselves \cite{HBP.eu}.
 
-Besides electronics, other kind of physical implementations are attempted from research teams.
-Probably the most intriguing example is given by researches in photonics, which attempts to match electronics performance by overcoming its intrinsically weaknesses, such as power consumption, speed, and intrinsic compatibility with parallel computing.
-Photonics has yet to reach achievements comparable to electronics, mainly due to the embryonic state of its technology.
+\paragraph{Neuromorphic photonics\\}
+Besides electronics, other kind of physical implementations have been attempted from research teams.
+Probably the most intriguing example is given by integrated photonics.
+Photonics Integrated Circuits (PICs) have never been competitive in comparison to electronics in the development of von Neumann like processors, which are based on boolean logic gates.
+No photonic integrated logic of comparable performance to electronics has been proposed yet.
+However, by implementing a computing architecture that adheres to the artificial neural network rules integrated photonics might emerge as a successful platform \cite{de2017progress}.
+Even if research in neuromorphic photonics is just in its embryonic state, many progresses have been accomplished lately.
+%Moreover, it has yet to leave its embryonic state of technology, however many progresses have been accomplished lately 
+The aim of neuromorphic photonics is to match electronics performances by overcoming it in power consumption, computational speed, and intrinsic suitability to parallel computing.
+
+\begin{figure}[!htbp]
+	\centering
+	\input{tikz/scopus.tex}
+	\caption{Scopus data on `neuromorphic' vs `neuromorphic photonics'}
+	\label{fig:scopus}
+\end{figure}
+
+Since PIC manufacturing is not as developed as fabrication of electronic devices, integrated photonics research on artificial neural networks concentrates on integrating single optical devices rather than building a full-grown all-optical network.
+The great majority of researches integrates optical structures and electronic ones on the same network, building hybrid optoelectronic artificial neural networks.
+Moreover, the networks implemented mostly are of recursive type or trained with the reservoir computing method.
+Both of them allow to build functioning ANNs with a low number of (controllable) computing nodes.
 
 \paragraph{My work\\}
 My work in this thesis has two related objectives.
 The primary aim is to implement a proof of concept for a fundamental component of artificial neural networks: the neuron's activation function.
 I plan to do so by employing the framework made available by integrated photonics.
-The second intent is to bring together two until now distant fields of research: physics and information technology, specifically photonics and machine learning.
-In fact generating knowledge transversal to the two research fields is at least as much important as the primary objective.
+The second intent is to bring together two until now distant fields of research: %physics and information technology, specifically
+photonics and machine learning.
+In fact generating knowledge and tools to be used in common by the two research fields is at least as much important as the primary objective.
 
 The idea at the base of our physical implementation is to employ integrated optical devices, which have been manufactured for other projects, to create a proof of concept for the activation function.
 %The choice of integrated photonics is motivated by the fact that, unlike the electronic counterpart, does not suffer from the Joule effect.
 Therefore in this work I will study a particular device, a microring resonator, and characterize its response to different inputs, for several working conditions.
 This device can process information because it has, under certain circumstances, a nonlinear response function to its inputs.
 Moreover, the same device might be used in another important part of artificial neural network nodes: the weighted sum.
-With this two parts together one could claim to have built a rudimentary artificial neuromorphic network, the \textit{perceptron} (see \ref{sssec:Perceptron}).
+With this two parts together one could claim to have built a rudimentary artificial neuromorphic network, the \textit{perceptron} (see \autoref{ssec:Perceptron}).
 However, since integrated structures able to carry out a weighted sum of optical signals have already been discussed in literature and it requires less effort to produce acceptable results, it will not be at the center of this study.
 
 During the thesis I achieved two main results.
-I have demonstrated the use of optical bistability in microring cavities to produce an activation function
-I have demonstrated the use of the response of a microring optical cavity to produce an activation function by exploiting the optical bistability regime.
+%I have demonstrated the use of optical bistability in microring cavities to produce an activation function
+I have demonstrated the use of the nonlinear response of a microring optical cavity to produce an activation function by exploiting the optical bistability regime.
 In addition, with the aim of testing such response function, I simulated an artificial network with custom activation function by using standard software libraries used by ICT community to model neural networks.
 %{WHAT AM I DOING\\why silicon photonics (CMOS compatibility)}
 %The aim of this work is to put together two fields of research: physics and computer technology, specifically photonics and machine learning.
@@ -120,7 +138,7 @@ The first chapter of this thesis is intended as an introduction to the world of 
 After a brief historical summary, I describe the main aspects of neural networks and their working principles.
 Then I focus on the description of the simplest type of artificial networks, the feedforward network, and finally and overview on other kind of networks.
 %Since the aim of this thesis is to tackle a specific problem, this chapter is not meant to be comprehensive foundation or compendium on the matter.
-Later, the chapter is concluded with an introductory description of the language Python and the library PyTorch, used in this work for artificial network simulations.
+Later, the chapter is concluded with an introductory description of the Python language and the PyTorch library, used in this work for artificial network simulations.
 
 The second chapter introduces the physics which I will study.
 Again, after a short explanation on the basic devices used in the field, I will describe in depth the device studied for the task.

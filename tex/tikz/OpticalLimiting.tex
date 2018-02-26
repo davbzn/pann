@@ -1,0 +1,15 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{OpticalLimiting}
+\begin{tikzpicture}[baseline]
+	\begin{axis}[
+			xlabel={Input optical power},
+			ylabel={Output optical power},
+			xtick={0},
+			ytick={0},
+		]
+		\newcommand\LIM{10}
+		\addplot [black!50, 	domain=0:7.5,		samples=101, smooth, dashed]	{x};
+		\node [below left, align=center] at (6,7.5) {\footnotesize maximum\\ \footnotesize transmission\\ \footnotesize line};
+		\addplot [blue, 	domain=0:\LIM,		samples=101, smooth]	{x*exp(-5e-2*x)};
+	\end{axis}
+\end{tikzpicture}

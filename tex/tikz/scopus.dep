@@ -1,0 +1,3 @@
+tikz/scopus.pdf: tikz/Scopus-NM.csv
+tikz/scopus.pdf: tikz/Scopus-NM-eng.csv
+tikz/scopus.pdf: tikz/Scopus-NM-pho+opt.csv

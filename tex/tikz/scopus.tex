@@ -1,0 +1,42 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{scopus}
+
+\begin{tikzpicture}[baseline]
+	
+%	\begin{semilogyaxis}[
+	\begin{axis}[
+			title={Scopus documents analytics},
+			xlabel={Year},
+			ylabel={Documents},
+			tick align=outside,
+			width=\textwidth*0.75,%
+			height=207pt,
+			legend style={at={(0.5,-0.25)},anchor=north,legend columns=-1},
+			/pgf/number format/1000 sep=,
+		]
+	  
+		\addplot [semithick, blue, semithick, mark=*, mark size=1.5, mark options={solid}]
+			table [x index=0,y index=1] {tikz/Scopus-NM.csv};
+    \addlegendentry{ \scriptsize\textit{Neuromorphic}}	  
+		\addplot [semithick, green, semithick, mark=*, mark size=1.5, mark options={solid}]
+			table [x index=0,y index=1] {tikz/Scopus-NM-eng.csv};
+    \addlegendentry{ \scriptsize\textit{Neuromorphic engeneering}}	  
+		\addplot [semithick, orange, semithick, mark=*, mark size=1.5, mark options={solid}]
+			table [x index=0,y index=1] {tikz/Scopus-NM-pho+opt.csv};
+    \addlegendentry{ \scriptsize\textit{Neuromorphic AND (optics OR photonics)} }
+    
+	\end{axis}
+%	\end{semilogyaxis}
+\end{tikzpicture}
+
+%ewcommand{\plotfile}[1]{
+%    \pgfplotstableread[col sep=tab, header=true]{#1}{\table}
+%    \pgfplotstablegetcolsof{#1}
+%    \pgfmathtruncatemacro\numberofcols{\pgfplotsretval - 1}
+%    \pgfplotsinvokeforeach{1,...,\numberofcols}{
+%        \pgfplotstablegetcolumnnamebyindex{##1}\of{\table}\to{\colname}
+%        \addplot [semithick, color##1, mark=*, mark size=1, mark options={solid}]%
+%        		table [x index= 0, y index=##1] {#1};
+%        \addlegendentryexpanded{ \colname }
+%    }
+%}

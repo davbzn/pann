@@ -80,8 +80,9 @@
 \affil[]{Department of Physics, University of Trento}
 
 \usepackage[style=ieee]{biblatex}
-\addbibresource{custom_bibliography.bib}
-\addbibresource{mendeley_bibliography.bib}
+\addbibresource{bib_articles.bib}
+\addbibresource{bib_books.bib}
+\addbibresource{bib_websites.bib}
 \usepackage{csquotes}		% required by biblatex ???
 
 \usepackage{makeidx}			% to create an index with terms and the corresponding page(s)
@@ -96,8 +97,11 @@
 	\tikzsetexternalprefix{tikz/}	% set subfolder
 	%\tikzexternalize[prefix=tikz/] % activate!
 
-\usepgfplotslibrary{fillbetween} % need this to fill between functions
-\usetikzlibrary{patterns, decorations, arrows, arrows.meta, shapes.geometric, decorations.markings}
+\usepgfplotslibrary{fillbetween,dateplot} % need this to fill between functions
+\usetikzlibrary{	patterns, decorations, decorations.markings,
+								shapes, shapes.geometric, shapes.misc, arrows, arrows.meta,
+								positioning, intersections
+								}
 
 % USER DEFINED COMMANDS %
 % define the symbols := and =: for ease of use
@@ -106,11 +110,12 @@
 \newcommand{\eqdef}{=\vcentcolon}
 
 \begin{document}
-
 % define Capitalized names for chapter/section/...
 \def\chapterautorefname{Chapter}
 \def\sectionautorefname{Section}
 \def\subsectionautorefname{Subsection}
+
+\sisetup{separate-uncertainty = true}
 
 % define the box around functions
 \newtcolorbox{mymathbox}[1][]{colback=white, sharp corners, #1}

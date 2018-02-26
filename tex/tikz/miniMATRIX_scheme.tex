@@ -1,0 +1,75 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{miniMATRIX_scheme}
+\begin{tikzpicture}[
+		baseline,
+		grating/.style	={ isosceles triangle, rotate=180,
+			draw=orange, preaction={fill, white},
+			pattern color=orange, pattern=north west lines,
+			thick,
+			inner sep=0pt,	minimum size=12pt
+		},
+		guide/.style 	={ double=gray!25, double distance=1pt,
+			thick, draw=black!50,
+			rounded corners=4pt, line join=round, line cap=round,
+		},
+		ring/.style 		={ circle, radius=16pt,
+			double=gray!25, double distance=1pt,
+			thick, draw=black!50,
+			rounded corners=8pt, line join=round,
+		},
+	]
+	
+	\def\mylist{	1/0.0/0, 2/1.5/0, 3/3.0/0, 4/4.5/0,
+									5/6.0/0, 6/7.5/0, 7/9.0/0, 8/10.5/0}
+
+	% declare node of gratings and coupling regions
+	\node (input) at (-2,0) {};
+	\foreach \name/\px/\py in \mylist {
+			\draw (\px,\py) node (dr\name) {} ++(-0.2,2.5) node (cr\name) {};
+		}
+	\draw (12.0,0) node (th) {};
+
+	% draw rings
+	\foreach \name/\px/\py in \mylist {
+			\node (r\name) [ring] at (cr\name) {};
+			\node at (r\name.north) [above] {$r_\name$};
+			\draw (cr\name.west) ++(-0.02,0) node (rL\name) {};
+			\draw (cr\name.east) ++(+0.02,0) node (rR\name) {};
+		}
+		
+	% draw waveguides
+	\draw [guide] (input) to (-1.4,0) -- (-1.4,2)
+			% insert all the bendings here
+			-| (rR1.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR2.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR3.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR4.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR5.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR6.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR7.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-| (rR8.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			-- (11.4,2) -- (11.4,0) -- (th);
+
+	\foreach \name/\px/\py in \mylist {
+			\draw [guide] (dr\name) -| (rL\name.west) -- ++(0,0.4)  -- ++(120:0.2);
+		}
+	\foreach \px in {-.51,.99,2.49,3.99,5.49,6.99,8.49,9.99}
+		\node [shape=diamond, draw=gray!25, fill=gray!25, inner sep=.8pt] at (\px,2) {};
+	
+	% draw gratings
+	\node (grin) at (input) [grating, rotate=180] {};
+	\node at (grin.south) [below left] {$in$};
+	\foreach \name/\px/\py in \mylist{
+			\node (gr\name) [grating] at (dr\name) {};
+			\node at (gr\name.north) [below right] {$dr_\name$};
+		}
+	\node (grth) at (th) [grating] {};
+	\node at (grth.north) [below right] {$th$};
+
+	% draw highlighted areas
+	\draw [thick, draw=purple, fill=purple!50, opacity=0.4] (r1)
+				++(-0.4,-0.3) rectangle ++(0.8,0.6);
+	\draw [thick, draw=blue, fill=blue!50, opacity=0.4]
+				(.84,1.85) rectangle ++(0.3,0.3);
+	
+\end{tikzpicture}
