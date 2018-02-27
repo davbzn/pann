@@ -13,7 +13,7 @@ It was followed by the arrangement of a simulated neural network on the PyTorch 
 
 % THEORETICAL STUDY OF MRR
 % NUMERICAL SIMULATIONS OF MRR
-The central part of the thesis explained the physical effects related to the working principles of an optical microring resonator in the \textit{Add-Drop Filter} configuration.
+The central part of the thesis explained the physical effects related to the working principles of an optical microring resonator in the \acl{ADF} configuration.
 These effects initially have been studied in their analytical linear approximation.
 %Subsequently, with the introduction of nonlinear perturbations to the resonator response, the physical phenomena have been analyzed numerically.
 Subsequently, nonlinear perturbations have been introduced to the resonator response.
@@ -35,7 +35,7 @@ To obtain a more profound knowledge of the physical phenomena, I successfully ca
 
 I implemented a small neural network in PyTorch, which is a software library used by the machine learning community.
 The code was initially used to solve a benchmark problem, with standard artificial neural network parameters and functions.
-Finally I implemented also a new activation function that mimics the response of a microring resonator in Add-Drop Filter configuration.
+Finally I implemented also a new activation function that mimics the response of a microring resonator in \acl{ADF} configuration.
 This allowed me to confront the operation of the standard function with the one based on the optical bistability.
 
 \paragraph{Improvements\\}
@@ -69,7 +69,8 @@ All-optical reservoir computing could put together the efficiency of the algorit
 Furthermore, the development of a time-dependent theory would allow the analysis of physical effects in different regimes other than the quasi-static one.
 This will consent to investigate new phenomena and test their properties against the requirements for the neural network node operation.
 By exploiting new optical effects, we will be able to examine other implementations, such as spiking neurons.
-In this type of neurons, the intensity of the signals is as much important as their rate.
+The output for this type of neurons depends both on the signals intensity and rate.
+In this perspective, for example, the presence of a hysteresis loop could be exploited to implement some kind of short-term memory in the node.
 
 In common to all these projects, there must be a simultaneous development of the software simulation, based on standard libraries.
 This allows initial performance comparison between the software functions and the proposed physical effects.

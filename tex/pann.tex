@@ -44,7 +44,7 @@
     linkcolor = black,		% color of internal links (change box color with linkbordercolor)
     citecolor = black,		% color of links to bibliography
     filecolor = black,		% color of file links
-    urlcolor  = blue			% color of external links
+    urlcolor  = gray			% color of external links
 }
 \usepackage[noabbrev]{cleveref}		% clever references package
 
@@ -88,6 +88,9 @@
 \usepackage{makeidx}			% to create an index with terms and the corresponding page(s)
 \makeindex
 
+\usepackage[printonlyused]{acronym}
+\usepackage{multicol}
+
 \usepackage{tikz}							% externalize tikz images
 \usepackage{pgfplots} 					% create plots with pgf/tikz
 \pgfplotsset{compat=1.14} 			% README here http://pgfplots.sourceforge.net/pgfplots.pdf
@@ -98,7 +101,7 @@
 	%\tikzexternalize[prefix=tikz/] % activate!
 
 \usepgfplotslibrary{fillbetween,dateplot} % need this to fill between functions
-\usetikzlibrary{	patterns, decorations, decorations.markings,
+\usetikzlibrary{	patterns, decorations, decorations.markings, decorations.pathreplacing,
 								shapes, shapes.geometric, shapes.misc, arrows, arrows.meta,
 								positioning, intersections
 								}
@@ -134,8 +137,9 @@
 % Index
 \cleardoublepage
 %\addcontentsline{toc}{chapter}{Symbols and Acronyms}
-\printindex
+%\printindex
 %\markboth{INDEX}{}
+\input{chapters/acronyms.tex}
 
 \cleardoublepage
 \pagenumbering{arabic}

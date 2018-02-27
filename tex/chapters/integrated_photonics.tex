@@ -10,7 +10,7 @@ Photonics is the physical science which studies detection, manipulation, and emi
 Specifically, integrated photonics is the branch that studies how to reduce and \textit{integrate} macroscopic optical devices in miniaturized structures.
 
 In the past few decades, thanks to the constant improvement of the manufacturing techniques, many productive problems have been progressively resolved.
-Moreover interest in the field is rising, driven by the growing needs of information and communication technology (ICT), which was in turn following the increase in computational power of electronics.
+Moreover interest in the field is rising, driven by the growing needs of \acf{ICT}, which was in turn following the increase in computational power of electronics.
 Many integrated devices have been proposed and some of them even commercialized \cite{thunderbolt}.
 
 %Silicon photonics is the research field that studies how to integrate optical devices in structures built with silicon and materials derived from it.
@@ -20,7 +20,7 @@ Many integrated devices have been proposed and some of them even commercialized 
 
 \section{Silicon Photonics}
 \label{sec:Silicon_Photonics}
-Silicon-on-Insulator (SOI) photonics is one of the widest branches of integrated photonics.
+\ac{SOI} photonics is one of the widest branches of integrated photonics.
 It pursues the same objectives of all integrated photonics with the addition of following the production steps already developed for microelectronics.
 
 Its framework is silicon, which is transparent in the same range of frequencies used by fiber optics.
@@ -33,7 +33,7 @@ A schematic representation of the layers is shown in \autoref{fig:SOI}.
 \begin{figure}[ht]
 	\centering
 	\input{tikz/SOI.tex}
-	\caption{SOI productive framework.
+	\caption{\acs{SOI} productive framework.
 		The buffer layer of $SiO_2$ is buried underneath the pure crystalline $Si$ device layer which is used to build structures.
 		The top silicon layer will become the volume in which light will be confined.
 		The bottom silicon, underneath the buffer layer, is called substrate.
@@ -41,8 +41,8 @@ A schematic representation of the layers is shown in \autoref{fig:SOI}.
 	\label{fig:SOI}
 \end{figure}
 
-The fact of relying on the SOI framework to build integrated devices is a strength of silicon photonics, because it enables researchers to develop CMOS compatible integrated optical structures.
-Complementary Metal-Oxide-Semiconductor (CMOS) compatibility is an industry standard created to fabricate microelectronic devices.
+The fact of relying on the \acs{SOI} framework to build integrated devices is a strength of silicon photonics, because it enables researchers to develop \acs{CMOS} compatible integrated optical structures.
+\ac{CMOS} compatibility is an industry standard created to fabricate microelectronic devices.
 Therefore by exploiting this standard all the know-how of the manufacturing industries behind the commercial microelectronic products is available to fabricate integrated photonics devices.
 
 Moreover, by sharing the fabrication technology with microelectronic makes it easier to integrate electronic components and obtain hybrid integrated optoelectronic devices or compensate lack of appropriate optical structures.
@@ -93,7 +93,7 @@ A list of advantages and disadvantages of silicon photonics compared to other in
 The most important thing for integrated photonics is the way light is confined and manipulated into microscopic structures.
 While in conventional optics, light is delivered with bulky mirrors and lenses toward the desired position, in integrated photonics waveguides are the main device for this task.
 Moreover, they are the fundamental block for building more complex devices, whether they are passive, active, or hybrid optoelectronic devices.
-A few illustrative devices are the waveguide coupler, the Array Waveguide Grating (AWG), the electro-optic modulators, and integrated Mach-Zehnder Interferometer (MZI).
+A few illustrative devices are the waveguide coupler, the \ac{AWG}, the electro-optic modulators, and integrated \ac{MZI}.
 
 % Many other devices such as Mach-Zenhder interferometers (MZI) and Directional Couplers (DC) have been demonstrated.
 % , Arrayed Waveguide Gratings (AWG) and Multimode interference(MMI)
@@ -109,8 +109,8 @@ Light is confined in the desired path by a series of metallic mirrors.
 However, this mechanism works well only for electromagnetic radiation for which metals can still be considered \textit{perfect metals}.
 For visible and infrared frequencies integrated metallic waveguides are not possible, due to too high absorption of the metals at optical frequencies.
 
-On the other hand, dielectric waveguides are based on the phenomenon of total internal reflection (TIR) at the interface between two dielectric media.
-To produce TIR, the two materials must have sufficiently different real part of the refractive index.
+On the other hand, dielectric waveguides are based on the phenomenon of \ac{TIR} at the interface between two dielectric media.
+To produce \acs{TIR}, the two materials must have sufficiently different real part of the refractive index.
 Moreover, they must also be transparent, i.e. they must have low imaginary part of the refractive index, in the required range of frequencies.
 Hence not all media are suitable to build dielectric waveguides that work at a specific wavelength.
 For example, silicon is known to be transparent in the near infrared region.
@@ -159,7 +159,7 @@ Obviously, the versatility of straight (2D-) waveguides is limited.
 Hence more complex structures such as bent waveguides have been developed.
 
 \paragraph{Propagation of light inside waveguides\\}
-\noindent A more complete description of guided modes is given by wave physics, where waveguides modes are described as superposition of planar transverse electro-magnetic (TEM) waves.
+\noindent A more complete description of guided modes is given by wave physics, where waveguides modes are described as superposition of planar \ac{TEM} waves.
 %Light propagates inside waveguides as superposition of transverse electro-magnetic (TEM) waves which keep reflecting on the interfaces of the core.
 The result of the superposition is the so called \textit{mode}, which is expressed mathematically by
 \begin{equation}
@@ -168,7 +168,7 @@ The result of the superposition is the so called \textit{mode}, which is express
 \end{equation}
 $\phi_m\left( x, y \right)$ is the transverse field distribution, $z$ is the direction of propagation, $\beta_m$ is the propagation constant of the m-th mode, and $\omega=2\pi \nu$ is the angular frequency of light.
 Since light has two independent polarization, there are different modes for different polarizations.
-Modes are therefore separated in \textit{transverse electric} (TE) and \textit{transverse magnetic} (TM), which propagates differently due to geometrical asymmetries.
+Modes are therefore separated in \acfi{TE} and \acfi{TM}, which propagates differently due to geometrical asymmetries.
 
 Each mode, identified by the $m$ index, travels inside the waveguide with a certain propagation constant $\beta$ and maintaining a field distribution $\phi_m$.
 Both of them depend on the materials and the geometry of the waveguide.
@@ -196,7 +196,7 @@ The propagation constant can be written as
 where $k_0$ is the wavevector in vacuum, $n_{eff} \defeq c_0/v_{ph}$ is the \textit{effective refractive index}\index{effective refractive index} of the mode, and $\alpha_{eff}$ is \textit{effective absorption coefficient}\index{effective absorption coefficient}.
 The effective refractive index is the ratio between the speed of light and the \textit{effective phase velocity} $v_{ph}$ at which each wavefront propagates in the core.
 It is a pure number and its value is between the core refractive index and the cladding refractive index $n_L < n_{eff} < n_H$.
-Given a WG geometry, larger $n_{eff}$ means a greater confinement of the electromagnetic field inside the core and a slower propagation speed along the waveguide.
+Given a \acl{WG} geometry, larger $n_{eff}$ means a greater confinement of the electromagnetic field inside the core and a slower propagation speed along the waveguide.
 The effective absorption coefficient instead is defined by the ratio between the input and output powers for a material of depth $L$, such that $I_{out}/I_{in}=e^{-\alpha_{eff}L}$, and has units of \si{\per\m}.
 A low absorption coefficient is synonym of transparency and low power absorption per unit length.
 
@@ -237,7 +237,7 @@ Usually, if working on a restricted range of frequencies, this dependence is cha
 where $\Delta\omega = \omega-\omega'$ and $\omega'$ is the frequency around which $\beta$ is expanded.
 \autoref{eq:beta_taylor_v} is the same expansion, but the derivative are substituted by new quantities:
 the \textit{phase velocity} $v_{ph}$, which describes the propagation speed of the wavefront of each frequency,
-the \textit{group velocity} $v_g$, which describes the speed at which the ensemble of frequencies, the wavepacket, propagates, and finally the \textit{group velocity dispersion} $\textsc{GVD}$, which describes the relative behavior of the different frequency components in a single wavepacket.
+the \textit{group velocity} $v_g$, which describes the speed at which the ensemble of frequencies, the wavepacket, propagates, and finally the \acused{GVD}\textit{group velocity dispersion} $\textsc{GVD}$, which describes the relative behavior of the different frequency components in a single wavepacket.
 Values of $\textsc{GVD} \neq 0 $ the wavepacket will either compress or dilate in time.
 Those quantities are defined as follows:
 %\begin{equation}
@@ -315,14 +315,14 @@ On the other hand, when the signals are out of phase, the interference is destru
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\input{tikz/APF_scheme.tex}
-		\caption{APF}
+		\caption{\acs{APF}}
 		\label{fig:APF_scheme}
 	\end{subfigure}
 	\hspace{.02\textwidth}
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\input{tikz/ADF_scheme.tex}
-		\caption{ADF}
+		\caption{\acs{ADF}}
 		\label{fig:ADF_scheme}
 	\end{subfigure}
 	\hspace{.02\textwidth}
@@ -335,18 +335,18 @@ On the other hand, when the signals are out of phase, the interference is destru
 	
 	\caption{
 		Schematic representation of microring configurations and of their coupling regions.
-		APF has two channels, \textit{input} and \textit{through}, and one coupling region.
-		ADF has four channels, \textit{input}, \textit{through}, \textit{add} and \textit{drop}, and two coupling regions.
+		\acs{APF} has two channels, \textit{input} and \textit{through}, and one coupling region.
+		\acs{ADF} has four channels, \textit{input}, \textit{through}, \textit{add} and \textit{drop}, and two coupling regions.
 		The coupling constants ($\kappa$ and $\tau$) are in principle different for each coupling region.
 	}
 	\label{fig:resonator_theory}
 \end{figure}
 
 In the simpler case when there is only one waveguide side coupled to the resonator the optical cavity has only two ports, which are usually called \textit{input} and \textit{through}.
-This configuration, shown in \autoref{fig:APF_scheme}, is called \textit{All-Pass Filter}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
+This configuration, shown in \autoref{fig:APF_scheme}, is called \acfi{APF}, because in the ideal case, where no losses happen, all the signal passes from the input to the through channels.
 %All pass resonators have only one input and one output: light then propagate in only in one direction, unless some specific phenomena happens (e.g. back scattering).
 
-By adding a secondary waveguide coupled to the ring, one obtains the so called Add-Drop Filter (ADF) configuration, shown in \autoref{fig:ADF_scheme}.
+By adding a secondary waveguide coupled to the ring, one obtains the so called \acfi{ADF} configuration, shown in \autoref{fig:ADF_scheme}.
 Its name derives from the fact that the two additional ports are called \textit{add} and \textit{drop} respectively.
 This simple structure can be readily used as a signal mixer: signals at the resonance wavelengths of the cavity are directed from the input to the drop channel or from the add channel to the through port.
 Additionally signals out of resonance travel straight from the input to the through channel and from the add to the drop port.
@@ -357,20 +357,20 @@ The simplest model considers the region as infinitely small compared to the othe
 However the model can be expanded to include coupling regions with a finite length, which transform the microring in the so called \textit{racetrack resonator}.
 
 The theoretical model usually employed to describe resonators analytically decomposes their structure in a series of simpler substructures.
-Both the APF and the ADF configurations are studied as ordered combinations of straight waveguides, coupling regions, and bent waveguides.
-Other used descriptions, such as numerical simulation obtained with finite element methods (FEM), achieve more precise results, however they are more dependent on the specific geometry of the problem.
+Both the \acs{APF} and the \acs{ADF} configurations are studied as ordered combinations of straight waveguides, coupling regions, and bent waveguides.
+Other used descriptions, such as numerical simulation obtained with \aclp{FEM} (\acs{FEM}), achieve more precise results, however they are more dependent on the specific geometry of the problem.
 Moreover the approximation given by the analytical model is sufficiently accurate to make quantitative prediction of the coupling and it gives a clear description of the physics behind it.
 Furthermore it can be expanded to include non-trivial phenomena (see \autoref{sec:Nonlinear_Optics}).
-In the following section I will go through the necessary steps to solve the case of the ADF configuration in the theoretical model.
+In the following section I will go through the necessary steps to solve the case of the \acs{ADF} configuration in the theoretical model.
 
 %1.2.3.2 Add-drop filter theory\\
 \subsubsection{Add-Drop-Filter theory}
 \label{sssec:Add-Drop-Filter_theory}
-ADF configuration is obtained when a microring is coupled to two waveguides.
+\acs{ADF} configuration is obtained when a microring is coupled to two waveguides.
 Such structure is composed by three different basic structures: four straight waveguides, two bent waveguides which together form the whole ring, and two coupling regions between the waveguides and the microring.
 Each of these pieces transfers light to or from the outside or another piece.
 
-Since our experiments are carried out in a time scale such that physics phenomena can be considered quasi-static, the field propagating in the device is described by a scalar complex function which, assuming a monochromatic continuous EM wave, loses any temporal dependence:
+Since our experiments are carried out in a time scale such that physics phenomena can be considered quasi-static, the field propagating in the device is described by a scalar complex function which, assuming a monochromatic continuous \acs{EM} wave, loses any temporal dependence:
 \begin{equation}
 	E(z) = |E(z_0)|e^{i\beta z},
 \end{equation}
@@ -465,7 +465,7 @@ The depth of the dips, the height of the peaks, and the width of both of them is
 	\centering
 	\input{tikz/ADF.tex}
 	\caption{
-		Transmission spectra of microring resonators in ADF configuration for the through $T(\omega)$ and drop ports $D(\omega)$.
+		Transmission spectra of microring resonators in \ac{ADF} configuration for the through $T(\omega)$ and drop ports $D(\omega)$.
 		The resonators considered differ in radius ($R=$\SI{4}{\um} and $R=$\SI{5}{\um}), but share the coupling constant $\tau=0.85$, the half round trip loss factor $\gamma=0.8$ and the effective index $n_{eff}=3.826$.
 	}
 	\label{fig:ADF}
@@ -477,14 +477,14 @@ The frequency of each resonance is identified by a positive integer number, that
 \end{equation}
 where the dependence of $n_{eff}=n_{eff}\left(\omega\right)$ has been explicitly shown.
 
-Each resonance is spaced from the next one by a quantity called \textit{Free Spectral Range}\index{Free Spectral Range (FSR)} $FSR_{\omega_m}$.
+Each resonance is spaced from the next one by a quantity called \acfi{FSR}.
 By exploiting the Taylor expansion of $\beta$ seen in \cref{eq:beta_taylor_n} one obtains
 \begin{equation}
 	FSR_{\omega_m} \simeq \dfrac{c_0}{n_{eff}^g\left(\omega_m\right) R} .
 \end{equation}
 where the \textit{effective group index} $n_{eff}^g\left(\omega\right)$ has been defined in \cref{eq:neff_group}.
 Another important quantity is the width of the peaks or dips of each resonance.
-Ordinarily one evaluates the so called \textit{full-width-half-maximum} (FWHM) of the transmission in the drop channel:
+Ordinarily one evaluates the so called \acfi{FWHM} of the transmission in the drop channel:
 \begin{equation}
 	FWHM_{\omega_m} = \dfrac{c_0}{n_{eff}^g\left(\omega_m\right)}\dfrac{1- \tau^2\gamma}{\pi R \tau \sqrt{\gamma}}
 \end{equation}
@@ -494,7 +494,7 @@ Ordinarily one evaluates the so called \textit{full-width-half-maximum} (FWHM) o
 	\centering
 	\input{tikz/ADF2.tex}
 	\caption{
-		Transmission spectra of microring resonators in ADF configuration for the through $T(\omega)$ and drop ports $D(\omega)$.
+		Transmission spectra of microring resonators in \ac{ADF} configuration for the through $T(\omega)$ and drop ports $D(\omega)$.
 		The microring has radius $R=\SI{5}{\um}$ and effective index $n_{eff}=3.826$.
 		The coupling constant is $\tau=0.85$, while the loss factor $\gamma$ takes two values: $0.9$ (red) and $0.75$ (blue).
 		The arrows indicate a $FSR_\nu \approx \SI{2.49}{\THz}$ and a $FWHM_\nu \approx \SI{0.35}{\THz}$, which gives a quality factor of around $Q \approx \num{550}$.
@@ -586,7 +586,7 @@ The quality factor can be written as
 \end{equation}
 where $Q_{coupl}$ is dependent on the geometry and the material, whereas $Q_{intr}$ is dependent on th quality of the manufacturing processes.
 
-A microring resonator in the ADF configuration has two coupling regions and therefore in principle we can have symmetrical or asymmetrical coupling mechanisms.
+A microring resonator in the \ac{ADF} configuration has two coupling regions and therefore in principle we can have symmetrical or asymmetrical coupling mechanisms.
 I shortly address here the case of asymmetric coupling ($\tau_1 \neq \tau_2$) to define the three coupling regimes.
 The coupling constants $\kappa_i$ and $\tau_i$ and the loss factor $\gamma$ can add up in different ways to obtain the same quality factor.
 Specifically, when $\tau_1=\gamma^2\tau_2$ is verified, the resonator is in the \textit{critical-coupling regime}.
@@ -636,7 +636,7 @@ Then the following generalized equation is used instead:
 \end{equation}
 which in principle is a vectorial relation, where the $j-th$ order susceptibility term $\chi^{(j)}$ is a tensor of rank $j+1$ \cite{Agrawal2001}.
 Often, the spatial dependences simplify and the equation can be reduced to be scalar only.
-This is the case of linearly polarized TEM waves, when the electric field is directed only along one direction.
+This is the case of linearly polarized \ac{TEM} waves, when the electric field is directed only along one direction.
 
 Equation \ref{eq:NL_polarization} allows to expand the definition of refractive index and absorption coefficient to:
 \begin{equation}
@@ -657,12 +657,12 @@ The Kerr effect is given by the real part of the third order nonlinear susceptib
 where $I$ is the intensity of light beam and $n_2$ is the second-order (or intensity dependent) nonlinear refractive index, defined by
 \begin{equation}
 	n_2 = \dfrac{3}{4\varepsilon_0 c_0} \mathcal{R}\mathrm{e} \left[ \chi^{(3)} \right]
-	\overset{Si}{\simeq} \SI{0.45e-17}{\square\m\per\W}.
+	\overset{Si}{\simeq} \SI{4.5e-18}{\square\m\per\W}.
 \end{equation}
 The value of $n_2$ is verified for light at $\lambda=\SI{1.54}{\um}$ in silicon \cite{chen2012bistability}.
 
 \subsubsection{Two photon absorption}
-The other fundamental effect is the two photon absorption (TPA), which is linked instead to the imaginary part of the third order nonlinear susceptibility.
+The other fundamental effect is the \ac{TPA}, which is linked instead to the imaginary part of the third order nonlinear susceptibility.
 It does not produce a change to the refractive index but to the absorption coefficient instead.
 \begin{equation}
 	\Delta\alpha_{TPA} = \beta_{TPA} I,
@@ -670,7 +670,7 @@ It does not produce a change to the refractive index but to the absorption coeff
 where $\beta_{TPA}$ is the TPA coefficient which is experimentally found to be \cite{chen2012bistability}
 \begin{equation}
 	\beta_{TPA} = \dfrac{3}{2\varepsilon_0 c_0^2n^2} \mathcal{I}\mathrm{m} \left[ \chi^{(3)} \right]
-	\overset{Si}{\simeq} \SI{0.79e-11}{\m\per\W}.
+	\overset{Si}{\simeq} \SI{7.5e-12}{\m\per\W}.
 \end{equation}
 
 As a consequence to the absorption of two photons, a free carrier is generated in the conduction band of silicon.
@@ -679,14 +679,14 @@ The presence of free carriers alters both the refractive index and the absorptio
 \subsection{Charge carrier nonlinearities}
 \label{ssec:Charge_carrier_nonlinearities}
 When free carriers are generated in the conduction band, they can either move around until they thermalize or they can absorb an incoming photon.
-The first case is the \textit{free carrier dispersion} (FCD) effect, which affects the refractive index.
-The second case is the \textit{free carrier absorption} (FCA) effect and affects the absorption coefficient.
+The first case is the \acfi{FCD} effect, which affects the refractive index.
+The second case is the \acfi{FCA} effect and affects the absorption coefficient.
 Both effects are usually characterized as first order expansions, as follows:
 \begin{align}
 	n			\left(N	\right) &= n				\left(N_0\right) + \left.\dfrac{dn}{dN}\right|_{N_0} \Delta N \\
 	\alpha	\left(N	\right) &= \alpha	\left(N_0\right) + \left.\dfrac{d\alpha}{dN}\right|_{N_0} \Delta N
 \end{align}
-where the value of the FCD and FCA coefficients are \cite{Reed2008,moss2013semiconductor}
+where the value of the \ac{FCD} and \ac{FCA} coefficients are \cite{moss2013semiconductor,johnson2006self}
 \begin{equation}
 	\left.\dfrac{dn}{dN}\right|_{N_0} \overset{Si}{\simeq} \SI{-1.73e-21}{\cubic\m}
 	\qquad and \qquad
@@ -702,7 +702,7 @@ The generation rate $G$ is defined as
 \begin{equation}
 G = \frac{P_{abs}^{TPA}}{2\hbar\omega V_{ring}}
 \end{equation}
-In our case the free carrier are mainly generated by the two photon absorption process, hence $G$ is linked to the power absorbed by the material by the TPA effect only.
+In our case the free carrier are mainly generated by the two photon absorption process, hence $G$ is linked to the power absorbed by the material by the \ac{TPA} effect only.
 Therefore the absorbed power can be explained as a function of optical power:
 \begin{equation}
 	P_{abs}^{TPA} = A \left(1-\gamma_{TPA}^2\right) I
@@ -713,16 +713,15 @@ where $A=V/2\pi R$ is the area of the microring.
 
 \subsection{Thermal nonlinearities}
 \label{ssec:Thermal_nonlinearities}
-The optical nonlinearities of the refractive index due to the changes in a material being heated is called \textit{thermo-optic effect} (TOE).
+The optical nonlinearities of the refractive index due to the changes in a material being heated is called \acfi{TOE}.
 This happens when heat source is, for example, a resistance, but also when light propagates inside a medium, because a portion of the photons is absorbed.
 To characterize this change in the refractive index caused by the temperature, a first order expansion is usually made:
 \begin{equation}
 	n\left(T\right) = n\left(T_0\right) + \left.\dfrac{dn}{dT}\right|_{T_0} \Delta T,
 	\label{eq:TOC}
 \end{equation}
-where $\dfrac{dn}{dT}$ is called \textit{thermo-optic coefficient} and $\Delta T$ is the temperature shift.
-
-The thermo-optic coefficient (TOC) of silicon at \SI{300}{\K} is \cite{??} :
+where $\dfrac{dn}{dT}$ is called \acfi{TOC} and $\Delta T$ is the temperature shift.\\
+The \ac{TOC} of silicon at \SI{300}{\K} is \cite{johnson2006self} :
 \begin{equation}
 	\left.\dfrac{dn}{dT}\right|_{\SI{300}{\K}} = \SI{1.86e-4}{\per\K}.
 	\label{eq:Si_TOC}
@@ -752,7 +751,7 @@ On the contrary, the timescale of thermal perturbations is of the order of the \
 Each one of these values, however, depends strictly on the geometry of the structure.
 
 On the other hand, also the magnitude of the different effects plays an important role.
-Having similar effects on the refractive index, at short timescales Kerr and FCD win over the thermal one, however, at longer timescales the thermal effect is the predominant one.
+Having similar effects on the refractive index, at short timescales Kerr and \ac{FCD} win over the thermal one, however, at longer timescales the thermal effect is the predominant one.
 Hence ultrashort light pulses would have shown a completely different dynamics than the one described in this thesis..
 
 In this discussion I will consider only the sum of all effects at steady state and the thermo-optic effect is the prevalent effect at medium-high intensities, as shown in \autoref{fig:NL_effects}.
@@ -769,7 +768,7 @@ onator as function of the cavity power, taken from \cite{priem2005optical}.}
 When injecting light into a resonator, its transfer function ultimately depends on two factors: the frequency of the light compared to the frequency of the resonance and the optical power injected.
 At low intensities the response of a microring to frequencies around its resonance is symmetrical, as was shown in the preceding section.
 At higher intensities, however, the nonlinear phenomena change the refractive index of the material so much that the resonance frequency shifts.
-Not all nonlinear mechanisms act in the same way: for example, thermal and FCD phenomena have opposed and competing effects, which shift the resonance in opposite directions.
+Not all nonlinear mechanisms act in the same way: for example, thermal and \ac{FCD} phenomena have opposed and competing effects, which shift the resonance in opposite directions.
 However, as already stated, on long timescales thermal nonlinearities predominates over all the others.
 Hence, after the system has reached the quasi-static regime, as the intensity of the input beam grows, the cavity heats up and the refractive index increases.
 This produces a shift of the \textit{cold} resonance towards smaller frequencies, as shown in \autoref{fig:NL_resonance}.
@@ -819,37 +818,39 @@ Moreover, the state inside the bistability interval is determined by the past st
 This defines a hysteresis cycle around the bistability region.
 All these features are shown in \autoref{fig:bistability_example}.
 
+The empirical values of the nonlinear constants introduced in \Cref{ssec:Electronic_nonlinearities,ssec:Charge_carrier_nonlinearities,ssec:Thermal_nonlinearities} are collected in \autoref{tab:nonlinearities}.
+
+\begin{table}[htbp]
+	\centering
+	\footnotesize
+	\begin{tabular}{r r r l c}
+	\toprule
+	\normalsize Parameter & \normalsize Value & \normalsize Unit & \normalsize Source \\
+	\midrule
+	$n2$ 									& \num{4.5e-18}		& \si{\square\m\per\W}	& \cite{chen2012bistability} \\
+	$\beta_{TPA}$					&	\num{7.5e-12}		& \si{\m\per\W}				& \cite{chen2012bistability} \\
+	$\frac{dn}{dN}$				& \num{-1.73e-21}	& \si{\cubic\m}				& \cite{johnson2006self} \\
+	$\frac{d\alpha}{dN}$	& \num{1.1e-15}		& \si{\square\m}				& \cite{} \\
+	$\gamma_{FC}$					& \num{300e-9}			& \si{\peta\Hz}				& \cite{mancinelli2013linear} \\
+	$\frac{dn}{dT}$				& \num{1.86e-4}		& \si{\per\K}					& \cite{johnson2006self} \\
+	$\gamma_{TH}$					&	\num{12e-9}			& \si{\peta\Hz}				& \cite{mancinelli2013linear} \\
+	\bottomrule
+	\end{tabular}
+	\caption{Collection of the empirical values of nonlinear constants.}
+	\label{tab:nonlinearities}
+\end{table}
+
 \clearpage
 \section{Integrated photonics applied to ANNs}
 \label{sec:Integrated_photonics_applied_to_ANNs}
 Even though the vast majority of hardware architectures for artificial neural networks are developed within the electronic platform, integrated photonics is emerging as a fast and efficient alternative.
 The way in which information is elaborated inside neural networks seems to be more favorable, in comparison to the boolean logic, to the development of photonic integrated processors \cite{shastri2017emergence}.
-The aim of photonics is to match the performances of electronics in the development of neuromorphic networks by exploiting its inherent suitability to parallel computing, its bandwidth and speed, and also its power efficiency (see \autoref{tab:neuromorphic_arc}).
-
-\begin{table}[!htbp]
-	\centering
-	\footnotesize
-	\begin{tabular}{l r r r r}
-	\toprule
-	\normalsize Chip & \normalsize MAC rate & \normalsize Energy per MAC & \normalsize Area per MAC \\
-	& & (\si{\pico\joule}) & (\si{\square\um})\\
-	\midrule
-	Photonic hybrid III-V/Si & \SI{20}{\GHz} & \num{1.3} 	& 205 \\
-	Sub-$\lambda$ photonics (future trend) & \SI{200}{\GHz} & \num{0.0007} 	& 20 \\
-	HICANN & \SI{22.4}{\MHz} & \num{198.4} 	& 780 \\
-	TrueNorth & \SI{2.5}{\kHz} & \num{0.27} 	& 4.9 \\
-	Neurogrid & \SI{40.1}{\kHz} & \num{119} 	& 7.1 \\
-	SpiNNaker & \SI{3.2}{\kHz} & \num{6e5} 	& 217 \\
-	\bottomrule
-	\end{tabular}
-	\caption{Comparative table on current and future trends in electronic and photonic micro-architectures for neuromorphic computing. MAC stands for \textit{Multiply and ACcumulate} operation, a standard computational step. Taken from \cite{de2017progress}.}
-	\label{tab:neuromorphic_arc}
-\end{table}
+The aim of photonics is to match the performances of electronics in the development of neuromorphic networks by exploiting its inherent suitability to parallel computing, its bandwidth and speed, and also its power efficiency.
 
 Nevertheless building a neural network within a photonic integrated chip is a demanding task.
 For this reason, the results achieved until now have been obtained by using a small number of integrated devices.
 This fact inevitably limits the maximum complexity of the neural networks built.
-However, many neuromorphic networks are based on the reservoir computing (RC) approach or the recurrent neural network (RNN) type or both.
+However, many neuromorphic networks are based on the \acf{RC} approach or the \acf{RNN} type or both.
 The first one is a learning method that allows to have little to no control on the majority of the network while employing all efforts on the training of a single output layer \cite{van2017advances, haynes2015reservoir}.
 Hence very fast and complex system can be exploited without having real control on the local effects that happen inside the \textit{reservoir}.
 On the other hand, a recurrent neural network can be implemented with only one computational node \cite{dejonckheere2014all, haynes2015reservoir}, as it exploit time to distribute the computation.
@@ -863,14 +864,14 @@ The idea of this work is to tackle the problem head on and develop a framework f
 
 As shown in \autoref{sec:Basis_of_Neural_Networks}, the principal parts of an artificial neural network are its nodes, which in turn are built by two separate subcomponents: the weighted sum and the nonlinear activation function.
 %In the next sections I will describe some photonic devices that have been developed to perform those tasks, along with my implementation of an all-optical nonlinear activation function with a microring resonator.
-In the next sections I will describe how the nonlinear response of a microring could be exploited in an all-optical node of a feedforward ANN.
+In the next sections I will describe how the nonlinear response of a microring could be exploited in an all-optical node of a feedforward \ac{ANN}.
 
 \subsection{Weighted sum of inputs}
 \label{ssec:Weighted_Sum_of_inputs}
 The difficulty in the weighted sum of inputs does not lie in the type of operation, i.e. sum and multiplication, but in the fact that each node has many inputs.
 Excluding the cases in which the weighted summation has been carried off by online or offline elaboration on standard computers, there are two important examples of all-optical weighted sum.
 
-The first one \cite{Shen2017} is based on a cascade of Mach-Zehnder Interferometers (MZI), which transforms all the outputs of a whole layer to the set of inputs of the next one.
+The first one \cite{Shen2017} is based on a cascade of \acf{MZI}, which transforms all the outputs of a whole layer to the set of inputs of the next one.
 This happens by a sequence of constructive and destructive interferences that alter the starting coherent signal.
 
 The second example \cite{Tait2017} is given by a series of microring resonator, parametrically tuned to transmit a portion of light.
@@ -880,9 +881,9 @@ This example, however, exploit an optoelectronic nonlinear stage composed of two
 
 \subsection{Nonlinear Activation Function}
 \label{ssec:Nonlinear_Activation_Function}
-The development of novel optical mechanisms for the nonlinear activation function in ANNs has not progressed as much as the development of the weighted sum of the node inputs has.
+The development of novel optical mechanisms for the nonlinear activation function in \acsp{ANN} has not progressed as much as the development of the weighted sum of the node inputs has.
 %As opposed to the mechanism for weighted sum, optical phenomenon for the activation function in an integrated photonic circuit has not been discussed much.
-In fact, many proposed PICs by means of integrated optical structures realize the weighting part of the inputs only.
+In fact, many proposed \acsp{PIC} by means of integrated optical structures realize the weighting part of the inputs only.
 The nonlinear activation function is then implemented either by electronic devices \cite{Tait2017} or even by computer aided evalutation \cite{Shen2017}.
 
 An interesting proposal is to employ a saturable absorber to obtain a nonlinear activation function \cite{dejonckheere2014all}.

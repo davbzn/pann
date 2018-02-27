@@ -4,14 +4,14 @@
 %\label{sec:AAN_intro}
 %A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
-Artificial Neuromorphic Networks (ANNs) are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (animal brains).
+\acfp{ANN} are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (animal brains).
 Biological networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition) and prediction (e.g. pattern recognition).
 The underlying idea is to copy some of their mechanisms and exploit them for computational applications.
 These systems are intrinsically parallel in operation, do not require specific programming to operate, and modify their behavior through a learning process to improve their accuracy in a certain task.
 
-Mathematically speaking, ANNs are a collection of nodes, each one of them elaborates the information and is somehow connected to the other.
+Mathematically speaking, \acsp{ANN} are a collection of nodes, each one of them elaborates the information and is somehow connected to the other.
 Artificial networks can be either simulated on computers or physically built on hardware designed ad hoc.
-At this time, ANNs are mainly implemented by simulations, however the technological progress is withheld by limitation in computing power and efficiency.
+At this time, \acsp{ANN} are mainly implemented by simulations, however the technological progress is withheld by limitation in computing power and efficiency.
 Training a complex artificial neural network with computers at the state of art might take even weeks.
 Thus, with the aim of improving performance from simulated networks, research on hardware architectures is surging: digital, analog, electrical, and optical devices are being developed.
 
@@ -31,7 +31,7 @@ However, despite the early successes of neural networks, the traditional computi
 
 The reason why this happened, probably, was due to several concurring facts.
 First of all, in the same time period (1969) a research paper by Minksi and Papert \cite{minski1969perceptrons}, which identified two important problems.
-The basic perceptron was not able to execute the exclusive-or (XOR) operation, unlike the logical circuits at the base of von Neumann architecture.
+The basic perceptron was not able to execute the \ac{XOR} operation, unlike the logical circuits at the base of von Neumann architecture.
 Moreover, the research stated the fact that more complex networks such as multiple- or deep-layered networks were not possible (at that time) because of the lack of adequate processing power.
 
 %who discovered two key issues with the computational machines that processed neural networks.
@@ -41,7 +41,7 @@ Moreover, the research stated the fact that more complex networks such as multip
 
 In addition to this research, the early successes of some works on neural networks pointed to an overestimation of the artificial neural networks potential, also held back by the technological capacity of the time.
 Finally, important questions of philosophical nature came to light, such as the fear fueled debate on the impact on our society of a class of computers able to think.
-This very controversy, i.e. the artificial intelligence (AI) problem, is discussed still today \cite{stanford.edu}.
+This very controversy, i.e. the \ac{AI} problem, is discussed still today \cite{stanford.edu}.
 
 Sometime during the 1980s the interest for this computing method was reinvigorated.
 The main stimulation was probably given by a number of works which suggested methods to implement multi-layered networks distributing pattern recognition errors through the all the layers in the network.
@@ -116,7 +116,7 @@ Two examples of nonlinear function are shown below in \autoref{fig:activation_fu
 One can distinguish at least three type of nodes in every neural network: input, inner/hidden, and output nodes.
 Input nodes take one input value, from the outside of the neural network, and pass it on to the inner nodes unchanged.
 Inner/hidden nodes take many inputs and generate an output through the activation function.
-Output nodes, similarly to input nodes, take one input value, from the inside of the NN, and pass it on to the outside.
+Output nodes, similarly to input nodes, take one input value, from the inside of the \acs{ANN}, and pass it on to the outside.
 
 \subsection*{Standard Representation}
 %This is not the orthodox description, but I claim that it is more consistent than the standard representation with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
@@ -150,14 +150,24 @@ This non-standard description, moreover, is consistent with the idea of function
 %Therefore I can easily distinguish the nodes which will use a nonlinear activation function.
 %Questa non è la visione standard/ortodossa, ma è consistente con un'idea di 'black box' in cui gli input e output sono gli unici nodi visibili. mentre gli altri sono all'interno della scatola nera.
 
-\subsection{Comparison with conventional computers}
-\label{ssec:Comparison_with_conventional_computers}
+\subsection{Applications of ANNs}
+\label{ssec:Applications_of_ANNs}
+Conventional computers are extremely fast and efficient in executing simple algebraic tasks and they can perform more complex activities if provided with the correct series of instructions.
+Hence algorithms can solve arbitrary difficult problems, provided that the necessary steps are know.
 
-%Digital, analog, and optical chips are the different types of chips being developed.
-%One might immediately discount analog signals as a thing of the past.
-%However neurons in the brain actually work more like analog signals than digital signals.
-%While digital signals have two distinct states (1 or 0, on or off), analog signals vary between minimum and maximum values.
-%It may be awhile, though, before optical chips can be used in commercial applications."
+Artificial neural networks take a different path in the solution of a given problem.
+\acsp{ANN} cannot be programmed, but they learn from the examples that are provided to them.
+Then they exploit their internal complexity to minimize the error and hence automatically solve the problem.
+After a network has been prepared, it is able to operate much faster than the complex algorithms on conventional computers.
+
+\acsp{ANN} have proven to be extremely good at recognize patterns, which can be used to solve problems in several classes.
+For example, classification problems are solved by the recognition of attributes of the input element.
+Likewise, clustering is obtained when a sequence of examples is grouped according to their features.
+Moreover, regression analysis and time series prediction can be obtained, when a sequence of data is fed to the network.
+% Regression: Predicting a continuous variable\\
+% Classification: Predicting a variable with finite possible values\\
+% Clustering: Grouping data\\
+% https://cs.stackexchange.com/questions/58131/are-neural-networks-a-type-of-reinforcement-learning-or-are-they-different
 
 \section{Working Principles of ANNs}
 \label{sec:Working_Principles_of_ANNs}
@@ -182,7 +192,7 @@ Then weights are modified in order to decrease the loss function to its lowest p
 The loss function $L(y, \hat{y})$ evaluates the difference between the predicted and the correct answer.
 Usually, this quantity is linked to the geometrical distance between the predicted output and the target $\left| \hat{y}-y \right|$.
 
-The most common loss function is the \textit{mean-square error}.
+The most common loss function is the \acfi{MSE}.
 Assuming to have an input set of $N$ examples paired with the same number of targets, and that the outputs and the targets are composed by $C$ values, or classes, the function becomes:
 \begin{equation}
 	L(y, \hat{y}) = f_{MSE}(y, \hat{y}) = \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C \left( \hat{y}_{n,i} - y_{n,i} \right)^2,
@@ -190,7 +200,7 @@ Assuming to have an input set of $N$ examples paired with the same number of tar
 where each example in the set is subtracted to its target and then squared.
 Finally the mean of all squares gives the expected result.
 
-Another commonly used function is the cross-entropy loss (also known as negative log likelihood),
+Another commonly used function is the \acfi{CEL} (also known as negative log likelihood),
 \begin{equation}
 	L(y, \hat{y}) = f_{CEL}(y, \hat{y}) = - \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C y_{n,i} \log \left( \hat{y}_{n,i} \right),
 \end{equation}
@@ -206,7 +216,7 @@ Alternatively, variations of the previous methods are given by taking the sum of
 The weights update process is a difficult task, and probably the most computationally expensive one in running a neural network.
 There is a variety of methods to chose from, depending on the type of artificial network and the resources available.
 
-A widely used algorithm is the gradient descent, from its most simple version to more complex variations such as stochastic gradient descent (SGD).
+A widely used algorithm is the gradient descent, from its most simple version to more complex variations such as \acfi{SGD}.
 This method updates the weights by subtracting a value proportional to the gradient of the loss function in respect to the weights themselves times a positive factor called \textit{learning rate}, as shown below.
 \begin{equation}
 	\left.w_i\right|_{n+1} = \left.w_i\right|_n - lr \cdot \frac{\partial L}{\partial \left.w_i\right|_n}
@@ -216,7 +226,7 @@ where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate,
 This method is equivalent to minimize the error on the loss function, by following the gradient $\bigtriangledown_w L$.
 This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where $W$ is the total number of parameters in the network.
 
-The most efficient \cite{??} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
+The most efficient \ref{} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
 Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
 
 %\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
@@ -280,7 +290,7 @@ Moreover the connection between the layers might be complete, i.e. each node in 
 
 The most naive topology of a Feedforward neural network is given by the so called \textit{Perceptron}.
 The Perceptron dates back to the 1957, when the homonym \textit{Perceptron algorithm} was software implemented by Frank Rosenblatt on a computer (IBM 704) and only subsequently in hardware as the \textit{Mark 1 perceptron} \cite{frank1957perceptron,Rosenblatt1958}.
-The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Perceptron} below.
+The graph of a generic (single layer) perceptron \acs{ANN} is shown in \autoref{fig:Perceptron}.
 
 \begin{figure}[ht]
 	\centering
@@ -292,17 +302,17 @@ The graph of a generic (single layer) perceptron ANN is shown in \autoref{fig:Pe
 	\label{fig:Perceptron}
 \end{figure}
 
-By adding more than one hidden perceptron layer to the neural network, one obtain the so called \textit{Multi-Layer Perceptron} (MLP).
-This allows for more computational complexity \cite{??}.
+By adding more than one hidden perceptron layer to the neural network, one obtain the so called \acfi{MLP}.
+This allows for more computational complexity \ref{}.
 When the total number of layer is more than two, the network is called \textit{deep}.
-A deep MLP is shown in \autoref{fig:deepMLP}.
-In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \cite{??}.
-Besides the shape, in literature a perceptron is almost always considered fully connected \cite{??}.
+A deep \acs{MLP} is shown in \autoref{fig:deepMLP}.
+In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \ref{}.
+Besides the shape, in literature a perceptron is almost always considered fully connected \ref{}.
 
 \begin{figure}[ht]
 	\centering
 	\input{tikz/MLPNN.tex}
-	\caption{	Deep Multi-Layer Perceptron (MLP), fully connected.}
+	\caption{	Deep \acf{MLP}, fully connected.}
 	\label{fig:deepMLP}
 \end{figure}
 
@@ -311,7 +321,7 @@ Besides the shape, in literature a perceptron is almost always considered fully 
 
 Feedforward neural networks are a large family that includes many other types besides the perceptron one.
 A few names are autoencoder, time delay, and convolutional neural networks.
-Autoencoders ANNs are feedforward networks with the same number of input and output nodes, with the purpose of reconstructing its own inputs.
+Autoencoders \acsp{ANN} are feedforward networks with the same number of input and output nodes, with the purpose of reconstructing its own inputs.
 For this reason autoencoders employ unsupervised learning.
 Time delay networks have a feedforward structure and their purpose is to analyze patterns in
 
@@ -339,11 +349,11 @@ A technological application of this kind of network is the real time recognition
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
 By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
-Moreover, those different types of network are not a niche, but they are widely \cite{??} studied as a different approaches to the same or additional problems.
+Moreover, those different types of network are not a niche, but they are widely \ref{} studied as a different approaches to the same or additional problems.
 
 \subsubsection{Recurrent NN}
 \label{sssec:Recurrent_NN}
-Recurrent neural network are a kind of network in which a portion of the input of nodes depends on the (past) output of the same nodes or nodes of subsequent layers.
+\acp{RNN} are a kind of network in which a portion of the input of nodes depends on the (past) output of the same nodes or nodes of subsequent layers.
 That is information does not propagates only forward like in the feedforward networks, but can propagate also backward, for example in loops or in feedbacks.
 
 \begin{figure}[ht]
@@ -365,7 +375,7 @@ That is the expansion of the recurrent architecture in time is the same as the t
 
 \subsubsection{Reservoir NN}
 \label{sssec:Reservoir_NN}
-Reservoir neural networks differ from feedforward and recurrent networks in the learning approach.
+Reservoir neural networks, or \ac{RC}, differ from feedforward and recurrent networks in the learning approach.
 In fact, the topology of a reservoir network could be exactly the same as that of a deep multi-layer perceptron or that of a recurrent network.
 However, the reservoir computing differs in approach in respect to deep learning.
 It claims that it is not necessary to learn all the weights of the network, as in deep learning, but it is sufficient to train only the last (perceptron) layer of the network.
@@ -387,7 +397,7 @@ The question over which training method is correct is still debated and literatu
 %\label{sec:Spiking_NN}
 %Spiking artificial networks are the most different kind in respect to all the other networks until now described.
 %In this class of ANNs, information is not coded only in the intensity of the signal, but also in the rate of signals, e.g. a high value will be encoded as a signal with high repetition rate, whereas a low value as a signal with low repetition rate.
-%This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \cite{??}.
+%This way of encoding information is more alike the mechanism of biological neural networks, such as our brain \ref{}.
 %
 %\vspace{1em}
 %\noindent LOOK INTO other type of neuron model: Hodgkin–Huxley (H-H) model\\
@@ -413,12 +423,12 @@ In regards to this, \autoref{fig:GoogleTrendsPyTorch} shows the number of intern
 
 In light of the facts above, PyTorch was chosen as framework.
 PyTorch is an open source machine learning library for python, which development has started only recently and it is based upon the older framework Torch  \cite{PyTorch.org}.
-It provides a high-level platform for the deep learning ecosystem and integrates acceleration libraries that allow fast and lean operation, both on common CPUs and GPUs.
+It provides a high-level platform for the deep learning ecosystem and integrates acceleration libraries that allow fast and lean operation, both on common \acsp{CPU} and \acsp{GPU}.
 It is based on a backpropagation algorithm called \textit{Reverse-mode auto-differentiation}, which allows versatile execution.
 
 To summarize, the library was chosen for its language, its flexibility, and the growing interest for it within the machine learning community.
 Nevertheless, its features make it a very powerful framework. However, considering the need to keep the simulated system as simple as possible, this last characteristic slipped in the background.
-The need to simulate a simple network comes from the fact that the ultimate goal of this project is to implement an ANN with a (photonic) hardware architecture.
+The need to simulate a simple network comes from the fact that the ultimate goal of this project is to implement an \acs{ANN} with a (photonic) hardware architecture.
 
 \begin{figure}[htbp]
 	\centering
@@ -453,22 +463,10 @@ Similarly to the criterion, the last piece of the system is given by the \textit
 Optimizers are a class of algorithms that provides the optimization of the weights during the learning phase.
 Most commonly used methods are already supported and they provide parameters to fine tune their execution.
 
-Following the official tutorials and the immense package documentation, I implemented a multi-layer perceptron (MLP) and then tested it with randomly generated numbers until its operation seemed correct.
-The model that I defined allows to implement a fully-connected feedforward neural network with some parameters.
-Specifically, the parameters cover the number of input and ouptut nodes, the number of hidden layer, and the number of nodes in each hidden layer.
-Another degree of freedom that I implemented is whether the last hidden layer has a nonlinear activation function or a linear one.
-The scheme of the network is shown in \autoref{fig:ANN_model}.
-
-The optimizer chosen is called \textit{Stochastic Gradiend Descent} (SGD), which is parametrized just by the learning rate, at least in its vanilla implementation.
-The criterion used initially is the mean square error, however it was eventually replaced by the cross entropy loss (CEL), which is more suited to the classification task.
-
-\begin{figure}[htbp]
-	\centering
-	\input{tikz/PT_MLP.tex}
-	\caption{Topology of the model implemented in PyTorch. The number of input ad output nodes, as well as the number of nodes in the last hidden layers is determined by the dataset.
-	The number of nodes in the other hidden layers and the number of hidden layers itself is governed by a parameter.}
-	\label{fig:ANN_model}
-\end{figure}
+Following the official tutorials and the immense package documentation, I implemented a fully connected \acf{MLP} model and then tested it with randomly generated numbers until its operation seemed correct.
+The code that I implemented allows to change the overall structure of the network with some parameters (see \autoref{ssec:Simulated_ANN_operation})
+The optimizer chosen is called \acfi{SGD}, which is parametrized just by the learning rate, at least in its vanilla implementation.
+The criterion used initially was the mean square error, however it was eventually replaced by the \acfi{CEL}, which is more suited to the classification task.
 
 \subsection{Dataset}
 \label{ssec:PyDataset}
@@ -482,7 +480,7 @@ The dataset is called \textit{Connectionist Bench (Vowel Recognition - Deterding
 It is composed by \num{990} entries of \num{10} attributes, i.e. input values, grouped in \num{11} classes.
 
 Each entry is a vector of \num{10} real numbers plus an integer number between \num{0} and \num{10}.
-In view of the fact the proposed activation function is a real-positive-valued function (see \autoref{sec:Characterization_of_the_Activation_Function}), I normalized the database.
+In view of the fact the proposed activation function is a real-positive-valued function (see \autoref{sec:Characterization_of_the_Activation_Function}), I renormalized the database.
 The normalization is independently applied to each one of the attributes in such a way that is described by a real number in $[0,1]$.
 The normalization is applied before the dataset is divided in the learning and testing examples.
 
@@ -492,9 +490,27 @@ In this case, the test set is used as validation instead too.
 
 \subsection{Simulated ANN operation}
 \label{ssec:Simulated_ANN_operation}
+The model that I defined allows some changes with the simple definition of a few parameters.
+Specifically, the parameters cover the number of input and ouptut nodes, the number of hidden layer, and the number of nodes in each hidden layer.
+Whereas the number of input and output nodes is defined by the problem, i.e. the dataset, the other are free parameters that can
+Another degree of freedom that I implemented is whether the last hidden layer applies the nonlinear activation function or just the weighted sum, since I observed that many network in the tutorials were built this way.
+The scheme of the network is shown in \autoref{fig:ANN_model}.
+
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/PT_MLP.tex}
+	\caption{Topology of the model implemented in PyTorch. The number of input ($D_{in}$) ad output nodes ($D_{out}$), as well as the number of nodes in the last hidden layer is determined by the dataset.
+	The number of nodes ($D_{H}$) in the other hidden layers and the number of hidden layers itself ($n_{H}$) is governed by a parameter.}
+	\label{fig:ANN_model}
+\end{figure}
+
+The choice of the structure of the neural network is purely heuristic, since up to now no satisfactory method has been proposed in literature.
+However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
+Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
+
 Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
-Initially I implemented a \textit{ReLU} and a sigmoid activation functions.
-The ReLU function is a standard activation function and is defined as follows:
+Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
+The \acs{ReLU} function is a standard activation function and is defined as follows:
 \begin{equation}
 f_{ReLU}(x) =
 \begin{cases}
@@ -503,42 +519,68 @@ f_{ReLU}(x) =
 \end{cases}~.
 \label{eq:relu}
 \end{equation}
-On the other hand, the sigmoid function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
+On the other hand, the Logistic function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
 \begin{equation}
 f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
 \end{equation}
-with $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$ parameters.
-Both functions are widely used in literature, however the \textit{ReLU} function seems to be preferred lately.
-
-In \autoref{sec:Test_of_a_Trained ANN} there are the results of the same network models, with the nonlinear activation function given by the microring resonator.
-
-The choice of the structure of the neural network is purely heuristic.
-Up to now, no satisfactory method has been proposed in literature.
-However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
-Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
+with the parameters $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$.
+Both functions are widely used in literature, however the \acs{ReLU} function seems to be preferred lately.
+I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network models, with the nonlinear activation function given by the microring resonator.
 
 \subsubsection{Learning}
-The learning process with the
+After the definition of the model, I had to train the networks on the training set.
+Since the dataset is small, all the examples are fed into the model, then the overall loss is evaluated, and finally the weights are upgraded.
+This method is called \textit{batch} operation; others are \textit{online} operation, which evaluate the loss and change the weights at each example, and \textit{minibatch} operation, which uses a random subset of the full dataset.
+
+Every time the network is trained on the full dataset, an \textit{epoch} is completed.
+I trained the models defined above for \num{2000} epochs, in order to observe both the fast and slow dynamics.
+For example, smaller networks tend to train faster, because there are less free parameters.
+On the other hand, larger networks often train slower, but can obtain better results thanks to their complexity.
+
+Moreover, I defined a different learning rates $l_r$ for each activation function, in order to provide the best parameter for different models but still be able to compare the performance of similar ones.
+Specifically the learning rate for the \acs{ReLU} is $l_{r|ReLU} = \num{5e-2}$, while for the Logistic function is $l_{r|Logistic}= \num{5e-3}$
+
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
-	\caption{learning process}
+	\input{tikz/Train_evolution.tex}
+	\caption{Evolution of the loss criterion (solid lines) throughout the epochs.
+		Points represent the values of the loss criterion on the validation dataset, carried out repeatedly during the training.
+	}
 	\label{fig:PyTorch_learning}
 \end{figure}
 
+\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{2000} epochs of training.
+From the evolution of the loss function we can see that every model has 
+
+
 \subsubsection{Collection of results}
+Since the number of classes is \num{11}, the percentage of correct answer given a random value is $\sim \SI{9.09}{\percent}$.
+Hence, values of correct answers above that mean that the neural network is working.
+On the other hand, values around or even below \SI{9.09}{\percent} mean that the current neural network is not working at all.
+
+\autoref{tab:PyResults} collects all the results for the different topologies.
+The same shape has been tested with both $f_{ReLU}$ and $f_{Logistic}$ to compare the performance.
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{c c c c c}
+	\begin{tabular}{c c c c r}
 	\toprule
-	no. hidden 	& no. nodes	& other			& nonlinear	& Percent\\
-	layers 			& per layer	& parameters	& function		& correct\\
+	activation	& no. hidden 	& no. nodes	& other			& Percent\\
+	function		& layers 			& per layer	& parameters	& correct\\
 	\midrule
-	c & c & c & c & c\\
-	c & c & c & c & c\\
+	$f_{ReLU}$ 			& 2 & 11 & - & \SI{70}{\percent}\\
+	$f_{ReLU}$ 			& 2 & 22 & - & \SI{70}{\percent}\\
+	$f_{ReLU}$ 			& 3 & 11 & - & \SI{70}{\percent}\\
+	$f_{ReLU}$ 			& 3 & 22 & - & \SI{70}{\percent}\\
+	$f_{Logistic}$ 	& 2 & 11 & - & \SI{9}{\percent}\\
+	$f_{Logistic}$ 	& 2 & 22 & - & \SI{9}{\percent}\\
+	$f_{Logistic}$ 	& 3 & 11 & - & \SI{9}{\percent}\\
+	$f_{Logistic}$ 	& 3 & 22 & - & \SI{9}{\percent}\\
 	\bottomrule
 	\end{tabular}
+	\caption{Results of the different activation functions and the several network topologies.
+	}
+	\label{tab:PyResults}
 \end{table}
 
 %+-------------------------+--------+---------+---------+

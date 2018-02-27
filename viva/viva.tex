@@ -1,0 +1,409 @@
+\documentclass[11pt]{beamer}
+%\usetheme{Dresden}%{Berkeley}
+\usetheme{metropolis} 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[font=scriptsize,labelfont=bf]{subcaption}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+%\usepackage{FiraSans}
+%\usepackage{FiraMono}
+
+\usepackage{lmodern}
+
+\usepackage[binary-units = true]{siunitx}
+\DeclareSIUnit{\bps}{bps}
+
+% create plots
+%\usepackage{pgfplots} % README here http://pgfplots.sourceforge.net/pgfplots.pdf
+%\pgfplotsset{compat=1.14}
+
+% externalize tikz images
+\usepackage{tikz}\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/] % activate!
+
+%\usepackage[
+%  backend     = biber,
+%  style       = phys,
+%  autocite    = superscript,
+%  sortcites   = true,
+%]{biblatex}
+%\bibliography{optical_buffers}
+%\usepackage{csquotes}
+%\renewcommand*{\bibfont}{\scriptsize}
+%\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\author[D. Bazzanella]{Davide Bazzanella}
+\title[All-Optical Neural Networks]{Optical Bistability As Neural Network Nonlinear Activation Function}
+%\logo{\includegraphics[height=2.3cm]{pics/unitn_logo.png} } 
+\institute[UNITN]{Università degli studi di Trento} 
+\date{20 March 2018} 
+\subject{Master Thesis in Physics}
+
+\setbeamercovered{transparent} 
+\setbeamertemplate{navigation symbols}{} 
+
+\newcommand{\frameofframes}{/}
+\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
+\setframeofframes{of}
+
+\setbeamertemplate{footline}{
+	\begin{beamercolorbox}[ht=2.5ex, dp=1.125ex, leftskip=.3cm, rightskip=.3cm plus1fil]
+		{title in head/foot}
+		{\insertshorttitle} \hfill {\insertframenumber~\frameofframes~\inserttotalframenumber}
+%		{author in head/foot}
+%		{\insertshortauthor} \hfill {\insertinstitute}
+	\end{beamercolorbox}
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{What is an optical buffer?}
+	In telecommunications and computing, a buffer is a \textbf{storage medium} that keeps data for a certain time.
+	Data are usually stored in a \textit{very temporary} way.
+	
+	\vspace{1em}
+	An optical buffer is a device that is capable of temporarily storing data that was \textbf{transmitted optically}, without converting it to the electrical domain.
+\end{frame}
+
+%\subsubsection*{Fields of study}
+%\begin{frame}{Fields of interest and Purpose}
+%%	\begin{columns}
+%%		\column{0.55\textwidth}
+%			\textbf{Fields of interest}:\autocite{Tanabe2007,Song2005,Baba2008,Tucker2005}
+%			\begin{itemize}
+%				\item optical signal processing,
+%				\item optical communications,
+%				\item signal production and synchronization
+%			\end{itemize}
+%		
+%			\vspace{1em}
+%			\textbf{Purpose}:\autocite{Tanabe2007,Song2005,Baba2008,Tucker2005}
+%			\begin{itemize}
+%				\item Substitute electronic buffers,
+%				\item chip integration of bulky delay lines
+%			\end{itemize}
+%		
+%%		\column{0.4\textwidth}
+%%%			\only<2>
+%%			{
+%%				placeholder
+%%			}
+%%	\end{columns}
+%\end{frame}
+%
+%\subsubsection*{Competing technologies}
+%\begin{frame}{Competing technologies}
+%	\textbf{Silicon-based electronics (MOS integrated circuits)}:\\
+%	\begin{itemize}
+%		\item 	single bit density ($\sim\SI{100}{\square\nm}$)\autocite{Haraszti2000}
+%		\item highly refined production process:\\
+%			high speed, low consumption, low cost
+%		\item could be difficult to improve further\autocite{skotnicki2005end}
+%		\item requires conversion of domains (optical/electrical)\\ twice at switch nodes
+%					%requires double conversion from optical\\ to electrical domain and vice versa
+%	\end{itemize}
+%\end{frame}
+%
+%\section{Optical delay line}
+%\begin{frame}{Optical delay line}
+%	\textbf{Packets} (consecutive bits) \textbf{are delayed} of a certain time $T_S$.\\
+%	The delay is \textbf{controlled by an external signal}.
+%	\vspace{1em}
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=\textwidth]{pics/OB_memory_edited.png}%scale=.11
+%		\caption{Physical sizes are retrieved by $L=v_g\tau$. Adapted from \autocite{Tucker2005}}
+%		\label{fig:OB_memory}
+%	\end{figure}
+%\end{frame}
+%
+%\subsubsection*{Key parameters}
+%\begin{frame}{Key parameters}
+%	Key operating parameters are
+%	\begin{itemize}
+%		\item Storage time $T_S$
+%		\item	Bit period $\tau_b$
+%		\item Delay-bandwidth Product (DBP), i.e. the capacity $C=T_S /\tau_b$
+%	\end{itemize}
+%	
+%	\vspace{0.5em} Important physical traits are
+%	\begin{itemize}
+%		\item bit size
+%		\item intrinsic and extrinsic losses
+%	\end{itemize}
+%	
+%	\vspace{0.5em} Other parameters are the signal wavelength $\lambda$,\\ the Hold-off time $T_{HO}$ and the slow down factor $S=v_{g1}/v_{g2}$.
+%\end{frame}
+%
+%\subsection{Implementation}
+%\begin{frame}{Implementation}
+%
+%	Considering a FIFO buffer for simplicity, although parallel operation is also possible.
+%
+%	\vspace{.5em}
+%	Implementation:
+%	\begin{itemize}
+%		\item long optical path
+%		\item optical cavity: high $Q$ factor and long photon lifetime
+%		\item slow propagation speed: \textit{slow light}
+%	\end{itemize}
+%
+%	\vspace{.5em}
+%	Also bear in mind that:	
+%	\begin{quote}
+%		A delay line whose delay cannot be changed is not an optical buffer.\autocite{Tucker2005}
+%	\end{quote}
+%\end{frame}
+%
+%\subsubsection*{Optical cavity}
+%\begin{frame}{Optical cavity}
+%	\begin{columns}
+%		\column{0.54\textwidth}			
+%			Integrated cavities are obtained with simple waveguides (\textbf{rings}) and with more complex \textbf{PhC lattices} and defects.
+%			
+%			\vspace{0.5em} PhCs can employ semiconductor \textbf{heterojunctions} design techniques to boost their quality parameters.\autocite{Istrate2006}
+%			
+%			\vspace{0.5em} Control over $v_g$ is obtained mainly by changing the input/output coupling of the cavity.\autocite{Tucker2005}
+%
+%		\column{0.45\textwidth}
+%			\vspace{-1em}
+%			\begin{figure}
+%		    \begin{subfigure}[b]{\textwidth}
+%					\centering
+%					\includegraphics[width=.7\textwidth]{pics/CROW_edited.png}
+%					\caption{Rings. Adapted from \autocite{Xia2007a}}
+%					\label{fig:CROW}
+%				\end{subfigure}
+%		    \begin{subfigure}[b]{\textwidth}
+%					\centering
+%					\includegraphics[width=.65\textwidth]{pics/HJ_cavity_edited.png}
+%					\caption{Heterojunction. Adapted from \autocite{Song2005}}
+%					\label{fig:PhC_cavity}
+%				\end{subfigure}
+%				\label{figs:CROW_and_PhC_cavity}
+%			\end{figure}
+%	\end{columns}
+%\end{frame}
+%
+%\subsubsection*{Slow light}
+%\begin{frame}{Slow light}
+%	Slow light is a phenomenon in which the propagation of light in a medium is reduced greatly thanks to the \textbf{low group velocity} $\frac{\partial \omega}{\partial k}$.
+%	
+%	\vspace{1em}
+%	To obtain such effect one has to employ either:
+%	\begin{itemize}
+%		\item Near resonance refractive index\autocite{yu2013slow}
+%		\item Electromagnetically Induced Transparency (EIT)
+%		\item Population Oscillations (PO)
+%		\item Dispersion band-edge in Photonic Crystals (PhC)
+%	\end{itemize}
+%	
+%	\vspace{0.5em} Control over $v_g$ is obtained in EIT devices by changing the wavelength and power of the pump laser.\autocite{chang2003variable}
+%\end{frame}
+%
+%\subsection{Slow light DL optical buffers}
+%\begin{frame}{Types of delay line buffers}
+%	Focusing on the delay line optical buffer based on slow light, we can separate them in two categories:
+%	\begin{itemize}
+%	\item A-type: cannot change its $v_g$ when storing a bit
+%	\item B-type: can change its $v_g$ when storing a bit
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{A-type}
+%	A-type: cannot change its $v_g$ when storing a bit
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=.65\textwidth]{pics/CLA_pulses_edited.png}
+%		\caption{Adapted from \autocite{Tucker2005}}
+%		\label{fig:A_DL}
+%	\end{figure}
+%\end{frame}
+%
+%\begin{frame}{B-type}
+%	B-type: can change its $v_g$ when storing a bit
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=.8\textwidth]{pics/CLB_pulses_edited.png}
+%		\caption{Adapted from \autocite{Tucker2005}}
+%		\label{fig:B_DL}
+%	\end{figure}
+%\end{frame}
+%
+%\begin{frame}{Delay line composition}
+%	\begin{itemize}
+%		\item A-type or B-type only
+%		\item A/B/A composition:
+%	\end{itemize}
+%		\begin{figure}[hb]
+%			\centering
+%			\includegraphics[width=.8\textwidth]{pics/ABA_DL.png}
+%			\caption{Adapted from \autocite{Tucker2005}}
+%			\label{fig:ABA_DL}
+%	\end{figure}
+%\end{frame}
+%
+%\subsubsection*{Strengths and weaknesses}
+%\begin{frame}{Strengths and weaknesses}
+%Bit size ranges from sub wavelength (\SI{740}{\nm}\autocite{Tucker2005}) for A-type buffers to a few \SI{10}{\um}\autocite{ku2004slow} or even more\autocite{liu2001observation} for B devices.
+%On the other hand, DBP is much higher (e.g. $10^4$)\autocite{yanik2004stopping} in B-type devices.
+%
+%\vspace{0.5em} The hybrid A/B/A device can (in theory) get the best from the two worlds\autocite{Tucker2005}.
+%
+%\vspace{0.5em} The delay of slow light is dominated by \textbf{intrinsic and extrinsic losses} and dispersive components (mainly GVD), hence dispersion-compensated and zero-dispersion slow light are very important.\autocite{Baba2008}
+%
+%\vspace{0.5em} Pulse distortion distortion might also be too high for certain purposes.
+%\end{frame}
+%
+%\section{Bistable optical devices}
+%\begin{frame}{Bistable optical devices}
+%	\begin{columns}
+%		\column{0.5\textwidth}
+%			An ideal bistable system has\\ \textbf{two stable output values}.\\
+%			The system is forced to \textbf{switch} from one state to the other by a \textbf{control parameter}. \autocite{saleh1991fundamentals}%[\ppno 843--847]{}
+%			
+%			\vspace{0.5em}
+%			Optical bistable systems can be used to store data in the optical domain.
+%		\column{0.45\textwidth}
+%			\begin{figure}[hb]
+%				\centering
+%				\includegraphics[width=\textwidth]{pics/bistability.png}
+%				\caption{States of the polarization bistable VCSEL. \autocite{Katayama2009}}
+%				\label{fig:opt_bistability}
+%			\end{figure}
+%	\end{columns}
+%\end{frame}
+%
+%\subsection{Implementation}
+%\begin{frame}{Implementation}
+%	VCSEL provides two orthogonally polarized lasing modes with the same optical gain.
+%	
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=.75\textwidth]{pics/VCSEL_bsy_edited_v2.png}
+%		\caption{All-optical flip-flop op. using polarization bistable VCSEL. Adapted from \autocite{Katayama2009}}
+%		\label{fig:VCSEL_bistability}
+%	\end{figure}
+%\end{frame}
+%
+%\begin{frame}{Data, set, and reset signals}
+%	Polarization bistable VCSELs act as AND gates (1-bit memories) in all-optical buffer memories.\autocite{Sakaguchi2010}
+%\begin{columns}
+%	\column{.7\textwidth}
+%		\begin{figure}[hb]
+%			\centering
+%			\includegraphics[width=.9\textwidth]{pics/1-bit_OB_scheme_edited.png}
+%			\caption{One-bit optical buffer memory scheme.\autocite{Katayama2009}}
+%			\label{fig:1-bit_OB_scheme}
+%		\end{figure}
+%	\column{.3\textwidth}
+%		{\small		
+%		\begin{tabular}{c|c|c||c}
+%			$\mathcal{I}$ & $\mathcal{S}$ & $\mathcal{R}$ & $\mathcal{O}$ \\ 
+%			\hline 
+%			$0$ & $0$ & $0$ & $0$ \\
+%			$1$ & $0$ & $0$ & $0$ \\
+%			$0$ & $1$ & $0$ & $0$ \\
+%			$1$ & $1$ & $0$ & $1$ \\
+%			$x$ & $y$ & $1$ & $0$ \\
+%		\end{tabular} 
+%		}
+%\end{columns}
+%	Injection light from \textbf{data} ($\ang{0}$) + \textbf{set} ($\ang{0}$) signals must be higher than the \textbf{switching threshold}.\autocite{Katayama2009}\\
+%	Reset ($\ang{90}$) signal must switch back to polarization state \ang{90}.
+%\end{frame}
+%
+%\begin{frame}
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=.75\textwidth]{pics/1-bit_BOB_at_1gbps.png}
+%		\caption{1-bit optical buffer memory operation exp. result for a \SI{1}{\giga\bps} RZ signal.\autocite{Katayama2009}}
+%		\label{fig:1-bit_BOB_at_1gbps}
+%	\end{figure}
+%\end{frame}
+%
+%\subsection{Bistable optical buffers}
+%\begin{frame}{Examples of bistable optical buffers}
+%	\begin{figure}[hb]
+%		\centering
+%		\includegraphics[width=.8\textwidth]{pics/4-bit_BOB_scheme.png}
+%		\caption{4-bit optical buffer memory with parallel shift register.\autocite{Katayama2009}}
+%		\label{fig:4-bit_BOB}
+%	\end{figure}
+%	
+%	4-bit buffering operation was obtained in a parallel shift register up to \SI{500}{\mega\bps}.\autocite{Katayama2009}
+%\end{frame}
+%
+%\subsubsection*{Strengths and weaknesses}
+%\begin{frame}{Strengths and weaknesses}
+%	\textbf{operational records}:
+%	\begin{itemize}
+%		\item Buffering operation up to \SI{10}{\giga\bps} (RZ) signals\autocite{Katayama:08},
+%		\item lowest switching time of of \SI{7}{\ps}\autocite{kawaguchi1997bistable},
+%		\item lowest switching energy of \SI{0.3}{\femto\J}\autocite{mori2006low},
+%	\end{itemize}
+%	mainly using an InGaAs/GaAs VCSEL in the \SI{980}{\nm} range.
+%	
+%	\vspace{0.5em}
+%	\textbf{operating conditions}:
+%	\begin{itemize}
+%		\item supply \si{\mA} bias current of the VCSEL,
+%		\item 	avoid error caused by high energy data,
+%		\item avoid error caused from long packages - pseudo-random bit sequence (PRBS) test
+%	\end{itemize}
+%\end{frame}
+%
+%\section{Conclusion}
+%\begin{frame}{Summary}
+%Optical delay lines are not adequate for optical packet switches (OPS) due to their \textbf{fundamental limits}, e.g bit size and DBP.
+%However there are other application such as integration of bulky delay lines which could benefit from such devices
+%
+%\vspace{1em} Optical bistable VCSELs have demonstrated \textbf{high bit rates} and \textbf{low bit size}, hence they seem an interesting technology for all-optical buffering.
+%On the other hand, from the works considered one cannot understand (and thus judge) the \textit{wall-plug efficiency} of the device which could be a critical factor.
+%\end{frame}
+%
+%\begin{frame}[allowframebreaks]{References}
+%\printbibliography
+%\end{frame}
+
+\end{document}
+
+%\begin{itemize}
+% \item<1-> Text visible on slide 1
+% \item<2-> Text visible on slide 2
+% \item<3> Text visible on slide 3
+% \item<4-> Text visible on slide 4
+%\end{itemize}
+
+
+%\begin{frame}
+%Photonic-crystal devices are especially attractive for generating slow light, as they are compatible with on-chip integration and room- temperature operation. \autocite{Baba2008}\\
+%slow light (offers the opportunity for compressing optical signals and optical energy in space, which) reduces the device footprint and enhances light–matter interactions. \autocite{Baba2008}\\
+%The delay of slow light and the potential to stop light altogether is limited in practice by the lifetime of light, which is dominated by intrinsic and extrinsic losses. \autocite{Baba2008}\\
+
+%The major component of the higher-order dispersion is the group-velocity dispersion (GVD), given by $d(v_g^{-1})/d\omega = d^2k/d\omega^2$. It usually becomes extremely large near the band edge; a typical GVD constant is of the order of \SI{100}{\ps\per\nm\per\mm}, which is $10^6$ times larger than that of single-mode silica fibres. Because of this, dispersion-compensated and zero-dispersion slow light are very important. \autocite{Baba2008}
+%\end{frame}
+
+%\begin{frame}
+%Stable measurements are very difficult to perform for these cav- ities [9,29] because they require a stable setup with excellent wavelength resolution. \autocite{Tanabe2007}\\
+%Since a high-Q system has a long photon life-time, a time-domain measurement is potentially more accurate than a spectrum measurement. \autocite{Tanabe2007} (Fig. 4)\\
+%We expect time-domain measurement to become an indispensable tool for the characterization of future ultrahigh-Q PhC nanocavities. \autocite{Tanabe2007}\\
+%It is particularly important with an ultrahigh-Q cavity system to minimize any temperature fluctuation during the pulse delay measurement. \autocite{Tanabe2007}\\
+%\end{frame}
+
+%\begin{frame}
+%To obtain slow guided-light modes that feature the combination of low group velocity and vanishing GVD parameter. \autocite{Rawal2009}\\
+%Operation below the silica light-line, because the modes which lie above the light-line are intrinsically lossy (i.e. leaky) in the vertical direction. \autocite{Rawal2009}\\
+%A flat section of dispersion curve should be obtained i.e. the slope of the dispersion curve should not only be small but it should also be close to constant for a given range. \autocite{Rawal2009}\\
+%\end{frame}

@@ -119,4 +119,11 @@
 
 	\draw [dotted, ->] (inner\lhide_2) to [out=0, in=180] (output2);
 	
+	\draw [decorate, decoration={brace, amplitude=5}] (\lhidd,-1.5) -- (\lhid,-1.5)
+		node [midway, below=2pt] {$n_{H}\times D_H$};
+	\draw [decorate, decoration={brace, amplitude=5}] (-.5,-0.5) -- (-.5,2.5)
+		node [midway, left=2pt]  {$D_{in}$};
+	\draw [decorate, decoration={brace, amplitude=5}] (9.5,2.5) -- (9.5,-0.5)
+		node [midway, right=2pt] {$D_{out}$};
+	
 \end{tikzpicture}

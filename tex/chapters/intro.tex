@@ -6,7 +6,7 @@
 \addcontentsline{toc}{chapter}{Preface}
 
 \paragraph{The research field\\}
-Research in the field of artificial neural networks has became more and more popular in the last few decades as the computing power available to the average institution increased further.
+Research in the field of \acp{ANN} has became more and more popular in the last few decades as the computing power available to the average institution increased further.
 As a matter of fact, in the last two decades the calculation power which once belonged only to bulky, power hungry, and very expensive supercomputers, gradually became possible also for relatively more compact, efficient, and definitely cheaper servers and workstations.
 
 This trend has been dictated by the fact that artificial neural networks are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
@@ -17,8 +17,8 @@ Moreover another problem is that it requires explicit programming for each singu
 The formalization of the von Neumann (or Princeton) architecture dates back to 1945 \cite{Godfrey1993} and it is as old as the first attempt in artificial neural networks \cite{Rosenblatt1958}.
 Shortly after, research and industry efforts focused only on the development of the Princeton architecture, choosing it de facto as the primary design for computing devices.
 
-In the recent years, help came from acceleration units known as Graphic Processing Units (GPU), which were developed for a completely different objective.
-These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to CPUs, but are much more efficient both in power and in time, because of their parallel execution \cite{stone2010opencl,DBLP:journals/corr/abs-1211-5590}.
+In the recent years, help came from acceleration units known as \acp{GPU}, which were developed for a completely different objective.
+These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to \acused{CPU}\acsp{CPU}, but are much more efficient both in power and in time, because of their parallel execution \cite{stone2010opencl,DBLP:journals/corr/abs-1211-5590}.
 
 \paragraph{Todays software implementations\\}
 Between the most famous examples of simulated neural network there certainly are the older Watson supercomputer from IBM and the more recent AlphaGo artificial intelligence.
@@ -30,7 +30,7 @@ AlphaGO, nevertheless, is a deep neural network that in 2016, through reinforced
 Another interesting case is given by SpiNNaker, of the University of Manchester.
 It is composed by $10^4$ neurons connected by more that $10^7$ synapses, and is simulated on over 65 thousand 18-core ARM processors connected together.
 Unlike the other two, its main goals are to simulate several neural mechanisms, such as the operation of visual cortex.
-The SpiNNaker system is part of the Human Brain Project (HBP), funded by the European Union \cite{HBP.eu, Nawrocki2016a}.
+The SpiNNaker system is part of the \ac{HBP}, funded by the European Union \cite{HBP.eu, Nawrocki2016a}.
 
 Similarly to SpiNNaker, another effort in gaining better understanding of the human brain is \textit{The Blue Brain Project}, which is leaded by École Polytechnique Fédérale de Lausanne in collaboration with over one hundred other international research institutions and it is funded by the European Union.
 This project is simulated on IBM Blue Gene supercomputers, each fitted with more than 100 thousand processors and consuming several \si{\MW} of power \cite{Nawrocki2016a}.
@@ -53,6 +53,14 @@ Hence alternatives are sought \cite{soman2016recent}.
 \paragraph{Overview of current alternatives to simulations\\}
 Apart from the vast majority of the research on neural networks, which is being carried out with simulations on powerful processors, a smaller portion of research is focused on building neural network physically.
 Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow artificial neural networks to run physically, instead of being simulated on conventional computers \cite{soman2016recent}.
+\autoref{fig:scopus} shows the increase of interest in the scientific community for the development of new architectures based on neural networks.
+
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/scopus.tex}
+	\caption{Scopus data on `neuromorphic' vs `neuromorphic photonics'}
+	\label{fig:scopus}
+\end{figure}
 
 The reason why considerable improvements can be expected is that the path of designing hardware devices ad hoc for neural network computation has not yet been covered comprehensively.
 Majors performance or efficiency enhancements are coming from the fact that those new architectures are conceived with parallel execution of specific operations in mind.
@@ -81,24 +89,38 @@ A particularity of this system is that does not execute pre-programmed code, but
 \paragraph{Neuromorphic photonics\\}
 Besides electronics, other kind of physical implementations have been attempted from research teams.
 Probably the most intriguing example is given by integrated photonics.
-Photonics Integrated Circuits (PICs) have never been competitive in comparison to electronics in the development of von Neumann like processors, which are based on boolean logic gates.
+\acp{PIC} have never been competitive in comparison to electronics in the development of von Neumann like processors, which are based on boolean logic gates.
 No photonic integrated logic of comparable performance to electronics has been proposed yet.
 However, by implementing a computing architecture that adheres to the artificial neural network rules integrated photonics might emerge as a successful platform \cite{de2017progress}.
 Even if research in neuromorphic photonics is just in its embryonic state, many progresses have been accomplished lately.
 %Moreover, it has yet to leave its embryonic state of technology, however many progresses have been accomplished lately 
-The aim of neuromorphic photonics is to match electronics performances by overcoming it in power consumption, computational speed, and intrinsic suitability to parallel computing.
+The aim of neuromorphic photonics is to match electronics performances by overcoming it in power consumption, computational speed, and intrinsic suitability to parallel computing (see \autoref{tab:neuromorphic_arc}).
 
-\begin{figure}[!htbp]
+\begin{table}[!htbp]
 	\centering
-	\input{tikz/scopus.tex}
-	\caption{Scopus data on `neuromorphic' vs `neuromorphic photonics'}
-	\label{fig:scopus}
-\end{figure}
+	\footnotesize
+	\begin{tabular}{l r r r r}
+	\toprule
+	\normalsize Chip & \normalsize \acs{MAC} rate &%
+	\normalsize Energy per \acs{MAC} & \normalsize Area per \acs{MAC} \\
+	& & (\si{\pico\joule}) & (\si{\square\um})\\
+	\midrule
+	Photonic hybrid III-V/Si & \SI{20}{\GHz} & \num{1.3} 	& 205 \\
+	Sub-$\lambda$ photonics (future trend) & \SI{200}{\GHz} & \num{0.0007} 	& 20 \\
+	HICANN & \SI{22.4}{\MHz} & \num{198.4} 	& 780 \\
+	TrueNorth & \SI{2.5}{\kHz} & \num{0.27} 	& 4.9 \\
+	Neurogrid & \SI{40.1}{\kHz} & \num{119} 	& 7.1 \\
+	SpiNNaker & \SI{3.2}{\kHz} & \num{6e5} 	& 217 \\
+	\bottomrule
+	\end{tabular}
+	\caption{Comparative table on current and future trends in electronic and photonic micro-architectures for neuromorphic computing. \acs{MAC} stands for \textit{Multiply and ACcumulate} operation, a standard computational step. Taken from \cite{de2017progress}.}
+	\label{tab:neuromorphic_arc}
+\end{table}
 
-Since PIC manufacturing is not as developed as fabrication of electronic devices, integrated photonics research on artificial neural networks concentrates on integrating single optical devices rather than building a full-grown all-optical network.
+Since \acs{PIC} manufacturing is not as developed as fabrication of electronic devices, integrated photonics research on artificial neural networks concentrates on integrating single optical devices rather than building a full-grown all-optical network.
 The great majority of researches integrates optical structures and electronic ones on the same network, building hybrid optoelectronic artificial neural networks.
 Moreover, the networks implemented mostly are of recursive type or trained with the reservoir computing method.
-Both of them allow to build functioning ANNs with a low number of (controllable) computing nodes.
+Both of them allow to build functioning \acp{ANN} with a low number of (controllable) computing nodes.
 
 \paragraph{My work\\}
 My work in this thesis has two related objectives.
@@ -119,7 +141,7 @@ However, since integrated structures able to carry out a weighted sum of optical
 During the thesis I achieved two main results.
 %I have demonstrated the use of optical bistability in microring cavities to produce an activation function
 I have demonstrated the use of the nonlinear response of a microring optical cavity to produce an activation function by exploiting the optical bistability regime.
-In addition, with the aim of testing such response function, I simulated an artificial network with custom activation function by using standard software libraries used by ICT community to model neural networks.
+In addition, with the aim of testing such response function, I simulated an artificial network with custom activation function by using standard software libraries used by \ac{ICT} community to model neural networks.
 %{WHAT AM I DOING\\why silicon photonics (CMOS compatibility)}
 %The aim of this work is to put together two fields of research: physics and computer technology, specifically photonics and machine learning.
 %The idea is to create a proof of concept for a physical implementation of a very important piece of any artificial networks, the activation function, by using integrated photonics as framework.
