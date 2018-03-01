@@ -1,5 +1,6 @@
-\tikzsetnextfilename{GenericNode}
-\begin{tikzpicture}
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{node}
+\begin{tikzpicture}[baseline, scale=1]
 	\node [shape=circle, minimum size=2cm, draw=gray!100, fill=gray!20]%
 				(af) at (1.5,0) {\LARGE $f_a$};
 	\node (aftext) [below, align=center] at (af.south) {activation \\ function};

@@ -32,7 +32,7 @@ However, despite the early successes of neural networks, the traditional computi
 The reason why this happened, probably, was due to several concurring facts.
 First of all, in the same time period (1969) a research paper by Minksi and Papert \cite{minski1969perceptrons}, which identified two important problems.
 The basic perceptron was not able to execute the \ac{XOR} operation, unlike the logical circuits at the base of von Neumann architecture.
-Moreover, the research stated the fact that more complex networks such as multiple- or deep-layered networks were not possible (at that time) because of the lack of adequate processing power.
+Moreover, the research stated the fact that more complex networks such as multiple- or deep-layered networks were impossible to train due to the vanishing gradient problem. %(at that time) because of the lack of adequate processing power.
 
 %who discovered two key issues with the computational machines that processed neural networks.
 %The first was that basic perceptrons were incapable of processing the exclusive-or circuit.
@@ -44,7 +44,7 @@ Finally, important questions of philosophical nature came to light, such as the 
 This very controversy, i.e. the \ac{AI} problem, is discussed still today \cite{stanford.edu}.
 
 Sometime during the 1980s the interest for this computing method was reinvigorated.
-The main stimulation was probably given by a number of works which suggested methods to implement multi-layered networks distributing pattern recognition errors through the all the layers in the network.
+The main stimulation was probably given by a number of works which suggested methods to implement multi-layered networks by distributing pattern recognition errors through all the layers in the network.
 This method is now called \textit{backpropagation}.
 
 In today's research and technology, artificial neural networks are used in numerous applications.
@@ -210,6 +210,9 @@ The mean over all examples in the set returns the results.
 
 Alternatively, variations of the previous methods are given by taking the sum of the examples in place of the mean, or by calculating a loss function for each example instead of evaluating it for the whole set.
 
+Depending on the class of the problem, e.g. classification or image recognition, a different loss function is chosen.
+In fact, since the loss function drives the weights update process, it is important to choose the correct one.
+
 \subsubsection{Weights Update Process}
 \label{sssec:Weights_Update_Process}
 
@@ -226,23 +229,28 @@ where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate,
 This method is equivalent to minimize the error on the loss function, by following the gradient $\bigtriangledown_w L$.
 This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where $W$ is the total number of parameters in the network.
 
-The most efficient \ref{} algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
+The most used algorithm is called \textit{backpropagation}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the artificial network and going backward toward the input, hence the name backpropagation.
 Since the number of connections between nodes might be even order of magnitude bigger than the number of nodes, it is simple to understand how large networks are computationally expensive to train.
 
+In early days, this algorithm was used together with the Logistic activation function.
+Due to the saturating behavior of the function, the gradient is repeatedly multiplied by small values at each layer.
+Hence, the effect of backpropagation becomes negligible for the first layer on deep networks
+This problem is known as \textit{vanishing gradient} problem.
+Thanks to the introduction of non saturating activation functions, the training of deep neural network has become gradually possible \cite{krizhevsky2012imagenet}.
 %\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
 
 \subsection{Validation Process}
 \label{ssec:Validation_Process}
-In the validation process, which happens repeatedly throughout the training process, the neural network is tested of a new set of examples.
-However, the outcome of this test is not used to change the weights as in the learning phase.
-Instead, the output is used to prevent overfitting.
+The validation process is carried out at the same time of the training process and consists on testing the neural network on a new set of examples.
+Differently from the learning process, during validation the output predicted by the network are compared to the examples, but the weights are not updated.
+Instead, the loss function is used as a control parameter to prevent overfitting
 
-Overfitting is the phenomenon in which a neural network is trained over and over on the same set of data.
-This can train the network to recognize specific features of the samples instead of the more general ones.
-Therefore, by periodically testing the network on a novel set, i.e. the validation set which is different from the training set, one can reduce or avoid the problem.
+Overfitting is the phenomenon in which a neural network recognizes specific features of the samples instead of the more general ones.
+It occurs when the network is trained over and over on the same set of data.
+Since the specific features are the ones that characterize precisely the test dataset, they should not characterize other dataset.
+Therefore, by periodically testing the network on a novel set, i.e. the validation set which is different from the training set, one can avoid or at least reduce the problem.
 
-Depending on the resources available and the size of the dataset, the validation happens more or less often throughout the learning process.
-
+The validation process happens repeatedly throughout the training process, more or less often, depending on the resources available and the size of the dataset.
 
 \subsection{Testing Process}
 \label{ssec:Testing_Process}
@@ -255,7 +263,7 @@ Instead, an overall value of the correctness is evaluated and it is often expres
 	\centering
 	\input{tikz/LVTcurves.tex}
 	\caption{The learning curves are the value of the loss function, or criterion, as a function of the training iterations.
-	Both the validation and the test error are usually higher than the error on the training set.
+	Both the validation and the test error are usually higher than the errors on the training set.
 	Sometimes, to avoid overfitting, the training procedure is stopped at a minimum of the validation learning curve \cite{duda2012pattern}.
 	}
 	\label{fig:LVTcurves}
@@ -303,11 +311,9 @@ The graph of a generic (single layer) perceptron \acs{ANN} is shown in \autoref{
 \end{figure}
 
 By adding more than one hidden perceptron layer to the neural network, one obtain the so called \acfi{MLP}.
-This allows for more computational complexity \ref{}.
-When the total number of layer is more than two, the network is called \textit{deep}.
+This allows for more computational complexity, e.g. \acs{MLP} can solve the \acs{XOR} problem, whereas single layer perceptron cannot \ref{}.
+When the number of hidden layers is more than two, the network is called \textit{deep}.
 A deep \acs{MLP} is shown in \autoref{fig:deepMLP}.
-In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network \ref{}.
-Besides the shape, in literature a perceptron is almost always considered fully connected \ref{}.
 
 \begin{figure}[ht]
 	\centering
@@ -316,8 +322,11 @@ Besides the shape, in literature a perceptron is almost always considered fully 
 	\label{fig:deepMLP}
 \end{figure}
 
-\subsubsection{Other Feedforward NNs}
-\label{sssec:Other_Feedforward_NNs}
+In principle any shape is possible, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network (see following section).
+Moreover, in literature with the term perceptron one almost always refers to fully connected feedforward networks \ref{}.
+
+\subsection{Other Feedforward NNs}
+\label{ssec:Other_Feedforward_NNs}
 
 Feedforward neural networks are a large family that includes many other types besides the perceptron one.
 A few names are autoencoder, time delay, and convolutional neural networks.
@@ -325,13 +334,12 @@ Autoencoders \acsp{ANN} are feedforward networks with the same number of input a
 For this reason autoencoders employ unsupervised learning.
 Time delay networks have a feedforward structure and their purpose is to analyze patterns in
 
-\paragraph{Convolutional}\label{par:Convolutional} networks are inspired to the visual cortex, in which neurons are not fully connected their inputs but only to a restricted region.
-Convolutional neural networks are a type of feedforward network conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
+\subsubsection{Convolutional Neural Networks}
+\label{par:Convolutional}
+\acp{CNN} are inspired to the visual cortex, in which neurons are not fully connected all the inputs but only to a restricted region.
+\aclp{CNN} are a type of feedforward network conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
 Its input is often represented as a 2D matrix, instead of a 1D vector.
-This kind of network is usually composed by many layers, the prevalent kind is the convolutional one.
-This layer performs a two-dimensional convolution over the input matrix of a second 2D matrix of weights, called \textit{feature map}.
-Thus, each node of the layer operates on a restricted region to understand if a feature is present or not.
-Commonly the operating regions are overlapping and the feature map is shared among the nodes in the same layer.
+This kind of network is usually composed by many layers: the most recurring is prevalent the convolutional one, but other types can be mixed together too.
 
 \begin{figure}[ht]
 	\centering
@@ -339,17 +347,23 @@ Commonly the operating regions are overlapping and the feature map is shared amo
 	\caption{%
 		Pictorial representation of a layer of a convolutional supernode.
 		Several supernodes might be placed side by side to form a convolutional layer.
+		Each node acts on a restricted region of the inputs: in this examples a $3\times 3$ region.
 		}
 	\label{fig:convolutionalNN}
 \end{figure}
 
-Convolutional neural networks are nowadays widely used in image recognition with outstanding results and they improve with a steady pace.
+This layer performs a two-dimensional convolution over the input matrix of a second 2D matrix of weights, called \textit{feature map}.
+Thus, each node of the layer operates on a restricted region to understand if a feature is present or not.
+The operating regions are commonly overlapping and the feature map is shared among the nodes in the same layer.
+Due to the specific operation of convolutional layers, the number of nodes per layer decreased with each layer.
+
+\aclp{CNN} are nowadays widely used in image recognition with outstanding results and they improve with a steady pace.
 A technological application of this kind of network is the real time recognition of obstacles in a vehicle path, for safety and automation purposes in the automotive industry.
 
 \subsection{Other Types of NNs}
 \label{ssec:Other_Types_of_NNs}
 By changing the topology of the nodes distribution and their connections, one obtain other networks that cannot be catalogued under the class of feedforward networks.
-Moreover, those different types of network are not a niche, but they are widely \ref{} studied as a different approaches to the same or additional problems.
+Moreover, those different types of network are not a niche, but they are widely studied as a different approaches to the same or additional problems.
 
 \subsubsection{Recurrent NN}
 \label{sssec:Recurrent_NN}
@@ -388,7 +402,7 @@ It claims that it is not necessary to learn all the weights of the network, as i
 \end{figure}
 
 \noindent This kind of networks, then, can be trained much faster than their respective counterparts, i.e. feedforward and recurrent.
-The question over which training method is correct is still debated and literature does not provide clear answers yet.
+The question over which training method is more efficient is still debated and literature does not provide clear answers yet.
 
 %\subsubsection{Modular NN}
 %\label{sec:Modular_NN}
