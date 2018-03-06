@@ -1,0 +1,84 @@
+\tikzsetnextfilename{pump_setup}
+% Define size/space
+\def\loopsize{.8cm}
+\def\loopoffset{0.2cm}
+% Define the loops
+\def\myloops#1#2{
+\begin{scope}[shift={#1}, scale=#2]
+        % Draw the baseline
+    \draw (-\loopoffset,0) -- (\loopoffset,0);
+        % Draw the loops
+    \draw (-\loopoffset,0)	node [draw, thick, circle, anchor=south, minimum size=\loopsize] (id) {};
+    \draw (0,0) 						node [draw, thick, circle, anchor=south, minimum size=\loopsize] (id) {};
+    \draw (\loopoffset,0) 	node [draw, thick, circle, anchor=south, minimum size=\loopsize] (id) {};
+\end{scope}
+}
+
+\begin{tikzpicture}
+	[
+	source/.style ={
+		draw, rectangle, inner sep=6pt, anchor=west
+		},
+	VOA/.style ={
+		draw, circle, inner sep=2pt, fill=white, anchor=west
+		},
+	sample/.style={
+		draw, chamfered rectangle, chamfered rectangle=8pt, anchor=west
+		},
+	coupler/.style={
+		draw, rounded rectangle, rounded rectangle right arc=none, anchor=west, inner sep=2pt
+		},
+	thick,
+	] %radius=5, inner sep=0pt,	minimum size=3mm}
+	
+	\draw (0,0) node [source, align=center] (tunics)
+									{\small TUNICS\\\tiny + \\\small EYDFA}
+					node [above] at (tunics.north) {source}
+					node [below] at (tunics.south) {amplified}
+				(tunics.east)
+%				++(0.6, 0) node [source] (eydfa) {EYDFA}
+%					node [above] at (eydfa.north) {amplifier}
+%				(eydfa.east)
+				++(0.6, 0) node [VOA] (circ) {$\scriptstyle\circlearrowright$}
+%					node [above] at (circ.north) {circ}
+			  (circ.east)
+				++(0.6, 0) node [coupler] (couplerA) {\tiny(a)}
+					node [above] at (couplerA.north east) {\tiny .5}
+					node [below] at (couplerA.south east) {\tiny .5}
+			   +(1.0,-1.2) node [source] (osa) {OSA}
+					node [below] at (osa.south) {detector}
+				(couplerA.east)
+				++(1.2, 0) node (polarizer) {}
+				++(1.2, 0) node [coupler] (couplerB) {\tiny(b)}
+					node [above] at (couplerB.north east) {\tiny .9}
+					node [below] at (couplerB.south east) {\tiny .1}
+				(couplerB.east)
+				++(1.0, 0) node [VOA] (voa) {$\scriptstyle\nearrow$}
+					node [above] at (voa.north) {voa}
+			   +(0.0,-1.2) node [source] (detectorB) {Ge B}
+					node [below] at (detectorB.south) {detector}
+			  (voa.east)
+				++(0.6, 0) node [sample] (sample) {sample}
+				(sample.east)
+				++(0.6, 0) node [source] (detectorA) {Ge A}
+					node [above] at (detectorA.north) {detector};
+	
+	\myloops{(polarizer)}{1}
+	\node [below] at (polarizer) {polarizer};
+
+	\draw (tunics) -- ++(circ) node [pos=.85, above] {\tiny (1)}
+				(circ) -- (couplerA) node [pos=.15, above] {\tiny (2)}
+				(circ) to [out=225, in=90] ++(-0.4,-0.6) node [circle, inner sep=1pt, black, fill=black] {}
+																								node [below] {\tiny (3)}
+				(circ) to [out=315, in=90] ++(+0.4,-0.6) node [circle, inner sep=1pt, black, fill=black] {}
+																								node [below] {\tiny (4)}
+				(couplerA.20) to [out=0, in=180] (polarizer)
+				(couplerA.-20) to [out=0, in=180] (osa)
+				(polarizer) to (couplerB)
+				(couplerB.20) to [out=0, in=180] (voa)
+				(couplerB.-20) to [out=0, in=180] (detectorB)
+				(voa) -- (sample)
+				(sample) -- (detectorA)
+				;
+
+\end{tikzpicture}

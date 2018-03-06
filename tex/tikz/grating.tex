@@ -1,0 +1,29 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{grating}
+
+\begin{tikzpicture}[	baseline]
+	
+	\begin{axis}[
+			title={Grating Transmission Efficiency},
+			xlabel={Wavelength [\si{\nm}]},
+			ylabel={Transmission Efficiency},
+%			tick align=outside,
+%			tick pos=left,
+			width=\textwidth*0.75,%
+			height=207pt,
+			legend pos = outer north east,
+			cycle list name=color list,
+			/pgf/number format/1000 sep=,
+			yticklabels={,,0.06,0.08,0.1,0.12},
+		]
+    
+%		\addlegendentry{\hspace{-.6cm}output}
+%		\addlegendimage{empty legend};
+	  
+%		\addplot [black, domain=1510:1570, forget plot] {x};
+    \addplot [red, mark=*] table [x index=0, y index=1] {tikz/grating.csv};
+%    \addlegendentry{ $y=mx+q$ }
+    
+	\end{axis}
+	
+\end{tikzpicture}

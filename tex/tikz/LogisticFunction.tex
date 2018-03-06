@@ -6,11 +6,14 @@
 			title ={$\mathrm{Logistic}(x)$},%
 			xlabel={$x$},%
 %			ylabel={$\mathrm{Logistic}(x)$},%
+			thick,
+			samples=101,
+			smooth
 		]
 		\newcommand\LIM{10}
-		\addplot [blue, 	domain=-\LIM:\LIM,		samples=101, smooth,]	{(1+exp(-0.5*x))^-1};
-		\addplot [blue, 	domain=-\LIM:\LIM,		samples=101, smooth,]	{(1+exp(-1.0*x))^-1};
-		\addplot [blue, 	domain=-\LIM:\LIM,		samples=101, smooth,]	{(1+exp(-2.0*x))^-1};
-		\addplot [blue, 	domain=-\LIM:\LIM,		samples=101, smooth,]	{(1+exp(-5.0*x))^-1};
+		\addplot [cyan, 		domain=-\LIM:\LIM]	{(1+exp(-0.5*x))^-1};
+		\addplot [blue,	 	domain=-\LIM:\LIM]	{(1+exp(-1.0*x))^-1};
+		\addplot [magenta,	domain=-\LIM:\LIM]	{(1+exp(-2.0*x))^-1};
+		\addplot [red, 		domain=-\LIM:\LIM]	{(1+exp(-5.0*x))^-1};
 	\end{axis}
 \end{tikzpicture}

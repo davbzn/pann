@@ -30,7 +30,7 @@
 	
 	\begin{axis}[
 			title={Bistability region power limits},
-			xlabel={Wavelength [\si{\nm}]},
+			xlabel={Wavelength Detuning [\si{\nm}]},
 			ylabel={Output Power [\si{\uW}]},
 			scaled x ticks = manual:{$+\SI{\Central}{\nm}$}{ \pgfmathparse{#1-\Central }},
 			tick align=outside,
@@ -41,7 +41,7 @@
 			error bar legend,
 		]
     
-		\newcommand{\f}{3};
+		\newcommand{\f}{0.6};
     
 %		\addlegendentry{\hspace{-.6cm}output}
 %		\addlegendimage{empty legend};

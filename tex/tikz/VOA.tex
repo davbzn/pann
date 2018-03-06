@@ -1,0 +1,19 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{VOA}
+
+\begin{tikzpicture}[	baseline ]
+	
+	\begin{axis}[
+			title={VOA Calibration},
+			xlabel={Control Signal [\si{\V}]},
+			ylabel={VOA Transparency},
+			width=\textwidth*0.75,%
+			height=207pt,
+			legend pos = outer north east,
+		]
+		
+    \addplot [mark=+] table [x index=0, y expr=\thisrowno{1}/1.519545] {tikz/VOA_calibration.csv};
+    
+	\end{axis}
+	
+\end{tikzpicture}

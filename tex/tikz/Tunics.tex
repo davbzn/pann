@@ -1,0 +1,63 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{TUNICS}
+
+\begin{tikzpicture}[	baseline,
+										spy using outlines={circle, magnification=5, connect spies}
+										]
+	
+	\begin{axis}[
+			title={Source Calibration},
+			xlabel={Source Wavelength [\si{\nm}]},
+			ylabel={OSA Wavelength [\si{\nm}]},
+%			tick align=outside,
+%			tick pos=left,
+			width=\textwidth*0.75,%
+			height=207pt,
+			legend pos = outer north east,
+			cycle list name=color list,
+			/pgf/number format/1000 sep=,
+			grid = major,
+			ytick={1510, 1520, 1530, 1540, 1550, 1560, 1570},
+		]
+    
+%		\addlegendentry{\hspace{-.6cm}output}
+%		\addlegendimage{empty legend};
+	  
+		\addplot [black, domain=1510:1570, forget plot] {x};
+    \addplot [red, mark=*] table [x index=0, y index=1] {tikz/tunics_calibration.csv};
+    \addlegendentry{ $y=mx+q$ }
+		\addlegendentry{\hspace{-.6cm}m=0.9425}
+		\addlegendimage{empty legend};
+		\addlegendentry{\hspace{-.6cm}q=87.4754}
+		\addlegendimage{empty legend};
+		\addlegendentry{\hspace{-.6cm}standard error}
+		\addlegendimage{empty legend};
+		\addlegendentry{\hspace{-.6cm}0.0005}
+		\addlegendimage{empty legend};
+
+		% slope=0.9425054945054935,
+		% intercept=87.47538461538625,
+		% rvalue=0.999998547069192,
+		% pvalue=8.306111526948216e-32,
+		% stderr=0.0004844238149507297
+
+		% 1533 resonance
+		\draw [orange] (1532.675, {1532.675-0.2375}) -- (1532.675, {1532.675+0.2375});
+		
+		\coordinate (spypoint33) at (1532.675,1532.675);
+%		\coordinate (magnifyglass33) at (1525,1555);
+		\coordinate (magnifyglass33) at (1545,1525);
+
+		% 1552 resonance
+		\draw [orange] (1551.900, {1551.900-0.3}) -- (1551.900, {1551.900+0.3});
+		
+		\coordinate (spypoint52) at (1551.9,1551.9);
+%		\coordinate (magnifyglass52) at (1555,1525);
+		\coordinate (magnifyglass52) at (1565,1525);
+    
+	\end{axis}
+	
+	\spy [cyan, size=2cm] on (spypoint33) in node[fill=white] at (magnifyglass33);	
+	\spy [cyan, size=2cm] on (spypoint52) in node[fill=white] at (magnifyglass52);	
+	
+\end{tikzpicture}

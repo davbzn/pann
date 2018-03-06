@@ -56,12 +56,13 @@ nSi = 3.48           # Silicon refractive index
 n0 = nSi             # standard refractive index
 n2 = 4.5e-18         # [1/(W/m²)]  intensity-dependent refractive index
 dndT = 1.86e-4       # [1/K]
-dndN = -4.2e-27      # [m³]
-dαdN =  1.45e-15     # [m²]
-βtpa =  0.79e-11     # [m/W]
+dndN = -1.7e-27      # [m³]
+dαdN =  1.1e-15      # [m²]
+βtpa =  0.75e-11     # [m/W]
 
-κ	= 0.10           # [1]
-𝛾	= 0.9			 # [1]
+#[for 0.6nm @ 1552nm, either κ = 0.2 & 𝛾 = 0.95, or κ = 0.1 & 𝛾 = 0.92 ]
+κ = 0.2              # [1]
+𝛾 = 0.95             # [1]
 
 ### RENORMALIZED CONSTANTS and PARAMETERS
 
@@ -92,11 +93,11 @@ M0 = 1 # [Kg]
 ñL    = 2*np.pi*ñR   # [m /L0 ]=[1] core length
 ñV    = ñL*ñwga      # [m³/L0³]=[1] ~ core volume
 
-ñMCpV = MCpV*T0*L0**3/(P0/f0)	# [J/K/m³]
+ñMCpV = MCpV*T0*L0**3/(P0/f0)   # [J/K/m³]
 
 ### standard wavelength
-ñλ0 = λ0/L0       	# [m]
-ñω0 = c0/λ0/f0      # ~ 193.1 e12 [Hz] or 0.1931 [PHz]
+ñλ0 = λ0/L0          # [m]
+ñω0 = c0/λ0/f0       # ~ 193.1 e12 [Hz] or 0.1931 [PHz]
 
 ñ𝛾TH = 𝛾TH/f0        # [Hz/PHz]=[1]
 ñ𝛾FC = 𝛾FC/f0        # [Hz/PHz]=[1]

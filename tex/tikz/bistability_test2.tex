@@ -38,15 +38,15 @@
 	\definecolor{color9}{rgb}{0.25,0.25,0.99}
 	
 	\begin{axis}[
-			title={Internal Power},
+			title={Transmitted Power to Drop Channel},
 			xlabel={Pump Power [\si{mW}]},
-			ylabel={Internal Power [arb.units]},
-			tick align=outside,
-			tick pos=left,
+			ylabel={$D(\lambda)$ [\si{\mW}]},
+%			tick align=outside,
+%			tick pos=left,
 			width=\textwidth*0.75,%
 			height=207pt,
 			legend pos = outer north east,
-			cycle list name=color list,
+			%cycle list name=color list,
 			forget plot style={opacity=0.4},
 		]
 		\addlegendentry{\hspace{-.6cm}$\Delta\lambda$ in \si{\pm}}

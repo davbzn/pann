@@ -14,38 +14,39 @@
 	\path [name path=inner] (0,0) circle [radius=5.085];
 	\path [name path=outer] (0,0) circle [radius=5.505];
 %	%distance between waveguides is 9.848
-	\path [name path=leftwg]  (-4.924,-6) rectangle (-5.344,+6);
-	\path [name path=rightwg] (+4.924,-6) rectangle (+5.344,+6);
+	\path [name path=belowwg] (-6,-4.924) rectangle (+6,-5.344);
+	\path [name path=abovewg] (-6,+4.924) rectangle (+6,+5.344);
 	
-	\path [name intersections={of=inner and leftwg, name=leftyin}];
-	\path [name intersections={of=outer and leftwg, name=leftyout}];
+	\path [name intersections={of=inner and abovewg, name=abovein}];
+	\path [name intersections={of=outer and abovewg, name=aboveout}];
 	
-	\path [name intersections={of=inner and rightwg, name=rightyin}];
-	\path [name intersections={of=outer and rightwg, name=rightyout}];
+	\path [name intersections={of=inner and belowwg, name=belowin}];
+	\path [name intersections={of=outer and belowwg, name=belowout}];
 	
 	\draw [black!50, line join=round, rounded corners=1pt, fill=gray!20]
-		(-4.924,-6) -- (-5.344,-6) -- (leftyout-4)
-		.. controls ++(+103:1) and ++(-103:1) .. (leftyout-2)
-		-- (-5.344,+6) -- (-4.924,+6) -- (leftyin-1)
-		.. controls ++(-102:1) and ++(+102:1) .. (leftyin-2)
+		(-6,+4.924) -- (-6,+5.344) -- (aboveout-3)
+		.. controls ++(+13:1) and ++(+167:1) .. (aboveout-1)
+		-- (+6,+5.344) -- (+6,+4.924) -- (abovein-1)
+		.. controls ++(+168:1) and ++(+12:1) .. (abovein-2)
 		-- cycle;
 	
 	\draw [black!50, line join=round, rounded corners=1pt, fill=gray!20]
-		(+4.924,-6) -- (+5.344,-6) -- (rightyout-4)
-		.. controls ++(+77:1) and ++(-77:1) .. (rightyout-2)
-		-- (+5.344,+6) -- (+4.924,+6) -- (rightyin-1)
-		.. controls ++(-78:1) and ++(+78:1) .. (rightyin-2)
+		(-6,-4.924) -- (-6,-5.344) -- (belowout-1)
+		.. controls ++(-13:1) and ++(+193:1) .. (belowout-3)
+		-- (+6,-5.344) -- (+6,-4.924) -- (belowin-2)
+		.. controls ++(+192:1) and ++(-12:1) .. (belowin-1)
 		-- cycle;
 	
-	\draw [semithick, -stealth] (+6.0,-6) -- (+6.0,-5) node [midway, right] {\texttt{A}};
-	\draw [semithick, -stealth] (+6.0,+5) -- (+6.0,+6) node [midway, right] {\texttt{D}};
-	\draw [semithick, -stealth] (-6.0,-5) -- (-6.0,-6) node [midway, left] {\texttt{T}};
-	\draw [semithick, -stealth] (-6.0,+6) -- (-6.0,+5) node [midway, left] {\texttt{I}};
+	\draw [semithick, -stealth] (-6,+6.0) -- (-5,+6.0) node [midway, above] {\texttt{I}};
+	\draw [semithick, -stealth] (+5,+6.0) -- (+6,+6.0) node [midway, above] {\texttt{T}};
+	\draw [semithick, -stealth] (-5,-6.0) -- (-6,-6.0) node [midway, below] {\texttt{D}};
+	\draw [semithick, -stealth] (+6,-6.0) -- (+5,-6.0) node [midway, below] {\texttt{A}};
 	
-	\draw [-stealth, visible on=<1->] (0,0) -- ++(60:4.43) node [left, midway] {$R_{in}$};
+	\draw [-stealth, visible on=<1>]  (0,0) -- ++(60:4.43) node [left, midway] {\scriptsize $R_{in}$};
+	\draw [-stealth, visible on=<2->] (0,0) -- ++(60:4.43) node [left, midway] {\scriptsize\SI{4.43}{\um}};
 				
-	\draw [|-|, black, visible on=<2->] (+0,+4.430) -- (+0,+4.910) node [pin=+90:\scriptsize\SI{0.48 }{\um}] {};
-	\draw [|-|, black, visible on=<3->] (+4.924,-5) -- (+5.344,-5) node [pin=200:\scriptsize\SI{0.42 }{\um}] {};
-	\draw [|-|, black, visible on=<3->] (-4.924,+0) -- (-5.085,+0) node [pin=340:\scriptsize\SI{0.175}{\um}] {};
+	\draw [|-|, black, visible on=<2->] (+4.430,+0) -- (+4.910,+0) node [pin=+45:\scriptsize\SI{0.48 }{\um}] {};
+	\draw [|-|, black, visible on=<2->] (+5,-5.344) -- (+5,-4.924) node [pin=+45:\scriptsize\SI{0.42 }{\um}] {};
+	\draw [|-|, black, visible on=<2->] (+0,-4.924) -- (+0,-5.085) node [pin=+90:\scriptsize\SI{0.175}{\um}] {};
 
 \end{tikzpicture}

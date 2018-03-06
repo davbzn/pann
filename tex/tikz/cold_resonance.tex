@@ -6,11 +6,11 @@
 	\definecolor{color1}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
 	
 	\begin{axis}[
-			title={Internal Power},
-			xlabel={Wavelength distance $\Delta\lambda$ [\si{\nm}]},
-			ylabel={Internal Power [arb.units]},
-			tick align=outside,
-			tick pos=left,
+			title={Transmitted Power to Drop Channel},
+			xlabel={Wavelength Detuning $\Delta\lambda$ [\si{\nm}]},
+			ylabel={$D(\lambda)$ [\si{\mW}]},
+%			tick align=outside,
+%			tick pos=left,
 			width=\textwidth*0.75,%
 			height=207pt,
 			legend pos = outer north east,
@@ -23,7 +23,7 @@
     		table [x index=0, y index=1] {tikz/triangles.csv};
    	\pgfplotstableread{tikz/triangles.csv}\table 
 		\pgfplotstablegetcolumnnamebyindex{1}\of{\table}\to{\colname}
-    \addlegendentryexpanded{ \SI{\colname}{\mW}}
+    \addlegendentryexpanded{ \SI{\colname}{\mW} }
     
 	\end{axis}
 \end{tikzpicture}

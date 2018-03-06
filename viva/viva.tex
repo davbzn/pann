@@ -13,14 +13,11 @@
 \usepackage{FiraSans}
 \usepackage{FiraMono}
 
+\usepackage{pgfpages}
+
 \usepackage{lmodern}
 
 \usepackage[binary-units = true]{siunitx}
-\DeclareSIUnit{\bps}{bps}
-
-% create plots
-%\usepackage{pgfplots} % README here http://pgfplots.sourceforge.net/pgfplots.pdf
-%\pgfplotsset{compat=1.14}
 
 % externalize tikz images
 \usepackage{tikz}							% externalize tikz images
@@ -59,15 +56,6 @@
 								overlay-beamer-styles,
 								mindmap,trees,shadows}
 
-% should do transition things
-%\tikzset{
-%    invisible/.style={opacity=0,text opacity=0},
-%    visible on/.style={alt=#1{}{invisible}},
-%    alt/.code args={<#1>#2#3}{%
-%      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
-%    },
-%}
-
 \usepackage[
   backend     = biber,
   style       = phys,
@@ -79,8 +67,11 @@
 \addbibresource{../tex/bib_websites.bib}
 \usepackage{csquotes}
 \renewcommand{\footnotesize}{\tiny}%{\scriptsize}
+%\setbeamerfont{bibliography entry note}{size=\tiny}
 %\renewcommand*{\bibfont}{\scriptsize}
 %\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+%\setbeameroption{show notes on second screen}
 
 \author[D. Bazzanella]{Davide Bazzanella}
 \title[All-Optical Neural Networks]{Optical Bistability As Neural Network Nonlinear Activation Function}
@@ -118,7 +109,9 @@
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
 \section[Introduction]{Introduction}
 \begin{frame}{All-optical Artificial Neural Networks}
-	Applying integrated photonics to artificial neural networks
+	Applying integrated photonics to artificial neural networks architecture design
+	
+	Develop simulations on standard software libraries that help performance comparisons
 \end{frame}
 
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
@@ -141,6 +134,9 @@
 	\end{figure}
 \end{frame}
 %
+%\begin{frame}[standout]
+%	What can they do?
+%\end{frame}
 \begin{frame}[c]{What can they do?}
 	\center \huge What can they do?
 \end{frame}
@@ -169,20 +165,32 @@
 \begin{frame}[c]{How do they work?}
 	\center \huge How do they work?
 	
-	\tikzsetexternalprefix{tikz/}	% set subfolder
-	\tikzsetnextfilename{test}
 	\tikzset{external/export next=false}
-	\begin{tikzpicture}[remember picture,overlay]
-    \draw [line width=10mm,opacity=.25] (current page.center) circle (3cm);
+	\begin{tikzpicture}[remember picture, overlay]
+    \draw [line width=10mm, opacity=.25] (current page.center) circle [radius=2cm];
+    \node (c) at (current page.center) {};
+%    \draw [->, very thick,red,opacity=0.5] (c) to[bend right] (current page.south east);
+%    \draw [overlay , ->, very thick,red,opacity=0.5] (c) to[bend right] (n1);
 		%\node [rotate=60,scale=2,text opacity=0.2] at (current page.center) {Example};
 	\end{tikzpicture}
 \end{frame}
+%\begin{frame}{How do they work?}
+%	ANNs can obtain arbitrary decision regions\footnotemark
+%	
+%	\vspace*{2em}
+%	The amount of free parameters in an ANN, allow ..
+%	\footnotetext{\fullcite{duda2012pattern}}%\footfullcite{duda2012pattern}
+%\end{frame}
 \begin{frame}{How do they work?}
 	ANNs can obtain arbitrary decision regions\footnotemark
 	
 	\vspace*{2em}
-	The amount of free parameters in an ANN, allow ..?
+	The amount of free parameters in an ANN, allow ..
+	\tikzset{external/export next=false}\tikz[remember picture] \node [circle,fill=red!50] (n1) {};
+	?
 	\footnotetext{\fullcite{duda2012pattern}}%\footfullcite{duda2012pattern}
+	
+	\tikzset{external/export next=false}\tikz[remember picture,overlay] \draw [->, very thick,red,opacity=0.5] (c)++(-\textwidth,0) to[bend right] (n1);
 \end{frame}
 \begin{frame}{How do they work?}
 	\begin{itemize}[<+->]
@@ -202,7 +210,14 @@
 \begin{frame}{MRR}
 	\begin{columns}
 		\column{0.45\textwidth}
-		placeholder
+		Consider a MRR in the \textit{Add-Drop Filter} configuration
+		\begin{align*}
+			\texttt{T} \left( \omega \right) &= f \left[ ~\texttt{I} \left( \omega \right) ~\right] \\
+			\texttt{D} \left( \omega \right) &= f \left[ ~\texttt{I} \left( \omega \right) ~\right]
+		\end{align*}
+		
+		\visible<3->{Coupling is governed by
+		\[\tau \quad \mathrm{and} \quad \kappa.\]}
 		\column{0.45\textwidth}
 		\begin{figure}
 			\centering
@@ -218,7 +233,9 @@ Linear
 Nonlinear
 \end{frame}
 \begin{frame}{Experiments}
-Setup
+	\begin{figure}
+	\input{tikz/pump_setup.tex}
+	\end{figure}
 \end{frame}
 
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
@@ -228,9 +245,27 @@ What means simulating?
 PyTorch library
 \end{frame}
 \begin{frame}{Fundamental blocks}
-model ($FF[f_a]$)\\
-loss criteria (CEL)\\
-weight update criteria (SGD)
+	model ($FF[f_a]$)
+	
+	loss criteria (CEL)
+	
+	weight update criteria (SGD)
+\end{frame}
+\begin{frame}
+	model ($FF[f_a]$)
+\end{frame}
+\begin{frame}
+	\textit{Cross-Entropy Loss} (also known as negative log likelihood),
+	\begin{equation*}
+		L(y, \hat{y}) = f_{CEL}(y, \hat{y}) = - \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C y_{n,i} \log \left( \hat{y}_{n,i} \right)
+	\end{equation*}
+\end{frame}
+\begin{frame}
+	\textit{Stochastic Gradient Descent}
+	
+	 with \textit{momentum}
+	 
+	 and \textit{learning rate scheduler}.
 \end{frame}
 \begin{frame}{Operation Tests}
 ReLU vs Sigmoid vs $f_{fit}$
@@ -238,10 +273,25 @@ ReLU vs Sigmoid vs $f_{fit}$
 
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%
 \section{Conclusion}
-\begin{frame}{Conclusions}
-	Overview
-	Improvements
-	Future Perspective
+\begin{frame}{Overview}
+
+	{I assembled an experimental setup from scratch}
+	
+	\vspace{1em}
+	{I characterized the response of the MRR in several aspects}
+	
+	\vspace{1em}
+	{I implemented the bistable response in standard software libraries}
+\end{frame}
+\begin{frame}{Future Perspectives}
+	\visible<1->{Continue the current work with a quantitative analysis of specific features}
+	
+	\vspace{1em}
+	\visible<2->{Enhance the physical theory to describe time dependent phenomena}
+	
+	\vspace{1em}
+	\visible<3->{Proceed with the development of the simulations to include all the characteristics of the physical system}
+%	Proceed with the implementation of physical characteristics in the simulations
 \end{frame}
 
 %\section[]{References}

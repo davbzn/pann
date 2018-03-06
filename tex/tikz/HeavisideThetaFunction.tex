@@ -6,9 +6,11 @@
 			title ={$\Theta(x)$},%
 			xlabel={$x$},%
 %			ylabel={$\Theta(x)$},%
+			thick,
+			smooth,
 		]
 		\newcommand\LIM{5}
-		\addplot [blue, domain=-\LIM:0,	smooth,]	{0};
-		\addplot [blue, domain=0:\LIM,		smooth,]	{1};
+		\addplot [blue, domain=-\LIM:0]	{0};
+		\addplot [blue, domain=+0:\LIM]	{1};
 	\end{axis}
 \end{tikzpicture}

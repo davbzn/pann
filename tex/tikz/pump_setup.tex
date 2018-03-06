@@ -43,41 +43,43 @@
 				++(0.6, 0) node [VOA] (circ) {$\scriptstyle\circlearrowright$}
 %					node [above] at (circ.north) {circ}
 			  (circ.east)
-				++(0.6, 0) node [coupler] (couplerA) {\tiny(a)}
-					node [above] at (couplerA.north east) {\tiny .5}
-					node [below] at (couplerA.south east) {\tiny .5}
-			   +(1.0,-1.2) node [source] (osa) {OSA}
-					node [below] at (osa.south) {detector}
-				(couplerA.east)
 				++(1.2, 0) node (polarizer) {}
 				++(1.2, 0) node [coupler] (couplerB) {\tiny(b)}
-					node [above] at (couplerB.north east) {\tiny .9}
-					node [below] at (couplerB.south east) {\tiny .1}
+					node [above] at (couplerB.north east) {\tiny .99}
+					node [below] at (couplerB.south east) {\tiny .01}
 				(couplerB.east)
-				++(1.0, 0) node [VOA] (voa) {$\scriptstyle\nearrow$}
+				++(0.6,-1.2) node [coupler] (couplerA) {\tiny(a)}
+					node [above] at (couplerA.north east) {\tiny .5}
+					node [below] at (couplerA.south east) {\tiny .5}
+			  ++(1.2, 0) node [source] (osa) {OSA}
+					node [right] at (osa.east) {detector}
+			  ++(0.0,-1.2) node [source] (detectorB) {PD-B}
+					node [right] at (detectorB.east) {detector}
+				(couplerB.east)
+				++(0.6, 0) node [VOA] (voa) {$\scriptstyle\nearrow$}
 					node [above] at (voa.north) {voa}
-			   +(0.0,-1.2) node [source] (detectorB) {Ge B}
-					node [below] at (detectorB.south) {detector}
 			  (voa.east)
 				++(0.6, 0) node [sample] (sample) {sample}
 				(sample.east)
-				++(0.6, 0) node [source] (detectorA) {Ge A}
+				++(0.6, 0) node [source] (detectorA) {PD-A}
 					node [above] at (detectorA.north) {detector};
 	
 	\myloops{(polarizer)}{1}
 	\node [below] at (polarizer) {polarizer};
 
-	\draw (tunics) -- ++(circ) node [pos=.85, above] {\tiny (1)}
-				(circ) -- (couplerA) node [pos=.15, above] {\tiny (2)}
+	\draw (tunics) -- ++(circ)
+				(circ) node [above left] {\tiny (1)}
+				(circ) node [above right] {\tiny (2)}
 				(circ) to [out=225, in=90] ++(-0.4,-0.6) node [circle, inner sep=1pt, black, fill=black] {}
 																								node [below] {\tiny (3)}
 				(circ) to [out=315, in=90] ++(+0.4,-0.6) node [circle, inner sep=1pt, black, fill=black] {}
 																								node [below] {\tiny (4)}
-				(couplerA.20) to [out=0, in=180] (polarizer)
-				(couplerA.-20) to [out=0, in=180] (osa)
+				(circ) to (polarizer)
 				(polarizer) to (couplerB)
 				(couplerB.20) to [out=0, in=180] (voa)
-				(couplerB.-20) to [out=0, in=180] (detectorB)
+				(couplerB.-20) to [out=0, in=180] (couplerA)
+				(couplerA.20) to [out=0, in=180] (osa)
+				(couplerA.-20) to [out=0, in=180] (detectorB)
 				(voa) -- (sample)
 				(sample) -- (detectorA)
 				;

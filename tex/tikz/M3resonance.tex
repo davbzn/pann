@@ -14,16 +14,13 @@
 %	\definecolor{color9}{rgb}{0.25,0.25,0.99}
 	
 	\begin{axis}[
-			title={Output Power},
+			title={Transmission},
 			xlabel={Wavelength [\si{\nm}]},
-			ylabel={Output Power [\si{\uW}]},
-			tick align=outside,
-			tick pos=left,
+			ylabel={Transmission},
 			width=\textwidth*0.75,%
 			height=207pt,
-			legend pos = north east,
-			cycle list name=color list,
-			xmin=1547, xmax=1557,
+			legend pos = outer north east,
+			xmin=1548, xmax=1556,
 			/pgf/number format/1000 sep=,
 		]
     
@@ -34,11 +31,12 @@
 		
 %	  \pgfplotstableread[col sep=tab]{tikz/M1.csv}\tableM1
 	  
-		\addplot [semithick, color1] table [x index=0, y index=1] {tikz/M3.csv};
+		\addplot [semithick, cyan] table [x index=0, y index=1] {tikz/res1552.csv};
 		\addlegendentryexpanded{ $dr_1$ }
 		
-		\draw [<-] (1552.55, 0.019) -- (1553.05, 0.019) node [right] {\scriptsize $FWHM$}; %0.5665693/2 = 0.283
-		\draw [<-] (1551.80, 0.019) -- (1551.30, 0.019) {};
+		\draw [<-] ({1551.9+0.30+0.1}, 0.306) -- ({1551.9+1.5}, 0.306)
+				node [right] {\small $FWHM$}; 
+		\draw [<-] ({1551.9-0.4-0.1}, 0.306) -- ({1551.9-1.5}, 0.306);
     
 	\end{axis}
 \end{tikzpicture}

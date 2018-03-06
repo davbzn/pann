@@ -16,14 +16,15 @@
 	\begin{axis}[
 			title={Output Power},
 			xlabel={Wavelength [\si{\nm}]},
-			ylabel={Output Power [\si{\uW}]},
-			tick align=outside,
-			tick pos=left,
+			ylabel={Transmission},
+%			tick align=outside,
+%			tick pos=left,
 			width=\textwidth*0.75,%
 			height=207pt,
 			legend pos = outer north east,
 			cycle list name=color list,
 			/pgf/number format/1000 sep=,
+			xtick distance=3,
 		]
     
 		\addlegendentry{\hspace{-.6cm}output}
@@ -34,10 +35,10 @@
 %	  \pgfplotstableread[col sep=tab]{tikz/M1.csv}\tableM1
 	  
     \pgfplotsinvokeforeach{1,2,...,8}{
-        \addplot [semithick, color#1] table [x index=0, y index=#1] {tikz/M3.csv};
+        \addplot [semithick, color#1] table [x index=0, y index=#1] {tikz/m3.csv};
         \addlegendentryexpanded{ $dr_#1$ }
     }
-		\addplot [semithick, color9] table [x index=0,y index=9] {tikz/M3.csv};
+		\addplot [semithick, color9] table [x index=0,y index=9] {tikz/m3.csv};
     \addlegendentry{ $th$ }
     
 	\end{axis}

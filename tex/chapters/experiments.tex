@@ -1,37 +1,72 @@
 \chapter{Samples, setup and experiments}
 \label{ch:experiments}
 
-All the experiments have been carried out on samples manufactured for the IRIS project \cite{testa2016design}.
-This is due to the fact that in the time frame of this work there would have not been enough time to design and produce an ad hoc device.
-Moreover, as already stated, the aim of this thesis is to produce a proof of concept for an all-optical implementation of an activation function, rather than to construct a complete prototype.
-With the knowledge obtained during this work, future researches could design new structures by focusing on the correct parameters.
+All the experiments have been carried out on \acs{PIC} developed within a FP7 project (IRIS, \cite{testa2016design}) that aimed to develop an optical router.
+An optical router is a matrix of microresonators whose resonances are tuned at will to (re)direct an optical signal along a predefined path.
+We exploit the nonlinear optical response of these nodes to demonstrate the feasibility of an all optical nonlinear activation function made on PIC.
+
+%All the experiments have been carried out on samples manufactured for the IRIS project \cite{testa2016design}.
+%This is due to the fact that in the time frame of this work there would have not been enough time to design and produce an ad hoc device.
+%Moreover, as already stated, the aim of this thesis is to produce a proof of concept for an all-optical implementation of an activation function, rather than to construct a complete prototype.
+%With the knowledge obtained during this work, future researches could design new structures by focusing on the correct parameters.
 
 \section{The samples}
 The IRIS project studied the design and the implementation of an integrated reconfigurable silicon photonics switch matrix, a routing device, as a replacement for electronic devices used in the telecommunication industry.
 The completed integrated photonic circuit consists of a matrix of waveguides crossing each other and linked by couples of racetrack resonators, thermally-controlled.
 At the ends of the waveguides other structures, interleavers and \acsp{AWG}, allowed many signals at different wavelengths to be multiplexed/demultiplexed onto/from the same waveguide.
 
-The complexity of such photonic circuit required outstanding precision in the design and the fabrication.
-Hence, for preliminary testing purposes, each and every structure of which the full device is composed, has been manufactured repeatedly with several small variations.
-For example, several microrings in the \ac{ADF} configuration have been fabricated with different radius, or different ring-waveguide gap.
-The collection of all these testing structures on the same chip was produced in a few samples.
-All these test structures as well as a fully completed switch matrix were disposed on a single chip, accessible via grating couplers.
+\begin{figure}[hbtp]
+	\centering
+	\input{tikz/IRIS.tex}
+	\caption{Scheme of a routing node of the full \acs{PIC} of IRIS. $\lambda_0$ travels from the input port to the through port; $\lambda_5$ is redirected from the input port to the drop port; $\lambda_3$ is redirected from an add port to the through port.}
+	\label{fig:fullmatrix}
+\end{figure}
 
-The first step of this work therefore has been to characterize qualitatively the response of some devices among the single structures, the short sequences of structures, and the full switch matrix itself.
-After many trials of different devices, my final choice was to study a system of intermediate complexity.
-In fact, since the work in this thesis is like the first step in a long journey, with this choice I tried to obtain a compromise between simplicity in immediate future (current work) and adaptability in the long term.
-For example, the current structure allowed me to study the nonlinear activation function, but could be reused in the future to study the weighted sum.
+Each node of the matrix can be modeled by a microring resonator in \acs{ADF} configuration (see \autoref{ssec:Microring_optical_cavity}).
+Any signal that enters a node detuned from the resonance of the microring is directed toward the through port of the node.
+On the other hand, any signal that enters a node in resonance with the microring is redirected toward the drop port.
+\autoref{fig:fullmatrix} shows the scheme of a node in the full \acs{PIC}, where the signals is routed.
 
-The structure selected is the following: a simple waveguide, coupled to eight drop channels by a single or a couple of ring resonators each, nicknamed \textit{mini-matrix}.
-In this family of devices, there were those built with single microrings, double microrings, single racetracks, or double racetracks.
-The final choice was to study the \textit{mini-matrix} in which the coupling mechanism was provided by single ring resonators, because of its simpler transfer function in respect to double microrings or double racetracks.
-\autoref{fig:photo_minimatrix} shows a magnified photograph of the device chose, while \autoref{fig:minimatrix_scheme} shows a simplified (not in scale) scheme of the principal sub-structures of the \textit{mini-matrix}.
+%The complexity of such photonic circuit required outstanding precision in the design and the fabrication.
+%Hence, for preliminary testing purposes, each and every structure of which the full device is composed, has been manufactured repeatedly with several small variations.
+%For example, several microrings in the \ac{ADF} configuration have been fabricated with different radius, or different ring-waveguide gap.
+%The collection of all these testing structures on the same chip was produced in a few samples.
+%All these test structures as well as a fully completed switch matrix were disposed on a single chip, accessible via grating couplers.
+
+\newpage
+The development of the final IRIS chip has required several steps of improvement and few generation of test samples were fabricated with different optical properties.
+Thus the first step of the thesis has been to choose, among the many different devices available, the most promising ones.
+%characterize qualitatively the response of some devices among the single structures, the short sequences of structures, and the full switch matrix itself.
+%After many trials of different devices, my final choice was to study a system of intermediate complexity.
+%In fact, since the work in this thesis is like the first step in a long journey, with this choice I tried to obtain a compromise between simplicity in immediate future (current work) and adaptability in the long term.
+%For example, the current structure allowed me to study the nonlinear activation function, but could be reused in the future to study the weighted sum.
+The structure selected (nicknamed \textit{mini-matrix}) is shown in \autoref{fig:photos} and it is composed by: a waveguide, coupled to eight drop channels through ring resonators.
+In this family of devices, there were mini-matrices built with single microrings, double microrings, single racetracks, or double racetracks.
+%The final choice was to study the \textit{mini-matrix} in which the coupling mechanism was provided by single ring resonators, because of its simpler transfer function in respect to double microrings or double racetracks.
+\autoref{fig:minimatrix_scheme} shows a simplified scheme of the \textit{mini-matrix}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=50]{figures/2017_10_31_foto_contatti_ring.jpg}
-	\caption{Magnified photograph of the \textit{mini-matrix} device chosen. On the bottom, one input and nine output grating couplers are visible. }
-	\label{fig:photo_minimatrix}
+	\begin{subfigure}[b]{0.7\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{photos/minimatrix.png}
+		\caption{mini-matrix}
+		\label{fig:photo_minimatrix}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.345\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{photos/ring.png}
+		\caption{microring}
+		\label{fig:photo_ring}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.345\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{photos/grating.png}
+		\caption{grating}
+		\label{fig:photo_grating}
+	\end{subfigure}
+	\caption{Magnified photograph of the \textit{mini-matrix} device chosen (a) and two important structures: (b) microring resonator and (c) output grating couplers. }
+	\label{fig:photos}
 \end{figure}
 
 \begin{figure}[hbtp]
@@ -39,18 +74,18 @@ The final choice was to study the \textit{mini-matrix} in which the coupling mec
 %	\includegraphics[scale=.4]{figures/miniMATRIX_Klayout.png}\\
 	\input{tikz/miniMATRIX_scheme.tex}
 	\caption{
-		Simplified scheme of the \textit{mini-matrix} integrated photonic circuit, structures are not in scale.
-		Triangles (orange) are the grating couplers ($in$, $dr_{1-8}$, $th$), with the orientation respected by the symbol orientation.
+		Simplified scheme of the \textit{mini-matrix} integrated photonic circuit (structures are not in scale).
+		Triangles (orange) are the grating couplers ($in$, $dr_{1-8}$, $th$).
 		Waveguides and rings ($r_{1-8}$) are shown as thick grey lines.
-		The bigger (purple) highlighted area is a coupling region, the smaller (blue) area is a crossing between straight waveguides.
-		Bendings, crossings, and grating coupler are nontrivial structures which have their own typical response to wavelength and power.
+		The bigger (purple) highlighted area is a coupling region, shown in \autoref{fig:minimatrix_scheme_zoom}.
 	}
 	\label{fig:minimatrix_scheme}
 \end{figure}
 
-As an additional feature, each one of the microring resonators in the structure has been manufactured with thermo-electric heaters.
-Their purpose \cite{testa2016design} is to heat the rings and effectively shift the resonance frequency, which otherwise would be defined strictly by the geometry of the structure.
-\autoref{fig:minimatrix_scheme_zoom} shows the scheme of the microring resonator geometry, without any non-optical structure (e.g. heaters, metallic contacts).
+The resonance of each microring is strictly defined by the design of the structure, however it is ultimately changed by imperfections and uncertainties of the manufacturing process.
+Hence, since the optical router requires precise positioning of the resonances, their fine tuning is obtained by controlling the temperature of the material.
+Each one of the microring resonators in the structure has been manufactured with a thermo-electric heater, which is used to produce the thermo-optic effect (see \autoref{ssec:Thermal_nonlinearities}) in order to induce the required resonance tuning \cite{testa2016design}.
+\autoref{fig:minimatrix_scheme_zoom} shows the scheme of the microring resonator geometry, without any non-optical structures (e.g. heaters, metallic contacts).
 %This feature has never been exploited in this work, but could come of use in the future.
 
 \begin{figure}[htbp]
@@ -67,81 +102,125 @@ Their purpose \cite{testa2016design} is to heat the rings and effectively shift 
 
 \subsection{Initial characterization}
 \label{ssec:initial_characterization}
-To obtain an initial characterization of the sample, I arranged an experimental setup to measure its fundamental attributes.
-Among them there are the position of the resonances, the \acf{FSR}, and the \acf{FWHM} of the resonance transmission function.
+To obtain an initial characterization of the sample, I arranged an experimental setup to measure its fundamental attributes, such as the \acf{FSR}, the \acf{FWHM}, and the $Q$ factor of the resonances.
 These features can all be obtained through a study of the transmitted intensity in the through and drop channels, shown in \autoref{fig:minimatrix_scheme}.
-A scheme of the experimental setup used in showed in \autoref{fig:simple_setup} below.
+A scheme of the experimental setup used in showed in \autoref{fig:simple_setup}.
 
 \begin{figure}
 	\centering
 	\input{tikz/simple_setup.tex}
-	\caption{Scheme of the setup used to obtain an initial characterization of the sample.
-		The source is a TUNICS which produces a laser beam of up to \SI{8}{\mW} in the range of wavelength required (\SIrange{1500}{1580}{\nm}).
-		The second element is an optical circulator and the third is a fiber coupler (50\%:50\%).
-		Within the coupler the signal is split. One arm goes to an \ac{OSA}.
-		The other arm takes the signal to a polarizer which is then injected into the sample and finally extracted to be read by a Germanium-based photodetector.
+	\caption{Scheme of the setup used to obtain an initial characterization of the optical nodes.
+		%The source is an external cavity tunable laser that produces a laser beam of up to \SI{8}{\mW} in the range of wavelength required (\SIrange{1500}{1580}{\nm}).
+		The source is an external cavity tunable laser that produces a laser beam in the range \SIrange{1500}{1580}{\nm}.
+		The second element is an optical circulator and the third is a fiber polarizer.
+		After the signal is split into two arms (50\%:50\%): one goes to an \acs{OSA} and is used as reference during the measurements, while the other is fed into the sample.
+		Finally the intensity of the signal passed through the node is read by a Germanium \acs{PD} (PD-A).
 		}
 	\label{fig:simple_setup}
 \end{figure}
 
-The laser source used in this measures is a Yamatsu TUNICS T-100S tunable infrared laser.
+The laser source used in this measures is an external cavity Yamatsu TUNICS T-100S tunable infrared laser.
 It produces a linearly polarized continuous wave laser beam of optical power up to \SI{8}{\mW} in the wavelength range \SIrange{1500}{1580}{\nm}, with a minimum wavelength step of \SI{1}{\pm}.
 The generated light is injected into an optical circulator to protect the laser cavity from back-reflections.
 A circulator is a device that works similarly to a roundabout: input signals from the first port are directed only toward the second port. Similarly, signals injected in the second port are guided in the third port only and so on.
 The circulator used in the setup has four ports.
-Afterwards the beam is divided into two equal parts by means of a fiber coupler: one is analyzed by an \acf{OSA} and the other is brought to the sample.
+Afterwards the beam is divided into two equal parts by means of a fiber coupler: one is analyzed by an Anritsu 9710C \ref{} \acf{OSA} and the other is brought to the sample.
 
-The presence of an \ac{OSA} after the source is due to the fact that the self-referencing mechanism of the laser was not reliable.
-In fact, the actual wavelength emitted from it deviated rather sensibly from the supposed one.
-In order to correct this problem, I sampled the supposed-actual wavelength relationship with the \ac{OSA}, which allowed me to implement an online correction by exploiting the relative inverse function.
-In doing so, I assumed the \ac{OSA} as a reference with no error.
+The presence of an \ac{OSA} after the source is due to the fact that the self-referencing mechanism of the laser that occurs during its initialization was not reliable.
+In fact, I observed that measures of the resonance taken in different days (after reinitializing the source) showed different values for the resonance.
+Hence I analyzed the wavelength emitted from the source with the OSA and observed that
+the actual wavelength emitted deviated rather sensibly from the supposed one.
+In order to correct this problem, I sampled the supposed-actual wavelength relationship with the \ac{OSA}, and then I implemented an online correction by exploiting the its inverse function.
+In doing so, I assumed the \ac{OSA} as a reference.
+\autoref{fig:tunics} shows a typical calibration, where the emitted wavelength is greater than the actual one at shorter wavelengths but smaller at longer ones.
 
-All structures built on the test chip are accessible via grating couplers.
-Both the couplers and the photonic integrated circuits of IRIS are designed to support modes in the \acs{TE} polarization only.
-Grating couplers are planar periodic structures engineered to couple light from free space into integrated waveguides and vice versa.
-Due to geometrical constraint, they are built to work in a specific range of wavelengths and at a certain angle.
-This means that light at wavelength in the predefined range, impinging on the grating coupler with the correct angle, is coupled inside the waveguide on the \ac{PIC}.
-Similarly, light coming from a waveguide to a grating coupler, is radiated as plane wave from the grating coupler with the same mentioned angle.
+\begin{figure}[thbp]
+	\centering
+	\input{tikz/Tunics.tex}
+	\caption{Typical wavelength dependence calibration.
+	The black line shows the identity.
+	The orange segments in the magnified frames represent the \acs{FWHM} of the resonances.}
+	\label{fig:tunics}
+\end{figure}
 
-The sample is therefore adjusted on a 2-\acs{DOF} linear stage in between two 3-\acs{DOF} linear stages that holds the input and output coupling fibers.
-\autoref{fig:alignment} shows the respective position of input and output fibers in respect to the grating couplers.
+All the structures built on the test chip are accessible via grating couplers and are designed to support modes in the \acs{TE} polarization only.
+Grating couplers are planar periodic structures engineered to couple proper light bandwidth from free space into integrated waveguides and vice versa.
+In my case, the grating transmission is maximum for wavelengths from \SIrange{1540}{1550}{\nm} and decreases outside.
+%This means that even though the PIC could work in a broader range of wavelength, we are limited by the transmission efficiency of each grating.
+The coupling loss per grating is almost \SI{5}{\dB} at the maximum transmission, i.e. a third of the signal power is lost at each coupling.
 
+\newpage
 \begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{photos/gg.png}
+	\caption{Grating transmission efficiency test structure.}
+	\label{fig:grating-grating}
+\end{figure}
+
+To properly characterize the coupler transmission, I used a structure manufactured for this purpose.
+Depicted in \autoref{fig:grating-grating}, it consists of an input grating coupler, a straight waveguide, and an output grating coupler.
+Its transmission efficiency is shown in \autoref{fig:grating}.
+
+%This means that light at wavelength in the predefined range, impinging on the grating coupler with the correct angle, is coupled inside the waveguide on the \ac{PIC}.
+%Similarly, light coming from a waveguide to a grating coupler, is radiated as plane wave from the grating coupler with the same mentioned angle.
+
+\begin{figure}[hbtp]
+	\centering
+	\input{tikz/grating.tex}
+	\caption{The maximum transmission efficiency is around \num{0.117} and the coupling loss per grating is almost \SI{5}{\dB}, average over five consecutive measures.}
+	\label{fig:grating}
+\end{figure}
+
+The sample is adjusted on a 2-\acs{DOF} linear stage in between two 3-\acs{DOF} linear stages that holds the input and output coupling fibers.
+\autoref{fig:alignment} shows the respective positions of the input and the output fibers in respect to the grating couplers.
+
+\begin{figure}[!hbtp]
 	\centering
 	\input{tikz/alignment.tex}
 	\caption{Alignment phase of the input and output fibers over the corresponding grating couplers.
 	The optical fibers are aligned at an angle of \ang{14} over the grating couplers in such a way to inject and collect as much light as possible.
 	The sample was placed in a specific slot of a copper sample holder, which was secured onto a 2-\acs{DOF} manual stage.
-	The two fiber holders were placed on a 3-\acs{DOF} manual stage each, to obtain best alignment.
-	The angle of the fiber holder tip was fixed during the assembly at \ang{14} from the surface normal.}
+	The two fiber holders were placed on a 3-\acs{DOF} manual stage each, to align them properly.
+	}
 	\label{fig:alignment}
 \end{figure}
 
+\newpage
 Once secured the input and output optical fibers in place on the linear stages, the alignment phase begins.
-First the source is turned on at a wavelength that transmit on the correct channel, for example the resonance wavelength transmit in the drop channels but not in the through channel and vice versa.
+First the source light is positioned at a wavelength that transmit on the correct channel, for example the resonance wavelength transmit in the drop channels but not in the through channel and vice versa.
 Then the optical fibers are carefully moved in the respective positions that maximize the coupled signal.
-This procedure needs meticulous practice and method to avoid errors due to noise and imprecise movements of the linear stages.
-Moreover, sometimes the procedure must be repeated even if neither the sample nor the fibers have been moved, because of mechanical relaxation processes of the inner gears.
+The alignment have to be checked periodically, many times a day, to compensate for mechanical relaxations of the setup.
+%This procedure needs meticulous practice and method to avoid errors due to noise and imprecise movements of the linear stages.
+%Moreover, sometimes the procedure must be repeated even if neither the sample nor the fibers have been moved, because of mechanical relaxation processes of the inner gears.
 
-To obtain the best results, I also designed two new modular fiber holders with fixed angle, that could be used more easily than the older ones with adjustable angle.
+To obtain the best results, I also designed a new modular fiber holder with fixed angle (\autoref{fig:holders}) that was manufactured twice, one for each fiber. %, that could be used more easily than the older ones with adjustable angle.
 The main body has been manufactured in aluminum, except for the actual part that sustains the fiber, which was produced in iron.
 The metallic tip of the holder, appropriately grooved to house the optical fiber, can hold still the fiber with the help of little magnets.
-This techniques aims to reduce as much as possible the vibration of the fibers ends which causes fluctuations in the amount of light coupled to the gratings.
+This technique aims at reducing as much as possible the vibrations of the fibers ends, which causes fluctuations in the amount of light coupled to the gratings.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[height=8cm]{figures/supporto_completo.pdf}
+	\caption{Exploded-view drawing of the fiber holder design.
+	The holder is composed by three pieces.
+	The tip is made of iron, in order to be used together with small magnets.}
+	\label{fig:holders}
+\end{figure}
 
 Since the \acp{PIC} developed for IRIS support \acs{TE} modes only, after the positions of the optical fibers have been optimized, the coupled signal is maximized by the use of a polarizer.
 The polarizer, placed between the fiber coupler and the sample, is a device composed by a long optical fiber.
-Such fiber is coiled in three separate loops which have the effect of a half-wavelength plate, one quarter-wave plate, and another half-wave plate respectively.
+Such fiber is coiled in three separate loops which have the effect of a half-wave plate, one quarter-wave plate, and another half-wave plate respectively.
 Each coil can be manipulated, in a similar manner to the bulky quater-/half-wave plates, to change the output (linear) polarization of the light.
-The position of the polarization stage before of after the \ac{OSA} junction is not relevant as the \ac{OSA} is polarization independent.
+%The position of the polarization stage before of after the \ac{OSA} junction is not relevant as the \ac{OSA} is polarization independent.
 
-In order to reduce further the impact of noise on measures, I also boxed the three linear stages with stiff walls.
-This allowed to decrease the random fluctuations, due to movement of the fiber tips in the air, of at least one order of magnitude.
+In order to further reduce the impact of noise on measures, I also boxed the three linear stages with a rigid enclosure.
+This decreased the noise, due to the movement of the fiber tips in air by at least one order of magnitude.
 
-For the initial characterization of the structure, I studied the response of each output at input signals with low optical power and in a certain range of wavelengths (frequencies).
-With this study, I identified the position of the resonances and their shape.
-As shown in \autoref{fig:M3sweep}, the through channel $th$ follows the shape of the grating coupler response, which is centered around \SI{1550}{\um} and slowly drops with the growing relative distance from that wavelength.
-Moreover, one can observe that the first drop channel $dr_1$ has the expected shape (lorentzian), with a free spectral range of $FSR=\SI{19.15+-.1}{\nm}$\ref{}.
-On the other hand, all the other drop channels show a transmission that is perturbed by the light collected in the first channel.
+For the initial characterization, I studied the response of each output at input signals with low optical power and in the working range of the grating couplers, to identify the position of the resonances and their shape.
+%As shown in \autoref{fig:M3sweep}, the through channel $th$ follows the shape of the grating coupler response, which is centered around \SI{1540}{\um} and slowly drops with the growing relative distance from that wavelength.
+\autoref{fig:M3sweep} shows the normalized transmission of the eight drop channel ($dr_1$ to $dr_8$ ) and the through channel ($th$).
+The first drop channel ($dr_1$) has the expected lorentzian shape, with a free spectral range of $FSR=\SI{19.2+-.1}{\nm}$, while the shapes of all the other drop channels are highly distorted because of the light collected by $dr_1$.
+%On the other hand, all the other drop channels show a transmission that is perturbed by the light collected in the first channel.
 
 \begin{figure}[htbp]
 	\centering
@@ -149,65 +228,85 @@ On the other hand, all the other drop channels show a transmission that is pertu
 %	\input{tikz/M2.tex}
 	\input{tikz/M3.tex}
 	\caption{
-		Transmission spectra of the drop channels ($dr_1$ to $dr_8$) and through channel $th$.
+		Transmission spectra of the drop channels ($dr_1$ to $dr_8$) and through channel $th$, average over five consecutive measures.
 		The $dr_1$ channel shows the expected shape, whereas the other drop channels are clearly disturbed by the first one.
 		The through channel shows a shape similar to the expected one, but it is actually the results of all the drop channels.
 	}
 	\label{fig:M3sweep}
 \end{figure}
 
-Since the the first channel is the only one with an unperturbed transmission, I focused my attention on its response only.
-Specifically, I studied the resonance near \SI{1550}{\um} because it was the one with the highest transmitted signal and hence provided a better \acs{SNR}.
-\autoref{fig:M3_1550_resonance} shows such resonance and highlights its width to $FWHM=\SI{0.6+-0.1}{\nm}$\ref{}.
-The estimated quality factor is $Q=\num{2600+-400}$\ref{}.
+Since $dr_1$ is the only channel with an unperturbed transmission, I focused my attention on its response only.
+Specifically, I studied the resonance near \SI{1551.9}{\um}:% because it was the one with the highest transmitted signal and hence provided a better \acs{SNR}.
+\autoref{fig:M3_1550_resonance} shows such resonance and highlights its width to $FWHM=\SI{0.6+-0.05}{\nm}$.
+The estimated quality factor is $Q=\num{2600+-200}$.
 
-\begin{figure}[htbp]
+\begin{figure}[!hbtp]
 	\centering
 	\input{tikz/M3resonance.tex}
 	\caption{
 		Resonance near \SI{1552}{\nm}, transmission to the drop port $dr_1$.
-		This spectrum is the only one unperturbed by the other transmission spectra.
-		The FWHM and the resonance wavelength are clearly visible in the figure.
+		Average over five consecutive measures.
+%		This spectrum is the only one unperturbed by the other transmission spectra.
+%		The FWHM and the resonance wavelength are clearly visible in the figure.
 	}
 	\label{fig:M3_1550_resonance}
 \end{figure}
 
+\newpage
 \section{Characterization of the Activation Function}
 \label{sec:Characterization_of_the_Activation_Function}
-To characterize the thermal bistability of the microring resonator the setup used for the initial measures was not enough.
-In order to induce the thermal bistability effect in the microring I amplified the signal of the TUNICS with an \ac{EYDFA}.
-Even more so with addition of the optical amplifier, the role of the circulator placed between the sources and the rest of the devices is of fundamental importance.
-Back-reflected signals that enter optical amplifier in the wrong direction can cause serious damage to the equipment.
+To characterize the nonlinear response of the microring resonator the setup used for the initial measures has been modified.
+To induce the thermal bistability effect in the microring the signal of the TUNICS has been amplified using an \ac{EYDFA}.
+%Even more so with the addition of the optical amplifier, the role of the circulator placed between the sources and the rest of the devices is of fundamental importance.
+In this configuration, the role of the circulator placed between the sources and the rest of the devices acquires even more importance, as back-reflected signals that enter optical amplifier in the wrong direction can cause serious damage to the equipment.
 
-In addition to the amplifying stage, a remotely controlled \acfi{VOA} was added between the polarizer and the sample, in order to characterize with accuracy the response of the microring resonator to signals of fixed wavelength but different optical power.
-The \ac{VOA} employed is controlled by a voltage signals in the range \SIrange{0}{5}{\V}.
-It provides full transparency for \SI{0}{\V} and full attenuation for \SI{5}{\V} and, in between, the attenuator behaves similarly to a sigmoid function.
+In addition to the amplifying stage, a remotely controlled \ac{VOA} was added between the polarizer and the sample, to quantitatively characterize the nonlinear response of the microring. %the response of the microring resonator to signals of fixed wavelength but different optical power.
+The \ac{VOA} employed is controlled by a voltage signal in the range \SIrange{0}{5}{\V}: it provides full transparency for \SI{0}{\V} and full attenuation for \SI{5}{\V} and, in between, the attenuator behaves similarly to a sigmoid function.
 This curve has been identified with its closest analytical polynomial, to obtain an inverse formula that links transparency values in the range $[0,1]$ to the respective correct voltage value.
 
-Theoretically, this setup is sufficient to measure the features of the bistability effect.
-However, due to instabilities of the source and amplification stages, both in the optical power and in the wavelength of the signal, that is not the case.
-Hence, an additional infrared photodetector was placed before the \ac{VOA}, completing the setup as shown in \autoref{fig:pump_setup}.
+\begin{figure}[htbp]
+	\centering
+	\input{tikz/VOA.tex}
+	\caption{}
+	\label{fig:VOA}
+\end{figure}%1.519545
+
+This setup successfully induces the nonlinear response in the microring for up to detuning comparable to half $FWHM$.
+However, instabilities of the source and the amplification stages in the optical power and in the wavelength of the signal increase the uncertainty on the measures.
+
+The first corrective measure is obtained by allowing the system to thermalize.
+The most critical instrument is the \ac{EYDFA}, which might take up to half an hour to reach a steady state.
+This step in the measurement procedure reduces the long drifts in the output power of the source, but does not suppress the instantaneous noise in power and wavelength of the signal.
+
+In order to provide a correction for the instantaneous noise, a small part of the signal is collected from the main path, before the VOA, via a fiber coupler (99\%:1\%) and it is the equally distributed via a second fiber coupler (50\%:50\%) to the OSA and a second infrared \ac{PD} (PD-B).
+The completed setup is shown in \autoref{fig:pump_setup}.
 
 \begin{figure}[hbtp]
 	\centering
 	\input{tikz/pump_setup.tex}
 	\caption{Scheme of the setup used to obtain characterization of the thermal bistability in the microring resonator.
-		The source (TUNICS) is amplified by an \acs{EYDFA}, which can reach optical power up to several hundreds of \si{\mW}.
-		The amplified source is followed by the circulator and by the fiber coupler (50\%:50\%), that splits the signal to the \acs{OSA} and to the polarizer.
-		After the polarizer, a second fiber coupler (90\%:10\%) direct a small part of the signal to a second Germanium-based photodetector.
-		The signal in the other arm passes through a \acf{VOA}, then it is injected into the sample, and finally extracted to be read by a Germanium-based photodetector.
+		The source (TUNICS) is amplified by an \acs{EYDFA} and is followed by the circulator and by the polarizer.
+		Then a small part of the signal is collected by a fiber coupler (99\%:1\%) and it is equally distributed between the OSA and an additional infrared \ac{PD} (PD-B).
+		The signal in the main path passes through a \acf{VOA}, then it is injected into the sample, and finally extracted to be read by the first \ac{PD} (PD-A).
 		}
 	\label{fig:pump_setup}
 \end{figure}
 
-The second infrared detector measures a small part (10\%) of the signal, which is collected from the main path via a fiber coupler (90\%:10\%).
-Hence, in this configuration, the \ac{OSA} provides control over the wavelength of the source, while the photodetector provides control over the power emitted.
-Unfortunately, the measures obtained by means of the \ac{OSA}, due to intrinsic limitations of the instrument and to the high complexity of the measure itself, have a much lower sampling rate in comparison to the measures given by the photodetectors.
-For this reason, the \ac{OSA} has been employed as a before-and-after check on the light emitted by the source stages.
+This setup has been employed to measure several times the hysteresis cycle for the same imput wavelength.
+In order to do so, the measure had to be taken fast.
+
+PD-B measures the instantaneous power in input at the VOA and, together with the value of transparency selected on the VOA, provides control over effective power coupled into the \ac{PIC}.
+The sampling rate of PD-B is the same of PD-A and is limited by the acquisition board (\SI{1}{\kHz}).
+
+%On the other hand, the \ac{OSA} 
+In this configuration, the \ac{OSA} provides control over the wavelength of the source.
+Unfortunately, the measures obtained by means of the \ac{OSA}, due to intrinsic limitations of the instrument and to the high complexity of the measure itself, have a much lower sampling rate in comparison to the measures given by the \acp{PD}.
+For this reason, the \ac{OSA} has been employed as a check on the wavelength of light emitted by the source, before and after the measure of the hysteresis loops.
+This procedure allows to measure
 
 On the other hand, the second infrared detector was inserted in the measuring loops such that it collected data for each sampled point.
 Therefore, the data collected is composed by the optical power measured before the \ac{VOA}, by the transparency of the \ac{VOA}, and by the optical power measured at the output.
-This three-point measurement allowed more robustness against power fluctuations.
+This three-point measurement allows more robustness against power fluctuations.
 
 %Other than the addition discussed so far, the system setup is very similar to the one used before.
 %The coupling system and alignment process of the sample are the same described above in \autoref{ssec:initial_characterization}.
@@ -215,8 +314,8 @@ This three-point measurement allowed more robustness against power fluctuations.
 \subsection{Bistability wavelength dependence}
 \label{ssec:bistability_wavelength_dependence}
 The first feature studied is the dependence on wavelength of the overall shape of the bistability hysteresis loop.
-As seen in \autoref{ssec:Simulations}, the form of the bistability changes with the distance of the wavelength of light in respect to the wavelength of the resonance.
-This behavior is also observed in the transmission spectra experimentally measured, as shown in \autoref{fig:bistability_shape} below.
+As seen in \autoref{ssec:Simulations}, the form of the bistability changes with the detuning from the resonant wavelength.
+This behavior is also observed in the transmission spectra experimentally measured, as shown in \autoref{fig:bistability_shape}.
 
 \begin{figure}[hbtp]
 	\centering
@@ -227,11 +326,17 @@ This behavior is also observed in the transmission spectra experimentally measur
 	\label{fig:bistability_shape}
 \end{figure}
 
-As expected, the region of bistability disappears for wavelength within a certain distance from the wavelength resonance.
-Moreover, by increasing the distance between the pump and the resonance wavelengths, the bistability region becomes larger.
+Moreover, as expected the region of bistability disappears into a sigmoid for small detuning.
+Furthermore, by increasing the detuning, the bistability region becomes larger.
 The range of wavelengths with which the sample has been probed is upper limited due to the growing pump power required to activate the bistability.
 
-HOW DOES THIS COMPARE TO THE SIMULATIONS?
+Even though the behavior observed experimentally is similar to the one obtained with the simulations, there are some differences:
+First of all, in the experiments the transmission with high input power at different wavelength saturates at the same levels.
+On the contrary, in the simulations, the output signal at each wavelength has a different level of saturation.
+Moreover, in the experiment all wavelengths shows a peak and a decrease in transmission from a certain level of input power.
+The transmission at the highest levels of input power saturates to a value that is not the maximum achieved.
+
+The discrepancies between the experiments and the simulations are produced by two factors: either the difference between the constants employed in the simulation and the actual values of the microring, or the theoretical model lacks the description of some important effects of the system.
 
 %\subsubsection{Bistability region edges dependence on wavelength}
 %\label{sssec:bistability_region_edges_dependence_on_wavelength}
@@ -244,17 +349,16 @@ Similarly, the other \textit{inverse} bistability step was characterized by anal
 Eventually the data collected included twenty loops for each wavelength selected, which are five almost equally spaced in a wavelength range from \SIrange{1552.2}{1552.3}{\nm}.
 Each of this loop has been analyzed to find the abrupt jumps from a state to the other.
 A simple study on the discrete derivative was employed to achieve that.
-The same procedure has been applied both to the rising loops and to the descending loops.
-The results are five data points for the first kind of loops and just as much for the descending loops, as shown in \autoref{fig:bistability_jumps}.
+The same procedure has been applied both to the rising as well as to the descending loops.
+The results are five data points for the first kind of loops and just as much for the descending one, as shown in \autoref{fig:bistability_jumps}.
 
 \begin{figure}[!hbtp]
 	\centering
-%	\includegraphics[draft,width=9cm,height=6cm]{figures/foo.png}
 	\input{tikz/jumps.tex}
 	\caption{Wavelength dependence of the bistability region edges.
 		Upper limits are shown as blue dots, while lower limits are shown as red dots.
-		The wavelength uncertainty is assumed to be \SI{1}{\pm} for all the points and it is an estimate given by checks in betweens consecutive measures obtained with the OSA.
-		The power uncertainty is given by the statistic of the data collected with the loop in power.
+		The wavelength uncertainty is assumed to be \SI{5}{\pm} for all the points and it is an estimate given by checks in betweens consecutive measures obtained with the OSA.
+		The power uncertainty is given by the statistic of the data collected.% with the loop in power.
 	}
 	\label{fig:bistability_jumps}
 \end{figure}

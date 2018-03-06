@@ -363,7 +363,7 @@ Moreover the approximation given by the analytical model is sufficiently accurat
 Furthermore it can be expanded to include non-trivial phenomena (see \autoref{sec:Nonlinear_Optics}).
 In the following section I will go through the necessary steps to solve the case of the \acs{ADF} configuration in the theoretical model.
 
-%1.2.3.2 Add-drop filter theory\\
+\newpage
 \subsubsection{Add-Drop-Filter theory}
 \label{sssec:Add-Drop-Filter_theory}
 \acs{ADF} configuration is obtained when a microring is coupled to two waveguides.
@@ -546,7 +546,7 @@ This is due to the fact that the photon lifetime is strictly dependent on the lo
 However, in an optical cavity losses are given by absorption, but also by the coupling of the input and output channels.
 Thus, given a certain waveguide loss (defined by both the propagation and radiative contributions), the same Q-value can be obtained by different sets of loss factors.
 One can identify three distinct regimes: over-coupling, critical-coupling, and under-coupling regimes.
-\autoref{fig:Q_contour} shows contour plots of the maximum transmission in the drop channel and the quality factor as functions of the cavity losses ($\gamma$) and the coupling coefficients ($\kappa^2=1-\tau^2$).
+\autoref{fig:APF_contour_plots} shows contour plots of the maximum transmission in the drop channel and the quality factor as functions of the cavity losses ($\gamma$) and the coupling coefficients ($\kappa^2=1-\tau^2$).
 
 \begin{figure}[!hbtp]
 	\centering
@@ -829,8 +829,8 @@ The empirical values of the nonlinear constants introduced in \Cref{ssec:Electro
 	\midrule
 	$n2$ 									& \num{4.5e-18}		& \si{\square\m\per\W}	& \cite{chen2012bistability} \\
 	$\beta_{TPA}$					&	\num{7.5e-12}		& \si{\m\per\W}				& \cite{chen2012bistability} \\
-	$\frac{dn}{dN}$				& \num{-1.73e-21}	& \si{\cubic\m}				& \cite{johnson2006self} \\
-	$\frac{d\alpha}{dN}$	& \num{1.1e-15}		& \si{\square\m}				& \cite{} \\
+	$\frac{dn}{dN}$				& \num{-1.7e-21}		& \si{\cubic\m}				& \cite{johnson2006self} \\
+	$\frac{d\alpha}{dN}$		& \num{1.1e-15}		& \si{\square\m}				& \cite{borghi2016linear} \\
 	$\gamma_{FC}$					& \num{300e-9}			& \si{\peta\Hz}				& \cite{mancinelli2013linear} \\
 	$\frac{dn}{dT}$				& \num{1.86e-4}		& \si{\per\K}					& \cite{johnson2006self} \\
 	$\gamma_{TH}$					&	\num{12e-9}			& \si{\peta\Hz}				& \cite{mancinelli2013linear} \\
@@ -903,7 +903,7 @@ Since the experiments are carried out in the quasi-static regime, the system can
 
 \begin{align}
 EF \left( \omega \right)
-	&= \dfrac	{ \gamma \Delta\gamma}
+	&= \dfrac	{ \kappa^2 }
 		{ \left( 1-\tau^2	\gamma \Delta\gamma \right)^2 + 4 \tau^2	\gamma \Delta\gamma \sin^2 \left( \left(n_{eff} + \Delta n_{eff}\right) \frac{\omega}{c_0} \pi R \right) }\\
 \Delta N
 	&= \frac{1}{\gamma_{FC}} \frac{\beta_{TPA}}{2\hbar \omega} I^2\\
@@ -949,7 +949,7 @@ At low input intensities nonlinearities are negligible, thus the output has the 
 	\centering
 	\input{tikz/cold_resonance.tex}
 	\caption{
-		Shape of the resonance when probed with a low intensity signal.
+		Shape of the resonance at \SI{1537.417}{\nm}, when probed with a low intensity signal.
 		As expected is a lorentzian-type of curve, like in \autoref{fig:ADF}.
 	}
 	\label{fig:sim_cold_resonance}
@@ -971,7 +971,7 @@ In this revised algorithm the variables at each new step are evaluated with a mi
 This method contrasts the phenomenon of uncontrolled value oscillation.
 %I heuristically found that 
 
-The results of the algorithm, for input parameters given by a sequence of signals of increasing optical power at a precise distance from the resonance wavelength, map half of the hysteresis cycle.
+The results of the algorithm, for input parameters given by a sequence of signals of increasing optical power at a precise detuning from the resonance wavelength, map half of the hysteresis cycle.
 It is important in this case to set the initial conditions as the output values of the last evaluated state.
 Similarly, by setting the input parameters with a sequence of signals of decreasing optical power, the results map the other half of the bistability hysteresis cycle.
 The collection of the outcomes, obtained by repeating this evaluations for a set of different wavelengths on the red shoulder of the resonance, is shown in \autoref{fig:sim_bist_cycle}.
@@ -982,8 +982,8 @@ The collection of the outcomes, obtained by repeating this evaluations for a set
 %	\input{tikz/bistability_test1.tex}
 	\input{tikz/bistability_test2.tex}
 	\caption{
-		Hysteresis cycles described by the increase and decrease cycle of power, for input beams at different separations from the \textit{cold} resonance wavelength, in \si{\pm}.
-		All cases have higher wavelength (lower frequency) in comparison to the resonance wavelength.
+		Hysteresis cycles described by the increase and decrease cycle of power, for input beams at different detunings from the \textit{cold} resonance wavelength, in \si{\pm}.
+		All cases have longer wavelengths in comparison to the resonance wavelength.
 	}
 %	\label{fig:bist_up}
 %	\label{fig:bist_down}
@@ -1003,6 +1003,6 @@ Similar results can be obtained by inverting the sweep, thus showing another typ
 \begin{figure}[ht]
 	\centering
 	\input{tikz/pump_drag.tex}
-	\caption{Behavior of wavelength sweeps for fixed input optical powers. The lower curve (blue), is the same portrayed in \autoref{fig:sim_cold_resonance}. }
+	\caption{Behavior of wavelength sweeps around \SI{1537.417}{\nm} for a set of fixed input optical powers. The lower curve (blue), is the same portrayed in \autoref{fig:sim_cold_resonance}. }
 	\label{fig:sim_bist_triangles}
 \end{figure}
