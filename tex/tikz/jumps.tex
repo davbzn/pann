@@ -12,7 +12,13 @@
 %	\definecolor{color7}{rgb}{0.890196078431372,0.466666666666667,0.76078431372549}
 %	\definecolor{color8}{rgb}{0.45,0.45,0.45}
 %	\definecolor{color9}{rgb}{0.25,0.25,0.99}
-\pgfplotsset{myerr/.append style={only marks, mark size=1.5pt, error bars/.cd, y dir=both, y explicit, x dir=both, x explicit} }
+\pgfplotsset{myerr/.append style={
+								only marks, mark size=1.5pt,
+								error bars/.cd,
+								y dir=both, y explicit,
+								x dir=both, x explicit
+								}
+							}
 
 \pgfplotsset{
   /pgfplots/error bar legend/.style={
@@ -26,18 +32,19 @@
   }
 }
 	
-	\newcommand{\Central}{1552}
+	\newcommand{\Central}{1551.9}
 	
 	\begin{axis}[
 			title={Bistability region power limits},
 			xlabel={Wavelength Detuning [\si{\nm}]},
-			ylabel={Output Power [\si{\uW}]},
+			ylabel={Normalized Output Power},
 			scaled x ticks = manual:{$+\SI{\Central}{\nm}$}{ \pgfmathparse{#1-\Central }},
-			tick align=outside,
-			tick pos=left,
+%			tick align=outside,
+%			tick pos=left,
 			width=\textwidth*0.75,
 			height=207pt,
 			legend pos = north west,
+			legend cell align=left,
 			error bar legend,
 		]
     

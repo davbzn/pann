@@ -48,15 +48,16 @@
 %			cycle list name=color list,
 			/pgf/number format/1000 sep=,
 %			xmin=-199, xmax=2199,
-			xtick distance=250,
-			domain=0:2000,
+			xtick distance=500,
+			minor tick num=2,
+			domain=0:4000,
 			train/.style={
 				smooth,
 				semithick,
 			},
 			valid/.style={
 				only marks,
-				mark=*,
+				mark=o,
 				mark options={scale=0.25},
 				forget plot,
 			},
@@ -64,41 +65,49 @@
 		\addlegendentry{\hspace{-.6cm}$f_{ReLU}$};
 		\addlegendimage{empty legend};
 
-		\addplot [red, train] {0.2+2.5*exp(-0.01*x)+0.05*rand};
+%		\addplot [red, train] {0.2+2.5*exp(-0.01*x)+0.05*rand};
+		\addplot [red, train] table [x index=0, y index=3] {tikz/base-11x2_learn.csv};
 		\addlegendentry{$2\times 11$}
-		\addplot [red, valid] {0.4+2.3*exp(-0.01*x)+0.1*rand};
-		
-		\addplot [blue, train] {0.15+2.6*exp(-0.011*x)+0.06*rand};
-		\addlegendentry{$2\times 22$}
-		\addplot [blue, valid] {0.35+2.35*exp(-0.012*x)+0.13*rand};
+%		\addplot [red, valid] {0.4+2.3*exp(-0.01*x)+0.1*rand};
+		\addplot [red, valid] table [x index=0, y index=3] {tikz/base-11x2_valid.csv};
 
-		\addplot [teal, train] {0.2+2.5*exp(-0.01*x)+0.05*rand};
+%		\addplot [teal, train] {0.2+2.5*exp(-0.01*x)+0.05*rand};
+		\addplot [teal, train] table [x index=0, y index=6] {tikz/base-11x3_learn.csv};
 		\addlegendentry{$3\times 11$}
-		\addplot [teal, valid] {0.4+2.3*exp(-0.01*x)+0.1*rand};
+%		\addplot [teal, valid] {0.4+2.3*exp(-0.01*x)+0.1*rand};
+		\addplot [teal, valid] table [x index=0, y index=6] {tikz/base-11x3_valid.csv};
 		
-		\addplot [cyan, train] {0.15+2.6*exp(-0.011*x)+0.06*rand};
+%		\addplot [blue, train] {0.15+2.6*exp(-0.011*x)+0.06*rand};
+		\addplot [blue, train] table [x index=0, y index=9] {tikz/base-22x2_learn.csv};
+		\addlegendentry{$2\times 22$}
+%		\addplot [blue, valid] {0.35+2.35*exp(-0.012*x)+0.13*rand};
+		\addplot [blue, valid] table [x index=0, y index=9] {tikz/base-22x2_valid.csv};
+		
+%		\addplot [cyan, train] {0.15+2.6*exp(-0.011*x)+0.06*rand};
+		\addplot [cyan, train] table [x index=0, y index=7] {tikz/base-22x3_learn.csv};
 		\addlegendentry{$3\times 22$}
-		\addplot [cyan, valid] {0.35+2.35*exp(-0.012*x)+0.13*rand};
+%		\addplot [cyan, valid] {0.35+2.35*exp(-0.012*x)+0.13*rand};
+		\addplot [cyan, valid] table [x index=0, y index=7] {tikz/base-22x3_valid.csv};
 %		red,blue,black,yellow,brown,teal,orange,violet,cyan,green!70!black,magenta,gray
 		
-		\addlegendentry{\hspace{-.6cm}$f_{Logistic}$}
-		\addlegendimage{empty legend};
-		
-		\addplot [orange, train] {1.2+1.5*exp(-0.01*x)+0.05*rand};
-		\addlegendentry{$2\times 11$}
-		\addplot [orange, valid] {1.4+1.3*exp(-0.01*x)+0.1*rand};
-		
-		\addplot [blue!20!green, train] {1.15+1.6*exp(-0.011*x)+0.06*rand};
-		\addlegendentry{$2\times 22$}
-		\addplot [blue!20!green, valid] {1.35+1.35*exp(-0.012*x)+0.13*rand};	
-		
-		\addplot [gray, train] {1.2+1.5*exp(-0.01*x)+0.05*rand};
-		\addlegendentry{$3\times 11$}
-		\addplot [gray, valid] {1.4+1.3*exp(-0.01*x)+0.1*rand};
-		
-		\addplot [violet, train] {1.15+1.6*exp(-0.011*x)+0.06*rand};
-		\addlegendentry{$3\times 22$}
-		\addplot [violet, valid] {1.35+1.35*exp(-0.012*x)+0.13*rand};
+%		\addlegendentry{\hspace{-.6cm}$f_{Logistic}$}
+%		\addlegendimage{empty legend};
+%		
+%		\addplot [orange, train] {1.2+1.5*exp(-0.01*x)+0.05*rand};
+%		\addlegendentry{$2\times 11$}
+%		\addplot [orange, valid] {1.4+1.3*exp(-0.01*x)+0.1*rand};
+%		
+%		\addplot [blue!20!green, train] {1.15+1.6*exp(-0.011*x)+0.06*rand};
+%		\addlegendentry{$2\times 22$}
+%		\addplot [blue!20!green, valid] {1.35+1.35*exp(-0.012*x)+0.13*rand};	
+%		
+%		\addplot [gray, train] {1.2+1.5*exp(-0.01*x)+0.05*rand};
+%		\addlegendentry{$3\times 11$}
+%		\addplot [gray, valid] {1.4+1.3*exp(-0.01*x)+0.1*rand};
+%		
+%		\addplot [violet, train] {1.15+1.6*exp(-0.011*x)+0.06*rand};
+%		\addlegendentry{$3\times 22$}
+%		\addplot [violet, valid] {1.35+1.35*exp(-0.012*x)+0.13*rand};
 		
 	\end{axis}
 \end{tikzpicture}

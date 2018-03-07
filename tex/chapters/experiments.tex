@@ -104,7 +104,7 @@ Each one of the microring resonators in the structure has been manufactured with
 \label{ssec:initial_characterization}
 To obtain an initial characterization of the sample, I arranged an experimental setup to measure its fundamental attributes, such as the \acf{FSR}, the \acf{FWHM}, and the $Q$ factor of the resonances.
 These features can all be obtained through a study of the transmitted intensity in the through and drop channels, shown in \autoref{fig:minimatrix_scheme}.
-A scheme of the experimental setup used in showed in \autoref{fig:simple_setup}.
+A scheme of the experimental setup used is showed in \autoref{fig:simple_setup}.
 
 \begin{figure}
 	\centering
@@ -125,6 +125,7 @@ The generated light is injected into an optical circulator to protect the laser 
 A circulator is a device that works similarly to a roundabout: input signals from the first port are directed only toward the second port. Similarly, signals injected in the second port are guided in the third port only and so on.
 The circulator used in the setup has four ports.
 Afterwards the beam is divided into two equal parts by means of a fiber coupler: one is analyzed by an Anritsu 9710C \ref{} \acf{OSA} and the other is brought to the sample.
+The output of the sample is coupled in a fiber and taken to the (PD-A) infrared \ac{PD}
 
 The presence of an \ac{OSA} after the source is due to the fact that the self-referencing mechanism of the laser that occurs during its initialization was not reliable.
 In fact, I observed that measures of the resonance taken in different days (after reinitializing the source) showed different values for the resonance.
@@ -235,8 +236,11 @@ The first drop channel ($dr_1$) has the expected lorentzian shape, with a free s
 	\label{fig:M3sweep}
 \end{figure}
 
+Another interesting fact is that the peak transmission of $dr_1$ channel is higher than the maximum transmission of $th$.
+This is due to two factors: primarily the coupling maximization process with the linear stages has a repeatability error of about \SI{10}{\percent}, secondarily the $th$ channel is a longer structure and hence its losses are expected to be higher than the 'shorter` $dr_1$ channel.
+
 Since $dr_1$ is the only channel with an unperturbed transmission, I focused my attention on its response only.
-Specifically, I studied the resonance near \SI{1551.9}{\um}:% because it was the one with the highest transmitted signal and hence provided a better \acs{SNR}.
+Specifically, I studied the resonance near \SI{1551.9}{\um}: % because it was the one with the highest transmitted signal and hence provided a better \acs{SNR}.
 \autoref{fig:M3_1550_resonance} shows such resonance and highlights its width to $FWHM=\SI{0.6+-0.05}{\nm}$.
 The estimated quality factor is $Q=\num{2600+-200}$.
 
@@ -244,15 +248,13 @@ The estimated quality factor is $Q=\num{2600+-200}$.
 	\centering
 	\input{tikz/M3resonance.tex}
 	\caption{
-		Resonance near \SI{1552}{\nm}, transmission to the drop port $dr_1$.
-		Average over five consecutive measures.
+		Resonance at \SI{1551.9}{\nm}, transmission to the drop port $dr_1$, average over five consecutive measures.
 %		This spectrum is the only one unperturbed by the other transmission spectra.
 %		The FWHM and the resonance wavelength are clearly visible in the figure.
 	}
 	\label{fig:M3_1550_resonance}
 \end{figure}
 
-\newpage
 \section{Characterization of the Activation Function}
 \label{sec:Characterization_of_the_Activation_Function}
 To characterize the nonlinear response of the microring resonator the setup used for the initial measures has been modified.
@@ -261,24 +263,29 @@ To induce the thermal bistability effect in the microring the signal of the TUNI
 In this configuration, the role of the circulator placed between the sources and the rest of the devices acquires even more importance, as back-reflected signals that enter optical amplifier in the wrong direction can cause serious damage to the equipment.
 
 In addition to the amplifying stage, a remotely controlled \ac{VOA} was added between the polarizer and the sample, to quantitatively characterize the nonlinear response of the microring. %the response of the microring resonator to signals of fixed wavelength but different optical power.
-The \ac{VOA} employed is controlled by a voltage signal in the range \SIrange{0}{5}{\V}: it provides full transparency for \SI{0}{\V} and full attenuation for \SI{5}{\V} and, in between, the attenuator behaves similarly to a sigmoid function.
+The \ac{VOA} employed is controlled by a voltage signal in the range \SIrange{0}{5}{\V}: it provides full transparency for \SI{0}{\V} and full attenuation for \SI{5}{\V} and, in between, the attenuator behaves similarly to a sigmoid function, shown in \autoref{fig:VOA}.
 This curve has been identified with its closest analytical polynomial, to obtain an inverse formula that links transparency values in the range $[0,1]$ to the respective correct voltage value.
 
 \begin{figure}[htbp]
 	\centering
 	\input{tikz/VOA.tex}
-	\caption{}
+	\caption{Typical calibration curve of the attenuation curve of the VOA.
+		The data has been fitted with a spline to implement online control over the attenuation value.
+	}
 	\label{fig:VOA}
 \end{figure}%1.519545
 
-This setup successfully induces the nonlinear response in the microring for up to detuning comparable to half $FWHM$.
+This setup successfully induces the nonlinear response in the microring for detunings up to values comparable to half $FWHM$.
 However, instabilities of the source and the amplification stages in the optical power and in the wavelength of the signal increase the uncertainty on the measures.
+Specifically, the system shows a drift in optical power immediately after the source and amplification stages are switched on and random noise of the order of \SI{0.1}{\percent}.
+Moreover, the wavelength of the light generated shows a slow drift toward shorter wavelengths, which becomes important for long measurements.
+The typical wavelength stability of the source is rated at \SI[per-mode=symbol]{+-3}{\pico\meter\per\hour} (from instrument datasheet).
 
 The first corrective measure is obtained by allowing the system to thermalize.
 The most critical instrument is the \ac{EYDFA}, which might take up to half an hour to reach a steady state.
-This step in the measurement procedure reduces the long drifts in the output power of the source, but does not suppress the instantaneous noise in power and wavelength of the signal.
+This step reduces the slow drift in the output power of the source, but does not suppress the instantaneous noise in power and wavelength of the signal.
 
-In order to provide a correction for the instantaneous noise, a small part of the signal is collected from the main path, before the VOA, via a fiber coupler (99\%:1\%) and it is the equally distributed via a second fiber coupler (50\%:50\%) to the OSA and a second infrared \ac{PD} (PD-B).
+In order to provide a correction for the instantaneous noise, a small part of the signal is collected from the main path, before the VOA, via a fiber coupler (99\%:1\%) and it is the equally distributed via a second fiber coupler (50\%:50\%) to the OSA and to a second infrared \ac{PD} (PD-B).
 The completed setup is shown in \autoref{fig:pump_setup}.
 
 \begin{figure}[hbtp]
@@ -292,20 +299,18 @@ The completed setup is shown in \autoref{fig:pump_setup}.
 	\label{fig:pump_setup}
 \end{figure}
 
-This setup has been employed to measure several times the hysteresis cycle for the same imput wavelength.
-In order to do so, the measure had to be taken fast.
-
-PD-B measures the instantaneous power in input at the VOA and, together with the value of transparency selected on the VOA, provides control over effective power coupled into the \ac{PIC}.
+In this configuration, PD-B measures the instantaneous power in input at the VOA and, together with the value of transparency selected on the VOA, provides control over effective power coupled into the \ac{PIC} and correction over the noise in the power of the source.
 The sampling rate of PD-B is the same of PD-A and is limited by the acquisition board (\SI{1}{\kHz}).
 
-%On the other hand, the \ac{OSA} 
-In this configuration, the \ac{OSA} provides control over the wavelength of the source.
-Unfortunately, the measures obtained by means of the \ac{OSA}, due to intrinsic limitations of the instrument and to the high complexity of the measure itself, have a much lower sampling rate in comparison to the measures given by the \acp{PD}.
-For this reason, the \ac{OSA} has been employed as a check on the wavelength of light emitted by the source, before and after the measure of the hysteresis loops.
-This procedure allows to measure
+On the other hand, the \ac{OSA} provides a check over the wavelength of the source, but no correction can be implemented.
+Moreover, the measures obtained by means of the \ac{OSA}, due to intrinsic limitations of the instrument and to the high complexity of the measure itself, have a much lower sampling rate in comparison to the measures given by the \acp{PD}.
 
-On the other hand, the second infrared detector was inserted in the measuring loops such that it collected data for each sampled point.
-Therefore, the data collected is composed by the optical power measured before the \ac{VOA}, by the transparency of the \ac{VOA}, and by the optical power measured at the output.
+Since this setup has been employed to measure several times the hysteresis cycle, for the same input wavelength, the measurement could run for several minutes consecutively.
+In order to collect a significant number of points, without important drifts in the signal wavelength, the sampling time had to be reduced as much as possible.
+For this reason, the \ac{OSA} has been employed as a check on the signal wavelength, before and after each measure of the hysteresis loops.
+
+%On the other hand, the second infrared detector was inserted in the measuring loops such that it collected data for each sampled point.
+To summarize, the data collected is composed by the optical power measured before the \ac{VOA}, by the transparency of the \ac{VOA}, and by the optical power measured at the output.
 This three-point measurement allows more robustness against power fluctuations.
 
 %Other than the addition discussed so far, the system setup is very similar to the one used before.
@@ -313,7 +318,7 @@ This three-point measurement allows more robustness against power fluctuations.
 
 \subsection{Bistability wavelength dependence}
 \label{ssec:bistability_wavelength_dependence}
-The first feature studied is the dependence on wavelength of the overall shape of the bistability hysteresis loop.
+The first feature studied is the dependence of the overall shape of the bistability hysteresis loop on wavelength detuning.
 As seen in \autoref{ssec:Simulations}, the form of the bistability changes with the detuning from the resonant wavelength.
 This behavior is also observed in the transmission spectra experimentally measured, as shown in \autoref{fig:bistability_shape}.
 
@@ -326,46 +331,54 @@ This behavior is also observed in the transmission spectra experimentally measur
 	\label{fig:bistability_shape}
 \end{figure}
 
-Moreover, as expected the region of bistability disappears into a sigmoid for small detuning.
-Furthermore, by increasing the detuning, the bistability region becomes larger.
+As expected, the region of bistability disappears into a sigmoid for small detunings, while becomes larger for increased detunings.
 The range of wavelengths with which the sample has been probed is upper limited due to the growing pump power required to activate the bistability.
 
 Even though the behavior observed experimentally is similar to the one obtained with the simulations, there are some differences:
-First of all, in the experiments the transmission with high input power at different wavelength saturates at the same levels.
-On the contrary, in the simulations, the output signal at each wavelength has a different level of saturation.
+first of all, in the experiments the transmission for high input power saturates at the same value for different detunings.
 Moreover, in the experiment all wavelengths shows a peak and a decrease in transmission from a certain level of input power.
-The transmission at the highest levels of input power saturates to a value that is not the maximum achieved.
+On the contrary, in the simulations the output power does not saturate and shows different transmission efficiency for each detuning (see \autoref{fig:sim_bist_cycle}).
 
-The discrepancies between the experiments and the simulations are produced by two factors: either the difference between the constants employed in the simulation and the actual values of the microring, or the theoretical model lacks the description of some important effects of the system.
+Several are the factors that might produce these discrepancies between the experiments and the simulations.
+First of all, the setup and especially the sample are composed by many different structures.
+Each of them has its unique response to high values of optical power.
+Secondly, the parameters employed in the simulation are an estimate of the actual parameters that define the microring resonator and its coupling with the waveguides.
+Lastly, the theoretical model implemented in the numerical calculations is an approximation of the physical phenomena that occur in the system.
 
-%\subsubsection{Bistability region edges dependence on wavelength}
-%\label{sssec:bistability_region_edges_dependence_on_wavelength}
 \subsubsection{Bistability region edges}
 \label{sssec:bistability_region_edges}
-In order to describe with more precision the abrupt jumps on the edges of the bistability region, I also set up specific measurement loops.
-These loops repeatedly initialized the system with the \ac{VOA} at full absorption and then characterized the jump by sampling from few points below to few points above the bistability step.
-Similarly, the other \textit{inverse} bistability step was characterized by analogous loops in which the system was initialized with the VOA at full transparency instead.
+In order to precisely characterize the abrupt jumps on the edges of the bistability region, the stability of the system is crucial.
+Hence I implemented a specific series of measurements, which samples only the nearest part of the edge: the amount of points sampled is smaller, however the complete measurement is faster and the sampling near the bistability edges is more dense.
 
-Eventually the data collected included twenty loops for each wavelength selected, which are five almost equally spaced in a wavelength range from \SIrange{1552.2}{1552.3}{\nm}.
-Each of this loop has been analyzed to find the abrupt jumps from a state to the other.
-A simple study on the discrete derivative was employed to achieve that.
+The first step of each measurement is setting the source wavelength at a specific value, which is measured by the \ac{OSA}.
+Then the serial measurements begins: for ascending loops, at the beginning \ac{VOA} is initialized at full attenuation and then is used to sample the edge with small increasing steps.
+For descending loops, the \ac{VOA} is initialized at full transparency and the steps are decreasing instead.
+After the predefined number of loops is completed, the wavelength of the source is measured with the \ac{OSA} again.
+%These loops repeatedly initialized the system with the \ac{VOA} at full absorption and then characterized the jump by sampling from few points below to few points above the bistability step.
+%Similarly, the other \textit{inverse} bistability step was characterized by analogous loops in which the system was initialized with the VOA at full transparency instead.
+
+The data collected included twenty loops for each detuning, which are five almost equally spaced in a wavelength range from \SIrange{1552.2}{1552.3}{\nm}.
+Each set of data has been analyzed to find the abrupt jumps from a state to the other.
+A simple study of the discrete derivative was employed to achieve that.
 The same procedure has been applied both to the rising as well as to the descending loops.
 The results are five data points for the first kind of loops and just as much for the descending one, as shown in \autoref{fig:bistability_jumps}.
+The wavelength of each loop is measured by checks with the \acs{OSA} before the start and after the completion of each loop.
 
 \begin{figure}[!hbtp]
 	\centering
 	\input{tikz/jumps.tex}
 	\caption{Wavelength dependence of the bistability region edges.
 		Upper limits are shown as blue dots, while lower limits are shown as red dots.
-		The wavelength uncertainty is assumed to be \SI{5}{\pm} for all the points and it is an estimate given by checks in betweens consecutive measures obtained with the OSA.
-		The power uncertainty is given by the statistic of the data collected.% with the loop in power.
+		The wavelength is estimated by checks in betweens consecutive measures obtained with the \acs{OSA}.
+		Its uncertainty is assumed to be \SI{5}{\pm} (TUNICS Wavelength Setting Repeatability) for all the points.
+		The power uncertainty is given by the statistic of the data collected. % with the loop in power.
 	}
 	\label{fig:bistability_jumps}
 \end{figure}
 
-The error on each point has been evaluated as follows.
-The uncertainty on the wavelength position is an estimate, given by checks on the spectrum of the source, obtained with the \ac{OSA} before and after each measure cycle.
-The uncertainty of the power is calculated on the statistic of all the loops measured at the same wavelength.
+%The error on each point has been evaluated as follows.
+The uncertainty on the wavelength position is assumed to be the \SI{5}{\pm} for all the points, which is the wavelength setting repeatability of the TUNICS.
+The uncertainty on the power is evaluated from the statistic of all the loops measured at the same wavelength.
 Hence it is defined as the RMS error of twenty data points for each wavelength.
 
 It is interesting to observe that the experimental data, much like the simulations, show a steeper dependence on wavelength for the upper limits that for the lower limits.
@@ -374,14 +387,15 @@ Moreover, the position of the edges of the bistability region seem to be precise
 
 \section{Test of a Trained ANN}
 \label{sec:Test_of_a_Trained ANN}
-The first step that I made in order to test the nonlinear response of a microring resonator as a neural network activation function is to exploit the fitted bistability curve of \autoref{eq:fit} and implement it as activation function of the model defined in \autoref{ssec:Simulated_ANN_operation}.
+The first step I made to test the nonlinear response of a microring resonator as a neural network activation function was to exploit the fitted bistability curve of \autoref{eq:fit} and implement it as activation function of the model defined in \autoref{ssec:Simulated_ANN_operation}.
 
 \subsection{Optical bistability as nonlinear activation function}
 \label{ssec:Optical_bistability_as_nonlinear_activation_function}
 Having obtained a description of the optical bistability of the response of a microring resonator in a wide range of wavelengths, I implemented the shape of such response in a simulated artificial neural network.
-Hence, I chose one set of data from the group, such that it was neither the most distant nor the closest to the resonance.
-This was made to avoid unexpected ``border effects''.
-Specifically, the data belongs to the increasing half of the bistability loop for input light at \SI{1552.300}{\nm} \ref{}.
+Hence, I chose a representative set of data:
+%from the group, such that it was neither the most distant nor the closest to the resonance.
+%This was made to avoid unexpected ``border effects''.
+specifically, the data belongs to the increasing half of the bistability loop for input light at \SI{1552.300}{\nm} \ref{}.
 
 \begin{figure}[htbp]
 	\centering

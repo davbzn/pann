@@ -540,9 +540,9 @@ Since the absolute number of entries is low, compared to other datasets, the val
 
 \subsection{Simulated ANN operation}
 \label{ssec:Simulated_ANN_operation}
-The model that I defined allows to modify the number of input and output nodes, the number of hidden layer, and the number of nodes in each hidden layer.
-Whereas the number of input and output nodes is defined by the problem, i.e. the dataset, the other are free parameters.
-Another degree of freedom that I implemented is whether the last hidden layer applies the nonlinear activation function or just the weighted sum, since I observed that many examples of network were built with a linear layer as the last hidden one.
+The model that I defined allows to modify the number of input ($D_{in}$) and output nodes ($D_{out}$), the number of hidden layers ($n_{H}$), and the number of nodes in each hidden layer ($D_{H}$).
+Whereas the $D_{in}$ and $D_{out}$ is fixed by the problem, i.e. the dataset, the other are free parameters.
+Another degree of freedom that I implemented is whether the last hidden layer applies the nonlinear activation function or just the weighted sum, since I observed that in many examples of network the last hidden layer was linear.
 The scheme of the network is shown in \autoref{fig:ANN_model}.
 
 \begin{figure}[htbp]
@@ -557,9 +557,11 @@ The choice of the structure of the neural network is purely heuristic, since up 
 However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
 Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
 
-Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
-Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
-The \acs{ReLU} function is a standard activation function and is defined as follows:
+%Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
+%Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
+%The \acs{ReLU} function is a standard activation function and is defined as follows:
+Using the chosen dataset, I tested the neural network operation on the model defined before, with the nonlinearity provided by the \acfi{ReLU} activation function.
+The \acs{ReLU} function is a standard activation function defined as follows:
 \begin{equation}
 f_{ReLU}(x) =
 \begin{cases}
@@ -568,47 +570,59 @@ f_{ReLU}(x) =
 \end{cases}~.
 \label{eq:relu}
 \end{equation}
-On the other hand, the Logistic function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
-\begin{equation}
-f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
-\end{equation}
-with the parameters $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$.
-Both functions are widely used in literature, however the \acs{ReLU} function is the preferred choice recently.
-I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network models, with the nonlinear activation function given by the microring resonator.
+%On the other hand, the Logistic function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
+%\begin{equation}
+%f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
+%\end{equation}
+%with the parameters $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$.
+%Both functions are widely used in literature, however the \acs{ReLU} function is the preferred choice recently.
+%I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network models, with the nonlinear activation function given by the microring resonator.
+The \acs{ReLU} function is just one among the many activation functions used in literature, however recently it has become the preferred choice in the \ac{ICT} community.
+I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network model, with the nonlinear activation function given by the microring resonator.
 
 \subsubsection{Learning}
-After the definition of the model, I had to train the networks on the training set.
-All the examples are fed at once into the model, then the overall loss is evaluated, and finally the weights are upgraded.
+After the definition of the model, I had to train the networks.
+All the examples in the dataset are fed at once into the model, then the overall loss is evaluated, and finally the weights are upgraded.
 This method is called \textit{batch} operation; others are \textit{online} operation, which evaluate the loss and change the weights at each example, and \textit{minibatch} operation, which uses a random subset of the full dataset.
 
+I trained the models for \num{4000} epochs, in order to see the different dynamics of the training procedure: \autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model.
+The network loss (solid lines) on the training dataset decays to values near zero and shows some particular behaviors.
+The first one is that there are zones in which the network loss does not improve much, \textit{plateau}, and zones in which it improves more rapidly.
+Moreover, some models show \textit{ripples} in the evolution: this is due either to the too high learning rate or to the complex shape of the loss function in the parameters space.
+On the other hand
+
 %Every time the network is trained on the full dataset, an \textit{epoch} is completed.
-I trained the models defined above for \num{2000} epochs, in order to observe both the fast and slow dynamics.
-For example, smaller networks tend to train faster, because there are less free parameters.
-On the other hand, larger networks often train slower, but can obtain better results thanks to their complexity.
+I trained the models defined above for \num{4000} epochs, in order to observe the widest variety of dynamics.
+%For example, smaller networks tend to train faster, because there are less free parameters.
+%On the other hand, larger networks often train slower, but can obtain better results thanks to their complexity.
+At the beginning the network improves its operation, but going on with the training the validation set shows worse
 
 Moreover, I defined a different learning rates $l_r$ for each activation function, in order to provide the best parameter for different models but still be able to compare the performance of similar ones.
 Specifically the learning rate for the \acs{ReLU} is $l_{r|ReLU} = \num{5e-2}$, while for the Logistic function is $l_{r|Logistic}= \num{5e-3}$
 
 \begin{figure}[htbp]
 	\centering
-	\input{tikz/Train_evolution.tex}
-	\caption{Evolution of the loss criterion (solid lines) throughout the epochs.
+	\input{tikz/relu_evolution.tex}
+	\caption{Typical evolution of the loss criterion (solid lines) throughout the epochs.
 		Points represent the values of the loss criterion on the validation dataset, carried out repeatedly during the training.
+		Dotted lines are the scheduled change in the learning rate.
 	}
 	\label{fig:PyTorch_learning}
 \end{figure}
 
-\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{2000} epochs of training.
+\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{4000} epochs of training.
 From the evolution of the loss function we can see that every model has 
-
 
 \subsubsection{Collection of results}
 Since the number of classes is \num{11}, the probability of giving a correct answer at random is $\sim \SI{9.09}{\percent}$.
 Hence, values of correct answers above that mean that the neural network is working.
 On the other hand, values around or even below \SI{9.09}{\percent} mean that the current neural network is not working at all.
 
-\autoref{tab:PyResults} collects all the results for the different topologies.
-The same shape has been tested with both $f_{ReLU}$ and $f_{Logistic}$ to compare the performance.
+%\autoref{tab:PyResults} collects all the results for the different topologies.
+%The same shape has been tested with both $f_{ReLU}$ and $f_{Logistic}$ to compare the performance.
+\autoref{tab:PyResults} collects all the results for the different topologies, where the activation function was provided by a $f_{ReLU}$ function.
+We can observe that the width of the hidden layers seems to influence the correctness of the network, at least marginally.
+
 
 \begin{table}[htbp]
 	\centering
@@ -617,18 +631,18 @@ The same shape has been tested with both $f_{ReLU}$ and $f_{Logistic}$ to compar
 	activation	& no. hidden 	& no. nodes	& last hidden	& Percent \\
 	function		& layers 			& per layer	& layer				& correct \\
 	\midrule
-	$f_{ReLU}$ 			& 2 & 11 & linear & \SI{50 +- 50}{\percent} \\
-	$f_{ReLU}$ 			& 3 & 11 & linear & \SI{50 +- 50}{\percent} \\
-	$f_{ReLU}$ 			& 2 & 22 & linear & \SI{50 +- 50}{\percent} \\
-	$f_{ReLU}$ 			& 3 & 22 & linear & \SI{50 +- 50}{\percent} \\
-	$f_{Logistic}$ 	& 2 & 11 & - & \SI{9}{\percent} \\
-	$f_{Logistic}$ 	& 3 & 11 & - & \SI{9}{\percent} \\
-	$f_{Logistic}$ 	& 2 & 22 & - & \SI{9}{\percent} \\
-	$f_{Logistic}$ 	& 3 & 22 & - & \SI{9}{\percent} \\
+	$f_{ReLU}$ 			& 2 & 11 & linear & \SI{48 +- 6}{\percent} \\
+	$f_{ReLU}$ 			& 3 & 11 & linear & \SI{40 +- 11}{\percent} \\
+	$f_{ReLU}$ 			& 2 & 22 & linear & \SI{54 +- 2}{\percent} \\
+	$f_{ReLU}$ 			& 3 & 22 & linear & \SI{51 +- 4}{\percent} \\
+%	$f_{Logistic}$ 	& 2 & 11 & - & \SI{9}{\percent} \\
+%	$f_{Logistic}$ 	& 3 & 11 & - & \SI{9}{\percent} \\
+%	$f_{Logistic}$ 	& 2 & 22 & - & \SI{9}{\percent} \\
+%	$f_{Logistic}$ 	& 3 & 22 & - & \SI{9}{\percent} \\
 	\bottomrule
 	\end{tabular}
-	\caption{Results of the different activation functions and the several network topologies.
-	The statistics is made on \num{20} different initialization of the same model.
+	\caption{Results of the several network topologies.
+	The statistics is made on \num{10} different initialization of the same model: the error on the percentage is the standard deviation.
 	}
 	\label{tab:PyResults}
 \end{table}

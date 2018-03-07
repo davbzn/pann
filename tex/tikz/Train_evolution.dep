@@ -1,0 +1,8 @@
+tikz/Train_evolution.pdf: tikz/base-11x2_learn.csv
+tikz/Train_evolution.pdf: tikz/base-11x2_valid.csv
+tikz/Train_evolution.pdf: tikz/base-11x3_learn.csv
+tikz/Train_evolution.pdf: tikz/base-11x3_valid.csv
+tikz/Train_evolution.pdf: tikz/base-22x2_learn.csv
+tikz/Train_evolution.pdf: tikz/base-22x2_valid.csv
+tikz/Train_evolution.pdf: tikz/base-22x3_learn.csv
+tikz/Train_evolution.pdf: tikz/base-22x3_valid.csv
