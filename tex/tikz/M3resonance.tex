@@ -21,6 +21,7 @@
 			height=207pt,
 			legend pos = outer north east,
 			xmin=1548, xmax=1556,
+			minor tick num=1,
 			/pgf/number format/1000 sep=,
 		]
     
@@ -34,9 +35,11 @@
 		\addplot [semithick, cyan] table [x index=0, y index=1] {tikz/res1552.csv};
 		\addlegendentryexpanded{ $dr_1$ }
 		
-		\draw [<-] ({1551.9+0.30+0.1}, 0.306) -- ({1551.9+1.5}, 0.306)
-				node [right] {\small $FWHM$}; 
-		\draw [<-] ({1551.9-0.4-0.1}, 0.306) -- ({1551.9-1.5}, 0.306);
+		\draw [help lines, <-] ({1551.9+0.3+0.1}, 0.306) -- ({1551.9+0.3+0.1+0.8}, 0.306)
+				node [right, align=left] {\small $FWHM$\\\SI{0.6+-0.05}{\nm}};
+		\draw [help lines, <-] ({1551.9-0.4-0.1}, 0.306) -- ({1551.9-0.4-0.1-0.8}, 0.306);
+		
+		\draw [help lines] (1551.9, -0.1) -- (1551.9, 0.8) node [pos=.85, right] {$\lambda_{res}=\SI{1551.9+-0.1}{\nm}$};
     
 	\end{axis}
 \end{tikzpicture}

@@ -241,7 +241,7 @@ This is due to two factors: primarily the coupling maximization process with the
 
 Since $dr_1$ is the only channel with an unperturbed transmission, I focused my attention on its response only.
 Specifically, I studied the resonance near \SI{1551.9}{\um}: % because it was the one with the highest transmitted signal and hence provided a better \acs{SNR}.
-\autoref{fig:M3_1550_resonance} shows such resonance and highlights its width to $FWHM=\SI{0.6+-0.05}{\nm}$.
+\autoref{fig:M3_1550_resonance} shows such resonance and highlights its center $\lambda_{res}=\SI{1551.9+-0.1}{\nm}$ and width $FWHM=\SI{0.6+-0.05}{\nm}$.
 The estimated quality factor is $Q=\num{2600+-200}$.
 
 \begin{figure}[!hbtp]
@@ -277,7 +277,7 @@ This curve has been identified with its closest analytical polynomial, to obtain
 
 This setup successfully induces the nonlinear response in the microring for detunings up to values comparable to half $FWHM$.
 However, instabilities of the source and the amplification stages in the optical power and in the wavelength of the signal increase the uncertainty on the measures.
-Specifically, the system shows a drift in optical power immediately after the source and amplification stages are switched on and random noise of the order of \SI{0.1}{\percent}.
+Specifically, the system shows a drift in optical power immediately after the source and amplification stages are switched on and random noise (e.g. \SI{5}{\uW} of noise over \SI{1}{\mW} at the detector).
 Moreover, the wavelength of the light generated shows a slow drift toward shorter wavelengths, which becomes important for long measurements.
 The typical wavelength stability of the source is rated at \SI[per-mode=symbol]{+-3}{\pico\meter\per\hour} (from instrument datasheet).
 
@@ -385,59 +385,100 @@ It is interesting to observe that the experimental data, much like the simulatio
 Nevertheless, both quantities seem to increase with wavelength more distant from the resonance.
 Moreover, the position of the edges of the bistability region seem to be precisely defined by the parameters of the system.
 
-\section{Test of a Trained ANN}
-\label{sec:Test_of_a_Trained ANN}
-The first step I made to test the nonlinear response of a microring resonator as a neural network activation function was to exploit the fitted bistability curve of \autoref{eq:fit} and implement it as activation function of the model defined in \autoref{ssec:Simulated_ANN_operation}.
+\section{Optical Activation Function}
+\label{sec:Optical_Activation_Function}
+The first step to implement an optical activation function is to test the nonlinear response of the microring inside a simulated \ac{ANN}.
+In order to do so, I fitted the nonlinear response to obtain an approximated analytical description.
+The analytical description was then inserted as activation function in the same models used in \autoref{ssec:Simulated_ANN_operation}.
+Also the training and validation/test datasets are the same, hence it is possible to compare the results of the two activation functions: the \ac{ReLU} and the nonlinear optical response.
 
 \subsection{Optical bistability as nonlinear activation function}
 \label{ssec:Optical_bistability_as_nonlinear_activation_function}
-Having obtained a description of the optical bistability of the response of a microring resonator in a wide range of wavelengths, I implemented the shape of such response in a simulated artificial neural network.
-Hence, I chose a representative set of data:
+Having obtained a description of the response of the microring resonator in a wide range of wavelengths, I implemented the shape of such response in a simulated \ac{ANN}.
+I chose a representative set of data: specifically, the data belongs to the increasing half of the bistability loop for input light at \SI{1552.300}{\nm}.
+Since the response is defined apart of a multiplication factor, I normalized the function such that its domain and codomain were represented by the interval $[0,1]$.
 %from the group, such that it was neither the most distant nor the closest to the resonance.
 %This was made to avoid unexpected ``border effects''.
-specifically, the data belongs to the increasing half of the bistability loop for input light at \SI{1552.300}{\nm} \ref{}.
 
+As seen in the previous Section (\ref{ssec:bistability_wavelength_dependence}), the nonlinear response shows a decay in transmission after a certain input value.
+In the fit I neglected all the data after the maximum, because the cause of such behavior is still unknown: the theoretical model does not predict it.
+Moreover, this choice simplifies the analytical description of the activation function, which is helpful because simpler activation functions are less computational intensive on the simulations.
+Faster simulations, in turn, help me in the heuristic test of the many parameters of each network model.
+
+The functions employed to fit the data is a combination of function that are already implemented in PyTorch library.
+This allows a simple implementation in the simulations.
+%Specifically the function is composed by \textit{Logistic} and \textit{ReLU} function
+%\begin{equation}
+%	f_{fit} \defeq b~f_{Logistic}\left[a(x-x_0)\right] + c~f_{ReLU}\left[x\right]+d~f_{ReLU}\left[x-x_0\right]+e~f_{ReLU}\left[x-x_1\right],
+%	\label{eq:fit}
+%\end{equation}
+Specifically the function is composed by \textit{ReLU} functions only
+\begin{equation}
+	f_{fit} \defeq a~f_{ReLU}\left[x\right]+b~f_{ReLU}\left[x-x_0\right]+c~f_{ReLU}\left[x-x_1\right],
+	\label{eq:fit}
+\end{equation}
+where the parameters $a$, $b$, $x_0$, $c$, and $x_1$ are fixed by the fit.
+
+%\begin{figure}[htbp]
+%	\centering
+%	\input{tikz/fit+residuals.tex}
+%	\caption{Curve fitting and residuals on a set of data.
+%	The nonlinear curve is the increasing half of a bistability loop.
+%	The fit is quite close to the original values, except near the jump.}
+%	\label{fig:fit+residuals}
+%\end{figure}
 \begin{figure}[htbp]
 	\centering
-	\input{tikz/fit+residuals.tex}
+	\input{tikz/ReLUfit+residuals.tex}
 	\caption{Curve fitting and residuals on a set of data.
 	The nonlinear curve is the increasing half of a bistability loop.
 	The fit is quite close to the original values, except near the jump.}
 	\label{fig:fit+residuals}
 \end{figure}
 
-The curve employed to fit the data is a combination of function that are already implemented in PyTorch library.
-This allows a simple implementation in the simulations.
-Specifically the function is composed by \textit{Logistic} and \textit{ReLU} function
-\begin{equation}
-	f_{fit} \defeq b~f_{Logistic}\left[a(x-x_0)\right] + c~f_{ReLU}\left[x\right]+d~f_{ReLU}\left[x-x_0\right]+e~f_{ReLU}\left[x-x_1\right],
-	\label{eq:fit}
-\end{equation}
-where the parameters $a$, $b$, $c$, $d$, $e$, $x_0$, and $x_1$ are fixed by the fit.
+\autoref{fig:fit+residuals} shows the nonlinear response function, the fit, and the residuals.
+The data are distinguished in the data points considered and those excluded from the fit.
+The curve fit is very close to the original data points, with a maximum residual of \num{0.027} near the bistability edge.
 
-As shown in \autoref{fig:fit+residuals}, the curve fit on the chosen dataset is very close to the original data points.
-This is true all over the range of powers, except near the bistability edge, where the maximum difference occurs.
+%COME ADATTARE I PESI VIRTUALI A QUELLI FISICI? rappresentazione a bassa precisione?
 
-\subsection{Optical bistability vs ReLU and Logistic}
-\label{ssec:OBvsReLUvsSIGM}
-HO PROVATO DIVERSE GEOMETRIE e DIVERSE LOSS FUNCTIONS\\
-COME ADATTARE I PESI VIRTUALI A QUELLI FISICI? rappresentazione a bassa precisione?
+\newpage
+\subsection{Optical Nonlinear Response in ANN}
+\label{ssec:Optical_Nonlinear_Response_in_ANN}
+In \autoref{sec:FFNN_Simulation} I trained several models of \ac{ANN}, in which the activation function was the \ac{ReLU}.
+The networks had \num{10} inputs ($D_{in}$) and \num{11} outputs ($D_{out}$) and the last layer was composed by \num{11} nodes as well.
+The number of hidden layers ($n_H$) and the number of nodes per hidden layer ($D_H$) were free parameters.
 
+Using $f_{fit}$ as activation function, I tested models with $n_H=[2,3]$ and $D_H=[11,22]$ and obtained correctness up to $\sim\SI{50}{\percent}$.
+In this case, the last hidden layer implemented both the weighted sum and the activation function.
+I trained the models for 4000 epochs, in order to be consistent to what I did for the \ac{ReLU} based \acp{ANN}.
+The optimizer is the \ac{SGD}, parametrized by the learning rate $l_r$ and the momentum $m$.
+The learning rate scheduler is \textit{StepLR} ($\gamma$, $T$) and the criterion used is \ac{CEL}.
+
+The simulation parameters are: $l_r=\num{6e-3}$, $m=0.5$, $\gamma=0.8$, and $T=500$.
 
 \begin{figure}[htbp]
 	\centering
-	\input{tikz/Train_evolution_OB.tex}
+	\input{tikz/fit_evolution.tex}
 	\caption{Evolution of the loss criterion (solid lines) throughout the epochs.
 		Points represent the values of the loss criterion on the validation dataset, carried out repeatedly during the training.
 	}
 	\label{fig:fit_learning}
 \end{figure}
 
-\autoref{fig:fit_learning} shows the evolution of the loss and the validation of each model during the \num{2000} epochs of training.
-From the evolution of the loss function we can see that every model has 
+\autoref{fig:fit_learning} shows the typical evolution of the loss on both the train and the validation datasets, for each model.
+Despite the models are trained for \num{4000} epochs, the lowest loss reached is near \num{1.9}, whereas in \autoref{sec:FFNN_Simulation} loss values below \num{0.5} were reached.
+This factor it is connected to the lower learning rate employed and together they points towards the conclusion that it takes longer to train $f_{fit}$ based models in comparison to $f_{ReLU}$ based ones.
+Moreover, overfitting does not appear yet inside the \num{4000} epochs.
 
-The percentage of correct answer of different models that implements the optical bistability activation function is given by \autoref{tab:ExpResults}.
-The same shapes have been tested with $f_{ReLU}$ and $f_{Logistic}$ in \autoref{ssec:Simulated_ANN_operation}.
+Another important behavior is the instability of the evolution: the improvement of the loss function is scattered with spikes.
+This is due, at least partially, to the complex shape of the surface of loss function of the $f_{fit}$ based models.
+Moreover, higher values of $l_r$ induce higher instability, whereas lower values are dot not train fast enough.
+
+The results for the distinct models that implements the optical bistability activation function are collected in \autoref{tab:ExpResults}.
+The percentage of correct answers on the test dataset is lower than the results obtained for the \ac{ReLU} based \acp{ANN}.
+This might be caused by the fact that $f_{fit}$ based models work better with lower $l_r$ and are therefore harder to train.
+However, it is important to note that the optical node in the most promising configuration ($2\times 22$) gives near the \SI{30}{\percent} of correct answers, which is above the $p_{rnd}=\SI{9.09}{\percent}$ threshold of random choice.
 
 \begin{table}[htbp]
 	\centering
@@ -445,16 +486,17 @@ The same shapes have been tested with $f_{ReLU}$ and $f_{Logistic}$ in \autoref{
 	\toprule
 	activation	& no. hidden 	& no. nodes	& other			& Percent\\
 	function		& layers 			& per layer	& parameters	& correct\\
-	\midrule
-	$f_{fit}$ 			& 2 & 11 & - & \SI{66}{\percent}\\
-	$f_{fit}$ 			& 2 & 22 & - & \SI{55}{\percent}\\
-	$f_{fit}$ 			& 3 & 11 & - & \SI{44}{\percent}\\
-	$f_{fit}$ 			& 3 & 22 & - & \SI{33}{\percent}\\
+	\midrule	
+	$f_{fit}$ 			& 2 & 11 & linear & \SI{24 +- 5}{\percent} \\
+	$f_{fit}$ 			& 3 & 11 & linear & \SI{19 +- 5}{\percent} \\
+	$f_{fit}$ 			& 2 & 22 & linear & \SI{30 +- 6}{\percent} \\
+	$f_{fit}$ 			& 3 & 22 & linear & \SI{26 +- 6}{\percent} \\
 	\bottomrule
 	\end{tabular}
-	\caption{Results of the $f_{fit}$ function for several network topologies.
+	\caption{
+		Results of the $f_{fit}$ activation function on several network topologies.
+		The statistics is made on 10 different initializations of the same model:
+		the error on the percentage is the standard deviation.	
 	}
 	\label{tab:ExpResults}
 \end{table}
-
-As we can see the performance of the $f_{fit}$ function lies in the range of the $f_{ReLU}$, even if a bit lower.

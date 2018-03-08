@@ -31,7 +31,7 @@
 		\addlegendimage{semithick, red, mark=o, mark options={scale=1}}
 		\addlegendimage{semithick, cyan, mark=o, mark options={scale=1}}
 		\addlegendimage{semithick, lime!50!teal, mark=o, mark options={scale=1}}
-		\addlegendimage{semithick, orange!80!magenta, mark=o, mark options={scale=1}}
+		\addlegendimage{semithick, lightgray, mark=o, mark options={scale=1}}
 
 		\addlegendentry{$2\times 11$}
 		\addplot [red, train] table [x index=0, y index=3] {tikz/base-11x2_learn.csv};
@@ -46,8 +46,8 @@
 		\addplot [lime!50!teal, valid] table [x index=0, y index=9] {tikz/base-22x2_valid.csv};
 		
 		\addlegendentry{$3\times 22$}
-		\addplot [orange!80!magenta, train] table [x index=0, y index=7] {tikz/base-22x3_learn.csv};
-		\addplot [orange!80!magenta, valid] table [x index=0, y index=7] {tikz/base-22x3_valid.csv};
+		\addplot [lightgray, train] table [x index=0, y index=7] {tikz/base-22x3_learn.csv};
+		\addplot [lightgray, valid] table [x index=0, y index=7] {tikz/base-22x3_valid.csv};
 %		red,blue,black,yellow,brown,teal,orange,violet,cyan,green!70!black,magenta,gray
 		
 		\draw [dotted, help lines, thick]

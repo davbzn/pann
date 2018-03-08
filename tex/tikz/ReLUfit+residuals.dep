@@ -1,0 +1,4 @@
+tikz/ReLUfit+residuals.pdf: tikz/activation_1.csv
+tikz/ReLUfit+residuals.pdf: tikz/activation_2.csv
+tikz/ReLUfit+residuals.pdf: tikz/activation_3.csv
+tikz/ReLUfit+residuals.pdf: tikz/residuals_1.csv

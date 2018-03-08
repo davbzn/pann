@@ -557,10 +557,11 @@ The choice of the structure of the neural network is purely heuristic, since up 
 However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
 Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
 
-%Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
-%Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
-%The \acs{ReLU} function is a standard activation function and is defined as follows:
-Using the chosen dataset, I tested the neural network operation on the model defined before, with the nonlinearity provided by the \acfi{ReLU} activation function.
+\newpage
+Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
+Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
+%%The \acs{ReLU} function is a standard activation function and is defined as follows:
+%Using the chosen dataset, I tested the neural network operation on the model defined before, with the nonlinearity provided by the \acfi{ReLU} activation function.
 The \acs{ReLU} function is a standard activation function defined as follows:
 \begin{equation}
 f_{ReLU}(x) =
@@ -570,35 +571,44 @@ f_{ReLU}(x) =
 \end{cases}~.
 \label{eq:relu}
 \end{equation}
-%On the other hand, the Logistic function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
-%\begin{equation}
-%f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
-%\end{equation}
-%with the parameters $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$.
-%Both functions are widely used in literature, however the \acs{ReLU} function is the preferred choice recently.
-%I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network models, with the nonlinear activation function given by the microring resonator.
-The \acs{ReLU} function is just one among the many activation functions used in literature, however recently it has become the preferred choice in the \ac{ICT} community.
-I will discuss in \autoref{sec:Test_of_a_Trained ANN} the results of the same network model, with the nonlinear activation function given by the microring resonator.
+The Logistic function, which has already been shown in \autoref{fig:activation_function_example_2}, is defined by
+\begin{equation}
+f_{Logistic}(x) = \frac{1}{1+e^{-k\left(x-x_0\right)}},
+\end{equation}
+with the parameters $k\in \mathcal{R}^+$ and $x_0\in \mathcal{R}$.
+Both functions are widely used in literature, however recently \acs{ReLU} has become the preferred choice in the \ac{ICT} community.
+Unfortunately, the results for the Logistic function were almost the same as a random choice.
+For this reason in the next section I will describe the results for the \acs{ReLU} only.
+I will discuss in \autoref{sec:Optical_Activation_Function} the results of the same network model, with the nonlinear activation function given by the microring resonator.
 
 \subsubsection{Learning}
 After the definition of the model, I had to train the networks.
 All the examples in the dataset are fed at once into the model, then the overall loss is evaluated, and finally the weights are upgraded.
 This method is called \textit{batch} operation; others are \textit{online} operation, which evaluate the loss and change the weights at each example, and \textit{minibatch} operation, which uses a random subset of the full dataset.
 
-I trained the models for \num{4000} epochs, in order to see the different dynamics of the training procedure: \autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model.
-The network loss (solid lines) on the training dataset decays to values near zero and shows some particular behaviors.
-The first one is that there are zones in which the network loss does not improve much, \textit{plateau}, and zones in which it improves more rapidly.
-Moreover, some models show \textit{ripples} in the evolution: this is due either to the too high learning rate or to the complex shape of the loss function in the parameters space.
-On the other hand
+I provided the \ac{SGD} algorithm with a learning rates $l_r$ and a momentum $m$, which should stabilize the evolution.
+Moreover, I used a scheduler to reduce the learning rate with the iterations.
+There are several algorithm for the learning rate scheduler: the one I used is called \textit{StepLR} and decays the value of $l_r$ by $\gamma$ every $T$ epochs. 
+Specifically the learning rate is initially set to $l_{r|ReLU} = \num{0.05}$ and the momentum to $m=0.25$, while $\gamma = 0.6$ and $T=1000$.
+
+I trained the models for \num{4000} epochs, in order to see the different dynamics of the training procedure: \autoref{fig:PyTorch_learning} shows the typical evolution of the loss on the train and the validation datasets for each model.
+The network loss (solid lines) on the training dataset decays towards near zero and shows some particular behaviors.
+During the training, there are times at which the network loss does not improve much, \textit{plateau}, and times at which it improves more rapidly.
+Moreover, some models show \textit{ripples} during the evolution: this is due either to the learning rate being too high or to the complex shape of the loss function in the parameters space.
+Note that each time the learning rate scheduler changes $l_r$ the ripples disappear.
+
+The evolution of the loss function on the validation dataset is different.
+It shows a minimum usually in the second quarter of the total training period, which means that in the second half of the training the network is being overfitted on the data.
+In fact, I observed that usually the percentage of correct answers decreases slightly toward the end of the \num{4000} epochs due to overfitting.
 
 %Every time the network is trained on the full dataset, an \textit{epoch} is completed.
-I trained the models defined above for \num{4000} epochs, in order to observe the widest variety of dynamics.
+%I trained the models defined above for \num{4000} epochs, in order to observe the widest variety of dynamics.
 %For example, smaller networks tend to train faster, because there are less free parameters.
 %On the other hand, larger networks often train slower, but can obtain better results thanks to their complexity.
-At the beginning the network improves its operation, but going on with the training the validation set shows worse
-
-Moreover, I defined a different learning rates $l_r$ for each activation function, in order to provide the best parameter for different models but still be able to compare the performance of similar ones.
-Specifically the learning rate for the \acs{ReLU} is $l_{r|ReLU} = \num{5e-2}$, while for the Logistic function is $l_{r|Logistic}= \num{5e-3}$
+%At the beginning the network improves its operation, but going on with the training the validation set shows worse
+%
+%Moreover, I defined a different learning rates $l_r$ for each activation function, in order to provide the best parameter for different models but still be able to compare the performance of similar ones.
+%Specifically the learning rate for the \acs{ReLU} is $l_{r|ReLU} = \num{5e-2}$, while for the Logistic function is $l_{r|Logistic}= \num{5e-3}$
 
 \begin{figure}[htbp]
 	\centering
@@ -610,19 +620,24 @@ Specifically the learning rate for the \acs{ReLU} is $l_{r|ReLU} = \num{5e-2}$, 
 	\label{fig:PyTorch_learning}
 \end{figure}
 
-\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{4000} epochs of training.
-From the evolution of the loss function we can see that every model has 
+%\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{4000} epochs of training.
+%From the evolution of the loss function we can see that every model has 
 
 \subsubsection{Collection of results}
-Since the number of classes is \num{11}, the probability of giving a correct answer at random is $\sim \SI{9.09}{\percent}$.
+Considering that the number of classes is \num{11}, the probability of giving a correct answer at random is $p_{rnd}\sim \SI{9.09}{\percent}$.
 Hence, values of correct answers above that mean that the neural network is working.
-On the other hand, values around or even below \SI{9.09}{\percent} mean that the current neural network is not working at all.
+On the other hand, values around or even below $p_{rnd}$ mean that the current neural network is not working at all.
+
+Since in \num{4000} epochs the \acp{ANN} are become overfitted on the dataset, I select as correctness the maximum value of correct answer given during the training.
+It is the same as stopping the learning process on the network when a minimum of the validation set is reached.
 
 %\autoref{tab:PyResults} collects all the results for the different topologies.
 %The same shape has been tested with both $f_{ReLU}$ and $f_{Logistic}$ to compare the performance.
 \autoref{tab:PyResults} collects all the results for the different topologies, where the activation function was provided by a $f_{ReLU}$ function.
 We can observe that the width of the hidden layers seems to influence the correctness of the network, at least marginally.
+Moreover the depth of the network, i.e. the number of hidden layers ($n_H$), seems to be correlated to the deviation of the correctness.
 
+The overall results of these models are satisfactory because they all well over the $p_{rnd}$ threshold.
 
 \begin{table}[htbp]
 	\centering
@@ -635,14 +650,10 @@ We can observe that the width of the hidden layers seems to influence the correc
 	$f_{ReLU}$ 			& 3 & 11 & linear & \SI{40 +- 11}{\percent} \\
 	$f_{ReLU}$ 			& 2 & 22 & linear & \SI{54 +- 2}{\percent} \\
 	$f_{ReLU}$ 			& 3 & 22 & linear & \SI{51 +- 4}{\percent} \\
-%	$f_{Logistic}$ 	& 2 & 11 & - & \SI{9}{\percent} \\
-%	$f_{Logistic}$ 	& 3 & 11 & - & \SI{9}{\percent} \\
-%	$f_{Logistic}$ 	& 2 & 22 & - & \SI{9}{\percent} \\
-%	$f_{Logistic}$ 	& 3 & 22 & - & \SI{9}{\percent} \\
 	\bottomrule
 	\end{tabular}
 	\caption{Results of the several network topologies.
-	The statistics is made on \num{10} different initialization of the same model: the error on the percentage is the standard deviation.
+	The statistics is made on \num{10} different initializations of the same model: the error on the percentage is the standard deviation.
 	}
 	\label{tab:PyResults}
 \end{table}

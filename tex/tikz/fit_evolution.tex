@@ -1,0 +1,66 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{fit_evolution}
+
+\begin{tikzpicture}[baseline]
+	
+	\begin{axis}[
+			title={Loss Criterion Evolution},
+			xlabel={Epochs},
+			ylabel={Loss},
+			width=\textwidth*0.75,
+			height=207pt,
+			legend pos = outer north east,
+%			cycle list name=color list,
+			/pgf/number format/1000 sep=,
+			xtick distance=500,
+			minor tick num=1,
+			domain=0:4000,
+			train/.style={
+				smooth,
+				semithick,
+			},
+			valid/.style={
+				only marks,
+				mark=o,
+				mark options={scale=0.6},
+				forget plot,
+			},
+		]
+		\addlegendimage{empty legend};
+		\addlegendentry{\hspace{-.6cm}$f_{fit}$};
+		\addlegendimage{semithick, red, mark=o, mark options={scale=1}}
+		\addlegendimage{semithick, cyan, mark=o, mark options={scale=1}}
+		\addlegendimage{semithick, lime!50!teal, mark=o, mark options={scale=1}}
+		\addlegendimage{semithick, lightgray, mark=o, mark options={scale=1}}
+
+		\addlegendentry{$2\times 11$}
+		\addplot [red, train] table [x index=0, y index=6] {tikz/fitflatrelu-11x2_learn.csv};%1{tikz/fitflatrelu-11x2_learn.csv};
+		\addplot [red, valid] table [x index=0, y index=6] {tikz/fitflatrelu-11x2_valid.csv};%{tikz/fitflatrelu-11x2_valid.csv};
+
+		\addlegendentry{$3\times 11$}
+		\addplot [cyan, train] table [x index=0, y index=1] {tikz/fitflatrelu-11x3_learn.csv};%3{tikz/fitflatrelu-11x3_learn.csv};
+		\addplot [cyan, valid] table [x index=0, y index=1] {tikz/fitflatrelu-11x3_valid.csv};%{tikz/fitflatrelu-11x3_valid.csv};
+		
+		\addlegendentry{$2\times 22$}
+		\addplot [lime!50!teal, train] table [x index=0, y index=9] {tikz/fitflatrelu-22x2_learn.csv};%7
+		\addplot [lime!50!teal, valid] table [x index=0, y index=9] {tikz/fitflatrelu-22x2_valid.csv};%
+		
+		\addlegendentry{$3\times 22$}
+		\addplot [lightgray, train] table [x index=0, y index=3] {tikz/fitflatrelu-22x3_learn.csv};%{tikz/fitflatrelu-22x3_learn.csv};
+		\addplot [lightgray, valid] table [x index=0, y index=3] {tikz/fitflatrelu-22x3_valid.csv};%{tikz/fitflatrelu-22x3_valid.csv};
+%		red,blue,black,yellow,brown,teal,orange,violet,cyan,green!70!black,magenta,gray
+		
+		\draw [dotted, help lines, thick]
+			(   0,0) -- ++(0,3)
+			( 500,0) -- ++(0,3)
+			(1000,0) -- ++(0,3)
+			(1500,0) -- ++(0,3)
+			(2000,0) -- ++(0,3)
+			(2500,0) -- ++(0,3)
+			(3000,0) -- ++(0,3)
+			(3500,0) -- ++(0,3)
+			(4000,0) -- ++(0,3);
+				
+		
+	\end{axis}
+\end{tikzpicture}

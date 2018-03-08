@@ -1,0 +1,61 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{ReLUfit+residuals}
+
+\begin{tikzpicture}
+	\begin{axis}[
+			title={Nonlinear activation function fit},
+			width=0.75\textwidth,
+			height=207pt,
+			scale only axis,
+			name=main plot,
+			xticklabels=\empty,
+			domain=0:1,
+			ylabel={Normalized Output Signal},
+			legend pos=south east,
+			legend cell align=left,
+	    clip mode=individual,			
+		]
+
+	\addlegendentry{\hspace{-0.6cm}data points:};
+	\addlegendimage{empty legend};
+	
+	\addplot [only marks, mark=o, mark options={cyan, scale=.8}]
+						table [x index=0, y index=1] {tikz/activation_1.csv};
+	\addplot [only marks, mark=x, mark options={red, scale=1}]
+						table [x index=0, y index=1] {tikz/activation_2.csv};
+	\addplot [thick, darkgray]
+						table [x index=0, y index=1] {tikz/activation_3.csv};
+	
+	\addlegendentry{considered};
+	\addlegendentry{excluded};
+	\addlegendentry{fit};
+	
+	\draw [help lines, thin]
+			(-0.1, 0) -- (1.1, 0) (-0.1, 1) -- (1.1, 1);
+%			(	0,-0.2) -- (0, 1.25) ( 1,-0.2) -- (1, 1.25);
+	
+	\end{axis}
+	
+	\begin{axis}[
+			at={(main plot.below south west)},
+			yshift=.1cm,
+			xlabel={Normalized Input Signal},
+			ylabel={Residuals [$\cdot 10^{-2}$]},
+%			scaled y ticks=false,
+			anchor=north west,
+			width=0.75\textwidth,
+			scale only axis,
+			height=2.8cm,
+			domain=0:1,
+			xmin=-0.1, 	xmax=+1.1,
+			ymin=-4, 	ymax=+4,
+			ytick={-2,0,2},
+	    clip mode=individual,
+		]
+		
+	\addplot [only marks, mark=o, mark options={cyan, scale=.8}] table [x index=0, y expr=100*\thisrowno{1}] {tikz/residuals_1.csv};
+	
+	\draw [help lines, thin] (-0.1, 0) -- (1.1, 0);
+
+	\end{axis}
+\end{tikzpicture}

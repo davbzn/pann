@@ -156,25 +156,54 @@ class FitReLU(torch.nn.Module):
         
         h = []
         h.append( self.linear0(x).clamp(min=0).mul_(p[0]) )
-        h[0].add_( self.linear0(x).clamp(min=p[2]).mul_(p[1]) )
-        h[0].add_( self.linear0(x).clamp(min=p[4]).mul_(p[3]) )
-        #h.append( self.linear0(x).clamp(min=0).mul_(p[0])
-        #         +self.linear0(x).clamp(min=p[2]).mul_(p[1])
-        #         +self.linear0(x).clamp(min=p[4]).mul_(p[3]) )
+        h[0].add_( self.linear0(x).add_(-p[2]).clamp(min=0).mul_(p[1]) )
+        h[0].add_( self.linear0(x).add_(-p[4]).clamp(min=0).mul_(p[3]) )
         
         # sum (linear2) and then nonlinear function
         for jj in range(n):
             exec("h.append( self.linear%d(h[-1]).clamp(min=0).mul_(p[0]) )" %(jj+1) );
-            exec("h[jj+1].add_( self.linear%d(h[-2]).clamp(min=p[2]).mul_(p[1]) )" %(jj+1) );
-            exec("h[jj+1].add_( self.linear%d(h[-2]).clamp(min=p[4]).mul_(p[3]) )" %(jj+1) );
+            exec("h[jj+1].add_( self.linear%d(h[-2]).add_(-p[2]).clamp(min=0).mul_(p[1]) )" %(jj+1) );
+            exec("h[jj+1].add_( self.linear%d(h[-2]).add_(-p[4]).clamp(min=0).mul_(p[3]) )" %(jj+1) );
                      
         # sum (out) and the output
         if not NL_out :
             y_pred = self.linearOut(h[-1])
         elif NL_out:
             y_pred = self.linearOut(h[-1]).clamp(min=0).mul_(p[0])
-            y_pred.add_( self.linearOut(h[-1]).clamp(min=p[2]).mul_(p[1]) )
-            y_pred.add_( self.linearOut(h[-1]).clamp(min=p[4]).mul_(p[3]) )
+            y_pred.add_( self.linearOut(h[-1]).add_(-p[2]).clamp(min=0).mul_(p[1]) )
+            y_pred.add_( self.linearOut(h[-1]).add_(-p[4]).clamp(min=0).mul_(p[3]) )
+        else:
+            raise ValueError('NL_out must be either True or False, but it isn\'t')
+                                
+        return y_pred # output = y_pred(icted)
+
+# define fit with ReLU class 
+class FitFlatReLU(torch.nn.Module):
+    def __init__(self, D_in, D_H, D_out, n):
+        super(FitFlatReLU, self).__init__()
+        self.linear0 = torch.nn.Linear(D_in, D_H)
+        for jj in range(n):
+            exec("self.linear%d = torch.nn.Linear(D_H, D_H)" %(jj+1) );
+        self.linearOut = torch.nn.Linear(D_H, D_out)
+
+    def forward(self, x, n, NL_out=False):
+        
+        # parameters
+        a, b, x0, c, x1 = [1.310, 41.516, 0.399, -42.491, 0.409]
+        #a*relu(arg-)+b*relu(arg-x0)+(c)*relu(arg-x1)
+        
+        h = []
+        h.append( self.linear0(x).clamp(min=0).mul_(a)+self.linear0(x).add_(-x0).clamp(min=0).mul_(b)+self.linear0(x).add_(-x1).clamp(min=0).mul_(c))
+        
+        # sum (linear2) and then nonlinear function
+        for jj in range(n):
+            exec( "h.append(self.linear%d(h[-1]).clamp(min=0).mul_(a)+self.linear%d(h[-1]).add_(-x0).clamp(min=0).mul_(b)+self.linear%d(h[-1]).add_(-x1).clamp(min=0).mul_(c))"%(jj+1,jj+1,jj+1) )
+                     
+        # sum (out) and the output
+        if not NL_out :
+            y_pred = self.linearOut(h[-1])
+        elif NL_out:
+            y_pred = self.linearOut(h[-1]).clamp(min=0).mul_(a)+self.linearOut(h[-1]).add_(-x0).clamp(min=0).mul_(b)+self.linearOut(h[-1]).add_(-x1).clamp(min=0).mul_(c)
         else:
             raise ValueError('NL_out must be either True or False, but it isn\'t')
                                 
@@ -195,6 +224,8 @@ def generate_entry(obj, verbose = False):
         entry.append( BestFit(entry[0][2], entry[0][3], entry[0][5], entry[0][4]) )
     elif obj[1]=='fitrelu':
         entry.append( FitReLU(entry[0][2], entry[0][3], entry[0][5], entry[0][4]) )
+    elif obj[1]=='fitflatrelu':
+        entry.append( FitFlatReLU(entry[0][2], entry[0][3], entry[0][5], entry[0][4]) )
     else:
         raise ValueError('model type not recognised')
     if verbose:

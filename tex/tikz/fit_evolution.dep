@@ -1,0 +1,8 @@
+tikz/fit_evolution.pdf: tikz/fitflatrelu-11x2_learn.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-11x2_valid.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-11x3_learn.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-11x3_valid.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-22x2_learn.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-22x2_valid.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-22x3_learn.csv
+tikz/fit_evolution.pdf: tikz/fitflatrelu-22x3_valid.csv
