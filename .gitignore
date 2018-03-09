@@ -1,7 +1,7 @@
 ## folders & subfolders
 /code/Jupyter/PyTorch/60-minute_blitz_tutorial/
 /code/Jupyter/PyTorch/Learning_PyTorch_with_Examples/
-/tex/photos/IMG*
+/tex/photos/
 
 ### TeX standard .gitignore file
 

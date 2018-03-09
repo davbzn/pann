@@ -8,8 +8,8 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage[font=scriptsize,labelfont=bf]{subcaption}
-\usepackage[font=scriptsize,labelfont=bf]{caption}
+%\usepackage[font=scriptsize,labelfont=bf]{subcaption}
+%\usepackage[font=scriptsize,labelfont=bf]{caption}
 \usepackage{FiraSans}
 \usepackage{FiraMono}
 
@@ -71,7 +71,7 @@
 %\renewcommand*{\bibfont}{\scriptsize}
 %\setbeamertemplate{bibliography item}{\insertbiblabel}
 
-%\setbeameroption{show notes on second screen}
+\setbeameroption{show notes on second screen}
 
 \author[D. Bazzanella]{Davide Bazzanella}
 \title[All-Optical Neural Networks]{Optical Bistability As Neural Network Nonlinear Activation Function}
@@ -84,18 +84,20 @@
 \setbeamercovered{transparent} 
 \setbeamertemplate{navigation symbols}{} 
 
-\newcommand{\frameofframes}{/}
-\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
-\setframeofframes{of}
+\metroset{numbering=fraction, background=light}
 
-\setbeamertemplate{footline}{
-	\begin{beamercolorbox}[ht=2.5ex, dp=1.125ex, leftskip=.3cm, rightskip=.3cm plus1fil]
-		{title in head/foot}
-		{\insertshorttitle} \hfill {\insertframenumber~\frameofframes~\inserttotalframenumber}
-%		{author in head/foot}
-%		{\insertshortauthor} \hfill {\insertinstitute}
-	\end{beamercolorbox}
-}
+%\newcommand{\frameofframes}{/}
+%\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
+%\setframeofframes{of}
+
+%\setbeamertemplate{footline}{
+%	\begin{beamercolorbox}[ht=2.5ex, dp=1.125ex, leftskip=.3cm, rightskip=.3cm plus1fil]
+%		{title in head/foot}
+%		{\insertshorttitle} \hfill {\insertframenumber~\frameofframes~\inserttotalframenumber}
+%%		{author in head/foot}
+%%		{\insertshortauthor} \hfill {\insertinstitute}
+%	\end{beamercolorbox}
+%}
 
 % set automatic fade transition
 \addtobeamertemplate{background canvas}{\transfade}{}
@@ -167,7 +169,7 @@
 	
 	\tikzset{external/export next=false}
 	\begin{tikzpicture}[remember picture, overlay]
-    \draw [line width=10mm, opacity=.25] (current page.center) circle [radius=2cm];
+    \draw [line width=10mm, opacity=.25] (current page.center)++(-\textwidth/4,0) circle [radius=2cm];
     \node (c) at (current page.center) {};
 %    \draw [->, very thick,red,opacity=0.5] (c) to[bend right] (current page.south east);
 %    \draw [overlay , ->, very thick,red,opacity=0.5] (c) to[bend right] (n1);
@@ -232,8 +234,8 @@ Linear
 \begin{frame}{Theory}
 Nonlinear
 \end{frame}
-\begin{frame}{Experiments}
-	\begin{figure}
+\begin{frame}[plain]{Experiments}
+	\begin{figure}[htbp]
 	\input{tikz/pump_setup.tex}
 	\end{figure}
 \end{frame}
@@ -268,7 +270,7 @@ PyTorch library
 	 and \textit{learning rate scheduler}.
 \end{frame}
 \begin{frame}{Operation Tests}
-ReLU vs Sigmoid vs $f_{fit}$
+ReLU vs $f_{fit}$
 \end{frame}
 
 %%%%% %%%%% %%%%% %%%%% %%%%% %%%%%

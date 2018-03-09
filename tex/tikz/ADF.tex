@@ -76,6 +76,6 @@
 			scaled x ticks = manual:{}{ \pgfkeys{/pgf/fpu}\pgfmathparse{(1e-3*\CC/#1)} },
 			/pgf/number format/1000 sep=,
 		]
-		\addplot[black, opacity=0, domain = \START:\STOP] {0}; %
+		\addplot[white, only marks] coordinates {(188.1,0.5) (198.9, 0.5)};
 	\end{axis}
 \end{tikzpicture}

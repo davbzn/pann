@@ -799,7 +799,7 @@ On the other hand, by injecting the same amount of optical power at lower freque
 		\label{fig:bistability_example}
   \end{subfigure}
   \caption{
-		Examples of (a) optical limiting and (b) optical bistability.
+		Examples of (a) optical limiting and (b) optical bistability (two halves).
 		These curves are just a qualitative example of the phenomena.
 		More accurate representation will be shown in the \autoref{ssec:Simulations}.
   }
@@ -812,13 +812,13 @@ Optical limiting is the progressive decrease in transmission with the increase o
 Hence, the effective transmission produced is nonlinearly dependent on the value of the input signal, as shown in \autoref{fig:optical_limiting_example}.
 On the other hand, by choosing a signal on the red shoulder of the \textit{cold} resonance, the effect obtained is \textit{optical bistability}.
 Optical bistability is the existence of two distinct steady states of the transmission function for the same interval of input signals.
-In an optical microring resonator this produces abrupt \textit{jumps} from one steady state to the other, when at the edges of such intervals.
-Specifically, at the right edge of the bistability region, the systems switches from the lower to the higher transmission state, whereas at the left edge, the system switches from the higher to the lower tramsission state.
+In an optical microring resonator this produces abrupt \textit{jumps} from one steady state to the other: %, when at the edges of such intervals.
+specifically, at the right edge of the bistability region, the systems switches from the lower to the higher transmission state, whereas at the left edge, the system switches from the higher to the lower tramsission state.
 Moreover, the state inside the bistability interval is determined by the past states of the optical cavity.
 This defines a hysteresis cycle around the bistability region.
 All these features are shown in \autoref{fig:bistability_example}.
 
-The empirical values of the nonlinear constants introduced in \Cref{ssec:Electronic_nonlinearities,ssec:Charge_carrier_nonlinearities,ssec:Thermal_nonlinearities} are collected in \autoref{tab:nonlinearities}.
+To summarize, the empirical values of the nonlinear constants introduced in \Cref{ssec:Electronic_nonlinearities,ssec:Charge_carrier_nonlinearities,ssec:Thermal_nonlinearities} are collected in \autoref{tab:nonlinearities}.
 
 \begin{table}[htbp]
 	\centering
@@ -845,9 +845,9 @@ The empirical values of the nonlinear constants introduced in \Cref{ssec:Electro
 \label{sec:Integrated_photonics_applied_to_ANNs}
 Even though the vast majority of hardware architectures for artificial neural networks are developed within the electronic platform, integrated photonics is emerging as a fast and efficient alternative.
 The way in which information is elaborated inside neural networks seems to be more favorable, in comparison to the boolean logic, to the development of photonic integrated processors \cite{shastri2017emergence}.
-The aim of photonics is to match the performances of electronics in the development of neuromorphic networks by exploiting its inherent suitability to parallel computing, its bandwidth and speed, and also its power efficiency.
+The aim of photonics is to overcome the performances of electronics in the development of neuromorphic networks by exploiting its inherent suitability to parallel computing, its bandwidth and speed, and also its power efficiency.
 
-Nevertheless building a neural network within a photonic integrated chip is a demanding task.
+Nevertheless building a neural network within a \ac{PIC} is a demanding task.
 For this reason, the results achieved until now have been obtained by using a small number of integrated devices.
 This fact inevitably limits the maximum complexity of the neural networks built.
 However, many neuromorphic networks are based on the \acf{RC} approach or the \acf{RNN} type or both.
@@ -856,20 +856,21 @@ Hence very fast and complex system can be exploited without having real control 
 On the other hand, a recurrent neural network can be implemented with only one computational node \cite{dejonckheere2014all, haynes2015reservoir}, as it exploit time to distribute the computation.
 In this type of network, the lack of physical complexity is compensated by the extension in time of the required task.
 
-The idea of this work is to tackle the problem head on and develop a framework for feedforward artificial neural network based on optical effects.
+The idea of this work is to tackle the problem head on and develop a framework for \ac{FFNN} based on optical effects.
 %In this section, I will describe the fundamental ideas at the base of my photonic implementation of a neural network.
 %The optical microring resonator, specifically in the ADF configuration, is the hardware on which my implementation is based.
 %Since the response of this type of resonators is multifaceted, as many physical quantities can be used as input or output variables, I will explain precisely how its response will be used.
 %Thus, I will make wide use of the theoretical base illustrated in the earlier sections, specifically on the nonlinear effects.
-
 As shown in \autoref{sec:Basis_of_Neural_Networks}, the principal parts of an artificial neural network are its nodes, which in turn are built by two separate subcomponents: the weighted sum and the nonlinear activation function.
 %In the next sections I will describe some photonic devices that have been developed to perform those tasks, along with my implementation of an all-optical nonlinear activation function with a microring resonator.
 In the next sections I will describe how the nonlinear response of a microring could be exploited in an all-optical node of a feedforward \ac{ANN}.
+The use of active elements, however, increments the power consumption.
+
 
 \subsection{Weighted sum of inputs}
 \label{ssec:Weighted_Sum_of_inputs}
-The difficulty in the weighted sum of inputs does not lie in the type of operation, i.e. sum and multiplication, but in the fact that each node has many inputs.
-Excluding the cases in which the weighted summation has been carried off by online or offline elaboration on standard computers, there are two important examples of all-optical weighted sum.
+%The difficulty in the weighted sum of inputs does not lie in the type of operation, i.e. sum and multiplication, but in the fact that each node has many inputs.
+Excluding the cases in which the weighted summation has been carried off by online or offline elaboration on standard computers, there are two reported examples of all-optical weighted sum.
 
 The first one \cite{Shen2017} is based on a cascade of \acf{MZI}, which transforms all the outputs of a whole layer to the set of inputs of the next one.
 This happens by a sequence of constructive and destructive interferences that alter the starting coherent signal.
@@ -917,11 +918,11 @@ I 								&= EF~I_{input}\\
 \Delta n_{eff} 	&= n_2 I + \frac{dn}{dN} \Delta N + \frac{dn}{dT} \Delta T
 \end{align}
 
-This set of equations allows a simple but complete description of the physical quantities of interest in the system.
+This set of equations allows a complete description of the physical quantities of interest in the system.
 
 To decrease numerical errors, a reduced variable approach has been used.
 This means that every factor in the equations has been divided by the order of magnitude typical of the problem, to reduce or increase its numerical representation towards unity.
-For examples, distances have been reduced to \si{\um} and powers to \si{\mW} and so on.
+For examples, distances have been reduced to \si{\um}, power to \si{\mW} and so on.
 
 In addition, important values that are not explicitly computed, such as the transmission of the through and drop channels, can be extracted with just a simple multiplication.
 Moreover, adding another light source at a different wavelength (or frequency) is very simple.
@@ -971,9 +972,9 @@ In this revised algorithm the variables at each new step are evaluated with a mi
 This method contrasts the phenomenon of uncontrolled value oscillation.
 %I heuristically found that 
 
-The results of the algorithm, for input parameters given by a sequence of signals of increasing optical power at a precise detuning from the resonance wavelength, map half of the hysteresis cycle.
+The results of the algorithm, for input parameters given by a sequence of signals of increasing optical power at a precise detuning from the resonance wavelength, map the low half of the hysteresis cycle.
 It is important in this case to set the initial conditions as the output values of the last evaluated state.
-Similarly, by setting the input parameters with a sequence of signals of decreasing optical power, the results map the other half of the bistability hysteresis cycle.
+Similarly, by setting the input parameters with a sequence of signals of decreasing optical power, the results map the high half of the bistability hysteresis cycle.
 The collection of the outcomes, obtained by repeating this evaluations for a set of different wavelengths on the red shoulder of the resonance, is shown in \autoref{fig:sim_bist_cycle}.
 
 \begin{figure}[ht]
@@ -991,11 +992,12 @@ The collection of the outcomes, obtained by repeating this evaluations for a set
 \end{figure}
 
 The simulations predict that, for wavelengths near the resonance, the hysteresis cycle will disappear in a single curve, similar to a sigmoid.
-Forward and backwards sweeps will coincide in this case.
-On the other hand, inputs at farther wavelength from the resonance will show an increasing area of bistability and the jumps at the edges of the bistability regions are more sharp for higher input powers.
+Very near the resonance, forward and backward sweeps coincide, the area of the hysteresis cycle tends to zero and the spectrum becomes a sigmoid.
+%Forward and backwards sweeps will coincide in this case.
+%On the other hand, inputs at farther wavelength from the resonance will show an increasing area of bistability and the jumps at the edges of the bistability regions are more sharp for higher input powers.
 
 Another interesting way to map the bistability effect is to set the initial conditions for a fixed input optical power at a shorter wavelength than the resonance wavelength.
-Then evaluate a certain number of sample wavelengths in a progressive sweep toward longer wavelengths until the whole shape is mapped.
+Then evaluate a certain number of sample wavelengths during a sweep toward longer wavelengths until the whole shape is mapped.
 Also in this case it is important to set the initial conditions of each run as the output values of last evaluation.
 Similar results can be obtained by inverting the sweep, thus showing another type of hysteresis cycle.
 \autoref{fig:sim_bist_triangles} shows an example of this behavior.

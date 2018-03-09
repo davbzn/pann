@@ -59,8 +59,8 @@
 		{-- +(-{cos(\t)},0,{sin(\t)})};
 
 % red light
-\fill[red!15,draw=red,very thick,opacity=0.5] ++(0.25,0,0)
-	node [circle,inner sep=1pt,red,fill=red, opacity=0.5] {}
+\fill[red!15,draw=red,very thick] ++(0.25,0,0) % ,opacity=0.5
+	node [circle,inner sep=1pt,red,fill=red] {} % ,opacity=0.5
 	+(0,0.55,0) % core
 	\foreach \t in {90,95,100,...,450}
 		{--+({0.54*cos(\t)},{0.55*sin(\t)},0)}--cycle
@@ -74,23 +74,23 @@
 
 % left fiber
 % lower surface
-\fill[blue!15,draw=blue,very thick,opacity=0.5] ++(0,0,1)
+\fill[blue!15,draw=blue,very thick] ++(0,0,1) % ,opacity=0.5
 		+(0,1,0) % cladding
 		\foreach \t in {90,95,100,...,450}
 			{--+({cos(\t)*cos(14)},{sin(\t)},{cos(\t)*sin(14)})}--cycle;
-\fill[blue!15,draw=blue,very thick,opacity=0.75] ++(0,0,1)
+\fill[blue!30,draw=blue,very thick] ++(0,0,1) % ,opacity=0.75
 		+(0,0.3,0) % core
 		\foreach \t in {90,95,100,...,450}
 			{--+({0.3*cos(\t)*cos(14)},{0.3*sin(\t)},{0.3*cos(\t)*sin(14)})}--cycle;
 % inner surface
-\draw[draw=blue,very thick, opacity=0.75] ++(0,0,1)
+\draw[draw=blue,very thick] ++(0,0,1) % ,opacity=0.75
 	++({0.3*cos(30)*cos(14)},{0.3*sin(30)},{0.3*cos(30)*sin(14)})
 	-- ++(-.17,0,.68)
 	(0,0,1)
 	++({0.3*cos(210)*cos(14)},{0.3*sin(210)},{0.3*cos(210)*sin(14)})
 	-- ++(-.17,0,.68);
 % external surface
-\draw[draw=blue,very thick, opacity=0.5] ++(0,0,1)
+\draw[draw=blue,very thick] ++(0,0,1) % ,opacity=0.5
 	++({cos(30)*cos(14)},{sin(30)},{cos(30)*sin(14)})
 	-- ++(-.23,0,.91)
 	(0,0,1)
@@ -99,23 +99,23 @@
 
 % right fiber
 % lower surface		
-\fill[blue!15,draw=blue,very thick,opacity=0.5] ++(6,0,1)
+\fill[blue!15,draw=blue,very thick] ++(6,0,1) % ,opacity=0.5
 	+(0,1,0) % cladding
 	\foreach \t in {90,95,100,...,450}
 		{--+({cos(\t)*cos(-14)},{sin(\t)},{cos(\t)*sin(-14)})}--cycle;
-\fill[blue!15,draw=blue,very thick,opacity=0.75] ++(6,0,1)
+\fill[blue!30,draw=blue,very thick] ++(6,0,1) % ,opacity=0.75
 	+(0,0.3,0) % core
 	\foreach \t in {90,95,100,...,450}
 		{--+({0.3*cos(\t)*cos(-14)},{0.3*sin(\t)},{0.3*cos(\t)*sin(-14)})}--cycle;
 % inner surface
-\draw[draw=blue,very thick, opacity=0.75] ++(6,0,1)
+\draw[draw=blue,very thick] ++(6,0,1) % ,opacity=0.75
 	++({0.3*cos(+5)*cos(-14)},{0.3*sin(+5)},{0.3*cos(+5)*sin(-14)})
 	-- ++(+.17,0,.68)
 	(6,0,1)
 	++({0.3*cos(180+5)*cos(-14)},{0.3*sin(180+5)},{0.3*cos(180+5)*sin(-14)})
 	-- ++(+.17,0,.68);
 % external surface
-\draw[draw=blue,very thick, opacity=0.5] ++(6,0,1)
+\draw[draw=blue,very thick] ++(6,0,1) % ,opacity=0.5
 	++({cos(+5)*cos(-14)},{sin(+5)},{cos(+5)*sin(-14)})
 	-- ++(+.23,0,.91)
 	(6,0,1)

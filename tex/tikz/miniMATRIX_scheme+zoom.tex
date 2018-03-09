@@ -1,0 +1,116 @@
+\tikzsetexternalprefix{tikz/}	% set subfolder
+\tikzsetnextfilename{miniMATRIX_scheme+zoom}
+\begin{tikzpicture}[
+		baseline,
+		grating/.style	={ isosceles triangle, rotate=180,
+			draw=orange, preaction={fill, white},
+			pattern color=orange, pattern=north west lines,
+			thick,
+			inner sep=0pt,	minimum size=12pt
+		},
+		guide/.style 	={ double=gray!25, double distance=1pt,
+			thick, draw=black!50,
+			rounded corners=4pt, line join=round, line cap=round,
+		},
+		ring/.style 		={ circle, radius=16pt,
+			double=gray!25, double distance=1pt,
+			thick, draw=black!50,
+			rounded corners=8pt, line join=round,
+		},
+		every pin edge/.style={-},
+	]
+	
+	\def\mylist{	1/0.0/0, 2/1.5/0, 3/3.0/0, 4/4.5/0,
+									5/6.0/0, 6/7.5/0, 7/9.0/0, 8/10.5/0}
+
+	% declare node of gratings and coupling regions
+	\node (input) at (-2,0) {};
+	\foreach \name/\px/\py in \mylist {
+			\draw (\px,\py) node (dr\name) {} ++(-0.2,2.5) node (cr\name) {};
+		}
+	\draw (12.0,0) node (th) {};
+
+	% draw rings
+	\foreach \name/\px/\py in \mylist {
+			\node (r\name) [ring] at (cr\name) {};
+			\node at (r\name.north) [above] {$r_\name$};
+			\draw (cr\name.west) ++(-0.02,0) node (rL\name) {};
+			\draw (cr\name.east) ++(+0.02,0) node (rR\name) {};
+		}
+		
+	% draw waveguides
+	\draw [guide] (input) to (-1.4,0) -- (-1.4,2)
+			% insert all the bendings here
+			\foreach \nn in {1,...,8} {
+				-| (rR\nn.east) -- ++(0,.4) -- ++(.3,0) -- ++(0,-0.9)
+			}
+			-- (11.4,2) -- (11.4,0) -- (th)
+			\foreach \name/\px/\py in \mylist {
+					(dr\name) -| (rL\name.west) -- ++(0,0.4)  -- ++(120:0.2)
+				};
+	
+	% draw gratings
+	\node (grin) at (input) [grating, rotate=180] {};
+	\node at (grin.south) [below left] {$in$};
+	\foreach \name/\px/\py in \mylist{
+			\node (gr\name) [grating] at (dr\name) {};
+			\node at (gr\name.north) [below right] {$dr_\name$};
+		}
+	\node (grth) at (th) [grating] {};
+	\node at (grth.north) [below right] {$th$};	
+	
+	%%%%%	%%%%%	%%%%%	%%%%%	%%%%%	%%%%%
+	%%% draw zoom rectangles
+	\draw [semithick, draw=darkgray, dotted]
+				(r1) ++(-0.45,-0.3) rectangle ++(0.9,0.6)
+				(0,10.5) rectangle (10, 3.5);
+	\draw [gray, dotted]
+				(r1) ++(-0.45,+0.3) -- (0,10.5)
+				(r1) ++(+0.45,-0.3) -- (10, 3.5);	
+
+	%%%%%	%%%%%	%%%%%	%%%%%	%%%%%	%%%%%	
+	%%% draw microring zoomed in
+	\begin{scope}[scale=0.5, xshift=10cm, yshift=14cm]
+		
+		\filldraw [draw=black!50, fill=gray!20, even odd rule]
+			(0,0) circle [radius=4.43, thick]
+			(0,0) circle [radius=4.91, thick];
+		\path [name path=inner] (0,0) circle [radius=5.085];
+		\path [name path=outer] (0,0) circle [radius=5.505];
+		%distance between waveguides is 9.848
+		\path [name path=leftwg]  (-4.924,-6) rectangle (-5.344,+6);
+		\path [name path=rightwg] (+4.924,-6) rectangle (+5.344,+6);
+		
+		\path [name intersections={of=inner and leftwg, name=leftyin}];
+		\path [name intersections={of=outer and leftwg, name=leftyout}];
+		
+		\path [name intersections={of=inner and rightwg, name=rightyin}];
+		\path [name intersections={of=outer and rightwg, name=rightyout}];
+		
+		\draw [black!50, line join=round, rounded corners=1pt, fill=gray!20]
+			(-4.924,-6) -- (-5.344,-6) -- (leftyout-4)
+			.. controls ++(+103:1) and ++(-103:1) .. (leftyout-2)
+			-- (-5.344,+6) -- (-4.924,+6) -- (leftyin-1)
+			.. controls ++(-102:1) and ++(+102:1) .. (leftyin-2)
+			-- cycle;
+		
+		\draw [black!50, line join=round, rounded corners=1pt, fill=gray!20]
+			(+4.924,-6) -- (+5.344,-6) -- (rightyout-4)
+			.. controls ++(+77:1) and ++(-77:1) .. (rightyout-2)
+			-- (+5.344,+6) -- (+4.924,+6) -- (rightyin-1)
+			.. controls ++(-78:1) and ++(+78:1) .. (rightyin-2)
+			-- cycle;
+		
+		\draw [-stealth] (0,0) -- ++(60:4.43) node [left, midway] {$R_{in}$};
+					
+		\draw [|-|,black, thick] (+4.430,+0) -- (+4.910,+0) node [pin=+60:\SI{0.48}{\um}] {};
+		\draw [|-|,black, thick] (+4.924,-3) -- (+5.344,-3) node [pin=+60:\SI{0.42}{\um}] {};
+		\draw [|-|,black, thick] (-4.924,+0) -- (-5.085,+0) node [pin=120:\SI{0.175}{\um}] {};
+		
+		\draw [thick, -stealth] (+6.0,-6) -- (+6.0,-5) node [midway, right] {in};
+		\draw [thick, -stealth] (+6.0,+5) -- (+6.0,+6) node [midway, right] {through};
+		\draw [thick, -stealth] (-6.0,-5) -- (-6.0,-6) node [midway, left] {drop};
+		\draw [thick, -stealth] (-6.0,+6) -- (-6.0,+5) node [midway, left] {add};
+	\end{scope}
+
+\end{tikzpicture}

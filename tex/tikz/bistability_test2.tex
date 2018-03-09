@@ -47,7 +47,7 @@
 			height=207pt,
 			legend pos = outer north east,
 			%cycle list name=color list,
-			forget plot style={opacity=0.4},
+%			forget plot style={opacity=0.4},
 		]
 		\addlegendentry{\hspace{-.6cm}$\Delta\lambda$ in \si{\pm}}
 		\addlegendimage{empty legend};
@@ -55,14 +55,17 @@
 		\upfile{tikz/upwards.csv}
 		\downfile{tikz/downwards.csv}
 
-    \addplot [fill=color1, opacity=0.2] fill between [of=up1 and down1];
-    \addplot [fill=color2, opacity=0.2] fill between [of=up2 and down2];
-    \addplot [fill=color3, opacity=0.2] fill between [of=up3 and down3];
-    \addplot [fill=color4, opacity=0.2] fill between [of=up4 and down4];
-    \addplot [fill=color5, opacity=0.2] fill between [of=up5 and down5];
-    \addplot [fill=color6, opacity=0.2] fill between [of=up6 and down6];
-    \addplot [fill=color7, opacity=0.2] fill between [of=up7 and down7];
-    \addplot [fill=color8, opacity=0.2] fill between [of=up8 and down8];
-    \addplot [fill=color9, opacity=0.2] fill between [of=up9 and down9];
+    \addplot [pattern color=color1, pattern=north west lines] fill between [of=up1 and down1];
+    \addplot [pattern color=color2, pattern=north west lines] fill between [of=up2 and down2];
+    \addplot [pattern color=color3, pattern=north west lines] fill between [of=up3 and down3];
+    \addplot [pattern color=color4, pattern=north west lines] fill between [of=up4 and down4];
+    \addplot [pattern color=color5, pattern=north west lines] fill between [of=up5 and down5];
+    \addplot [pattern color=color6, pattern=north west lines] fill between [of=up6 and down6];
+    \addplot [pattern color=color7, pattern=north west lines] fill between [of=up7 and down7];
+    \addplot [pattern color=color8, pattern=north west lines] fill between [of=up8 and down8];
+    \addplot [pattern color=color9, pattern=north west lines] fill between [of=up9 and down9];
+    
+    \draw node at (19.80,3.4) [pin=140:{high half}] {};
+    \draw node at (20.00,1.8) [pin=-90:{low half}] {};
 	\end{axis}
 \end{tikzpicture}

@@ -43,25 +43,24 @@ Thus the first step of the thesis has been to choose, among the many different d
 The structure selected (nicknamed \textit{mini-matrix}) is shown in \autoref{fig:photos} and it is composed by: a waveguide, coupled to eight drop channels through ring resonators.
 In this family of devices, there were mini-matrices built with single microrings, double microrings, single racetracks, or double racetracks.
 %The final choice was to study the \textit{mini-matrix} in which the coupling mechanism was provided by single ring resonators, because of its simpler transfer function in respect to double microrings or double racetracks.
-\autoref{fig:minimatrix_scheme} shows a simplified scheme of the \textit{mini-matrix}.
 
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[b]{0.7\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{photos/minimatrix.png}
+		\includegraphics[draft,width=\textwidth]{photos/minimatrix.png}
 		\caption{mini-matrix}
 		\label{fig:photo_minimatrix}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.345\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{photos/ring.png}
+		\includegraphics[draft,width=\textwidth]{photos/ring.png}
 		\caption{microring}
 		\label{fig:photo_ring}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.345\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{photos/grating.png}
+		\includegraphics[draft,width=\textwidth]{photos/grating.png}
 		\caption{grating}
 		\label{fig:photo_grating}
 	\end{subfigure}
@@ -69,39 +68,48 @@ In this family of devices, there were mini-matrices built with single microrings
 	\label{fig:photos}
 \end{figure}
 
+The resonance of each microring is strictly defined by the design of the structure, however it is ultimately changed by imperfections and uncertainties of the manufacturing process.
+Hence, since the optical router requires precise positioning of the resonances, their fine tuning is obtained by controlling the temperature of the material.
+Each one of the microring resonators in the structure has been manufactured with a thermo-electric heater, which is used to produce the thermo-optic effect (see \autoref{ssec:Thermal_nonlinearities}) in order to induce the required resonance tuning \cite{testa2016design}.
+%This feature has never been exploited in this work, but could come of use in the future.
+\autoref{fig:minimatrix_scheme} shows a simplified scheme of the \textit{mini-matrix} and the geometry of the microring resonator coupling region, without any non-optical structures (e.g. heaters, metallic contacts).
+%\autoref{fig:minimatrix_scheme} shows a simplified scheme of the \textit{mini-matrix}.
+%\autoref{fig:minimatrix_scheme_zoom} shows the scheme of the microring resonator geometry, without any non-optical structures (e.g. heaters, metallic contacts).
+
+%\begin{figure}[htbp]
+%	\centering
+%%	\includegraphics[scale=.4]{figures/single_ring_zoom.png}\\
+%%	\input{tikz/miniMATRIX_scheme_zoom.tex}
+%	\caption{
+%	Microring optical cavity region, structures are in scale.
+%	The ring has an internal radius of $R_{in}=\SI{4.43}{\um}$ and its width is of \SI{0.48}{\um}.
+%	The waveguides side coupled to the ring have a width of \SI{0.42}{\um} and distance from the ring of \SI{.175}{\um}.
+%	}
+%	\label{fig:minimatrix_scheme_zoom}
+%\end{figure}
+
 \begin{figure}[hbtp]
 	\centering
 %	\includegraphics[scale=.4]{figures/miniMATRIX_Klayout.png}\\
-	\input{tikz/miniMATRIX_scheme.tex}
+%	\input{tikz/miniMATRIX_scheme.tex}
+	\input{tikz/miniMATRIX_scheme+zoom.tex}
 	\caption{
-		Simplified scheme of the \textit{mini-matrix} integrated photonic circuit (structures are not in scale).
+		Below: simplified scheme of the \textit{mini-matrix} integrated photonic circuit
+		(structures are not in scale).
 		Triangles (orange) are the grating couplers ($in$, $dr_{1-8}$, $th$).
 		Waveguides and rings ($r_{1-8}$) are shown as thick grey lines.
-		The bigger (purple) highlighted area is a coupling region, shown in \autoref{fig:minimatrix_scheme_zoom}.
+		Above: zoom microring optical cavity region (structures are in scale).
+		The ring has an internal radius of $R_{in}=\SI{4.43}{\um}$
+		and its width is of \SI{0.48}{\um}.
+		The waveguides side coupled to the ring have a width of \SI{0.42}{\um}
+		and distance from the ring of \SI{.175}{\um}
 	}
 	\label{fig:minimatrix_scheme}
 \end{figure}
 
-The resonance of each microring is strictly defined by the design of the structure, however it is ultimately changed by imperfections and uncertainties of the manufacturing process.
-Hence, since the optical router requires precise positioning of the resonances, their fine tuning is obtained by controlling the temperature of the material.
-Each one of the microring resonators in the structure has been manufactured with a thermo-electric heater, which is used to produce the thermo-optic effect (see \autoref{ssec:Thermal_nonlinearities}) in order to induce the required resonance tuning \cite{testa2016design}.
-\autoref{fig:minimatrix_scheme_zoom} shows the scheme of the microring resonator geometry, without any non-optical structures (e.g. heaters, metallic contacts).
-%This feature has never been exploited in this work, but could come of use in the future.
-
-\begin{figure}[htbp]
-	\centering
-%	\includegraphics[scale=.4]{figures/single_ring_zoom.png}\\
-	\input{tikz/miniMATRIX_scheme_zoom.tex}
-	\caption{
-	Microring optical cavity region, structures are in scale.
-	The ring has an internal radius of $R_{in}=\SI{4.43}{\um}$ and its width is of \SI{0.48}{\um}.
-	The waveguides side coupled to the ring have a width of \SI{0.42}{\um} and distance from the ring of \SI{.175}{\um}.
-	}
-	\label{fig:minimatrix_scheme_zoom}
-\end{figure}
-
 \subsection{Initial characterization}
 \label{ssec:initial_characterization}
+
 To obtain an initial characterization of the sample, I arranged an experimental setup to measure its fundamental attributes, such as the \acf{FSR}, the \acf{FWHM}, and the $Q$ factor of the resonances.
 These features can all be obtained through a study of the transmitted intensity in the through and drop channels, shown in \autoref{fig:minimatrix_scheme}.
 A scheme of the experimental setup used is showed in \autoref{fig:simple_setup}.
@@ -478,7 +486,7 @@ Moreover, higher values of $l_r$ induce higher instability, whereas lower values
 The results for the distinct models that implements the optical bistability activation function are collected in \autoref{tab:ExpResults}.
 The percentage of correct answers on the test dataset is lower than the results obtained for the \ac{ReLU} based \acp{ANN}.
 This might be caused by the fact that $f_{fit}$ based models work better with lower $l_r$ and are therefore harder to train.
-However, it is important to note that the optical node in the most promising configuration ($2\times 22$) gives near the \SI{30}{\percent} of correct answers, which is above the $p_{rnd}=\SI{9.09}{\percent}$ threshold of random choice.
+However, it is important to note that the optical node in the most promising configuration ($2\times 22$) gives near the \SI{30}{\percent} of correct answers, which is above the $p_{rnd}\simeq\SI{9.09}{\percent}$ threshold of random choice.
 
 \begin{table}[htbp]
 	\centering

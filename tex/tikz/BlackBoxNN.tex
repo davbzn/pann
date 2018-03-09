@@ -9,6 +9,9 @@
 	\newcommand\lin{0}
 	\newcommand{\lout}{5}
 	
+	% black box
+	\filldraw [thick, draw=black, fill=gray!90, line width=0.5mm] (0.1,-1.5) rectangle (4.9,3.5);	
+	
 	% nodes
 	\foreach \i in {0,1,3} \node (input\i) at (\lin,2.5-\i) [input] {};
 	
@@ -64,8 +67,5 @@
 	\draw [->] (inner7)  to [out=0,in=180] (output2);
 	\draw [dotted, ->] (inner9)  to [out=0,in=180] (output3);
 	\draw [->] (inner3)  to [out=0,in=180] (output4);
-	
-	% black box
-	\filldraw [thick, draw=black, fill=black, fill opacity=0.4] (0.1,-1.5) rectangle (4.9,3.5);
 	
 \end{tikzpicture}

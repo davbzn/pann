@@ -39,7 +39,10 @@
 			ymin = 0, 			ymax=1,
 			yticklabel=\ ,
 		]
-		\addplot [opacity=0] {x};
+		\addplot [only marks, mark options={scale=0}] coordinates {
+			(1e-2,0)
+			(1,1)
+		};
 	\end{axis}
 	
 \end{tikzpicture}

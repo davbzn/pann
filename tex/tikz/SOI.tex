@@ -1,35 +1,24 @@
 \tikzsetexternalprefix{tikz/}	% set subfolder
 \tikzsetnextfilename{SOI}
 \begin{tikzpicture}[baseline]
-	\begin{axis}[	xmin=-4.0, xmax=+4.0,
-								ymin=-0.0, ymax=+1.2,
-								ticks=none,
-								area legend,
-								legend style={draw=none},
-								legend cell align=left,
-								legend pos=outer north east,
-								]
-
-		\addplot [name path = air, 		forget plot] {1.50 + 0*x};
-		\addplot [name path = top, 		forget plot] {0.80 + 0*x};
-		\addplot [name path = upper, 	forget plot, opacity=0.0] {0.7 + 0*x};
-		\addplot [name path = lower, 	forget plot, opacity=0.0] {0.40 + 0*x};
-		\addplot [name path = bottom,	forget plot] {0.00 + 0*x};
-		
-		\addplot [top color=blue!20, bottom color=white]
-			fill between [ of=top and air, ];
-		\addlegendentry{Air}
-		
-		\addplot [pattern=north west lines, pattern color=gray!50]
-			fill between [ of=upper and top, ];
-		\addlegendentry{$Si$}
-		
-		\addplot [pattern=north east lines, pattern color=gray!50!red]
-			fill between [ of=lower and upper, ];
-		\addlegendentry{$SiO_2$}
-		
-		\addplot [pattern=north west lines, pattern color=gray!50]
-			fill between [ of=bottom and lower, ];
-			
-	\end{axis}
+	\fill [pattern=north west lines, pattern color=gray!50]
+				(0,0) rectangle (7,2);
+	\fill [pattern=north east lines, pattern color=gray!50!red]
+				(0,2) rectangle (7,3.5);
+	\fill [pattern=north west lines, pattern color=gray!50]
+				(0,3.5) rectangle (7,4);
+	\draw [draw, color=gray!50] (0,0) rectangle (7,4);
+	
+	\fill [top color=blue!20, bottom color=white] (0,4) rectangle (7,6);
+	
+	
+	\draw [top color=blue!20, bottom color=white] (7.5,5.5)
+				++(0cm,-0.2cm) rectangle ++(0.6cm,0.3cm)
+				++(0cm,-0.15cm) node [right] {Air};
+	\draw [pattern=north west lines, pattern color=gray!50] (7.5,5.5)++(0,-0.6)
+				++(0cm,-0.2cm) rectangle ++(0.6cm,0.3cm)
+				++(0cm,-0.15cm) node [right] {$SiO$};
+	\draw [pattern=north east lines, pattern color=gray!50!red] (7.5,5.5)++(0,-1.2)
+				++(0cm,-0.2cm) rectangle ++(0.6cm,0.3cm)
+				++(0cm,-0.2cm) node [right] {$SiO_2$};%++(0,-0.2) 
 \end{tikzpicture}

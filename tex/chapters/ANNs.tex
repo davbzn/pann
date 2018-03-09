@@ -5,7 +5,7 @@
 %A neural network is an interconnected assembly of simple processing elements, units or nodes, whose functionality is loosely based on the animal neuron. The processing ability of the network is stored in the interunit connection strengths, or weights, obtained by a process of adaptation to, or learning from, a set of training patterns.
 
 \acfp{ANN} are computational systems which elaborate information in a way that is loosely inspired by the operation of biological neural networks (brains).
-Biological networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition) and prediction (e.g. pattern recognition).
+Biological networks are superior in performance to computers and extremely more efficient in difficult tasks such as classification (e.g. image recognition), prediction (e.g. stock market prediction), and creation (e.g. new text generation).
 The underlying idea is to copy some of their mechanisms and exploit them for computational applications.
 These systems are: intrinsically parallel in operation, able to modify their behavior through a learning process, and sharing similar dynamics to solve different tasks.
 
@@ -30,8 +30,11 @@ However, despite the early successes of neural networks, the traditional computi
 %As a result, funding and therefore also research diminished drastically in the following decades.
 
 The reason why this happened, probably, was due to several concurring facts.
-First of all, it was believed that more complex networks such as multiple- or deep-layered networks were impossible to train due to the vanishing gradient problem.
-Moreover, in the same time period (1969) a research paper by Minksi and Papert \cite{minski1969perceptrons} identified an important problem: the basic perceptron was not able to execute the \ac{XOR} operation, unlike the logical circuits at the base of von Neumann architecture.
+First of all, at the time the single-layer perceptron was the only trainable network, not the multiple- or deep-layered networks.
+Moreover, in the same time period (1969) a research paper by Minksi and Papert \cite{minski1969perceptrons} showed that the linear classfiers (e.g the basic perceptron) were not able to execute the \ac{XOR} operation and with it a wide class of real-world problems.
+Thus, unlike the logical circuits at the base of the von Neumann architecture, \ac{ANN} were considered insufficient for demanding applications.
+
+%were impossible to train due to the vanishing gradient problem.
 %Moreover, the research stated the fact that  %(at that time) because of the lack of adequate processing power.
 
 %who discovered two key issues with the computational machines that processed neural networks.
@@ -43,7 +46,7 @@ In addition to this research, the early successes of some works on neural networ
 Finally, important questions of philosophical nature came to light, such as the fear fueled debate on the impact on our society of a class of computers able to think.
 This very controversy, i.e. the \ac{AI} problem, is discussed still today \cite{stanford.edu}.
 
-During the 1980s the interest for this computing method was reinvigorated by a large number of works suggesting methods to train multi-layered networks by distributing pattern recognition errors through all the layers in the network.
+During the 1980s the interest for this computing method was reinvigorated by the fact that it was discovered a method to train multi-layered networks by distributing pattern recognition errors through all the layers in the network.
 This method is now called \textit{backpropagation}.
 
 In today's research and technology, artificial neural networks are used in numerous applications: from the most serious ones, such as medical image classification \cite{li2014medical}, to the lighter ones, like photo enhancement \cite{ignatov2017wespe} and generation of polyphonic music \cite{johnson2017generating, briot2017deep}.
@@ -62,12 +65,16 @@ A generic scheme of such network is shown in \autoref{fig:generic_NN}.
 \begin{figure}[ht]
 	\centering
 	\input{tikz/GenericNN.tex}
-	\caption{	Generic scheme of a neural network.
-						Triangles (red) are input nodes, circles (grey) are inner nodes,
-						and squares (blue) are output nodes.
-						Interconnections among nodes are represented by arrows.
-						%continuous when both elements are drawn, and dotted otherwise.
-						}
+	\caption{
+		Generic scheme of a neural network.
+		Triangles (red) are input nodes, circles (grey) are inner nodes,
+		and squares (blue) are output nodes.
+		Interconnections among nodes are represented by arrows.
+		%continuous when both elements are drawn, and dotted otherwise.
+		This figure uses an uncommon representation
+		(see \autoref{sec:standard_representation}).
+		%(see \hyperref[sec*:standard_representation]{next Section}).
+	}
 	\label{fig:generic_NN}
 \end{figure}
 
@@ -90,13 +97,14 @@ y = f_a \left(  w_0 + \sum_{i=1}^{n} w_i x_i \right),
 \end{equation}
 where $f_a$ is the activations function, evaluated on the sum of the input $x_i$ weighted with $w_i$, plus a bias $w_0$.
 
+\newpage
 Each node accepts values at its inputs and produces an output accordingly.
 However, in addition to the input, the output depends also on the node's parameters: the weights and the bias (see \autoref{sec:Working_Principles_of_ANNs}).
 Generally these parameters are modified during the training of the network, but not while it is operating.
 
-Moreover it is mandatory for the activation function $f_a\left(\cdot\right)$ to be nonlinear, because otherwise a collection of nodes will result in just a weighted sum of its inputs.
-Nonlinear activation functions are distinguished for their properties, such as continuity, limitedness, and existence of the derivative.
-Two examples are shown below in \autoref{fig:activation_function_examples}.
+The activation function $f_a\left(\cdot\right)$ must met a few requirements: firstly, it must be nonlinear, because otherwise a collection of nodes will result in just a weighted sum of its inputs.
+Moreover, in order to apply the backpropagation algorithm on the network, it must also be continuous and derivable.
+In addition, depending on the problem that needs to be solved, limitedness is also a desirable property. \cite{duda2012pattern}.
 
 \begin{figure}[ht]
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -111,16 +119,26 @@ Two examples are shown below in \autoref{fig:activation_function_examples}.
 		\caption{}
 		\label{fig:activation_function_example_2}
   \end{subfigure}
-  \caption{Examples of activation function: (\ref{fig:activation_function_example_1}) is the step function, or Heaviside $\Theta$, (\ref{fig:activation_function_example_2}) depicts few Logistic functions.}
+  \caption{
+		Examples of activation function:
+		(\ref{fig:activation_function_example_1}) is the step function,
+		or Heaviside $\Theta$,
+		(\ref{fig:activation_function_example_2}) depicts few Logistic functions.
+		The former is a discontinuous function, while the latter is a continuous and derivable function.}
   	\label{fig:activation_function_examples}
 \end{figure}
+
+Hence, nonlinear activation functions are distinguished for their properties, such as continuity, limitedness, and existence of the derivative.
+\autoref{fig:activation_function_examples} show two examples of nonlinear activation function: \ref{fig:activation_function_example_1} is discontinuous and bounded between \numlist{0;1}, while \ref{fig:activation_function_example_2} is continuous, derivable, and saturates for $|x|\rightarrow\infty$, i.e it is limited.
 
 %One can distinguish at least three type of nodes in every neural network: input, inner/hidden, and output nodes.
 %Input nodes take one input value, from the outside of the neural network, and pass it on to the inner nodes unchanged.
 %Inner/hidden nodes take many inputs and generate an output through the activation function.
 %Output nodes, similarly to input nodes, take one input value, from the inside of the \acs{ANN}, and pass it on to the outside.
 
-\subsection*{Standard Representation}
+\newpage
+\subsection{Standard Representation}
+\label{sec:standard_representation}
 %This is not the orthodox description, but I claim that it is more consistent than the standard representation with the idea of functional \textit{black box}, in which input and output are the only visible nodes, while the other are hidden inside.
 In the thesis I depict a generic neuromorphic network in a slightly different way compared to ICT literature.
 %The way I depicted a generic neuromorphic network in \autoref{fig:generic_NN} is not the standard representation used in books and research papers.
@@ -156,7 +174,7 @@ This non-standard description is consistent with the idea of functional \textit{
 \subsection{Applications of ANNs}
 \label{ssec:Applications_of_ANNs}
 Conventional computers are extremely fast and efficient in executing simple algebraic tasks and they can perform more complex activities if provided with the correct series of instructions.
-Hence algorithms can solve arbitrary difficult problems, provided that the necessary steps are know.
+Hence algorithms can solve arbitrary difficult problems, provided that the necessary steps are known.
 
 \aclp{ANN} take a different path in the solution of a given problem.
 In fact, when \acsp{ANN} are designed to solve a problem, they learn from the examples that are provided to them.
@@ -172,6 +190,7 @@ Moreover, regression analysis and time series prediction can be obtained, when a
 % Clustering: Grouping data\\
 % https://cs.stackexchange.com/questions/58131/are-neural-networks-a-type-of-reinforcement-learning-or-are-they-different
 
+\newpage
 \section{Working Principles of ANNs}
 \label{sec:Working_Principles_of_ANNs}
 \acsp{ANN} are implemented with different topologies in order to solve different problems.
@@ -181,9 +200,9 @@ Each one of these procedure is meant to prepare the network to work as required 
 
 \subsection{Learning Process}
 \label{ssec:Learning_Process}
-During the learning process the neural network is run on a set of inputs $x$, each paired with the correct answer $y$, or target, in a second set of data.
+During the learning process the neural network is run on a set of inputs ${x}$, each paired with the correct answer ${y}$, or target, in a second set of data.
 This procedure is called \textit{supervised learning}.
-The neural network will produce at the output a third set $\hat{y}$, which should be as close as possible to the correct answers, when the network works properly.
+The neural network will produce at the output its \textit{prediction}, a third set ${\hat{y}}$, which should be as close as possible to the correct answers, when the network works properly.
 %However this happens rarely, if ever, and a change in the way data is elaborated becomes necessary.
 %The usual \ref{} way is to keep the same topology, but tweak the weights that connect the hidden nodes together.
 %On account of this need, one have to quantify the distance of the predicted result of the artificial neural network from the correct answer.
@@ -209,7 +228,7 @@ Another commonly used function is the \acfi{CEL} (also known as negative log lik
 \begin{equation}
 	L(y, \hat{y}) = f_{CEL}(y, \hat{y}) = - \frac{1}{N} \sum_{n=1}^N \sum_{i=1}^C y_{n,i} \log \left( \hat{y}_{n,i} \right),
 \end{equation}
-which expects positive values at the input.
+which probabilities at the input, i.e. positive values between \numlist{0;1}.
 Hence the error $-y\log \left( \hat{y} \right)$, quantified for each element in each example, is always a positive number.
 The mean over all examples in the set returns the results.
 
@@ -236,14 +255,20 @@ where $\left.w_i\right|_{n}$ are the current weights, $lr$ is the learning rate,
 This method is equivalent to minimize the error on the loss function, by following the gradient $\nabla_w L$.
 This vector lives in the multidimensional space of the loss function $L:\mathbb{R}^W \mapsto \mathbb{R}$, where $W$ is the total number of weights in the network.
 
-The most used algorithm is called \textit{backpropagation}, or \textit{chain rule}: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights, starting from the end of the \acs{ANN} and going backward toward the input, hence is names.
-Since the number of connections between nodes might be order of magnitude greater than the number of nodes, it is easy to understand how large networks are computationally expensive to train.
+The most used algorithm is called \textit{backpropagation}
+%, or \textit{chain rule}
+: it computes the first derivative of the loss function $L$ in respect to all the parameters of the network, the weights
+It starts from the last layer of the \acs{ANN} and goes backward toward the input, hence its name.
+%Since the number of connections between nodes might be order of magnitude greater than the number of nodes, it is easy to understand how large networks are computationally expensive to train.
 
 In early days, this algorithm was used together with the Logistic activation function.
 Due to the saturating behavior of the function, the gradient is repeatedly multiplied by small values at each layer.
-Hence, the effect of backpropagation becomes negligible for the first layer on deep networks
+Hence, the effect of backpropagation becomes negligible for the first layers in deep networks.
 This problem is known as \textit{vanishing gradient} problem.
+
 Thanks to the introduction of non saturating activation functions, the training of deep neural network has become gradually possible \cite{krizhevsky2012imagenet}.
+An example of such function is the \acf{ReLU}.
+
 %\paragraph{Other types of learning processes} are used, e.g. unsupervised/reinforced.
 
 \subsection{Validation Process}
@@ -260,6 +285,12 @@ Therefore, by periodically testing the network on a novel set, i.e. the validati
 
 The validation process happens repeatedly throughout the learning process. %, depending on the resources available and the size of the dataset.
 The learning process is stopped at a minimum of the error on the validation set.
+
+\subsection{Testing Process}
+\label{ssec:Testing_Process}
+At the end of the learning and validation processes, the ANN have to be tested on never seen dataset: the test data.
+Predicted outputs are compared to the correct answers and an overall value of the correctness is evaluated, often expressed in percentage.
+
 \autoref{fig:LVTcurves} shows an example of the evolution of the loss function on the three dataset as function of the epochs.
 
 \begin{figure}[htbp]
@@ -271,11 +302,6 @@ The learning process is stopped at a minimum of the error on the validation set.
 	}
 	\label{fig:LVTcurves}
 \end{figure}
-
-\subsection{Testing Process}
-\label{ssec:Testing_Process}
-At the end of the learning and validation processes, the ANN have to be tested on never seen dataset: the test data.
-Predicted outputs are compared to the correct answers and an overall value of the correctness is evaluated, often expressed in percentage.
 
 \subsection{Datasets}
 \label{ssec:Datasets}
@@ -332,7 +358,7 @@ The graph of a generic (single layer) perceptron \acs{ANN} is shown in \autoref{
 \end{figure}
 
 By adding more than one hidden perceptron layer to the neural network, one obtain the so called \acfi{MLP}.
-This allows for more computational complexity, e.g. \acs{MLP} can solve the \acs{XOR} problem, whereas single layer perceptron cannot \ref{}.
+This allows for more computational complexity, e.g. \acs{MLP} can solve the \acs{XOR} problem, whereas single layer perceptron cannot.
 When the number of hidden layers is more than two, the network is called \textit{deep}.
 A deep \acs{MLP} is shown in \autoref{fig:deepMLP}.
 
@@ -344,7 +370,7 @@ A deep \acs{MLP} is shown in \autoref{fig:deepMLP}.
 \end{figure}
 
 \acsp{MLP} might show heavily different topology, i.e. each layer could have a different number of nodes, however often the layers at the beginning are wider than the layer at the end of the network (see following section).
-Moreover, in literature with the term perceptron one almost always refers to fully connected \acs{FFNN} \ref{}.
+Moreover, in literature with the term perceptron one almost always refers to fully connected \acs{FFNN}.
 
 \subsection{Other Feed Forward \acsp{ANN}}
 \label{ssec:Other_Feed_Forward_NNs}
@@ -357,10 +383,10 @@ Time delay networks have a \acs{FFNN} structure and their purpose is to analyze 
 
 \subsubsection{Convolutional Neural Networks}
 \label{par:Convolutional}
-\acp{CNN} are inspired to the visual cortex, in which neurons are not fully connected all the inputs but only to a restricted region.
-\aclp{CNN} are a type of \acs{FFNN} conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
+%\acp{CNN} are inspired to the visual cortex, in which neurons are not fully connected all the inputs but only to a restricted region.
+\ac{CNN} is a type of \acs{FFNN} conceived to recognize images without being misled by distortions such as translation, skewing, or scaling.
 Its input is often represented as a 2D matrix, instead of a 1D vector.
-This kind of network is usually composed by many layers: the most recurring is prevalent the convolutional one, but other types can be mixed together too.
+This kind of network is usually composed by many layers: the most recurring is the convolutional one, but other types can be mixed together too.
 
 A convolutional layer performs a two-dimensional convolution over the input matrix of a second 2D matrix of weights, called \textit{feature map}.
 Thus, each node of the layer operates on a restricted region to understand if a feature is present or not.
@@ -390,7 +416,7 @@ By changing the topology of the nodes distribution and their connections, one ob
 
 \subsection{Recurrent ANN}
 \label{ssec:Recurrent_ANN}
-\acp{RNN} are a kind of network in which a portion of the input of nodes depends on the (past) output of the same nodes or nodes of subsequent layers.
+\acp{RNN} are a kind of network in which a portion of the input of a node depends on the (past) output of the same node.% or nodes of subsequent layers.
 That is information does not propagates only forward like in the \acs{FFNN}, but can propagate also backward, for example in loops or in feedbacks.
 As a result, the time-dependent dynamic of the node is usually very important in the study of \acsp{RNN}.
 \autoref{fig:RecurrentNN} shows a recurrent node, in which the output is connected to the input of the node.
@@ -407,17 +433,17 @@ As a result, the time-dependent dynamic of the node is usually very important in
 	\label{fig:RecurrentNN}
 \end{figure}
 
-\acsp{RNN} have found large use in time series analysis and prediction \cite{duda2012pattern}.
+\acsp{RNN} have found large use in time series analysis \cite{duda2012pattern}.
 However \acsp{RNN} are occasionally employed to obtain the same classification of \acs{FFNN}.
-In this case, the former are equivalent to the latter, if ``unfolded'' in time.
-That is the expansion of the recurrent architecture in time is the same as the topology of the \acs{FFNN} one in space.
+%In this case, the former are equivalent to the latter, if ``unfolded'' in time.
+%That is the expansion of the recurrent architecture in time is the same as the topology of the \acs{FFNN} one in space.
 
 \subsection{Reservoir Computing}
 \label{ssec:Reservoir_Computing}
 \ac{RC} describes a learning method that differs from the deep learning commonly used by \acs{MLP} (\acs{FFNN}) and \acs{RNN}.
 %In fact, the topology of the network could be exactly the same as that of a deep multi-layer perceptron or that of a recurrent network.
 %However, the reservoir computing differs in approach in respect to deep learning.
-It claims that it is not necessary to learn all the weights of the network, as in deep learning, but it is sufficient to train only the last (perceptron) layer of the network.
+It claims that it is not necessary to learn all the weights of the network, as in deep learning, but it is sufficient to train only the last layer of the network.
 \acs{RC} was initially implemented due to the vanishing gradient problem, for which the last layer was the only one that showed significant change in the weights.
 
 \begin{figure}[ht]
@@ -431,7 +457,7 @@ It claims that it is not necessary to learn all the weights of the network, as i
 This kind of network can be trained much faster than its respective deep-learning counterpart, i.e. deep \acs{FFNN} and deep \acs{RNN}.
 The question over which training method is more effective is still debated and literature does not provide clear answers yet.
 
-Significant results for \acs{RC} implemented with photonics have been obtained mainly with the \acs{RNN}, therefore in this field \acs{RC} is typically associated to the \acs{RNN} topology \ref{}.
+Significant results for \acs{RC} implemented with photonics have been obtained mainly with the \acs{RNN}, therefore in this field \acs{RC} is typically associated to the \acs{RNN} topology.
 
 %\subsubsection{Modular NN}
 %\label{sec:Modular_NN}
@@ -451,6 +477,7 @@ Significant results for \acs{RC} implemented with photonics have been obtained m
 %\noindent\uppercase{\large{? Should I keep this section ?}}
 %\normalsize
 
+\newpage
 \section{FFNN Simulation}
 \label{sec:FFNN_Simulation}
 In the field of \acs{ANN} simulation, there are several platforms that are independently developed.
@@ -557,7 +584,6 @@ The choice of the structure of the neural network is purely heuristic, since up 
 However, given the problem (dataset), at least the input and output layer have a fixed amount of nodes.
 Specifically, the input nodes are \num{10}, the number of attributes, while the output nodes are \num{11}, the number of classes.
 
-\newpage
 Using the chosen dataset, I tested the neural network operation on the model defined before, with two different kinds of activation function.
 Initially I implemented a \acfi{ReLU} and a \textit{Logistic} (sigmoid) activation functions.
 %%The \acs{ReLU} function is a standard activation function and is defined as follows:
@@ -623,8 +649,9 @@ In fact, I observed that usually the percentage of correct answers decreases sli
 %\autoref{fig:PyTorch_learning} shows the evolution of the loss and the validation of each model during the \num{4000} epochs of training.
 %From the evolution of the loss function we can see that every model has 
 
+\newpage
 \subsubsection{Collection of results}
-Considering that the number of classes is \num{11}, the probability of giving a correct answer at random is $p_{rnd}\sim \SI{9.09}{\percent}$.
+Considering that the number of classes is \num{11}, the probability of giving a correct answer at random is $p_{rnd}\simeq \SI{9.09}{\percent}$.
 Hence, values of correct answers above that mean that the neural network is working.
 On the other hand, values around or even below $p_{rnd}$ mean that the current neural network is not working at all.
 
@@ -636,8 +663,6 @@ It is the same as stopping the learning process on the network when a minimum of
 \autoref{tab:PyResults} collects all the results for the different topologies, where the activation function was provided by a $f_{ReLU}$ function.
 We can observe that the width of the hidden layers seems to influence the correctness of the network, at least marginally.
 Moreover the depth of the network, i.e. the number of hidden layers ($n_H$), seems to be correlated to the deviation of the correctness.
-
-The overall results of these models are satisfactory because they all well over the $p_{rnd}$ threshold.
 
 \begin{table}[htbp]
 	\centering
@@ -657,6 +682,8 @@ The overall results of these models are satisfactory because they all well over 
 	}
 	\label{tab:PyResults}
 \end{table}
+
+The overall results obtained for the $f_{ReLU}$-based models are satisfactory because they all well over the $p_{rnd}$ threshold.
 
 %+-------------------------+--------+---------+---------+
 %|                         | no. of | no.     | percent |

@@ -9,7 +9,7 @@
 Research in the field of \acp{ANN} has became more and more popular in the last few decades as the computing power available to the average institution increased further.
 As a matter of fact, in the last two decades the calculation power which once belonged only to bulky, power hungry, and very expensive supercomputers, gradually became possible also for relatively more compact, efficient, and definitely cheaper servers and workstations.
 
-This trend has been dictated by the fact that artificial neural networks are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
+This trend has been dictated by the fact that \acp{ANN} are usually simulated on conventional computers, which are on the other hand based on the von Neumann, or Princeton, architecture.
 Implementations of this general purpose architecture are able to do any logical computation with a series of instructions.
 However the downside of this suitability to generic computations is that it is often difficult to parallelize single operations and therefore certain tasks are inherently inefficient, both in energy and in time.
 Moreover another problem is that it requires explicit programming for each singular task.
@@ -18,7 +18,7 @@ The formalization of the von Neumann (or Princeton) architecture dates back to 1
 Shortly after, research and industry efforts focused only on the development of the Princeton architecture, choosing it de facto as the primary design for computing devices.
 
 In the recent years, help came from acceleration units known as \acp{GPU}, which were developed for a completely different objective.
-These GPUs, which are nowadays being designed specifically to accelerate calculations of artificial neural network simulations, are able to carry out a restricted set of instruction compared to \acused{CPU}\acsp{CPU}, but are much more efficient both in power and in time, because of their parallel execution \cite{stone2010opencl,DBLP:journals/corr/abs-1211-5590}.
+These GPUs, which are nowadays being designed specifically to accelerate calculations of \acp{ANN} simulations, are able to carry out a restricted set of instruction compared to \acused{CPU}\acsp{CPU}, but are much more efficient both in power and in time, because of their parallel execution \cite{stone2010opencl,DBLP:journals/corr/abs-1211-5590}.
 
 \paragraph{Todays software implementations\\}
 Between the most famous examples of simulated neural network there certainly are the older Watson supercomputer from IBM and the more recent AlphaGo artificial intelligence.
@@ -38,7 +38,7 @@ This project is simulated on IBM Blue Gene supercomputers, each fitted with more
 \paragraph{Present objectives and future trends\\}
 We can distinguish two principal objectives in this research field.
 The first one is a technological objective and is that of developing a more powerful computational instrument.
-The second objective is instead a topic of more fundamental research: to use the tools of artificial neural networks to better understand biological neural networks such as our brain \cite{sciamHBP, HBP.eu}.
+The second objective is instead a topic of more fundamental research: to use the tools of \acp{ANN} to better understand biological neural networks such as our brain \cite{sciamHBP, HBP.eu}.
 
 If the comprehension of the complex mechanism at the base of our brain has always been a very arduous assignment, the tasks that artificial neural network are facing become increasingly difficult while time passes.
 Whereas in the past years public and private research groups trained themselves with ``easier" problems, such as television or board games, today they are concentrating their efforts on more challenging goals.
@@ -52,7 +52,7 @@ Hence alternatives are sought \cite{soman2016recent}.
 
 \paragraph{Overview of current alternatives to simulations\\}
 Apart from the vast majority of the research on neural networks, which is being carried out with simulations on powerful processors, a smaller portion of research is focused on building neural network physically.
-Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow artificial neural networks to run physically, instead of being simulated on conventional computers \cite{soman2016recent}.
+Great efforts are made nowadays by many research institutions and companies to develop original computing architectures that allow \acp{ANN} to run physically, instead of being simulated on conventional computers \cite{soman2016recent}.
 \autoref{fig:scopus} shows the increase of interest in the scientific community for the development of new architectures based on neural networks.
 
 \begin{figure}[htbp]
@@ -68,7 +68,7 @@ This, however, makes them inevitably less adaptable to changes, unlike software 
 A good example is given by size of the network, which in simulation is easily altered, even of orders of magnitude, while in hardware implementations it depends strictly by the architecture features and scalability.
 %However, being designed for precise tasks makes them unsuitable for generic computation, which could in principle make them less easy to modify when needed, unlike simulations on conventional computers.
 
-Many of these use the electronics framework, mainly because of the many benefits of the mature silicon technology and its CMOS-compatible production chain \cite{}.
+Many of these hardware implementations use the electronics framework, mainly because of the many benefits of the mature silicon technology and its CMOS-compatible production chain \cite{}.
 Specifically footprint and efficiency of CMOS devices has not yet stopped to grow since its discovery, in the past century.
 However, a relatively small portion of these works also inquired simpler network fabrication with organic electronic materials, achieving remarkable results \cite{Nawrocki2016a}.
 
@@ -91,10 +91,10 @@ Besides electronics, other kind of physical implementations have been attempted 
 Probably the most intriguing example is given by integrated photonics.
 \acp{PIC} have never been competitive in comparison to electronics in the development of von Neumann like processors, which are based on boolean logic gates.
 No photonic integrated logic of comparable performance to electronics has been proposed yet.
-However, by implementing a computing architecture that adheres to the artificial neural network rules integrated photonics might emerge as a successful platform \cite{de2017progress}.
+However, by implementing a computing architecture that adheres to the \ac{ANN} rules integrated photonics might emerge as a successful platform \cite{de2017progress}.
 Even if research in neuromorphic photonics is just in its embryonic state, many progresses have been accomplished lately.
 %Moreover, it has yet to leave its embryonic state of technology, however many progresses have been accomplished lately 
-The aim of neuromorphic photonics is to match electronics performances by overcoming it in power consumption, computational speed, and intrinsic suitability to parallel computing (see \autoref{tab:neuromorphic_arc}).
+The aim of neuromorphic photonics is to overcome electronics performances in power consumption, computational speed, and intrinsic suitability to parallel computing (see \autoref{tab:neuromorphic_arc}).
 
 \begin{table}[!htbp]
 	\centering
@@ -134,8 +134,8 @@ The idea at the base of our physical implementation is to employ integrated opti
 %The choice of integrated photonics is motivated by the fact that, unlike the electronic counterpart, does not suffer from the Joule effect.
 Therefore in this work I will study a particular device, a microring resonator, and characterize its response to different inputs, for several working conditions.
 This device can process information because it has, under certain circumstances, a nonlinear response function to its inputs.
-Moreover, the same device might be used in another important part of artificial neural network nodes: the weighted sum.
-With this two parts together one could claim to have built a rudimentary artificial neuromorphic network, the \textit{perceptron} (see \autoref{ssec:Perceptron}).
+Moreover, the same device might be used in another important part of \acp{ANN} nodes: the weighted sum.
+With this two parts together one could claim to have built an basic \ac{ANN}, the \textit{perceptron} (see \autoref{ssec:Perceptron}).
 However, since integrated structures able to carry out a weighted sum of optical signals have already been discussed in literature and it requires less effort to produce acceptable results, it will not be at the center of this study.
 
 During the thesis I achieved two main results.
@@ -164,10 +164,10 @@ Later, the chapter is concluded with an introductory description of the Python l
 
 The second chapter introduces the physics which I will study.
 Again, after a short explanation on the basic devices used in the field, I will describe in depth the device studied for the task.
-Having clarified the physics underneath, I ought to explain how I am going to use this physics to implement (part of) an artificial neural network.
+Having clarified the physics underneath, I ought to explain how I am going to use this physics to implement an \ac{ANN}.
 I will address these topics both from the theoretical point of view and from the numerical one, with simulation of the specific (simplified) system.
 
 The third chapter is dedicated to the description of the experimental work.
 At the beginning the problem of the selection of the sample is discussed, along with the definition of the device chosen.
-After, I characterize the different behaviors with detailed data.
+After, I explain the experimental setup that I assembled to characterize the different behaviors of the device with detailed data.
 Finally, an explanation on how the device will be used in the neural network viewpoint and the corresponding tests of operation.
